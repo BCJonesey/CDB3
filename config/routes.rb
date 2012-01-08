@@ -5,6 +5,8 @@ Cdb3::Application.routes.draw do
   match 'main/login', :as => 'login'
   match 'main/logout', :as => 'logout'
 
+  resources :games
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

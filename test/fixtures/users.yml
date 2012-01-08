@@ -3,7 +3,13 @@
 nat:
   name: Nat Tuck
   email: nat@ferrus.net
+  global_admin: true
 
 darren:
   name: Darren Gagne
   email: galen.terrak@gmail.com
+
+steve:
+  name: Steve Jobs
+  email: steve@apple.com
+  # He's dead; he never gets to be an admin.

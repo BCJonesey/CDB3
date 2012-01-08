@@ -1,4 +1,7 @@
 class GamesController < ApplicationController
+  before_filter :require_logged_in_user
+  before_filter :require_global_admin, :except => [:index, :show]
+
   def index
     @games = Game.all
   end

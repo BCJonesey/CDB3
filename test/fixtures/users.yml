@@ -1,11 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 nat:
-  id: 1
   name: Nat Tuck
   email: nat@ferrus.net
 
 darren:
-  id: 2
   name: Darren Gagne
   email: galen.terrak@gmail.com

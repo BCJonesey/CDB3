@@ -1,9 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 darren_mirror:
-  user_id: 2
-  game_id: 1
+  user: darren
+  game: mirror_mirror
 
 darren_calling:
-  user_id: 2
-  game_id: 2
+  user: darren
+  game: the_calling

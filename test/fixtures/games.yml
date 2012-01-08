@@ -1,9 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 mirror_mirror:
-  id: 1
   name: Mirror Mirror
 
 the_calling:
-  id: 2
   name: The Calling

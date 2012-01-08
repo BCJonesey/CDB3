@@ -8,6 +8,10 @@
 </head>
 <body>
 
+<% if flash[:error] %>
+  <p class="error_message"><%= flash[:error] %></p>
+<% end %>
+
 <%= yield %>
 
 </body>

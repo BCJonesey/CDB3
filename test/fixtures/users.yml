@@ -1,9 +1,5 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
-one:
-  name: MyString
-  email: MyString
-
-two:
-  name: MyString
-  email: MyString
+nat:
+  name: Nat Tuck
+  email: nat@ferrus.net

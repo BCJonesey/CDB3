@@ -48,6 +48,9 @@ Cdb3::Application.routes.draw do
   #     resources :products
   #   end
 
+  match 'main/login'
+  match 'main/logout'
+
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
   root :to => 'main#index'

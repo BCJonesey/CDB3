@@ -1,7 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
-one:
-  name: MyString
+mirror_mirror:
+  id: 1
+  name: Mirror Mirror
 
-two:
-  name: MyString
+the_calling:
+  id: 2
+  name: The Calling

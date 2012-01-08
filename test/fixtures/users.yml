@@ -1,9 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
-one:
-  name: MyString
-  email: MyString
+nat:
+  id: 1
+  name: Nat Tuck
+  email: nat@ferrus.net
 
-two:
-  name: MyString
-  email: MyString
+darren:
+  id: 2
+  name: Darren Gagne
+  email: galen.terrak@gmail.com
+
+

@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(:version => 20120107224036) do
   create_table "members", :force => true do |t|
     t.integer  "user_id"
     t.integer  "game_id"
+    t.boolean  "game_admin", :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -36,6 +37,7 @@ ActiveRecord::Schema.define(:version => 20120107224036) do
   create_table "users", :force => true do |t|
     t.string   "name"
     t.string   "email"
+    t.boolean  "global_admin", :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

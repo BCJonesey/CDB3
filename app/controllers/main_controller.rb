@@ -17,5 +17,4 @@ class MainController < ApplicationController
 
   def logout
   end
-
 end

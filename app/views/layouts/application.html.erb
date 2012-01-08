@@ -8,8 +8,8 @@
 </head>
 <body>
 
-<% if flash[:error] %>
-  <p class="error_message"><%= flash[:error] %></p>
+<% unless flash[:alert].nil? %>
+  <p class="error_message">Error: <%= flash[:alert] %></p>
 <% end %>
 
 <%= yield %>

@@ -1,4 +1,6 @@
 Cdb3::Application.routes.draw do
+  get "users/new"
+
   get "main/index"
 
   # The priority is based upon order of creation:
@@ -48,6 +50,7 @@ Cdb3::Application.routes.draw do
   #     resources :products
   #   end
 
+  resources :users
   match 'main/login'
   match 'main/logout'
 

@@ -11,6 +11,9 @@
 <% if flash[:error] %>
   <p class="error_message"><%= flash[:error] %></p>
 <% end %>
+<% if flash[:notice] %>
+  <p class="notice_message"><%= flash[:notice] %></p>
+<% end %>
 
 <%= yield %>
 

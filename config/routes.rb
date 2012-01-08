@@ -1,5 +1,9 @@
 Cdb3::Application.routes.draw do
   get "main/index"
+  root :to => 'main#index'
+
+  match 'main/login', :as => 'login'
+  match 'main/logout', :as => 'logout'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -48,12 +52,9 @@ Cdb3::Application.routes.draw do
   #     resources :products
   #   end
 
-  match 'main/login'
-  match 'main/logout'
-
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'main#index'
+  # root :to => 'main#index'
 
   # See how all your routes lay out with "rake routes"
 

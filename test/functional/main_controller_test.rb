@@ -21,4 +21,9 @@ class MainControllerTest < ActionController::TestCase
     assert_response :success
     assert_nil flash[:alert]
   end
+
+  test "should logout" do
+    get :logout, {}, { :user_id => users(:nat).id }
+    assert_redirected_to '/'
+  end
 end

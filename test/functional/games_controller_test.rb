@@ -15,4 +15,14 @@ class GamesControllerTest < ActionController::TestCase
     assert_equal flash[:alert], "Access denied: requires logged in user"
   end
 
+  test "should succeed with global admin" do
+    get :new, {}, {:user_id => users(:nat).id}
+    assert_response :success
+  end
+
+  test "should fail without global admin" do
+    get :new, {}, {:user_id => users(:steve).id}
+    assert_redirected_to '/'
+    assert_equal flash[:alert], "Access denied: requires global admin"   
+  end
 end

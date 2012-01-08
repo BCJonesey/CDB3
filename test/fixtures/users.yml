@@ -3,6 +3,7 @@
 nat:
   name: Nat Tuck
   email: nat@ferrus.net
+  global_admin: true
 
 darren:
   name: Darren Gagne

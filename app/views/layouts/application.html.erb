@@ -8,8 +8,9 @@
 </head>
 <body>
 
-<% unless session[:user_id].nil? %>
-  <p style="text-align: right;"><%= link_to "Logout", logout_path %></p>
+<% unless @user.nil? %>
+  <p style="text-align: right;">Logged in as <%= @user.name %>; 
+    <%= link_to "Logout", logout_path %></p>
 <% end %>
 
 <% unless flash[:alert].nil? %>

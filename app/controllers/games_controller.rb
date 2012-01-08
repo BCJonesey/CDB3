@@ -1,4 +1,6 @@
 class GamesController < ApplicationController
+  before_filter :require_logged_in_user
+
   def index
     @games = Game.all
   end

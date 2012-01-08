@@ -8,8 +8,12 @@
 </head>
 <body>
 
-<% if flash[:error] %>
-  <p class="error_message"><%= flash[:error] %></p>
+<% unless session[:user_id].nil? %>
+  <p style="text-align: right;"><%= link_to "Logout", logout_path %></p>
+<% end %>
+
+<% unless flash[:alert].nil? %>
+  <p class="error_message">Error: <%= flash[:alert] %></p>
 <% end %>
 <% if flash[:notice] %>
   <p class="notice_message"><%= flash[:notice] %></p>

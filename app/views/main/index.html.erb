@@ -1,7 +1,7 @@
 <h1>Welcome to the Character Database</h1>
 <h2>Log In</h2>
 
-<%= form_tag '/main/login' do %>
+<%= form_tag login_path do %>
 <p><%= label_tag :email, "Email: " %> <%= text_field_tag :email %>
 <br><%= submit_tag "Login" %>
 </p>

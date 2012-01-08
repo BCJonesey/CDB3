@@ -5,3 +5,4 @@
 require File.expand_path('../config/application', __FILE__)
 
 Cdb3::Application.load_tasks
+

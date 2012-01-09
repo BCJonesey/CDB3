@@ -1,2 +1,8 @@
-<h1>Games#new</h1>
-<p>Should only be accessible to global admins.</p>
+<h1>Add a Game</h1>
+
+<%= form_for @game do |f| %>
+<p>
+<%= f.text_field :name %>
+<br><%= submit_tag "Create Game" %>
+</p>
+<% end %>

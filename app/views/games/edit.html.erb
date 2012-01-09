@@ -1,2 +1,8 @@
-<h1>Games#edit</h1>
-<p>Find me in app/views/games/edit.html.erb</p>
+<h1>Edit Game (<%= @game.id %>)</h1>
+
+<%= form_for @game do |f| %>
+<p>
+<%= f.text_field :name %>
+<br><%= submit_tag "Create Game" %>
+</p>
+<% end %>

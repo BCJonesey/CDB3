@@ -2,6 +2,9 @@
 
 <ul>
   <% @games.each do |g| %>
-    <li><%= g.name %></li>
+    <li><%= g.name %> 
+        <%= link_to "[View]", game_path(g) %>
+        <%= link_to "[Edit]", edit_game_path(g) %>
+    </li>
   <% end %> 
 </ul>

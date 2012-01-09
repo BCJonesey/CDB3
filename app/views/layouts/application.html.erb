@@ -16,8 +16,9 @@
 <% unless flash[:alert].nil? %>
   <p class="error_message">Error: <%= flash[:alert] %></p>
 <% end %>
+
 <% if flash[:notice] %>
-  <p class="notice_message"><%= flash[:notice] %></p>
+  <p class="notice_message">Notice: <%= flash[:notice] %></p>
 <% end %>
 
 <%= yield %>

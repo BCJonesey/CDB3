@@ -7,6 +7,7 @@ class UsersControllerTest < ActionController::TestCase
   end
   
   test "create first user" do
+    Member.destroy_all
     User.destroy_all
     post :create, "user"=>{"name"=>"g man", "email"=>"bad_address@nowhere.gov"}
     assert_redirected_to '/'

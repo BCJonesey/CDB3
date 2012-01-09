@@ -4,7 +4,8 @@ class FirstRunTest < ActionDispatch::IntegrationTest
  
 
    test "first run" do
-    User.destroy_all
+    Member.destroy_all
+     User.destroy_all
     get '/' 
     assert_redirected_to new_user_path
     assert_nil session[:user_id]

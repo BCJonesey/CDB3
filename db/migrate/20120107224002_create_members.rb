@@ -1,8 +1,8 @@
 class CreateMembers < ActiveRecord::Migration
   def change
     create_table :members do |t|
-      t.integer :user_id
-      t.integer :game_id
+      t.integer :user_id, :null => false
+      t.integer :game_id, :null => false
       t.boolean :game_admin, :default => false
 
       t.timestamps

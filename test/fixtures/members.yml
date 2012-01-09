@@ -7,3 +7,7 @@ darren_mirror:
 darren_calling:
   user: darren
   game: the_calling
+
+nat_calling:
+  user: nat
+  game: the_calling

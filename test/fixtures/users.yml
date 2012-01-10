@@ -1,5 +1,4 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
-
 nat: # Is a global admin
   name: Nat Tuck
   email: nat@ferrus.net
@@ -12,3 +11,11 @@ darren:
 alex: # Not a global admin
   name: Alexander Ayube
   email: alex@ayube.com
+
+one:
+  name: MyString
+  email: MyString
+
+two:
+  name: MyString
+  email: MyString

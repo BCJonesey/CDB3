@@ -1,0 +1,28 @@
+<h1>Listing skills</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Summary</th>
+    <th>Description</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @skills.each do |skill| %>
+  <tr>
+    <td><%= skill.name %></td>
+    <td><%= skill.summary %></td>
+    <td><%= skill.description %></td>
+    <td><%= link_to 'Show', [@game,skill] %></td>
+    <td><%= link_to 'Edit', edit_game_skill_path(@game,skill) %></td>
+    <td><%= link_to 'Destroy', [@game,skill], confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+
+<%= link_to 'New Skill', new_game_skill_path(@game) %>

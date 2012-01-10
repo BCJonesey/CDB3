@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @skill.name %>
+</p>
+
+<p>
+  <b>Summary:</b>
+  <%= @skill.summary %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @skill.description %>
+</p>
+
+
+<%= link_to 'Edit', edit_game_skill_path(@game,@skill) %> |
+<%= link_to 'Back', game_skills_path(@game)%>

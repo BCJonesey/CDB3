@@ -1,4 +1,6 @@
 Cdb3::Application.routes.draw do
+
+
   get "main/index"
   root :to => 'main#index'
 
@@ -10,6 +12,7 @@ Cdb3::Application.routes.draw do
   resources :games do
     resources :members
     resources :characters
+    resources :skills
   end
 
   # The priority is based upon order of creation:

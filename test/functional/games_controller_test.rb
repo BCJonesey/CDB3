@@ -21,7 +21,7 @@ class GamesControllerTest < ActionController::TestCase
   end
 
   test "should fail without global admin" do
-    get :new, {}, {:user_id => users(:steve).id}
+    get :new, {}, {:user_id => users(:alex).id}
     assert_redirected_to '/'
     assert_equal flash[:alert], "Access denied: requires global admin"   
   end

@@ -1,6 +1,6 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
-nat:
+nat: # Is a global admin
   name: Nat Tuck
   email: nat@ferrus.net
   global_admin: true
@@ -9,7 +9,6 @@ darren:
   name: Darren Gagne
   email: galen.terrak@gmail.com
 
-steve:
-  name: Steve Jobs
-  email: steve@apple.com
-  # He's dead; he never gets to be an admin.
+alex: # Not a global admin
+  name: Alexander Ayube
+  email: alex@ayube.com

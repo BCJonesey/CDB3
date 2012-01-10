@@ -26,4 +26,52 @@ class ApplicationController < ActionController::Base
       redirect_to '/', :alert => "Access denied: requires global admin"
     end
   end
+
+  def get_current_game
+    if params[:game_id].nil?
+      @game = nil
+    else
+      @game = Game.find_by_id(params[:game_id])
+    end
+  end
+
+  def require_game
+    get_current_game
+
+    if @game.nil?
+      redirect_to '/', :alert => "No such game"
+    end
+  end
+
+  def require_game_member
+    get_current_game
+
+    if @game.nil?
+      redirect_to '/', :alert => "No such game"
+    end
+
+    unless @user.global_admin?
+      member = Member.find_by_user_id_and_game_id(@user, @game)
+
+      if member.nil?
+        redirect_to '/', :alert => "Access denied: requires game member"      
+      end
+    end
+  end
+
+  def require_game_admin
+    get_current_game
+
+    if @game.nil?
+      redirect_to '/', :alert => "No such game"
+    end
+
+    unless @user.global_admin?
+      member = Member.find_by_user_id_and_game_id(@user, @game)
+
+      if member.nil? || !member.game_admin?
+        redirect_to '/', :alert => "Access denied: requires game admin"
+      end
+    end
+  end
 end

@@ -5,13 +5,14 @@
   <tr>
     <td><%= member.user.name %></td>
     <td><%= member.game.name %></td>
-    <td><%= link_to 'Show', member %></td>
-    <td><%= link_to 'Edit', edit_member_path(member) %></td>
-    <td><%= link_to 'Destroy', member, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to 'Show', game_member_path(@game, member) %></td>
+    <td><%= link_to 'Edit', edit_game_member_path(@game, member) %></td>
+    <td><%= link_to 'Destroy', game_member_path(@game, member), 
+            confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Member', new_member_path %>
+<%= link_to 'New Member', new_game_member_path(@game) %>

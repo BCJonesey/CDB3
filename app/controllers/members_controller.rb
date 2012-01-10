@@ -1,6 +1,7 @@
 class MembersController < ApplicationController
   before_filter :require_logged_in_user
   before_filter :require_global_admin, :except => [:index, :show]
+  before_filter :require_game
 
   # GET /members
   # GET /members.json

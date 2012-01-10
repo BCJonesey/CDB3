@@ -5,8 +5,6 @@ class User < ActiveRecord::Base
   before_validation :lower_email
   before_destroy :verify_no_members
   
-  
-
   private 
   def lower_email
     self.email = self.email.downcase

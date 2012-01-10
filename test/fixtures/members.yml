@@ -11,3 +11,7 @@ darren_calling:
 nat_calling:
   user: nat
   game: the_calling
+
+alex_calling:
+  user: alex
+  game: the_calling

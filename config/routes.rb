@@ -1,15 +1,16 @@
 Cdb3::Application.routes.draw do
-  get "users/new"
-
   get "main/index"
   root :to => 'main#index'
 
   match 'main/login', :as => 'login'
   match 'main/logout', :as => 'logout'
 
-  resources :games
   resources :users
-  resources :members
+
+  resources :games do
+    resources :members
+    resources :characters
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

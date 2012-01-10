@@ -1,2 +1,5 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
+udo:
+  member: alex_calling
+  name: "Udo van Madhausen"

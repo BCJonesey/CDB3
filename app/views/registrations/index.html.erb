@@ -1,0 +1,35 @@
+<h1>Listing registrations</h1>
+
+<table>
+  <tr>
+    <th>Event</th>
+    <th>Member</th>
+    <th>Character</th>
+    <th>Paid</th>
+    <th>Present</th>
+    <th>Setup cleanup</th>
+    <th>Cp game</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @registrations.each do |registration| %>
+  <tr>
+    <td><%= registration.event_id %></td>
+    <td><%= registration.member_id %></td>
+    <td><%= registration.character_id %></td>
+    <td><%= registration.paid %></td>
+    <td><%= registration.present %></td>
+    <td><%= registration.setup_cleanup %></td>
+    <td><%= registration.cp_game_id %></td>
+    <td><%= link_to 'Show', [@game, registration] %></td>
+    <td><%= link_to 'Edit', edit_game_registration_path(@game, registration) %></td>
+    <td><%= link_to 'Destroy', [@game, registration], confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Registration', new_game_registration_path(@game) %>

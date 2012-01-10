@@ -1,7 +1,9 @@
 
 class CharactersController < ApplicationController
   before_filter :require_logged_in_user
+  before_filter :require_game
   before_filter :require_game_member
+  before_filter :require_game_admin, :only => [:admin]
 
   def admin
     # List characters you can admin.
@@ -50,10 +52,11 @@ class CharactersController < ApplicationController
   # POST /characters.json
   def create
     @character = Character.new(params[:character])
+    @character.member = @member
 
     respond_to do |format|
       if @character.save
-        format.html { redirect_to @character, notice: 'Character was successfully created.' }
+        format.html { redirect_to [@game, @character], notice: 'Character was successfully created.' }
         format.json { render json: @character, status: :created, location: @character }
       else
         format.html { render action: "new" }
@@ -69,7 +72,7 @@ class CharactersController < ApplicationController
 
     respond_to do |format|
       if @character.update_attributes(params[:character])
-        format.html { redirect_to @character, notice: 'Character was successfully updated.' }
+        format.html { redirect_to [@game, @character], notice: 'Character was successfully updated.' }
         format.json { head :ok }
       else
         format.html { render action: "edit" }
@@ -85,7 +88,7 @@ class CharactersController < ApplicationController
     @character.destroy
 
     respond_to do |format|
-      format.html { redirect_to characters_url }
+      format.html { redirect_to game_characters_url(@game) }
       format.json { head :ok }
     end
   end

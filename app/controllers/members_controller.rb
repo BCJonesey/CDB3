@@ -48,7 +48,7 @@ class MembersController < ApplicationController
 
     respond_to do |format|
       if @member.save
-        format.html { redirect_to @member, notice: 'Member was successfully created.' }
+        format.html { redirect_to [@game, @member], notice: 'Member was successfully created.' }
         format.json { render json: @member, status: :created, location: @member }
       else
         format.html { render action: "new" }
@@ -64,7 +64,7 @@ class MembersController < ApplicationController
 
     respond_to do |format|
       if @member.update_attributes(params[:member])
-        format.html { redirect_to @member, notice: 'Member was successfully updated.' }
+        format.html { redirect_to [@game, @member], notice: 'Member was successfully updated.' }
         format.json { head :ok }
       else
         format.html { render action: "edit" }
@@ -80,7 +80,7 @@ class MembersController < ApplicationController
     @member.destroy
 
     respond_to do |format|
-      format.html { redirect_to members_url }
+      format.html { redirect_to game_members_url(@game) }
       format.json { head :ok }
     end
   end

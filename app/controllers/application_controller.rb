@@ -50,12 +50,10 @@ class ApplicationController < ActionController::Base
       redirect_to '/', :alert => "No such game"
     end
 
-    unless @user.global_admin?
-      member = Member.find_by_user_id_and_game_id(@user, @game)
+    @member = Member.find_or_create_by_user_id_and_game_id(@user.id, @game.id)
 
-      if member.nil?
-        redirect_to '/', :alert => "Access denied: requires game member"      
-      end
+    if @member.nil?
+      redirect_to '/', :alert => "Requires game member"
     end
   end
 

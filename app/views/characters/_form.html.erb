@@ -1,7 +1,8 @@
-<%= form_for(@character) do |f| %>
+<%= form_for [@game, @character] do |f| %>
   <% if @character.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@character.errors.count, "error") %> prohibited this character from being saved:</h2>
+      <h2><%= pluralize(@character.errors.count, "error") %> 
+        prohibited this character from being saved:</h2>
 
       <ul>
       <% @character.errors.full_messages.each do |msg| %>
@@ -12,6 +13,7 @@
   <% end %>
 
   <div class="actions">
+    <%= f.label :name %> <%= f.text_field :name %>
     <%= f.submit %>
   </div>
 <% end %>

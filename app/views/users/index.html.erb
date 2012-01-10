@@ -1,0 +1,10 @@
+<table>
+  <% @users.each do |u| %>
+    <tr>
+      <td><%= u.name %></td>
+      <td><%= u.email %></td>
+      <td><%= link_to "[View]", user_path(u) %></td>
+        <td><%= link_to "[Edit]", edit_user_path(u) %></td>
+    </tr>
+  <% end %>
+</table>

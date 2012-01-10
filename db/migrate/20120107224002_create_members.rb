@@ -7,5 +7,7 @@ class CreateMembers < ActiveRecord::Migration
 
       t.timestamps
     end
+
+    add_index(:members, [:user_id, :game_id], :unique => true)
   end
 end

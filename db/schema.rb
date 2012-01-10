@@ -14,25 +14,27 @@
 ActiveRecord::Schema.define(:version => 20120107224036) do
 
   create_table "characters", :force => true do |t|
-    t.string   "name"
-    t.integer  "member_id"
+    t.string   "name",       :null => false
+    t.integer  "member_id",  :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "games", :force => true do |t|
-    t.string   "name"
+    t.string   "name",       :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "members", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "game_id"
+    t.integer  "user_id",                       :null => false
+    t.integer  "game_id",                       :null => false
     t.boolean  "game_admin", :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "members", ["user_id", "game_id"], :name => "index_members_on_user_id_and_game_id", :unique => true
 
   create_table "users", :force => true do |t|
     t.string   "name"

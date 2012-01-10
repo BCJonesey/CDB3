@@ -1,11 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  name: MyString
+  name: Fire Ball
   summary: MyString
   description: MyText
+  game: mirror_mirror
 
 two:
-  name: MyString
+  name: Ice Ball
   summary: MyString
   description: MyText
+  game: the_calling

@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(:version => 20120110030237) do
   add_index "members", ["user_id", "game_id"], :name => "index_members_on_user_id_and_game_id", :unique => true
 
   create_table "skills", :force => true do |t|
+    t.integer  "game_id"
     t.string   "name"
     t.string   "summary"
     t.text     "description"

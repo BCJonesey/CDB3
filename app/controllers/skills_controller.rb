@@ -1,12 +1,13 @@
 class SkillsController < ApplicationController
   before_filter :require_logged_in_user
   before_filter :require_game
+  before_filter :get_skill, :except => [:index, :new, :create]
   
   # GET /skills
   # GET /skills.json
   def index
-    @skills = Skill.all
-
+    @skills = @game.skills
+    
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @skills }
@@ -16,7 +17,6 @@ class SkillsController < ApplicationController
   # GET /skills/1
   # GET /skills/1.json
   def show
-    @skill = Skill.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -37,14 +37,14 @@ class SkillsController < ApplicationController
 
   # GET /skills/1/edit
   def edit
-    @skill = Skill.find(params[:id])
+   
   end
 
   # POST /skills
   # POST /skills.json
   def create
     @skill = Skill.new(params[:skill])
-
+    @skill.game = @game
     respond_to do |format|
       if @skill.save
         format.html { redirect_to [@game,@skill], notice: 'Skill was successfully created.' }
@@ -59,7 +59,7 @@ class SkillsController < ApplicationController
   # PUT /skills/1
   # PUT /skills/1.json
   def update
-    @skill = Skill.find(params[:id])
+
 
     respond_to do |format|
       if @skill.update_attributes(params[:skill])
@@ -75,7 +75,7 @@ class SkillsController < ApplicationController
   # DELETE /skills/1
   # DELETE /skills/1.json
   def destroy
-    @skill = Skill.find(params[:id])
+
     @skill.destroy
 
     respond_to do |format|
@@ -83,4 +83,14 @@ class SkillsController < ApplicationController
       format.json { head :ok }
     end
   end
+  
+  private
+  def get_skill
+    @skill = Skill.find(params[:id])
+    if(@skill.nil? || @skill.game != @game)
+      redirect_to '/', :alert => "No such game"
+    end
+  end
+  
+    
 end

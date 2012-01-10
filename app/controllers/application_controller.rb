@@ -44,10 +44,12 @@ class ApplicationController < ActionController::Base
   end
 
   def require_game_member
+    get_logged_in_user
     get_current_game
 
-    if @game.nil?
+    if @game.nil? or @user.nil?
       redirect_to '/', :alert => "No such game"
+      return
     end
 
     @member = Member.find_or_create_by_user_id_and_game_id(@user.id, @game.id)

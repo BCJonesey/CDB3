@@ -6,44 +6,44 @@ class SkillsControllerTest < ActionController::TestCase
   end
 
   test "should get index" do
-    get games
+    get :index, {:game_id=>games(:mirror_mirror).id},{:user_id=>users(:nat).id}
     assert_response :success
     assert_not_nil assigns(:skills)
   end
 
   test "should get new" do
-    get :new
+    get :new, {:game_id=>games(:mirror_mirror).id},{:user_id=>users(:nat).id}
     assert_response :success
   end
 
   test "should create skill" do
     assert_difference('Skill.count') do
-      post :create, skill: @skill.attributes
+      post :create, {:game_id=>games(:mirror_mirror).id,skill: @skill.attributes},{:user_id=>users(:nat).id}
     end
 
-    assert_redirected_to skill_path(assigns(:skill))
+    assert_redirected_to game_skill_path(games(:mirror_mirror),assigns(:skill))
   end
 
   test "should show skill" do
-    get :show, id: @skill.to_param
+    get :show, {id: @skill.to_param,:game_id=>games(:mirror_mirror).id},{:user_id=>users(:nat).id}
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, id: @skill.to_param
+    get :edit, {id: @skill.to_param,:game_id=>games(:mirror_mirror).id},{:user_id=>users(:nat).id}
     assert_response :success
   end
 
   test "should update skill" do
-    put :update, id: @skill.to_param, skill: @skill.attributes
-    assert_redirected_to skill_path(assigns(:skill))
+    put :update, {id: @skill.to_param,:game_id=>games(:mirror_mirror).id,skill: @skill.attributes},{:user_id=>users(:nat).id} 
+    assert_redirected_to game_skill_path(games(:mirror_mirror),assigns(:skill))
   end
 
   test "should destroy skill" do
     assert_difference('Skill.count', -1) do
-      delete :destroy, id: @skill.to_param
+      delete :destroy, {id: @skill.to_param,:game_id=>games(:mirror_mirror).id},{:user_id=>users(:nat).id}
     end
 
-    assert_redirected_to skills_path
+    assert_redirected_to game_skills_path(games(:mirror_mirror))
   end
 end

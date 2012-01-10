@@ -21,7 +21,6 @@ class UsersControllerTest < ActionController::TestCase
       post :create, user: @user.attributes
     end
 
-    assert_redirected_to user_path(assigns(:user))
   end
 
   test "should show user" do
@@ -53,22 +52,9 @@ class UsersControllerTest < ActionController::TestCase
     User.destroy_all
     post :create, "user"=>{"name"=>"g man", "email"=>"bad_address@nowhere.gov"}
     assert_redirected_to '/'
-    assert_equal User.first.name, "g man"
-    assert_equal User.first.email,"bad_address@nowhere.gov"
+    assert_equal "g man", User.first.name
+    assert_equal "bad_address@nowhere.gov",User.first.email
   end
   
-  test "fail when trying to create a user with an existing email" do
-    @request.env['HTTP_REFERER'] = '/users/new'
-    post :create, "user"=>{"name"=>"g man", "email"=>users(:darren).email}
-    assert_redirected_to '/users/new'
-    assert_equal flash[:alert], "A user with that email already exists"
-    
-  end
-  
-  test "fail when trying to change email to one that is already in use" do
-    @request.env['HTTP_REFERER'] = edit_user_path(users(:darren))
-    post :update, {"id"=> users(:darren).id,"user"=>{"name"=>"g man", "email"=>users(:nat).email}}
-    assert_equal flash[:alert], "A user with that email already exists"
-    
-  end
+
 end

@@ -1,0 +1,11 @@
+<p id="notice"><%= notice %></p>
+
+<table>
+  <tr>
+    <td><%= @member.user.name %></td>
+    <td><%= @member.game.name %></td>
+  </tr>
+</table>
+
+<%= link_to 'Edit', edit_member_path(@member) %> |
+<%= link_to 'Back', members_path %>

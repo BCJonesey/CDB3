@@ -8,6 +8,11 @@ darren_calling:
   user: darren
   game: the_calling
 
+ben_mirror:
+  user: ben
+  game: mirror_mirror
+  game_admin: true
+
 nat_calling:
   user: nat
   game: the_calling

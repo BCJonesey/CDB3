@@ -58,10 +58,17 @@ class ApplicationController < ActionController::Base
   end
 
   def require_game_admin
+    get_logged_in_user
     get_current_game
 
     if @game.nil?
       redirect_to '/', :alert => "No such game"
+      return
+    end
+
+    if @user.nil?
+      redirect_to '/', :alert => "Not logged in"
+      return
     end
 
     unless @user.global_admin?

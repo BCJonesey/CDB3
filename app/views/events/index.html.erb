@@ -1,0 +1,16 @@
+<h1>Listing events</h1>
+
+<table>
+<% @events.each do |event| %>
+  <tr>
+    <td><%= event.date %> @ <%= event.site %></td>
+    <td><%= link_to 'Show', [@game, event] %></td>
+    <td><%= link_to 'Edit', edit_game_event_path(@game, event) %></td>
+    <td><%= link_to 'Destroy', [@game, event], confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Event', new_game_event_path(@game) %>

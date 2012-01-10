@@ -12,3 +12,7 @@ darren:
 alex: # Not a global admin
   name: Alexander Ayube
   email: alex@ayube.com
+
+ben:
+  name: Ben Jones
+  email: ben@jones.co.uk

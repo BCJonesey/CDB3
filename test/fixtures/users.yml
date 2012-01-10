@@ -19,3 +19,7 @@ one:
 two:
   name: MyString
   email: MyString
+
+ben:
+  name: Ben Jones
+  email: ben@jones.co.uk

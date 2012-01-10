@@ -9,6 +9,7 @@
 
 <% @characters.each do |character| %>
   <tr>
+    <td><%= character.name %></td>
     <td><%= link_to 'Show', [@game, character] %></td>
     <td><%= link_to 'Edit', edit_game_character_path(@game, character) %></td>
     <td><%= link_to 'Destroy', [@game, character], confirm: 'Are you sure?', method: :delete %></td>

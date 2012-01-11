@@ -2,7 +2,8 @@
 class CharactersController < ApplicationController
   before_filter :require_logged_in_user
   before_filter :require_game
-  before_filter :get_or_create_member, :only => [:new]
+  before_filter :get_or_create_member, :only => [:create]
+  before_filter :get_resource_and_match_game, :except => [:index, :new, :create]
   
   # GET /characters
   # GET /characters.json
@@ -28,8 +29,7 @@ class CharactersController < ApplicationController
   # GET /characters/1
   # GET /characters/1.json
   def show
-    @character = Character.find(params[:id])
-
+    
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @character }
@@ -41,10 +41,10 @@ class CharactersController < ApplicationController
   def new
     @character = Character.new
 
-    @players = nil
+    @members = nil
 
     if game_admin?(@game)
-      @players = User.all
+      @members = @game.members
     end
 
     respond_to do |format|
@@ -55,7 +55,7 @@ class CharactersController < ApplicationController
 
   # GET /characters/1/edit
   def edit
-    @character = Character.find(params[:id])
+    
   end
 
   # POST /characters
@@ -87,7 +87,6 @@ class CharactersController < ApplicationController
   # PUT /characters/1
   # PUT /characters/1.json
   def update
-    @character = Character.find(params[:id])
 
     respond_to do |format|
       if @character.update_attributes(params[:character])
@@ -103,7 +102,6 @@ class CharactersController < ApplicationController
   # DELETE /characters/1
   # DELETE /characters/1.json
   def destroy
-    @character = Character.find(params[:id])
     @character.destroy
 
     respond_to do |format|

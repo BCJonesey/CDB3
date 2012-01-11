@@ -2,11 +2,12 @@ class MembersController < ApplicationController
   before_filter :require_logged_in_user
   before_filter :require_global_admin, :except => [:index, :show]
   before_filter :require_game
+  before_filter :get_resource_and_match_game, :except => [:index, :new, :create]
 
   # GET /members
   # GET /members.json
   def index
-    @members = Member.all
+    @members = @game.members
 
     respond_to do |format|
       format.html # index.html.erb
@@ -17,8 +18,6 @@ class MembersController < ApplicationController
   # GET /members/1
   # GET /members/1.json
   def show
-    @member = Member.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @member }
@@ -38,14 +37,14 @@ class MembersController < ApplicationController
 
   # GET /members/1/edit
   def edit
-    @member = Member.find(params[:id])
+
   end
 
   # POST /members
   # POST /members.json
   def create
     @member = Member.new(params[:member])
-
+    @member.game =@game
     respond_to do |format|
       if @member.save
         format.html { redirect_to [@game, @member], notice: 'Member was successfully created.' }
@@ -60,7 +59,6 @@ class MembersController < ApplicationController
   # PUT /members/1
   # PUT /members/1.json
   def update
-    @member = Member.find(params[:id])
 
     respond_to do |format|
       if @member.update_attributes(params[:member])
@@ -76,7 +74,6 @@ class MembersController < ApplicationController
   # DELETE /members/1
   # DELETE /members/1.json
   def destroy
-    @member = Member.find(params[:id])
     @member.destroy
 
     respond_to do |format|

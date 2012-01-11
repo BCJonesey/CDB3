@@ -1,13 +1,12 @@
 class SkillsController < ApplicationController
   before_filter :require_logged_in_user
   before_filter :require_game
-  before_filter :get_skill, :except => [:index, :new, :create]
+  before_filter :get_resource_and_match_game, :except => [:index, :new, :create]
   
   # GET /skills
   # GET /skills.json
   def index
     @skills = @game.skills
-    
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @skills }
@@ -84,13 +83,7 @@ class SkillsController < ApplicationController
     end
   end
   
-  private
-  def get_skill
-    @skill = Skill.find(params[:id])
-    if(@skill.nil? || @skill.game != @game)
-      redirect_to '/', :alert => "No such game"
-    end
-  end
+
   
     
 end

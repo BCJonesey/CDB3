@@ -1,6 +1,10 @@
 class GamesController < ApplicationController
-  before_filter :require_logged_in_user
-  before_filter :require_global_admin, :except => [:index, :show]
+  before_filter :require_logged_in_user, :except => [:login]
+  before_filter :require_global_admin, :except => [:login, :index, :show]
+
+  def login
+    @game = Game.find(params[:game_id])
+  end
 
   def index
     @games = Game.all

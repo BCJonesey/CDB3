@@ -13,9 +13,21 @@ class ApplicationController < ActionController::Base
 
   def require_logged_in_user
     get_logged_in_user
+    get_current_game
+
+    if @game.nil? and params[:controller] == 'games'
+      @game = Game.find_by_id(params[:id])
+    end
+
+    if @game.nil?
+      redirect_to '/', :alert => "Please pick a game."
+      return
+    end
 
     if @logged_in_user.nil?
-      redirect_to '/', :alert => "Access denied: requires logged in user"
+      session[:request_path] = request.path
+      redirect_to game_login_path(@game), :notice => "You must log in to access that page."
+      return
     end
   end
 

@@ -40,7 +40,12 @@ class CharactersController < ApplicationController
   # GET /characters/new.json
   def new
     @character = Character.new
-    @character.member_id = @member.id
+
+    @players = nil
+
+    if game_admin?(@game)
+      @players = User.all
+    end
 
     respond_to do |format|
       format.html # new.html.erb
@@ -57,6 +62,16 @@ class CharactersController < ApplicationController
   # POST /characters.json
   def create
     @character = Character.new(params[:character])
+
+    if params[:user_id]
+      @user = User.find(params[:user_id])
+    else
+      @user = @logged_in_user
+    end
+
+    @member = Member.find_or_create_by_user_id_and_game_id(@user.id, @game.id)
+    @character.member_id = @member.id
+
 
     respond_to do |format|
       if @character.save

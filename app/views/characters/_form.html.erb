@@ -1,6 +1,4 @@
 <%= form_for [@game, @character] do |f| %>
-  <%= f.hidden_field :member_id %>
-
   <% if @character.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@character.errors.count, "error") %> 
@@ -15,7 +13,16 @@
   <% end %>
 
   <div class="actions">
-    <%= f.label :name %> <%= f.text_field :name %>
-    <%= f.submit %>
+    <% unless @players.nil? %>
+      <p>
+      <%= f.label :player %> 
+      <%= select_tag :user_id, options_from_collection_for_select(@players, "id", "name") %>
+      </p>
+    <% end %>
+
+    <p>
+      <%= f.label :name %> <%= f.text_field :name %>
+      <%= f.submit %>
+    </p>
   </div>
 <% end %>

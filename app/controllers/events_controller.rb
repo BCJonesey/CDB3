@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
   before_filter :require_game_admin
+  before_filter :get_resource_and_match_game, :except => [:index, :new, :create]
 
   # GET /events
   # GET /events.json
@@ -15,7 +16,7 @@ class EventsController < ApplicationController
   # GET /events/1
   # GET /events/1.json
   def show
-    @event = Event.find(params[:id])
+
 
     respond_to do |format|
       format.html # show.html.erb
@@ -27,7 +28,7 @@ class EventsController < ApplicationController
   # GET /events/new.json
   def new
     @event = Event.new
-    @event.game_id = @game.id
+    
 
     respond_to do |format|
       format.html # new.html.erb
@@ -37,14 +38,14 @@ class EventsController < ApplicationController
 
   # GET /events/1/edit
   def edit
-    @event = Event.find(params[:id])
+
   end
 
   # POST /events
   # POST /events.json
   def create
     @event = Event.new(params[:event])
-
+    @event.game = @game
     respond_to do |format|
       if @event.save
         format.html { redirect_to [@game, @event], notice: 'Event was successfully created.' }
@@ -59,7 +60,6 @@ class EventsController < ApplicationController
   # PUT /events/1
   # PUT /events/1.json
   def update
-    @event = Event.find(params[:id])
 
     respond_to do |format|
       if @event.update_attributes(params[:event])
@@ -75,7 +75,6 @@ class EventsController < ApplicationController
   # DELETE /events/1
   # DELETE /events/1.json
   def destroy
-    @event = Event.find(params[:id])
     @event.destroy
 
     respond_to do |format|

@@ -42,6 +42,15 @@ class ApplicationController < ActionController::Base
       redirect_to '/', :alert => "No such game"
     end
   end
+  
+  def get_resource_and_match_game  
+    current_item = params[:controller].to_s.classify.constantize.find(params[:id])
+    instance_variable_set("@" + params[:controller].to_s.classify.downcase,current_item)
+    if(current_item.nil? || current_item.game != @game)
+      redirect_to '/', :alert => "No such game"
+    end
+  end
+  
 
   def require_game_member
     get_logged_in_user

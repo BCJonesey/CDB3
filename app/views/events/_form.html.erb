@@ -1,4 +1,6 @@
 <%= form_for [@game, @event] do |f| %>
+  <%= f.hidden_field :game_id %>
+
   <% if @event.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h2>
@@ -12,6 +14,9 @@
   <% end %>
 
   <div class="actions">
+    Date: <%= f.date_select :date %><br>
+    Site: <%= f.text_field :site %><br>
+    Notes: <%= f.text_field :notes %><br>
     <%= f.submit %>
   </div>
 <% end %>

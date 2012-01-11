@@ -19,7 +19,8 @@ class CharactersControllerTest < ActionController::TestCase
 
   test "should create character" do
     assert_difference('Character.count') do
-      post :create, {:game_id => @game.id, character: {:name => "Bobby McNoob"}}, 
+      post :create, {:game_id => @game.id, character:
+          {:member_id => members(:alex_calling).id, :name => "Bobby McNoob"}}, 
         {:user_id => users(:alex)}
     end
 

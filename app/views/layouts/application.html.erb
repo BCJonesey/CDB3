@@ -8,8 +8,8 @@
 </head>
 <body>
 
-<% unless @user.nil? %>
-  <p style="text-align: right;">Logged in as <%= @user.name %>; 
+<% unless @logged_in_user.nil? %>
+  <p style="text-align: right;">Logged in as <%= @logged_in_user.name %>; 
     <%= link_to "Logout", logout_path %></p>
 <% end %>
 

@@ -18,7 +18,7 @@ class MainControllerTest < ActionController::TestCase
   test "should login" do
     post :login, :email => 'nat@ferrus.net'
     assert session[:user_id] == users(:nat).id, "User id mismatch"
-    assert_response :success
+    assert_response :redirect
     assert_nil flash[:alert]
   end
 

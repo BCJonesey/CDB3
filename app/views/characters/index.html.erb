@@ -1,12 +1,9 @@
 <h1>Listing characters</h1>
 
-<table>
-  <tr>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
 
+<% unless @characters.empty? %>
+
+<table>
 <% @characters.each do |character| %>
   <tr>
     <td><%= character.name %></td>
@@ -17,6 +14,23 @@
 <% end %>
 </table>
 
+<% end %>
+
+<% unless @all_characters.empty? %>
+
+<table>
+<% @all_characters.each do |character| %>
+  <tr>
+    <td><%= character.name %></td>
+    <td><%= link_to 'Show', [@game, character] %></td>
+    <td><%= link_to 'Edit', edit_game_character_path(@game, character) %></td>
+    <td><%= link_to 'Destroy', [@game, character], confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<% end %>
+
 <br />
 
-<%= link_to 'New Character', new_game_character_path %>
+<%= link_to 'New Character', new_game_character_path(@game) %>

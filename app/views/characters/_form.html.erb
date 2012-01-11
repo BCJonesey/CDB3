@@ -1,4 +1,6 @@
 <%= form_for [@game, @character] do |f| %>
+  <%= f.hidden_field :member_id %>
+
   <% if @character.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@character.errors.count, "error") %> 

@@ -20,6 +20,7 @@ class MainController < ApplicationController
       return
     else
       session[:user_id] = @user.id
+      redirect_to '/games', :notice => "Logged in as #{@user.name}"
     end
   end
 

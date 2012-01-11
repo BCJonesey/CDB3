@@ -1,11 +1,13 @@
-<p id="notice"><%= notice %></p>
-
-<table>
-  <tr>
-    <td><%= @member.user.name %></td>
-    <td><%= @member.game.name %></td>
-  </tr>
-</table>
-
+<h1>Member: <%= @member.name %> @ <%= @member.game.name %></h1>
 <%= link_to 'Edit', edit_game_member_path(@game, @member) %> |
 <%= link_to 'Back', game_members_path(@game) %>
+
+<h2>Characters</h2>
+
+<ul>
+<% @member.characters.each do |character| %>
+  <li><%= character.name %> <%= link_to "[View]", game_character_path(@game, character) %></li>
+<% end %>
+</ul>
+
+<h2>Registrations</h2>

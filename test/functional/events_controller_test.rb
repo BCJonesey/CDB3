@@ -25,7 +25,8 @@ class EventsControllerTest < ActionController::TestCase
 
   test "should create event" do
     assert_difference('Event.count') do
-      post :create, {:game_id => @game.id, event: @event.attributes}, {:user_id => users(:ben).id}
+      post :create, {:game_id => @game.id, event: 
+        {:game_id => @game.id, :date => Time.now, :site => "Bacon" }}, {:user_id => users(:ben).id}
     end
 
     assert_redirected_to game_event_path(@game, assigns(:event))

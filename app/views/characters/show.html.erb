@@ -1,5 +1,6 @@
-<p id="notice"><%= notice %></p>
+<h1>Showing Character: <%= @character.name %></h1>
 
+<p>Player: <%= @character.member.name %></p>
 
 <%= link_to 'Edit', edit_game_character_path(@game, @character) %> |
 <%= link_to 'Back', game_characters_path(@game) %>

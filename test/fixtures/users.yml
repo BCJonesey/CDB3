@@ -12,14 +12,10 @@ alex: # Not a global admin
   name: Alexander Ayube
   email: alex@ayube.com
 
-one:
-  name: MyString
-  email: MyString
-
-two:
-  name: MyString
-  email: MyString
-
 ben:
   name: Ben Jones
   email: ben@jones.co.uk
+
+joe: # Member of no games
+  name: Joe Auditore
+  email: joe@elephant.com

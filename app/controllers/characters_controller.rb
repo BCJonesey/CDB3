@@ -2,18 +2,22 @@
 class CharactersController < ApplicationController
   before_filter :require_logged_in_user
   before_filter :require_game
-  before_filter :require_game_member
-  before_filter :require_game_admin, :only => [:admin]
-
-  def admin
-    # List characters you can admin.
-  end
+  before_filter :get_or_create_member, :only => [:new]
   
   # GET /characters
   # GET /characters.json
-  # Characters for current user only.
   def index
-    @characters = @member.characters
+    @characters = []
+
+    unless @member.nil?
+      @characters = @member.characters
+    end
+
+    @all_characters = []
+    
+    if game_admin?(@game) or global_admin?
+      @all_characters = @game.characters
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -37,6 +41,12 @@ class CharactersController < ApplicationController
   def new
     @character = Character.new
 
+    @players = nil
+
+    if game_admin?(@game)
+      @players = User.all
+    end
+
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @character }
@@ -52,7 +62,16 @@ class CharactersController < ApplicationController
   # POST /characters.json
   def create
     @character = Character.new(params[:character])
-    @character.member = @member
+
+    if params[:user_id]
+      @user = User.find(params[:user_id])
+    else
+      @user = @logged_in_user
+    end
+
+    @member = Member.find_or_create_by_user_id_and_game_id(@user.id, @game.id)
+    @character.member_id = @member.id
+
 
     respond_to do |format|
       if @character.save
@@ -91,5 +110,11 @@ class CharactersController < ApplicationController
       format.html { redirect_to game_characters_url(@game) }
       format.json { head :ok }
     end
+  end
+
+  private
+
+  def require_character_edit_authority
+
   end
 end

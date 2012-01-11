@@ -8,6 +8,7 @@ Cdb3::Application.routes.draw do
   resources :users
 
   resources :games do
+    match 'login'
     resources :members
     resources :characters
     resources :skills

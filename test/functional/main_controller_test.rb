@@ -10,13 +10,14 @@ class MainControllerTest < ActionController::TestCase
 
   test "should error on bad account" do
     post :login, :email => 'bad_address@nowhere.gov'
-    assert_redirected_to '/'
+    assert_response :redirect
     assert_nil session[:user_id]
     assert_equal flash[:alert], "No such user"
   end
 
   test "should login" do
-    post :login, :email => 'nat@ferrus.net'
+    post :login, {:email => users(:nat).email, :game => games(:the_calling)}, 
+    {:request_path => game_path(games(:the_calling))}
     assert session[:user_id] == users(:nat).id, "User id mismatch"
     assert_response :redirect
     assert_nil flash[:alert]

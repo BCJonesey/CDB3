@@ -19,15 +19,13 @@ class ApplicationController < ActionController::Base
       @game = Game.find_by_id(params[:id])
     end
 
-    if @game.nil?
-      redirect_to '/', :alert => "Please pick a game."
-      return
-    end
-
     if @logged_in_user.nil?
       session[:request_path] = request.path
-      redirect_to game_login_path(@game), :notice => "You must log in to access that page."
-      return
+      if @game.nil?
+        redirect_to '/', :notice => "You must log in to access that page."
+      else
+        redirect_to game_login_path(@game), :notice => "You must log in to access that page."
+      end
     end
   end
 
@@ -66,7 +64,6 @@ class ApplicationController < ActionController::Base
     end
   end
   
-
   def game_admin?(game)
     get_logged_in_user
 

@@ -17,7 +17,7 @@ class MainController < ApplicationController
     
     if @user.nil?
       session[:user_id] = nil
-      redirect_to referrer, :alert => "No such user"
+      redirect_to request.referrer || '/', :alert => "No such user"
       return
     else
       session[:user_id] = @user.id

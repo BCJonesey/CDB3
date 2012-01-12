@@ -1,13 +1,31 @@
-<h1>Welcome to the Character Database</h1>
+
+
+<div class="row">
+
+<div class="sixcol">
 
 <h2>Pick a Game</h2>
 
-<ul>
+<div>
 <% @games.each do |game| %>
-  <li><%= link_to game.name, game_path(game) %></li>
+  <p><%= link_to game.name, game_path(game) %></p>
 <% end %>
-</ul>
+</div>
 
+</div>
 
+<div class="sixcol last">
 
+<h2>Upcoming Events</h2>
+
+<div>
+<% @events.each do |event| %>
+  <p><%= link_to "#{event.date} #{event.game.name}", game_event_path(event.game, event) %> 
+      @ <%= event.site %></p>
+<% end %>
+</div>
+
+</div>
+
+</div>
 

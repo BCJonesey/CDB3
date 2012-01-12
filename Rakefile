@@ -25,6 +25,5 @@ namespace :test do
 
     puts "\trake test:integration"
     system("(rake test:integration) 2>&1 | grep failures")
-
   end
 end

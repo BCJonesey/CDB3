@@ -11,22 +11,8 @@
 <div class="container">
 
 <div class="row">
-  <div class="eightcol">
-    <div class="logo">
-      <% if @game.nil? %>
-        <%= image_tag "main_logo.png" %>
-      <% else %>
-        <%= image_tag @game.logo_image, :alt => @game.logo_image %>
-      <% end %>
-    </div>
-  </div>
-
-  <div class="fourcol last">
-    <%= link_to "Larp Tool Home", root_path %>
-
-    <% unless @logged_in_user.nil? %>
-      | Logged in as <%= @logged_in_user.name %>
-    <% end %>
+  <div class="twelvecol last main_logo">
+    <%= image_tag "main_logo.png" %>
   </div>
 </div>
 

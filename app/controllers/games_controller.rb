@@ -12,6 +12,8 @@ class GamesController < ApplicationController
 
   def show
     @game = Game.find(params[:id])
+    @characters = Character.all
+    @members = @game.members
   end
 
   def new

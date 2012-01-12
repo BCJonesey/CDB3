@@ -1,6 +1,7 @@
 
 class MainController < ApplicationController
-    before_filter :first_run_check
+  layout "main"
+  before_filter :first_run_check
   
   def first_run_check
     if(User.count < 1 )
@@ -9,7 +10,8 @@ class MainController < ApplicationController
   end
   
   def index
-    @games = Game.all.find_all {|g| g.public? }
+    @games  = Game.all.find_all {|g| g.public? }
+    @events = Event.all 
   end
 
   def login

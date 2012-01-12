@@ -5,3 +5,7 @@
  *= require_self
  *= require_tree . 
 */
+
+.copyright {
+    margin-top: 1in; text-align: center;
+}

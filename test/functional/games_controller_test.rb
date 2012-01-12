@@ -35,7 +35,7 @@ class GamesControllerTest < ActionController::TestCase
   test "should display mirror mirror" do
     get :show, {:id => games(:mirror_mirror).id}, {:user_id => users(:nat).id}
     assert_response :success
-    assert(@response.body.include?(games(:mirror_mirror).name), "No MM name")
+    assert(@response.body.include?(games(:mirror_mirror).short_name), "No MM image")
   end
 
   test "should create new game" do

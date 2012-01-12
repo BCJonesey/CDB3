@@ -13,6 +13,7 @@ Cdb3::Application.routes.draw do
     resources :characters
     resources :skills
     resources :events
+    resources :currencies
     resources :registrations
   end
 

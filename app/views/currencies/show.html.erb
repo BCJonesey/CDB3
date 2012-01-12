@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @currency.name %>
+</p>
+
+<p>
+  <b>Short name:</b>
+  <%= @currency.short_name %>
+</p>
+
+<p>
+  <b>Yearly cap:</b>
+  <%= @currency.yearly_cap %>
+</p>
+
+
+<%= link_to 'Edit', edit_game_currency_path(@game, @currency) %> |
+<%= link_to 'Back', game_currencies_path(@game) %>

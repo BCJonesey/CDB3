@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+CP:
+  name: Character Point
+  short_name: CP
+  yearly_cap: 15
+  game: the_calling
+
+TP:
+  name: Template Point
+  short_name: TP
+  yearly_cap: 5
+  game: mirror_mirror

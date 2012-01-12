@@ -1,0 +1,27 @@
+<h1>Listing currencies</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Short name</th>
+    <th>Yearly cap</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @currencies.each do |currency| %>
+  <tr>
+    <td><%= currency.name %></td>
+    <td><%= currency.short_name %></td>
+    <td><%= currency.yearly_cap %></td>
+    <td><%= link_to 'Show', [@game, currency] %></td>
+    <td><%= link_to 'Edit', edit_game_currency_path(@game, currency) %></td>
+    <td><%= link_to 'Destroy', [@game, currency], confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Currency', new_game_currency_path %>

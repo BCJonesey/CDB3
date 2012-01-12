@@ -3,4 +3,7 @@ class Member < ActiveRecord::Base
   belongs_to :user
   has_many :characters
 
+  def name
+    user.name
+  end
 end

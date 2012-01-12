@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Event:</b>
+  <%= @registration.event_id %>
+</p>
+
+<p>
+  <b>Member:</b>
+  <%= @registration.member_id %>
+</p>
+
+<p>
+  <b>Character:</b>
+  <%= @registration.character_id %>
+</p>
+
+<p>
+  <b>Paid:</b>
+  <%= @registration.paid %>
+</p>
+
+<p>
+  <b>Present:</b>
+  <%= @registration.present %>
+</p>
+
+<p>
+  <b>Setup cleanup:</b>
+  <%= @registration.setup_cleanup %>
+</p>
+
+<p>
+  <b>Cp game:</b>
+  <%= @registration.cp_game_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_game_registration_path(@game, @registration) %> |
+<%= link_to 'Back', game_registrations_path(@game) %>

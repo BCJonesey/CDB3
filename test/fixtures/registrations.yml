@@ -1,0 +1,10 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+alex_tc_sept:
+  event: tc_sept
+  member: alex_calling
+  character: udo
+  paid: false
+  present: false
+  setup_cleanup: false
+

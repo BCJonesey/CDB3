@@ -52,7 +52,20 @@ ActiveRecord::Schema.define(:version => 20120110202126) do
     t.datetime "updated_at"
   end
 
+  create_table "registrations", :force => true do |t|
+    t.integer  "event_id"
+    t.integer  "member_id"
+    t.integer  "character_id"
+    t.boolean  "paid"
+    t.boolean  "present"
+    t.boolean  "setup_cleanup"
+    t.integer  "cp_game_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "skills", :force => true do |t|
+    t.integer  "game_id"
     t.string   "name"
     t.string   "summary"
     t.text     "description"

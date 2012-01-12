@@ -1,13 +1,13 @@
 <h1>Welcome to the Character Database</h1>
-<h2>Log In</h2>
 
-<%= form_tag login_path do %>
-<p><%= label_tag :email, "Email: " %> <%= text_field_tag :email %>
-<br><%= submit_tag "Login" %>
-</p>
+<h2>Pick a Game</h2>
+
+<ul>
+<% @games.each do |game| %>
+  <li><%= link_to game.name, game_path(game) %></li>
 <% end %>
+</ul>
 
-<h2>Register</h2>
-<p><%= link_to "Register", new_user_path %></p>
 
-<p></p>
+
+

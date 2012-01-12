@@ -1,2 +1,21 @@
-<h1>View Game</h1>
-<p>You are viewing: <%= @game.name %></p>
+<h1>View Game: <%= @game.name %></p>
+
+<h2>Members</h2>
+
+<ul>
+<% @game.members.each do |member| %>
+  <li><%= member.name %>
+      <%= link_to "[View]", game_member_path(@game, member) %></li>
+<% end %>
+</ul>
+
+<h2>Events</h2>
+
+<ul>
+<% @game.events.each do |event| %>
+  <li><%= event.date %> <%= event.site %>
+      <%= link_to "[View]", game_event_path(@game, event) %></li>
+<% end %>
+</ul>
+
+<%= link_to "New Event", new_game_event_path(@game) %>

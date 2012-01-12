@@ -13,7 +13,16 @@
   <% end %>
 
   <div class="actions">
-    <%= f.label :name %> <%= f.text_field :name %>
-    <%= f.submit %>
+    <% unless @players.nil? %>
+      <p>
+      <%= f.label :player %> 
+      <%= select_tag :user_id, options_from_collection_for_select(@players, "id", "name") %>
+      </p>
+    <% end %>
+
+    <p>
+      <%= f.label :name %> <%= f.text_field :name %>
+      <%= f.submit %>
+    </p>
   </div>
 <% end %>

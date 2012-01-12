@@ -9,6 +9,10 @@ class User < ActiveRecord::Base
   
   private 
 
+  def name_and_email
+    "#{name} - <#{email}>"
+  end
+
   def lower_email
     self.email = self.email.downcase
   end

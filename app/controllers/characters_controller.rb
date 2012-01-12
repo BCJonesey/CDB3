@@ -41,10 +41,10 @@ class CharactersController < ApplicationController
   def new
     @character = Character.new
 
-    @members = nil
+    @users = nil
 
     if game_admin?(@game)
-      @members = @game.members
+      @users = User.all
     end
 
     respond_to do |format|
@@ -111,8 +111,4 @@ class CharactersController < ApplicationController
   end
 
   private
-
-  def require_character_edit_authority
-
-  end
 end

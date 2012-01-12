@@ -1,8 +1,11 @@
-<h1>Add a Game</h1>
+<div class="row">
 
-<%= form_for @game do |f| %>
-<p>
-<%= f.text_field :name %>
-<br><%= submit_tag "Create Game" %>
-</p>
-<% end %>
+<div class="twelvecol">
+<h1>Create New Game</h1>
+</div>
+
+</div>
+
+<%= render "form" %>
+
+

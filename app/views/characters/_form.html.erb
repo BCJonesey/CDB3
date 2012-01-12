@@ -13,10 +13,10 @@
   <% end %>
 
   <div class="actions">
-    <% unless @players.nil? %>
+    <% unless @members.nil? %>
       <p>
       <%= f.label :player %> 
-      <%= select_tag :user_id, options_from_collection_for_select(@players, "id", "name") %>
+      <%= select_tag :user_id, options_from_collection_for_select(@members, "id", "name") %>
       </p>
     <% end %>
 

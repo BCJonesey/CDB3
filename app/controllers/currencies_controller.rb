@@ -1,6 +1,7 @@
 class CurrenciesController < ApplicationController
 
   before_filter :require_game
+  before_filter :get_resource_and_match_game, :except => [:index, :new, :create]
   
   # GET /currencies
   # GET /currencies.json
@@ -16,7 +17,6 @@ class CurrenciesController < ApplicationController
   # GET /currencies/1
   # GET /currencies/1.json
   def show
-    @currency = Currency.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -37,7 +37,7 @@ class CurrenciesController < ApplicationController
 
   # GET /currencies/1/edit
   def edit
-    @currency = Currency.find(params[:id])
+    
   end
 
   # POST /currencies
@@ -61,7 +61,6 @@ class CurrenciesController < ApplicationController
   # PUT /currencies/1
   # PUT /currencies/1.json
   def update
-    @currency = Currency.find(params[:id])
 
     respond_to do |format|
       if @currency.update_attributes(params[:currency])
@@ -77,7 +76,6 @@ class CurrenciesController < ApplicationController
   # DELETE /currencies/1
   # DELETE /currencies/1.json
   def destroy
-    @currency = Currency.find(params[:id])
     @currency.destroy
 
     respond_to do |format|

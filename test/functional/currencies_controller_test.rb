@@ -3,7 +3,7 @@ require 'test_helper'
 class CurrenciesControllerTest < ActionController::TestCase
   setup do
     @game = games(:mirror_mirror)
-    @currency = currencies(:CP)
+    @currency = currencies(:TP)
   end
 
   test "should get index" do
@@ -18,6 +18,7 @@ class CurrenciesControllerTest < ActionController::TestCase
   end
 
   test "should create currency" do
+    @currency.short_name = "KP"
     assert_difference('Currency.count') do
       post :create, {game_id: @game.id, currency: @currency.attributes}
     end

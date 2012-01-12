@@ -15,6 +15,7 @@ Cdb3::Application.routes.draw do
     resources :characters
     resources :skills
     resources :events
+    resources :currencies
   end
 
   # The priority is based upon order of creation:

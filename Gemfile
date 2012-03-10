@@ -33,6 +33,12 @@ gem 'jquery-rails'
 group :test do
   # Pretty printed test output
   gem 'turn', '0.8.2', :require => false
+  gem 'capybara'
+  gem 'factory_girl_rails'
+end
+
+group :development do
+  gem 'factory_girl_rails'
 end
 
 gem 'therubyracer', require: "v8"

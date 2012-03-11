@@ -25,9 +25,10 @@
     <%= link_to "Larp Tool Home", root_path %>
 
     <% if @logged_in_user.nil? %>
-      | Not logged in.
+      | <%= link_to "Log In", '/main/login' %>
     <% else %>
-      | Logged in as <%= @logged_in_user.name %>
+      | Hi, <%= @logged_in_user.name %>. 
+        <%= link_to "Log Out", '/main/logout' %>
     <% end %>
   </div>
 </div>

@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(:version => 20120112032840) do
 
   create_table "character_versions", :force => true do |t|
     t.integer  "previous_version_id"
-    t.string   "name"
+    t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

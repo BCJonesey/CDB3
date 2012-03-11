@@ -15,6 +15,8 @@
 <p><%= character.name %></p>
 <% end %>
 
+<p><%= link_to "Create Character", new_game_character_path(@game) %></p>
+
 <% unless @members.nil? %>
 
 <h2>Game Members</h2>

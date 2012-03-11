@@ -1,0 +1,27 @@
+<div class="row">
+
+<div class="twocol">&nbsp</div>
+
+<div class="eightcol">
+<h2>Please log in</h2>
+
+<%= form_tag login_path do %>
+<table>
+<tr>
+  <td><%= label_tag :email %></td> 
+  <td><%= text_field_tag :email %></td>
+</td>
+<tr>
+  <td>&nbsp;</td>
+  <td><%= submit_tag "Login" %></td>
+</tr>
+</table>
+<% end %>
+
+<h2>Register</h2>
+<p><%= link_to "Register", new_user_path %></p>
+</div>
+
+<div class="twocol last">&nbsp;</div>
+
+</div>

@@ -2,7 +2,7 @@ class CreateCharacterVersions < ActiveRecord::Migration
   def change
     create_table :character_versions do |t|
       t.integer :previous_version_id
-      t.string :name
+      t.string :description
 
       t.timestamps
     end

@@ -53,7 +53,7 @@ class UsersControllerTest < ActionController::TestCase
   test "should create first user" do
     Member.destroy_all
     User.destroy_all
-    post :create, "user"=>{"name"=>"g man", "email"=>"bad_address@nowhere.gov"}
+    post :create, "user" => {"name"=>"g man", "email"=>"bad_address@nowhere.gov"}
     assert_response(:redirect)
     assert_equal "g man", User.first.name
     assert_equal "bad_address@nowhere.gov",User.first.email

@@ -6,10 +6,11 @@ class FirstRunTest < ActionDispatch::IntegrationTest
    test "first run" do
     Member.destroy_all
      User.destroy_all
-    get '/' 
-    assert_redirected_to new_user_path
-    assert_nil session[:user_id]
-    assert_equal flash[:notice], "This is a fist run, please create an initial user account."
+    visit root_url
+    assert_equal new_user_path,current_path
+    within(".flash_notice_message") do
+    assert has_content?("Notice: This is a first run, please create an initial user account.")
+    end
    end
    
   

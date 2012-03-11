@@ -1,30 +1,34 @@
 require 'test_helper'
 
 class MainControllerTest < ActionController::TestCase
-  fixtures :all
+
 
   test "should get index" do
+    Factory(:user,global_admin: true)
     get :index
+    
     assert_response :success
   end
 
   test "should error on bad account" do
+    Factory(:user,global_admin: true)
     post :login, :email => 'bad_address@nowhere.gov'
-    assert_response :redirect
+    assert_response :success
     assert_nil session[:user_id]
-    assert_equal flash[:alert], "No such user"
+    assert_equal "No such user",flash[:alert]
   end
 
   test "should login" do
-    post :login, {:email => users(:nat).email, :game => games(:the_calling)}, 
-    {:request_path => game_path(games(:the_calling))}
-    assert session[:user_id] == users(:nat).id, "User id mismatch"
+    @member = Factory(:member)
+    post :login, {:email => @member.user.email, :game => @member.game}, 
+    {:request_path => game_path(@member.game)}
+    assert session[:user_id] == @member.user.id, "User id mismatch"
     assert_response :redirect
     assert_nil flash[:alert]
   end
 
   test "should logout" do
-    get :logout, {}, { :user_id => users(:nat).id }
+    get :logout, {}, { :user_id => Factory(:user).id }
     assert_redirected_to '/'
   end
 end

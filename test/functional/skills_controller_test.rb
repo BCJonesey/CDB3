@@ -2,9 +2,12 @@ require 'test_helper'
 
 class SkillsControllerTest < ActionController::TestCase
   setup do
-    @skill = skills(:one)
-    @game = games(:mirror_mirror)
-    @user = users(:nat)
+    @game = Factory(:game_mirror_mirror)
+    
+    @skill = Factory(:skill,game: @game)
+
+    @member= Factory(:member, game:@game,game_admin: true)
+    @user=@member.user
   end
 
   test "should get index" do

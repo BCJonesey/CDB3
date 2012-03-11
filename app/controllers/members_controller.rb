@@ -1,7 +1,7 @@
 class MembersController < ApplicationController
   before_filter :require_logged_in_user
-  before_filter :require_global_admin, :except => [:index, :show]
   before_filter :require_game
+  before_filter :require_game_admin, :except => [:index, :show]
   before_filter :get_resource_and_match_game, :except => [:index, :new, :create]
 
   # GET /members

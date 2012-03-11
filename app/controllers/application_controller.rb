@@ -60,7 +60,7 @@ class ApplicationController < ActionController::Base
     current_item = params[:controller].to_s.classify.constantize.find(params[:id])
     instance_variable_set("@" + params[:controller].to_s.classify.downcase,current_item)
     if(current_item.nil? || current_item.game != @game)
-      redirect_to '/', :alert => "No such game"
+      redirect_to '/', :alert => "No such "+params[:controller].to_s.classify
     end
   end
   

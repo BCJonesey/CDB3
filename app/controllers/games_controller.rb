@@ -13,7 +13,12 @@ class GamesController < ApplicationController
   def show
     @game = Game.find(params[:id])
     @characters = Character.all
-    @members = @game.members
+    
+    @members = nil
+    
+    if @logged_in_user.game_admin?(@game)
+      @members = @game.members
+    end
   end
 
   def new

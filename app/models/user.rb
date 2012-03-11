@@ -3,7 +3,9 @@ class User < ActiveRecord::Base
   has_many :games, :through => :members
 
   validates :name, :presence => true
-  validates :email, :presence => true, :uniqueness => true , :format => {:with => /^[^A-Z]+$/} 
+  validates :email, :presence => true, :uniqueness => true , 
+    :format => {:with => /^[^A-Z]+$/}
+  
   before_validation :lower_email
   before_destroy :verify_no_members
 

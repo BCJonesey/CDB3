@@ -14,7 +14,8 @@
   <% end %>
 
   <div class="actions">
-    Date: <%= f.date_select :date %><br>
+    Date: <%= f.date_select :start_date %><br>
+    End Date: <%= f.date_select :end_date %><br>
     Site: <%= f.text_field :site %><br>
     Notes: <%= f.text_field :notes %><br>
     <%= f.submit %>

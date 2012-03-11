@@ -29,7 +29,7 @@ class EventsControllerTest < ActionController::TestCase
   test "should create event" do
     assert_difference('Event.count') do
       post :create, {:game_id => @game.id, event: 
-        {:game_id => @game.id, :date => Time.now, :site => "Bacon" }}, {:user_id => @ben.user.id}
+        {:game_id => @game.id, :start_date => DateTime.now, :end_date=>DateTime.now + 1.day,:site => "Bacon" }}, {:user_id => @ben.user.id}
     end
 
     assert_redirected_to game_event_path(@game, assigns(:event))

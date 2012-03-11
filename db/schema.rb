@@ -47,7 +47,8 @@ ActiveRecord::Schema.define(:version => 20120112032840) do
 
   create_table "events", :force => true do |t|
     t.integer  "game_id"
-    t.date     "date"
+    t.datetime "start_date"
+    t.datetime "end_date"
     t.text     "site"
     t.text     "notes"
     t.datetime "created_at"

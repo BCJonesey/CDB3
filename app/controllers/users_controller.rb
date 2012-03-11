@@ -46,7 +46,9 @@ class UsersController < ApplicationController
     end
     respond_to do |format|
       if @user.save
-        format.html { redirect_to root_path, notice: 'User was successfully created.' }
+        format.html do
+          redirect_to request.referrer, notice: 'User was successfully created.' 
+        end
         format.json { render json: @user, status: :created, location: @user }
       else
         format.html { render action: "new" }

@@ -28,7 +28,7 @@
 
 <div>
 <% @events.each do |event| %>
-  <p><%= link_to "#{event.date} #{event.game.name}", game_event_path(event.game, event) %> 
+  <p><%= link_to "#{event.start_date} #{event.game.name}", game_event_path(event.game, event) %> 
       @ <%= event.site %></p>
 <% end %>
 </div>

@@ -2,7 +2,11 @@
 FactoryGirl.define do
   factory :user do
     name "Goonbag McDouchepants"
-    email "goonbag@example.com"
+    sequence(:email) { |i| "goonbag#{i}@example.com"}
     global_admin false
+    
+    factory :user_admin do
+      global_admin true
+    end
   end
 end

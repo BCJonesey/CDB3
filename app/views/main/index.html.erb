@@ -13,13 +13,6 @@
 <% end %>
 </div>
 
-<% if @logged_in_user and @logged_in_user.global_admin? %>
-<br>
-<div>
-<p><%= link_to "Add game", new_game_path %></p>
-</div>
-<% end %>
-
 </div>
 
 <div class="sixcol last">
@@ -36,3 +29,27 @@
 </div>
 
 </div>
+
+<div class="spacer" style="height: 2em">&nbsp;</div>
+
+<% if @logged_in_user and @logged_in_user.global_admin? %>
+
+<div class="row">
+
+<div class="sixcol">
+
+<h2>Global Admin</h2>
+
+<p><%= link_to "Administer Games", games_path %></p>
+<p><%= link_to "Administer Users", users_path %></p>
+
+</div>
+
+<div class="sixcol last">
+&nbsp;
+</div>
+
+</div>
+
+<% end %>
+

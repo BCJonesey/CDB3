@@ -6,6 +6,15 @@ class User < ActiveRecord::Base
   validates :email, :presence => true, :uniqueness => true , :format => {:with => /^[^A-Z]+$/} 
   before_validation :lower_email
   before_destroy :verify_no_members
+
+  def game_admin?(game)
+    if global_admin?
+      true
+    else
+      memb = Member.find_by_game_id_and_user_id(game.id, self.id)
+      memb and memb.game_admin?
+    end
+  end
   
   private 
 

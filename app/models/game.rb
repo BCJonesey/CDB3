@@ -5,8 +5,8 @@ class Game < ActiveRecord::Base
   has_many :skills
   has_many :characters, :through => :members
   
-  validates :name, :presence => true
-  validates :slug, :presence => true  
+  validates :name, :presence => true, :uniqueness => true
+  validates :slug, :presence => true, :uniqueness => true
   
   def logo_image
     logo = self.name + '_logo.png'

@@ -11,7 +11,7 @@ namespace :db do
     system("rake db:drop")
     system("rake db:create")
     system("rake db:migrate")
-    system("rake db:fixtures:load")
+    #system("rake db:fixtures:load")
   end
 end
 

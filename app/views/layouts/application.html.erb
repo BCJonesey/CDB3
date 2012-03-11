@@ -13,7 +13,7 @@
 <div class="row">
   <div class="eightcol">
     <div class="logo">
-      <% if @game.nil? %>
+      <% if @game.nil? or @game.invalid? %>
         <%= image_tag "main_logo.png" %>
       <% else %>
         <%= image_tag @game.logo_image, :alt => @game.logo_image %>
@@ -24,7 +24,9 @@
   <div class="fourcol last">
     <%= link_to "Larp Tool Home", root_path %>
 
-    <% unless @logged_in_user.nil? %>
+    <% if @logged_in_user.nil? %>
+      | Not logged in.
+    <% else %>
       | Logged in as <%= @logged_in_user.name %>
     <% end %>
   </div>

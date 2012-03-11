@@ -21,8 +21,13 @@ class GamesController < ApplicationController
   end
 
   def create
-    @game = Game.create(params[:game])
-    redirect_to game_path(@game), :notice => "Game created: #{@game.name}"
+    @game = Game.new(params[:game])
+    
+    if @game.save
+      redirect_to game_path(@game), :notice => "Game created: #{@game.name}"
+    else
+      redirect_to new_game_path, :alert => "That didn't work."
+    end
   end
 
   def edit

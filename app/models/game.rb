@@ -4,16 +4,17 @@ class Game < ActiveRecord::Base
   has_many :currencies
   has_many :skills
   has_many :characters, :through => :members
-
-  def short_name
-    (name||'').downcase.sub(/\s/, '_')
-  end
-
+  
+  validates :name, :presence => true
+  validates :slug, :presence => true  
+  
   def logo_image
-    if short_name.empty?
-      'main_logo.png'
+    logo = self.name + '_logo.png'
+    
+    if File.exists?(Rails.root + "app/assets/images/" + logo)
+      logo
     else
-      short_name + '_logo.png'
+      'main_logo.png'
     end
   end
 end

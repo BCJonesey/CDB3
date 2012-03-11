@@ -6,7 +6,7 @@ Cdb3::Application.routes.draw do
   match 'main/logout', :as => 'logout'
 
   resources :users
-
+  
   resources :games do
     match 'login'
     resources :members

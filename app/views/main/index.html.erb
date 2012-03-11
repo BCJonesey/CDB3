@@ -12,6 +12,13 @@
 <% end %>
 </div>
 
+<% if @logged_in_user and @logged_in_user.global_admin? %>
+<br>
+<div>
+<p><%= link_to "Add game", new_game_path %></p>
+</div>
+<% end %>
+
 </div>
 
 <div class="sixcol last">
@@ -28,4 +35,3 @@
 </div>
 
 </div>
-

@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(:version => 20120110202126) do
 
   create_table "games", :force => true do |t|
     t.string   "name",                         :null => false
+    t.string   "slug",                         :null => false
     t.boolean  "public",     :default => true
     t.datetime "created_at"
     t.datetime "updated_at"

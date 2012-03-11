@@ -17,4 +17,8 @@ class Game < ActiveRecord::Base
       'main_logo.png'
     end
   end
+  
+  
+
+  
 end

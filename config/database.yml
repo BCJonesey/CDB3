@@ -31,3 +31,9 @@ production:
   pool: 5
   username: cdb3
   password: yooD9zai
+
+
+postgres:
+  adapter: postgresql
+  database: myapp_test
+  username: postgres

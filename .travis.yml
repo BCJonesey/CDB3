@@ -1,6 +1,6 @@
 language: ruby
 before_script:
-  - psql -c 'create database cdb3_test;' -U cdb3
+  - "psql -c 'create database myapp_test;' -U postgres"
 rvm:
   - 1.9.3
   - jruby-19mode # JRuby in 1.9 mode

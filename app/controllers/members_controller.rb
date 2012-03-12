@@ -1,7 +1,7 @@
 class MembersController < ApplicationController
   before_filter :require_logged_in_user
   before_filter :require_game
-  before_filter :require_game_admin, :except => [:index, :show]
+  before_filter :require_game_admin, :except => [:index, :show, :new, :create]
   before_filter :get_resource_and_match_game, :except => [:index, :new, :create]
 
   # GET /members
@@ -27,8 +27,17 @@ class MembersController < ApplicationController
   # GET /members/new
   # GET /members/new.json
   def new
-    @member = Member.new
+    @member = Member.find_by_game_id_and_user_id(@game.id, @logged_in_user.id)
 
+    if @member and !@member.game_admin?
+      redirect_to game_path(@game), :notice => "You are already a member."
+      return
+    end
+
+    if @member.nil?
+      @member = Member.new(:user_id => @logged_in_user.id, :game_id => @game.id)
+    end
+    
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @member }
@@ -44,10 +53,17 @@ class MembersController < ApplicationController
   # POST /members.json
   def create
     @member = Member.new(params[:member])
-    @member.game =@game
+    @member.game = @game
+    
+    unless @logged_in_user.game_admin?(@game)
+      @member.user = @logged_in_user
+    end
+    
     respond_to do |format|
       if @member.save
-        format.html { redirect_to [@game, @member], notice: 'Member was successfully created.' }
+        format.html do 
+          redirect_to [@game, @member], notice: 'Member was successfully created.'
+        end
         format.json { render json: @member, status: :created, location: @member }
       else
         format.html { render action: "new" }

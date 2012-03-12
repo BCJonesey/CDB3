@@ -17,6 +17,33 @@
 
 <p><%= link_to "Create Character", new_game_character_path(@game) %></p>
 
+</div>
+
+<div class="sixcol last">
+
+<h2>Events</h2>
+
+<ul>
+<% @game.events.each do |event| %>
+  <li><%= event.date %> <%= event.site %>
+      <%= link_to "[View]", game_event_path(@game, event) %></li>
+<% end %>
+</ul>
+
+<% if @logged_in_user.game_admin?(@game) %>
+<%= link_to "New Event", new_game_event_path(@game) %>
+<% end %>
+
+</div>
+
+</div>
+
+<% if @logged_in_user.game_admin?(@game) %>
+
+<div class="row">
+
+<div class="sixcol">
+
 <% unless @members.nil? %>
 
 <h2>Game Members</h2>
@@ -33,17 +60,10 @@
 
 <div class="sixcol last">
 
-<h2>Events</h2>
+<h2>Game Settings</h2>
 
-<ul>
-<% @game.events.each do |event| %>
-  <li><%= event.date %> <%= event.site %>
-      <%= link_to "[View]", game_event_path(@game, event) %></li>
+</div>
+
+</div>
+
 <% end %>
-</ul>
-
-<%= link_to "New Event", new_game_event_path(@game) %>
-
-</div>
-
-</div>

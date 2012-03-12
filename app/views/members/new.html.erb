@@ -3,7 +3,21 @@
 
 <h1>New member</h1>
 
+<% if @logged_in_user.game_admin?(@game) %>
+
 <%= render 'form' %>
+
+<% else %>
+
+<%= form_for [@game, @member] do |f| %>
+
+<p>Do you want to become a member of <%= @game.name %>?</p>
+  <div class="actions">
+    <%= f.submit "Join Game" %>
+  </div>
+
+<% end %>
+<% end %>
 
 <%= link_to 'Back', game_members_path(@game) %>
 

@@ -77,9 +77,10 @@ ActiveRecord::Schema.define(:version => 20120112032840) do
     t.integer  "event_id"
     t.integer  "member_id"
     t.integer  "character_id"
-    t.boolean  "paid"
-    t.boolean  "present"
-    t.boolean  "setup_cleanup"
+    t.boolean  "is_paid",       :default => false
+    t.boolean  "is_present",    :default => false
+    t.boolean  "is_prereged",   :default => false
+    t.boolean  "setup_cleanup", :default => false
     t.integer  "cp_game_id"
     t.datetime "created_at"
     t.datetime "updated_at"

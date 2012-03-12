@@ -2,7 +2,7 @@ language: ruby
 before_script:
   - "cp config/travis.database.yml config/database.yml"
   - "psql -c 'create database myapp_test;' -U postgres"
-  - "bundle exec rake db:migrate"
+  - "bundle exec rake db:nuke"
 rvm:
   - 1.9.3
   - rbx-19mode

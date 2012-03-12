@@ -19,7 +19,7 @@ development:
 test:
   adapter: postgresql
   database: myapp_test
-  username: postgresql
+  username: postgres
 
 production:
   adapter: postgresql

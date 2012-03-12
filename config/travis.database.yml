@@ -18,11 +18,8 @@ development:
 
 test:
   adapter: postgresql
-  encoding: unicode
-  database: cdb3_test
-  pool: 5
-  username: cdb3
-  password: yooD9zai
+  database: myapp_test
+  username: postgresql
 
 production:
   adapter: postgresql
@@ -31,3 +28,4 @@ production:
   pool: 5
   username: cdb3
   password: yooD9zai
+

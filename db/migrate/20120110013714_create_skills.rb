@@ -5,6 +5,8 @@ class CreateSkills < ActiveRecord::Migration
       t.string :name
       t.string :summary
       t.text :description
+      t.integer :min_rank,:default => 0
+      t.integer :max_rank,:default => 1
 
       t.timestamps
     end

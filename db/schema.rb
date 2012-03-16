@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(:version => 20120112032840) do
 
   create_table "character_versions", :force => true do |t|
     t.integer  "previous_version_id"
-    t.string   "description"
+    t.string   "description",         :default => "Current Version"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -91,6 +91,8 @@ ActiveRecord::Schema.define(:version => 20120112032840) do
     t.string   "name"
     t.string   "summary"
     t.text     "description"
+    t.integer  "min_rank",    :default => 0
+    t.integer  "max_rank",    :default => 1
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -1,33 +1,26 @@
-<div class="row">
-<div class="twelvecol last">
-
-<h1>Listing currencies</h1>
-
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Short name</th>
-    <th>Yearly cap</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @currencies.each do |currency| %>
-  <tr>
-    <td><%= currency.name %></td>
-    <td><%= currency.short_name %></td>
-    <td><%= currency.yearly_cap %></td>
-    <td><%= link_to 'Show', [@game, currency] %></td>
-    <td><%= link_to 'Edit', edit_game_currency_path(@game, currency) %></td>
-    <td><%= link_to 'Destroy', [@game, currency], confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-<% end %>
+<h1>Currencys</h1>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Created at</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @currencies.each do |currency| %>
+      <tr>
+        <td><%= currency.id %></td>
+        <td><%= link_to currency.name, game_currency_path(@game,currency) %></td>
+        <td><%= currency.created_at %></td>
+        <td>
+          <%= link_to 'Edit', edit_game_currency_path(@game,currency), :class => 'btn btn-mini' %>
+          <%= link_to 'Destroy', game_currency_path(@game,currency), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-mini btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
 
-<br />
-
-<%= link_to 'New Currency', new_game_currency_path %>
-
-</div>
-</div>
+<%= link_to 'New', new_game_currency_path(@game), :class => 'btn btn-primary' %>

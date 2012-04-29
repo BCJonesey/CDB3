@@ -1,19 +1,22 @@
-<div class="row">
-<div class="twelvecol last">
+<h1>/Member</h1>
 
-<h1>Member: <%= @member.name %> @ <%= @member.game.name %></h1>
-<%= link_to 'Edit', edit_game_member_path(@game, @member) %> |
-<%= link_to 'Back', game_members_path(@game) %>
+<p>
+  <b>User</b><br>
+  <%= @member.user_id %>
+</p>
 
-<h2>Characters</h2>
+<p>
+  <b>Game</b><br>
+  <%= @member.game_id %>
+</p>
 
-<ul>
-<% @member.characters.each do |character| %>
-  <li><%= character.name %> <%= link_to "[View]", game_character_path(@game, character) %></li>
-<% end %>
-</ul>
+<p>
+  <b>Game admin</b><br>
+  <%= @member.game_admin %>
+</p>
 
-<h2>Registrations</h2>
-
-</div>
+<div class="form-actions">
+  <%= link_to 'Back', game_members_path(@game), :class => 'btn'  %>
+  <%= link_to 'Edit', edit_game_member_path(@game,@member), :class => 'btn' %>
+  <%= link_to 'Delete', game_member_path(@game,@member), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-danger' %>
 </div>

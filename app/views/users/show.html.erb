@@ -1,21 +1,22 @@
-<div class="row">
-<div class="twelvecol last">
-
-<p id="notice"><%= notice %></p>
+<h1>/User</h1>
 
 <p>
-  <b>Name:</b>
+  <b>Name</b><br>
   <%= @user.name %>
 </p>
 
 <p>
-  <b>Email:</b>
+  <b>Email</b><br>
   <%= @user.email %>
 </p>
 
+<p>
+  <b>Global admin</b><br>
+  <%= @user.global_admin %>
+</p>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
-
-</div>
+<div class="form-actions">
+  <%= link_to 'Back', users_path, :class => 'btn'  %>
+  <%= link_to 'Edit', edit_user_path(@user), :class => 'btn' %>
+  <%= link_to 'Delete', user_path(@user), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-danger' %>
 </div>

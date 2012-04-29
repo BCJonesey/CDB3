@@ -1,44 +1,47 @@
-<div class="row">
-<div class="twelvecol last">
+<h1>/Registration</h1>
 
 <p>
-  <b>Event:</b>
+  <b>Event</b><br>
   <%= @registration.event_id %>
 </p>
 
 <p>
-  <b>Member:</b>
+  <b>Member</b><br>
   <%= @registration.member_id %>
 </p>
 
 <p>
-  <b>Character:</b>
+  <b>Character</b><br>
   <%= @registration.character_id %>
 </p>
 
 <p>
-  <b>Paid:</b>
+  <b>Is paid</b><br>
   <%= @registration.is_paid %>
 </p>
 
 <p>
-  <b>Present:</b>
+  <b>Is present</b><br>
   <%= @registration.is_present %>
 </p>
 
 <p>
-  <b>Setup cleanup:</b>
+  <b>Is prereged</b><br>
+  <%= @registration.is_prereged %>
+</p>
+
+<p>
+  <b>Setup cleanup</b><br>
   <%= @registration.setup_cleanup %>
 </p>
 
 <p>
-  <b>Cp game:</b>
+  <b>Cp game</b><br>
   <%= @registration.cp_game_id %>
 </p>
 
-
-<%= link_to 'Edit', edit_game_registration_path(@game, @registration) %> |
-<%= link_to 'Back', game_registrations_path(@game) %>
-
-</div>
+<div class="form-actions">
+  <%= link_to 'Back', game_registrations_path(@game), :class => 'btn'  %>
+  <%= link_to 'Edit', edit_game_registration_path(@game,@registration), :class => 'btn' %>
+  <%= link_to 'Delete', game_registration_path(@game,@registration), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-danger' %>
 </div>

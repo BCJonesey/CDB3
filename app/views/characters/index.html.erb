@@ -1,43 +1,26 @@
-
-<div class="row">
-<div class="twelvecol last">
-
-<h1>Listing characters</h1>
-
-
-<% unless @characters.empty? %>
-
-<table>
-<% @characters.each do |character| %>
-  <tr>
-    <td><%= character.name %></td>
-    <td><%= link_to 'Show', [@game, character] %></td>
-    <td><%= link_to 'Edit', edit_game_character_path(@game, character) %></td>
-    <td><%= link_to 'Destroy', [@game, character], confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-<% end %>
+<h1>Characters</h1>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Created at</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @characters.each do |character| %>
+      <tr>
+        <td><%= character.id %></td>
+        <td><%= link_to character.name, game_character_path(@game,character) %></td>
+        <td><%= character.created_at %></td>
+        <td>
+          <%= link_to 'Edit', edit_game_character_path(@game,character), :class => 'btn btn-mini' %>
+          <%= link_to 'Destroy', game_character_path(@game,character), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-mini btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
 
-<% end %>
-
-<% unless @all_characters.empty? %>
-
-<table>
-<% @all_characters.each do |character| %>
-  <tr>
-    <td><%= character.name %></td>
-    <td><%= link_to 'Show', [@game, character] %></td>
-    <td><%= link_to 'Edit', edit_game_character_path(@game, character) %></td>
-    <td><%= link_to 'Destroy', [@game, character], confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-<% end %>
-</table>
-
-<% end %>
-
-<br />
-
-<%= link_to 'New Character', new_game_character_path(@game) %>
-
-</div>
-</div>
+<%= link_to 'New', new_game_character_path(@game), :class => 'btn btn-primary' %>

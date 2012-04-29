@@ -1,35 +1,31 @@
-<div class="row">
-<div class="twelvecol">
+<%= form_for @game, :html => { :class => 'form-horizontal' } do |f| %>
+  <fieldset>
+    <legend><%= controller.action_name.capitalize %> /Game</legend>
 
-<%= form_for @game do |f| %>
-  <% if @game.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@game.errors.count, "error") %> 
-        prohibited this character from being saved:</h2>
-
-      <ul>
-      <% @game.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+    <div class="control-group">
+      <%= f.label :name, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :name, :class => 'text_field' %>
+      </div>
     </div>
-  <% end %>
 
-<table>
-<tr>
-  <td><%= f.label :name %></td>
-  <td><%= f.text_field :name %></td>
-</tr>
-<tr>
-  <td><%= f.label :slug %></td>
-  <td><%= f.text_field :slug %></td>
-</tr>
-<tr>
-  <td>&nbsp;</td>
-  <td><%= submit_tag "Save Game" %></td>
-</tr>
-</table>
+    <div class="control-group">
+      <%= f.label :slug, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :slug, :class => 'text_field' %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :public, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.check_box :public, :class => 'check_box' %>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to 'Cancel', games_path, :class => 'btn' %>
+    </div>
+  </fieldset>
 <% end %>
-
-</div>
-</div>

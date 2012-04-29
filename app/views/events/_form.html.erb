@@ -1,23 +1,45 @@
-<%= form_for [@game, @event] do |f| %>
-  <%= f.hidden_field :game_id %>
+<%= form_for [@game,@event], :html => { :class => 'form-horizontal' } do |f| %>
+  <fieldset>
+    <legend><%= controller.action_name.capitalize %> /Event</legend>
 
-  <% if @event.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h2>
-
-      <ul>
-      <% @event.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+    <div class="control-group">
+      <%= f.label :game_id, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.number_field :game_id, :class => 'number_field' %>
+      </div>
     </div>
-  <% end %>
 
-  <div class="actions">
-    Date: <%= f.date_select :start_date %><br>
-    End Date: <%= f.date_select :end_date %><br>
-    Site: <%= f.text_field :site %><br>
-    Notes: <%= f.text_field :notes %><br>
-    <%= f.submit %>
-  </div>
+    <div class="control-group">
+      <%= f.label :start_date, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.datetime_select :start_date, :class => 'datetime_select' %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :end_date, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.datetime_select :end_date, :class => 'datetime_select' %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :site, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_area :site, :class => 'text_area' %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :notes, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_area :notes, :class => 'text_area' %>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to 'Cancel', game_events_path(@gamme), :class => 'btn' %>
+    </div>
+  </fieldset>
 <% end %>

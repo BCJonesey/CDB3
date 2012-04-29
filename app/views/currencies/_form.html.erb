@@ -1,30 +1,38 @@
-<%= form_for [@game, @currency] do |f| %>
-  <%= @game.name %>
-  <% if @currency.errors.any? %>
-    <div id = "error_explanation">
-      <h2><%= pluralize(@currency.errors.count, "error") %> prohibited this currency from being saved:</h2>
+<%= form_for [@game,@currency], :html => { :class => 'form-horizontal' } do |f| %>
+  <fieldset>
+    <legend><%= controller.action_name.capitalize %> /Currency</legend>
 
-      <ul>
-      <% @currency.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+    <div class="control-group">
+      <%= f.label :name, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :name, :class => 'text_field' %>
+      </div>
     </div>
-  <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :short_name %><br />
-    <%= f.text_field :short_name %>
-  </div>
-  <div class="field">
-    <%= f.label :yearly_cap %><br />
-    <%= f.number_field :yearly_cap %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <div class="control-group">
+      <%= f.label :short_name, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :short_name, :class => 'text_field' %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :yearly_cap, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.number_field :yearly_cap, :class => 'number_field' %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :game_id, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.number_field :game_id, :class => 'number_field' %>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to 'Cancel', game_currencies_path(@game), :class => 'btn' %>
+    </div>
+  </fieldset>
 <% end %>

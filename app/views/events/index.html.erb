@@ -1,22 +1,26 @@
-<div class="row">
-<div class="twelvecol last">
-
-<h1>Listing events</h1>
-
-<table>
-<% @events.each do |event| %>
-  <tr>
-    <td><%= event.start_date %> @ <%= event.site %></td>
-    <td><%= link_to 'Show', [@game, event] %></td>
-    <td><%= link_to 'Edit', edit_game_event_path(@game, event) %></td>
-    <td><%= link_to 'Destroy', [@game, event], confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-<% end %>
+<h1>Events</h1>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Game</th>
+      <th>Created at</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @events.each do |event| %>
+      <tr>
+        <td><%= event.id %></td>
+        <td><%= link_to event.game_id, game_event_path(@game,event) %></td>
+        <td><%= event.created_at %></td>
+        <td>
+          <%= link_to 'Edit', edit_game_event_path(@game,event), :class => 'btn btn-mini' %>
+          <%= link_to 'Destroy', game_event_path(@game,event), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-mini btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
 
-<br />
-
-<%= link_to 'New Event', new_game_event_path(@game) %>
-
-</div>
-</div>
+<%= link_to 'New', new_game_event_path(@game), :class => 'btn btn-primary' %>

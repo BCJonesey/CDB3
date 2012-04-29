@@ -1,21 +1,26 @@
+<h1>Games</h1>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Created at</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @games.each do |game| %>
+      <tr>
+        <td><%= game.id %></td>
+        <td><%= link_to game.name, game_path(game) %></td>
+        <td><%= game.created_at %></td>
+        <td>
+          <%= link_to 'Edit', edit_game_path(game), :class => 'btn btn-mini' %>
+          <%= link_to 'Destroy', game_path(game), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-mini btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
-<div class="row">
-
-<div class="twelvecol">
-
-<h1>Administrate Games</h1>
-
-<ul>
-  <% @games.each do |g| %>
-    <li><%= g.name %>
-        <%= link_to "[Characters]", game_characters_path(g) %>
-        <%= link_to "[View]", game_path(g) %>
-        <%= link_to "[Edit]", edit_game_path(g) %>
-    </li>
-  <% end %> 
-</ul>
-
-<p><%= link_to "Add Game", new_game_path %></p>
-
-</div>
-</div>
+<%= link_to 'New', new_game_path, :class => 'btn btn-primary' %>

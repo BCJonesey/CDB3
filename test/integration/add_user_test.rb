@@ -10,14 +10,14 @@ class AddUserTest < ActionDispatch::IntegrationTest
     click_button 'Log In'
     
     click_link 'Administer Users'
-    click_link 'New User'
+    click_link 'New'
     
     fill_in 'Name', :with => 'Awesome McPhat'
     fill_in 'Email', :with => 'Awesome@example.com'
     click_button 'Create User'
     
-    within(".flash_notice_message") do
-      assert has_content?("Notice: User was successfully created.")
+    within("div.alert.alert-success") do
+      assert has_content?("User was successfully created.")
     end
     
     assert_equal 'awesome@example.com', User.find_by_name('Awesome McPhat').email

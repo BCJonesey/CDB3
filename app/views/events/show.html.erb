@@ -1,8 +1,32 @@
-<div class="row">
-<div class="twelvecol last">
+<h1>/Event</h1>
 
-<%= link_to 'Edit', edit_game_event_path(@game, @event) %> |
-<%= link_to 'Back', game_events_path(@game) %>
+<p>
+  <b>Game</b><br>
+  <%= @event.game_id %>
+</p>
 
-</div>
+<p>
+  <b>Start date</b><br>
+  <%= @event.start_date %>
+</p>
+
+<p>
+  <b>End date</b><br>
+  <%= @event.end_date %>
+</p>
+
+<p>
+  <b>Site</b><br>
+  <%= @event.site %>
+</p>
+
+<p>
+  <b>Notes</b><br>
+  <%= @event.notes %>
+</p>
+
+<div class="form-actions">
+  <%= link_to 'Back', game_events_path(@game,@event), :class => 'btn'  %>
+  <%= link_to 'Edit', edit_game_event_path(@game,@event), :class => 'btn' %>
+  <%= link_to 'Delete', game_event_path(@game,@event), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-danger' %>
 </div>

@@ -1,26 +1,27 @@
-<div class="row">
-<div class="twelvecol last">
-
-<p id="notice"><%= notice %></p>
+<h1>/Currency</h1>
 
 <p>
-  <b>Name:</b>
+  <b>Name</b><br>
   <%= @currency.name %>
 </p>
 
 <p>
-  <b>Short name:</b>
+  <b>Short name</b><br>
   <%= @currency.short_name %>
 </p>
 
 <p>
-  <b>Yearly cap:</b>
+  <b>Yearly cap</b><br>
   <%= @currency.yearly_cap %>
 </p>
 
+<p>
+  <b>Game</b><br>
+  <%= @currency.game_id %>
+</p>
 
-<%= link_to 'Edit', edit_game_currency_path(@game, @currency) %> |
-<%= link_to 'Back', game_currencies_path(@game) %>
-
-</div>
+<div class="form-actions">
+  <%= link_to 'Back', game_currencies_path(@game), :class => 'btn'  %>
+  <%= link_to 'Edit', edit_game_currency_path(@game,@currency), :class => 'btn' %>
+  <%= link_to 'Delete', game_currency_path(@game,@currency), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-danger' %>
 </div>

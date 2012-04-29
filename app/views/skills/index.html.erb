@@ -1,33 +1,26 @@
-<div class="row">
-<div class="twelvecol last">
-
-<h1>Listing skills</h1>
-<%= @words %>
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Summary</th>
-    <th>Description</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @skills.each do |skill| %>
-  <tr>
-    <td><%= skill.name %></td>
-    <td><%= skill.summary %></td>
-    <td><%= skill.description %></td>
-    <td><%= link_to 'Show', [@game,skill] %></td>
-    <td><%= link_to 'Edit', edit_game_skill_path(@game,skill) %></td>
-    <td><%= link_to 'Destroy', [@game,skill], confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-<% end %>
+<h1>Skills</h1>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Game</th>
+      <th>Created at</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @skills.each do |skill| %>
+      <tr>
+        <td><%= skill.id %></td>
+        <td><%= link_to skill.game_id, game_skill_path(@game,skill) %></td>
+        <td><%= skill.created_at %></td>
+        <td>
+          <%= link_to 'Edit', edit_game_skill_path(@game,skill), :class => 'btn btn-mini' %>
+          <%= link_to 'Destroy', game_skill_path(@game,skill), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-mini btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
 
-<br />
-
-<%= link_to 'New Skill', new_game_skill_path(@game) %>
-
-</div>
-</div>
+<%= link_to 'New', new_game_skill_path(@game), :class => 'btn btn-primary' %>

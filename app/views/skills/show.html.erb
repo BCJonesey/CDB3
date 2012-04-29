@@ -1,24 +1,37 @@
-<div class="row">
-<div class="twelvecol last">
+<h1>/Skill</h1>
 
 <p>
-  <b>Name:</b>
+  <b>Game</b><br>
+  <%= @skill.game_id %>
+</p>
+
+<p>
+  <b>Name</b><br>
   <%= @skill.name %>
 </p>
 
 <p>
-  <b>Summary:</b>
+  <b>Summary</b><br>
   <%= @skill.summary %>
 </p>
 
 <p>
-  <b>Description:</b>
+  <b>Description</b><br>
   <%= @skill.description %>
 </p>
 
+<p>
+  <b>Min rank</b><br>
+  <%= @skill.min_rank %>
+</p>
 
-<%= link_to 'Edit', edit_game_skill_path(@game,@skill) %> |
-<%= link_to 'Back', game_skills_path(@game)%>
+<p>
+  <b>Max rank</b><br>
+  <%= @skill.max_rank %>
+</p>
 
-</div>
+<div class="form-actions">
+  <%= link_to 'Back', game_skills_path(@game), :class => 'btn'  %>
+  <%= link_to 'Edit', edit_game_skill_path(@game,@skill), :class => 'btn' %>
+  <%= link_to 'Delete', game_skill_path(@game,@skill), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-danger' %>
 </div>

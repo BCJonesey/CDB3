@@ -1,59 +1,86 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>Cdb3</title>
-  <%= stylesheet_link_tag    "application" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cdb3</title>
+    <%= csrf_meta_tags %>
 
-<div class="container">
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]-->
 
-<div class="row">
-  <div class="eightcol">
-    <div class="logo">
-      <% if @game.nil? or @game.invalid? %>
-        <%= image_tag "main_logo.png" %>
-      <% else %>
-        <%= image_tag @game.logo_image, :alt => @game.logo_image %>
-      <% end %>
-    </div>
-  </div>
+    <!-- Le styles -->
+    <%= stylesheet_link_tag "application", :media => "all" %>
 
-  <div class="fourcol last">
-    <%= link_to "Larp Tool Home", root_path %>
+    <!-- Le fav and touch icons -->
+    <link href="images/favicon.ico" rel="shortcut icon">
+    <link href="images/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="images/apple-touch-icon-72x72.png" rel="apple-touch-icon" sizes="72x72">
+    <link href="images/apple-touch-icon-114x114.png" rel="apple-touch-icon" sizes="114x114">
+  </head>
+  <body>
 
-    <% if @logged_in_user.nil? %>
-      | <%= link_to "Log In", '/main/login' %>
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+          <div class="container">
+          <a class="btn btn-navbar" data-target=".nav-collapse" data-toggle="collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="#">Cdb3</a>
+	  <div class="pull-right">
+            <% if @logged_in_user.nil? %>
+      <%= link_to "Log In", '/main/login' %>
     <% else %>
-      | Hi, <%= @logged_in_user.name %>. 
+      Hi, <%= @logged_in_user.name %>. 
         <%= link_to "Log Out", '/main/logout' %>
     <% end %>
-  </div>
-</div>
+          </div>
+          <div class="container nav-collapse">
+            <ul class="nav">
+                <li><%= link_to "Link1", "/path1"  %></li>
+                <li><%= link_to "Link2", "/path2"  %></li>
+                <li><%= link_to "Link3", "/path3"  %></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
 
-<div class="row">
-  <div class="threecol">&nbsp;</div>
-  
-  <div class="sixcol">
-    <% unless flash[:alert].nil? %>
-      <p class="flash_alert_message">Error: <%= flash[:alert] %></p>
-    <% end %>
+    <div class="container">
+      <div class="content">
+        <div class="row">
+           <div class="span9">
+	      <%= render 'layouts/messages' %>
+              <%= yield %>
+            </div>
+            <div class="span3">
+              <div class="well sidebar-nav">
+                <h3>Sidebar</h3>
+                <ul class="nav nav-list">
+                  <li class="nav-header">Sidebar</li>
+                    <li><%= link_to "Link1", "/path1"  %></li>
+                    <li><%= link_to "Link2", "/path2"  %></li>
+                    <li><%= link_to "Link3", "/path3"  %></li>
+                </ul>
+              </div><!--/.well -->
+            </div><!--/span-->
+        </div><!--/row-->
+      </div><!--/content-->
 
-    <% if flash[:notice] %>
-      <p class="flash_notice_message">Notice: <%= flash[:notice] %></p>
-    <% end %>
-  </div>
+      <footer>
+        <%= render 'layouts/foot.html.erb' %>
+      </footer>
 
-  <div class="threecol last">&nbsp;</div>
-</div>
+    </div> <!-- /container -->
 
-<%= yield %>
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <%= javascript_include_tag "application" %>
 
-<%= render 'layouts/foot.html.erb' %>
-
-</div>
-
-</body>
+  </body>
 </html>

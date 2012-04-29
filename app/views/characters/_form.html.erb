@@ -1,28 +1,31 @@
-<%= form_for [@game, @character] do |f| %>
-  <% if @character.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@character.errors.count, "error") %> 
-        prohibited this character from being saved:</h2>
+<%= form_for [@game,@character], :html => { :class => 'form-horizontal' } do |f| %>
+  <fieldset>
+    <legend><%= controller.action_name.capitalize %> /Character</legend>
 
-      <ul>
-      <% @character.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+    <div class="control-group">
+      <%= f.label :name, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :name, :class => 'text_field' %>
+      </div>
     </div>
-  <% end %>
 
-  <div class="actions">
-    <% unless @users.nil? %>
-      <p>
-      <%= f.label :player %> 
-      <%= select_tag :user_id, options_from_collection_for_select(@users, "id", "name_and_email") %>
-      </p>
-    <% end %>
+    <div class="control-group">
+      <%= f.label :member_id, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.number_field :member_id, :class => 'number_field' %>
+      </div>
+    </div>
 
-    <p>
-      <%= f.label :name %> <%= f.text_field :name %>
-      <%= f.submit %>
-    </p>
-  </div>
+    <div class="control-group">
+      <%= f.label :character_version_id, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.number_field :character_version_id, :class => 'number_field' %>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to 'Cancel', game_characters_path(@game), :class => 'btn' %>
+    </div>
+  </fieldset>
 <% end %>

@@ -63,6 +63,8 @@ ActiveRecord::Schema.define(:version => 20120112032840) do
     t.datetime "updated_at"
   end
 
+  add_index "games", ["slug"], :name => "index_games_on_slug", :unique => true
+
   create_table "members", :force => true do |t|
     t.integer  "user_id",                       :null => false
     t.integer  "game_id",                       :null => false

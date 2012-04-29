@@ -46,6 +46,8 @@ class UsersController < ApplicationController
     end
     respond_to do |format|
       if @user.save
+        UserMailer.welcome_email(@user).deliver
+
         format.html do
           redirect_to login_path, 
             :notice => 'User was successfully created.' 

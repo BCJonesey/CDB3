@@ -6,5 +6,7 @@ class CreateGames < ActiveRecord::Migration
       t.boolean :public, :default => true
       t.timestamps
     end
+
+    add_index :games, :slug, unique: true
   end
 end

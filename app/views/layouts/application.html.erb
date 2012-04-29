@@ -24,28 +24,8 @@
 
     <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">
-          <div class="container">
-          <a class="btn btn-navbar" data-target=".nav-collapse" data-toggle="collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </a>
-          <a class="brand" href="#">Cdb3</a>
-	  <div class="pull-right">
-            <% if @logged_in_user.nil? %>
-      <%= link_to "Log In", '/main/login' %>
-    <% else %>
-      Hi, <%= @logged_in_user.name %>. 
-        <%= link_to "Log Out", '/main/logout' %>
-    <% end %>
-          </div>
-          <div class="container nav-collapse">
-            <ul class="nav">
-                <li><%= link_to "Link1", "/path1"  %></li>
-                <li><%= link_to "Link2", "/path2"  %></li>
-                <li><%= link_to "Link3", "/path3"  %></li>
-            </ul>
-          </div><!--/.nav-collapse -->
+        <div class="container-fluid">
+          <%= render 'layouts/navigation' %>
         </div>
       </div>
     </div>

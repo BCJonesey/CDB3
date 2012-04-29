@@ -44,7 +44,7 @@ class ApplicationController < ActionController::Base
     if params[:game_id].nil?
       @game = nil
     else
-      @game = Game.find_by_id(params[:game_id])
+      @game = Game.find(params[:game_id])
     end
   end
 

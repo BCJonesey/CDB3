@@ -8,6 +8,9 @@ class Game < ActiveRecord::Base
   validates :name, :presence => true, :uniqueness => true
   validates :slug, :presence => true, :uniqueness => true
   
+  extend FriendlyId
+  friendly_id :slug
+
   def logo_image
     logo = self.name + '_logo.png'
     
@@ -17,8 +20,4 @@ class Game < ActiveRecord::Base
       'main_logo.png'
     end
   end
-  
-  
-
-  
 end

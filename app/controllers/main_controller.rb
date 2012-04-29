@@ -29,6 +29,7 @@ class MainController < ApplicationController
       return
     else
       session[:user_id] = @user.id
+      session[:request_path] ||= '/games'
       redirect_to session[:request_path], :notice => "Logged in as #{@user.name}"
     end
   end

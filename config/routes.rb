@@ -1,4 +1,6 @@
 Cdb3::Application.routes.draw do
+  
+
   get "main/index"
   root :to => 'main#index'
 
@@ -15,6 +17,7 @@ Cdb3::Application.routes.draw do
     resources :events
     resources :currencies
     resources :registrations
+    resources :awards
   end
 
   # The priority is based upon order of creation:

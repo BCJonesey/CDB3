@@ -3,7 +3,7 @@
   <span class="icon-bar"></span>
   <span class="icon-bar"></span>
 </a>
-<a class="brand" href="#">CDB3</a>
+<%= link_to "CDB3", root_path, :class=>"brand" %>
 <% if @logged_in_user.nil? %>
 <%= link_to "Log In", '/main/login', :class=>'btn pull-right icon-user' %>
 <% else %>

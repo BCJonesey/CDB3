@@ -3,7 +3,7 @@ class Character < ActiveRecord::Base
   #funky shit!
   alias :real_character_version :character_version
 
-  
+  has_many :awards
   belongs_to :member
   has_one :game, :through => :member
   delegate :character_skills, :to=> :character_version

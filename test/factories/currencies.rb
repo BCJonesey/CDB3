@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :currency do
-    name "Goonbag McDouchepants"
+    sequence(:name) { |i| "Currency Name #{i}"}
     sequence(:short_name) { |i| "CP#{i}"}
     association :game, factory: :game_the_calling
   end

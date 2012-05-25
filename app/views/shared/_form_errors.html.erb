@@ -1,0 +1,10 @@
+<% if item.errors.any? %>
+<div id="error_explanation" class="alert alert-error">
+<div><%= pluralize(item.errors.count, "error") %> prohibited this <%= item.class.name.downcase %> from being saved:</div>
+<ul>
+<% item.errors.full_messages.each do |msg| %>
+<li><%= msg %></li>
+<% end %>
+</ul>
+</div>
+<% end %>

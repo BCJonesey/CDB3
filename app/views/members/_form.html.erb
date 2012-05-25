@@ -1,4 +1,5 @@
 <%= form_for [@game,@member], :html => { :class => 'form-horizontal' } do |f| %>
+<%= render :partial => 'shared/form_errors', :locals => {:item => @member} %>
   <fieldset>
     <legend><%= controller.action_name.capitalize %> /Member</legend>
 

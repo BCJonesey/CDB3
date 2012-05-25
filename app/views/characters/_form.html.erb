@@ -1,4 +1,5 @@
 <%= form_for [@game,@character], :html => { :class => 'form-horizontal' } do |f| %>
+<%= render :partial => 'shared/form_errors', :locals => {:item => @character} %>
   <fieldset>
     <legend><%= controller.action_name.capitalize %> /Character</legend>
 
@@ -8,21 +9,6 @@
         <%= f.text_field :name, :class => 'text_field' %>
       </div>
     </div>
-
-    <div class="control-group">
-      <%= f.label :member_id, :class => 'control-label' %>
-      <div class="controls">
-        <%= f.number_field :member_id, :class => 'number_field' %>
-      </div>
-    </div>
-
-    <div class="control-group">
-      <%= f.label :character_version_id, :class => 'control-label' %>
-      <div class="controls">
-        <%= f.number_field :character_version_id, :class => 'number_field' %>
-      </div>
-    </div>
-
     <div class="form-actions">
       <%= f.submit nil, :class => 'btn btn-primary' %>
       <%= link_to 'Cancel', game_characters_path(@game), :class => 'btn' %>

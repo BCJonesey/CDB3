@@ -17,7 +17,7 @@ group :assets do
 end
 
 gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
-
+gem 'less-rails'
 gem 'jquery-rails'
 
 gem 'friendly_id'

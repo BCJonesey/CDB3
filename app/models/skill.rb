@@ -1,4 +1,12 @@
 class Skill < ActiveRecord::Base
+  has_many :skill_labels, :dependent => :delete_all
+  has_many :provided_skill_labels, :class_name => "SkillLabel", :conditions => { :gives=>true}
+  has_many :labels, :through => :skill_labels
+  has_many :labels_provided,:class_name => "Label", :through => :provided_skill_labels, :source=>:label
+  
+  
+  
+  
   validates :name, :presence => true
   validates :game_id, :presence => true
   belongs_to :game

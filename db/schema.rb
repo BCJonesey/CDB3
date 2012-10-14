@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120501144952) do
+ActiveRecord::Schema.define(:version => 20121014031707) do
 
   create_table "awards", :force => true do |t|
     t.integer  "character_id"
@@ -76,6 +76,13 @@ ActiveRecord::Schema.define(:version => 20120501144952) do
 
   add_index "games", ["slug"], :name => "index_games_on_slug", :unique => true
 
+  create_table "labels", :force => true do |t|
+    t.string   "name"
+    t.integer  "game_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "members", :force => true do |t|
     t.integer  "user_id",                       :null => false
     t.integer  "game_id",                       :null => false
@@ -99,11 +106,21 @@ ActiveRecord::Schema.define(:version => 20120501144952) do
     t.datetime "updated_at"
   end
 
+  create_table "skill_labels", :force => true do |t|
+    t.boolean  "gives",      :default => false
+    t.integer  "skill_id"
+    t.integer  "label_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "skills", :force => true do |t|
     t.integer  "game_id"
     t.string   "name"
     t.string   "summary"
     t.text     "description"
+    t.text     "cost"
+    t.text     "rule"
     t.integer  "min_rank",    :default => 0
     t.integer  "max_rank",    :default => 1
     t.datetime "created_at"

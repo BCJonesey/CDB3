@@ -13,11 +13,15 @@ Cdb3::Application.routes.draw do
     match 'login'
     resources :members
     resources :characters
-    resources :skills
+    resources :skills do
+      put 'add_label', :on => :member
+      put 'remove_label', :on => :member
+    end
     resources :events
     resources :currencies
     resources :registrations
     resources :awards
+    resources :labels
   end
 
   # The priority is based upon order of creation:

@@ -16,7 +16,7 @@ class SkillsController < ApplicationController
   # GET /skills/1
   # GET /skills/1.json
   def show
-
+    @skillLabel = SkillLabel.new({:skill_id => @skill.id})
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @skill }
@@ -84,6 +84,31 @@ class SkillsController < ApplicationController
   end
   
 
+  # PUT /skills/1
+  # PUT /skills/1.json
+  def add_label
+    respond_to do |format|
+      @skillLabel = SkillLabel.new(params[:skill_label])
+      if @skillLabel.save
+        format.html { redirect_to [@game,@skill], notice: 'Skill was successfully updated.' }
+        format.json { head :ok }
+      else
+        format.html { render action: "show" }
+        format.json { render json: @skillLabel.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+  
+  # PUT /skills/1
+  # PUT /skills/1.json
+  def remove_label
+    SkillLabel.find(params[:skill_label_id]).destroy
+
+    respond_to do |format|
+      format.html { redirect_to [@game,@skill]}
+      format.json { head :ok }
+    end
+  end
   
     
 end

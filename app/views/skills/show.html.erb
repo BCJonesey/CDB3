@@ -29,6 +29,52 @@
   <b>Max rank</b><br>
   <%= @skill.max_rank %>
 </p>
+<h2>Labels</h2>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Label</th>
+      <th>Gives?</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @skill.skill_labels.each do |skill_label| %>
+      <tr>
+        
+        <td><%= skill_label.label.name %></td>
+        <td><%= skill_label.gives %></td>
+        <td>
+          <%= link_to 'Edit', edit_game_skill_path(@game,@skill), :class => 'btn btn-mini' %>
+          <%= link_to 'Destroy', game_skill_path(@game,@skill)+"/remove_label?skill_label_id="+skill_label.id.to_s , :method => :put, :confirm => 'Are you sure?', :class => 'btn btn-mini btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+<h2>Add a Label</h2>
+<%= form_for @skillLabel, :url => game_skill_path(@game,@skill)+"/add_label", :method=>:put ,:html => { :class => 'form-horizontal' } do |f| %>
+<%= render :partial => 'shared/form_errors', :locals => {:item => @skillLabel} %>
+  <fieldset>
+    <%= f.hidden_field(:skill_id) %>
+    <div class="control-group">
+      <%= f.label "Select a label", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.select(:label_id, options_from_collection_for_select(Label.unaffiliated_by_skill(@skill) , "id", "name")) %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label "Does this skill give this label?", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.check_box(:gives) %>
+      </div>
+    </div>
+    <%= f.submit "Add Tag", :class => 'btn btn-primary' %>
+  </fieldset>
+<% end %>
+
 
 <div class="form-actions">
   <%= link_to 'Back', game_skills_path(@game), :class => 'btn'  %>

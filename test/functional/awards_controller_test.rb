@@ -2,12 +2,12 @@ require 'test_helper'
 
 class AwardsControllerTest < ActionController::TestCase
   setup do
-     @game   = Factory(:game)
-    @member = Factory(:member,game: @game,game_admin: true)
+     @game   = FactoryGirl.create(:game)
+    @member = FactoryGirl.create(:member,game: @game,game_admin: true)
     @user = @member.user
-    @character = Factory(:character, member: @member)
-    @currency = Factory(:currency,game: @game)
-    @award = Factory(:award,character: @character,currency: @currency, created_by: @member)
+    @character = FactoryGirl.create(:character, member: @member)
+    @currency = FactoryGirl.create(:currency,game: @game)
+    @award = FactoryGirl.create(:award,character: @character,currency: @currency, created_by: @member)
    
   end
 

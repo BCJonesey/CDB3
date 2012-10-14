@@ -12,12 +12,12 @@ class UserTest < ActiveSupport::TestCase
   end
   
   test "ensure unique" do 
-    user = User.create({"email"=>Factory(:user).email})
+    user = User.create({"email"=>FactoryGirl.create(:user).email})
     assert_not_equal user.errors.count, 0
   end
   
   test "prevent delete of user when it has members" do
-    member = Factory(:member)
+    member = FactoryGirl.create(:member)
 
     exception = assert_raises RuntimeError do
       member.user.destroy

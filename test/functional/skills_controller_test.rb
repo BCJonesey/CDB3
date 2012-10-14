@@ -2,11 +2,11 @@ require 'test_helper'
 
 class SkillsControllerTest < ActionController::TestCase
   setup do
-    @game = Factory(:game_mirror_mirror)
+    @game = FactoryGirl.create(:game_mirror_mirror)
     
-    @skill = Factory(:skill,game: @game)
+    @skill = FactoryGirl.create(:skill,game: @game)
 
-    @member= Factory(:member, game:@game,game_admin: true)
+    @member= FactoryGirl.create(:member, game:@game,game_admin: true)
     @user=@member.user
   end
 

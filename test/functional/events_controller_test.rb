@@ -2,10 +2,10 @@ require 'test_helper'
 
 class EventsControllerTest < ActionController::TestCase
   setup do
-    @game  = Factory(:game_mirror_mirror)
-    @event = Factory(:event,game: @game)
-    @member = Factory(:member,game: @game)
-    @ben = Factory(:member,game: @game,game_admin: true)
+    @game  = FactoryGirl.create(:game_mirror_mirror)
+    @event = FactoryGirl.create(:event,game: @game)
+    @member = FactoryGirl.create(:member,game: @game)
+    @ben = FactoryGirl.create(:member,game: @game,game_admin: true)
     
   end
 

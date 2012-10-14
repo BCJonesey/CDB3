@@ -2,8 +2,8 @@ require 'test_helper'
 
 class CurrenciesControllerTest < ActionController::TestCase
   setup do
-    @game = Factory(:game_mirror_mirror)
-    @currency = Factory(:currency,game: @game)
+    @game = FactoryGirl.create(:game_mirror_mirror)
+    @currency = FactoryGirl.create(:currency,game: @game)
   end
 
   test "should get index" do

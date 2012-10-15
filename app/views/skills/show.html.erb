@@ -29,24 +29,24 @@
   <b>Max rank</b><br>
   <%= @skill.max_rank %>
 </p>
-<h2>Labels</h2>
+<h2>Tags</h2>
 <table class="table table-striped">
   <thead>
     <tr>
-      <th>Label</th>
+      <th>Tag</th>
       <th>Gives?</th>
       <th>Actions</th>
     </tr>
   </thead>
   <tbody>
-    <% @skill.skill_labels.each do |skill_label| %>
+    <% @skill.skill_tags.each do |skill_tag| %>
       <tr>
         
-        <td><%= skill_label.label.name %></td>
-        <td><%= skill_label.gives %></td>
+        <td><%= skill_tag.tag.name %></td>
+        <td><%= skill_tag.gives %></td>
         <td>
           <%= link_to 'Edit', edit_game_skill_path(@game,@skill), :class => 'btn btn-mini' %>
-          <%= link_to 'Destroy', game_skill_path(@game,@skill)+"/remove_label?skill_label_id="+skill_label.id.to_s , :method => :put, :confirm => 'Are you sure?', :class => 'btn btn-mini btn-danger' %>
+          <%= link_to 'Destroy', game_skill_path(@game,@skill)+"/remove_tag?skill_tag_id="+skill_tag.id.to_s , :method => :put, :confirm => 'Are you sure?', :class => 'btn btn-mini btn-danger' %>
         </td>
       </tr>
     <% end %>
@@ -54,19 +54,19 @@
 </table>
 
 
-<h2>Add a Label</h2>
-<%= form_for @skillLabel, :url => game_skill_path(@game,@skill)+"/add_label", :method=>:put ,:html => { :class => 'form-horizontal' } do |f| %>
-<%= render :partial => 'shared/form_errors', :locals => {:item => @skillLabel} %>
+<h2>Add a Tag</h2>
+<%= form_for @skillTag, :url => game_skill_path(@game,@skill)+"/add_tag", :method=>:put ,:html => { :class => 'form-horizontal' } do |f| %>
+<%= render :partial => 'shared/form_errors', :locals => {:item => @skillTag} %>
   <fieldset>
     <%= f.hidden_field(:skill_id) %>
     <div class="control-group">
-      <%= f.label "Select a label", :class => 'control-label' %>
+      <%= f.label "Select a tag", :class => 'control-tag' %>
       <div class="controls">
-        <%= f.select(:label_id, options_from_collection_for_select(Label.unaffiliated_by_skill(@skill) , "id", "name")) %>
+        <%= f.select(:tag_id, options_from_collection_for_select(Tag.unaffiliated_by_skill(@skill) , "id", "name")) %>
       </div>
     </div>
     <div class="control-group">
-      <%= f.label "Does this skill give this label?", :class => 'control-label' %>
+      <%= f.label "Does this skill give this tag?", :class => 'control-tag' %>
       <div class="controls">
         <%= f.check_box(:gives) %>
       </div>

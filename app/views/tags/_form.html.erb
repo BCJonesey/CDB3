@@ -1,10 +1,10 @@
-<%= form_for([@game,@label]) do |f| %>
-  <% if @label.errors.any? %>
+<%= form_for([@game,@tag]) do |f| %>
+  <% if @tag.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@label.errors.count, "error") %> prohibited this label from being saved:</h2>
+      <h2><%= pluralize(@tag.errors.count, "error") %> prohibited this tag from being saved:</h2>
 
       <ul>
-      <% @label.errors.full_messages.each do |msg| %>
+      <% @tag.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
       </ul>

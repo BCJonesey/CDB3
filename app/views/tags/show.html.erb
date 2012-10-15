@@ -1,0 +1,10 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @tag.name %>
+</p>
+
+
+<%= link_to 'Edit', edit_game_tag_path(@game,@tag) %> |
+<%= link_to 'Back', game_tags_path(@game) %>

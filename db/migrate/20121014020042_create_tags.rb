@@ -1,6 +1,6 @@
-class CreateLabels < ActiveRecord::Migration
+class CreateTags < ActiveRecord::Migration
   def change
-    create_table :labels do |t|
+    create_table :tags do |t|
       t.string :name
       t.integer :game_id
       t.timestamps

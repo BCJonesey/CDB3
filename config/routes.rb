@@ -14,14 +14,14 @@ Cdb3::Application.routes.draw do
     resources :members
     resources :characters
     resources :skills do
-      put 'add_label', :on => :member
-      put 'remove_label', :on => :member
+      put 'add_tag', :on => :member
+      put 'remove_tag', :on => :member
     end
     resources :events
     resources :currencies
     resources :registrations
     resources :awards
-    resources :labels
+    resources :tags
   end
 
   # The priority is based upon order of creation:

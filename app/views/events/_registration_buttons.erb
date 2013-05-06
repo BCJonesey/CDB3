@@ -1,0 +1,65 @@
+<div class="game-<%= event.id %>-registration-buttons">
+<% if(event.is_member_registered?(@member)) %>
+<a href="#" onclick='delete_reg(<%= event.id %>,<%= event.registrations.where(:member_id => @member.id).first.id %>);return false;'  class='btn btn-mini btn-danger'>Destroy Reg</a>
+<% else %>
+  <div class="btn-group">
+    <button class="btn">Action</button>
+    <button class="btn dropdown-toggle" data-toggle="dropdown">
+      <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+      <li>
+	<a  href="#" onclick="register_member(<%= event.id %>,<%= @member.id %>);return false;">Register as a PC</a>
+      </li>
+      <li>
+	<a href="#"><%= @member.name %></a></li>
+      <li>
+	<a href="#">Something else here</a></li>
+      <li class="divider"></li>
+      <li>
+	<a href="#">Separated link</a>
+      </li>
+    </ul>
+  </div>
+<% end %>
+
+
+  
+<%= hidden_field_tag(:event_id,event.id) %>
+<%= hidden_field_tag(:member_id,@member.id) %>
+<%= hidden_field_tag(:character_id,nil) %>
+<%= hidden_field_tag(:is_prereged,true) %>
+<%= hidden_field_tag(:cp_game_id,nil) %>
+
+<script>
+function register_member(event_id,member_id){
+  $.ajax({
+      url: "<%= game_registrations_path(@game) %>.json",
+      type: "POST",
+      data: {registration: {
+	      event_id: event_id,
+	      member_id: member_id, 
+	      is_prereged: true}},
+  }).done(refresh_buttons(event_id));
+}
+
+function delete_reg(event_id,registration_id){
+  $.ajax({
+      url: "<%= game_registrations_path(@game) %>/"+registration_id+".json",
+      type: "POST",
+      data: {"_method":"delete"}
+  }).done(refresh_buttons(event_id));
+}
+
+function refresh_buttons(event_id){
+  $.ajax({
+      url: "<%= game_events_path(@game) %>/"+event_id+"/registration_buttons",
+      type: "GET",
+      success: function(resp){ $('div.game-'+event_id+'-registration-buttons').replaceWith(resp);}
+  });
+}
+
+
+</script>
+
+</div>

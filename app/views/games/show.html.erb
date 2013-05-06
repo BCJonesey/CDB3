@@ -1,6 +1,6 @@
 <div class="row">
   <div class="span12">
-    <h1>Game Dashboard</h2>
+    <h1><%= @game.name %> Dashboard</h2>
   </div>
 </div>
 
@@ -24,7 +24,7 @@
 
 <ul>
 <% @game.events.each do |event| %>
-  <li><%= event.date %> <%= event.site %>
+  <li><%= event.start_date %> <%= event.site %>
       <%= link_to "[View]", game_event_path(@game, event) %></li>
 <% end %>
 </ul>

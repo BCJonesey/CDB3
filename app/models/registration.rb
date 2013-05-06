@@ -3,6 +3,7 @@ class Registration < ActiveRecord::Base
   belongs_to :member
   belongs_to :character
   validates :event_id, :presence => true
+  validates_uniqueness_of :event_id,:scope => :member_id
   
   
   scope :pcs, where(:cp_to_game_id =>nil)

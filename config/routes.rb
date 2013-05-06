@@ -17,7 +17,9 @@ Cdb3::Application.routes.draw do
       put 'add_tag', :on => :member
       put 'remove_tag', :on => :member
     end
-    resources :events
+    resources :events do
+      get 'registration_buttons',:on => :member
+    end
     resources :currencies
     resources :registrations
     resources :awards

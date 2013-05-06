@@ -1,4 +1,7 @@
 class EventsController < ApplicationController
+  before_filter :require_logged_in_user
+  before_filter :require_game
+  before_filter :get_member
   before_filter :require_game_admin
   before_filter :get_resource_and_match_game, :except => [:index, :new, :create]
 
@@ -82,4 +85,10 @@ class EventsController < ApplicationController
       format.json { head :ok }
     end
   end
+  
+
+  def registration_buttons
+    render :partial => "registration_buttons", :locals => { :event => @event }
+  end
+  
 end

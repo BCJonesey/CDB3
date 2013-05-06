@@ -50,7 +50,7 @@ class RegistrationsController < ApplicationController
       if @registration.save
         format.html { redirect_to [@game, @registration], 
           notice: 'Registration was successfully created.' }
-        format.json { render json: @registration, status: :created, location: @registration }
+        format.json { render json: @registration, status: :created }
       else
         format.html { render action: "new" }
         format.json { render json: @registration.errors, status: :unprocessable_entity }

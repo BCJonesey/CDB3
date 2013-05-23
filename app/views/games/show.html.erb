@@ -35,7 +35,7 @@
 
 <h2>Your Characters</h2>
 
-<% @member.characters.each do |character| %>
+<% @current_member.characters.each do |character| %>
 <p><%= link_to character.name, game_character_path(@game,character) %></p>
 <% end %>
 

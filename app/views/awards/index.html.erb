@@ -45,7 +45,7 @@
     </tr>
   </thead>
   <tbody>
-    <% @member.awards.unassigned.approved.each do |award| %>
+    <% @current_member.awards.unassigned.approved.each do |award| %>
       <tr>
         <td><%= award.amount %></td>
         <td><%= award.currency.name %></td>
@@ -60,7 +60,7 @@
 	      <span class="caret"></span>
 	    </button>
 	    <ul class="dropdown-menu">
-	      <% @member.characters.each do |character| %>
+	      <% @current_member.characters.each do |character| %>
 	      <li>
 		<%= link_to character.name, assign_game_award_path(@game,award,:character_id=>character.id) %>
 	      </li>
@@ -84,7 +84,7 @@
       <tr>
 	<td colspan="8">Pending Awards</td>
       <tr>
-    <% @member.awards.pending.each do |award| %>
+    <% @current_member.awards.pending.each do |award| %>
         <tr>
         <td><%= award.amount %></td>
         <td><%= award.currency.name%></td>
@@ -111,7 +111,7 @@
     <tr>
 	<td colspan="8"><h3>Assigned Awards</h3></td>
       <tr>
-      <% @member.characters.each do |char| %>
+      <% @current_member.characters.each do |char| %>
           <tr>
 	<td colspan="8"><h4><%= char.name %></h4></td>
       <tr>
@@ -131,7 +131,7 @@
 		  <span class="caret"></span>
 		</button>
 		<ul class="dropdown-menu">
-		  <% @member.characters.each do |character| %>
+		  <% @current_member.characters.each do |character| %>
 		  <li>
 		    <%= link_to character.name, assign_game_award_path(@game,award,:character_id=>character.id) %>
 		  </li>

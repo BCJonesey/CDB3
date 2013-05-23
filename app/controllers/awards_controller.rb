@@ -91,7 +91,7 @@ class AwardsController < ApplicationController
   end
   
   def approve
-    @award.approved_by = @member
+    @award.approved_by = @current_member
     @award.save
     respond_to do |format|
       format.html { redirect_to :back}
@@ -114,8 +114,8 @@ class AwardsController < ApplicationController
   
   def request_award
     @award = Award.new
-    @award.member_id = @member.id
-    @award.created_by_id = @member.id
+    @award.member_id = @current_member.id
+    @award.created_by_id = @current_member.id
     @award.amount = params[:award][:amount]
     @award.currency_id = params[:award][:currency_id]
     @award.comment = params[:award][:comment]

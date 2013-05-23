@@ -97,13 +97,13 @@ class ApplicationController < ActionController::Base
     get_logged_in_user
     get_current_game
 
-    @member = Member.find_or_create_by_user_id_and_game_id(@logged_in_user.id, @game.id)
+    @current_member = Member.find_or_create_by_user_id_and_game_id(@logged_in_user.id, @game.id)
   end
   
   def get_member
     get_logged_in_user
     get_current_game
 
-    @member = Member.find_by_user_id_and_game_id(@logged_in_user.id, @game.id)
+    @current_member = Member.find_by_user_id_and_game_id(@logged_in_user.id, @game.id)
   end
 end

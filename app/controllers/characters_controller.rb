@@ -11,8 +11,8 @@ class CharactersController < ApplicationController
   def index
     @characters = []
 
-    unless @member.nil?
-      @characters = @member.characters
+    unless @current_member.nil?
+      @characters = @current_member.characters
     end
 
     @all_characters = []

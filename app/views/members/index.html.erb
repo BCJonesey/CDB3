@@ -12,7 +12,7 @@
     <% @members.each do |member| %>
       <tr>
         <td><%= member.id %></td>
-        <td><%= link_to member.user_id, game_member_path(@game,member) %></td>
+        <td><%= link_to member.name, game_member_path(@game,member) %></td>
         <td><%= member.created_at %></td>
         <td>
           <%= link_to 'Edit', edit_game_member_path(@game,member), :class => 'btn btn-mini' %>

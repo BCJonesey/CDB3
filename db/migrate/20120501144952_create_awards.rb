@@ -7,7 +7,7 @@ class CreateAwards < ActiveRecord::Migration
       t.text :comment
       t.decimal :amount
       t.integer :currency_id
-
+      t.integer :member_id
       t.timestamps
     end
   end

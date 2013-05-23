@@ -31,6 +31,13 @@
         <%= f.text_area :notes, :class => 'text_area' %>
       </div>
     </div>
+    
+    <div class="control-group">
+      <%= f.label :player_cap, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.number_field :player_cap, :class => 'number_field' %>
+      </div>
+    </div>
 
     <div class="form-actions">
       <%= f.submit nil, :class => 'btn btn-primary' %>

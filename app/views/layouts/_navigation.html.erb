@@ -17,8 +17,14 @@
     </ul>
   </div>
 <% end %>
+
+
+<% if @game.nil? ? false: !@game.id.nil? %>
 <div class="nav-collapse">
   <ul class="nav">
-    <li><%= link_to "Games", games_path %></li>
+    <li><%= link_to "Characters", game_characters_path(@game) %></li>
+    <li><%= link_to "Events", game_events_path(@game) %></li>
+    <li><%= link_to "Awards", game_awards_path(@game) %></li>
   </ul>
 </div><!--/.nav-collapse -->
+<% end %>

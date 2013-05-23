@@ -62,7 +62,7 @@ class MembersController < ApplicationController
     respond_to do |format|
       if @member.save
         format.html do 
-          redirect_to [@game, @member], notice: 'Member was successfully created.'
+          redirect_to @game, notice: 'Member was successfully created.'
         end
         format.json { render json: @member, status: :created, location: @member }
       else

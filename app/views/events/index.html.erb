@@ -21,8 +21,10 @@
         <td><%= event.created_at %></td>
         <td>
 	  <%= render :partial => "registration_buttons", :locals => { :event => event } %>
+          <% if(@member.is_admin) %>
           <%= link_to 'Edit', edit_game_event_path(@game,event), :class => 'btn btn-mini' %>
           <%= link_to 'Destroy', game_event_path(@game,event), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-mini btn-danger' %>
+          <% end %>
         </td>
       </tr>
     <% end %>
@@ -37,8 +39,10 @@
         <td><%= link_to event.start_date, game_event_path(@game,event) %></td>
         <td><%= event.created_at %></td>
         <td>
+        <% if(@member.is_admin) %>
           <%= link_to 'Edit', edit_game_event_path(@game,event), :class => 'btn btn-mini' %>
           <%= link_to 'Destroy', game_event_path(@game,event), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-mini btn-danger' %>
+	<% end %>
         </td>
       </tr>
     <% end %>

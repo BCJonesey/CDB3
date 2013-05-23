@@ -2,13 +2,14 @@ class AwardsController < ApplicationController
   before_filter :require_logged_in_user
   before_filter :require_game
   before_filter :get_member
-  before_filter :get_or_create_member, :only => [:create]
-  before_filter :get_resource_and_match_game, :except => [:index, :new, :create]
+  before_filter :get_resource_and_match_game, :except => [:index, :new, :create,:request_award]
+  before_filter :require_game_admin,:except => [:index,:request]
   
   # GET /awards
   # GET /awards.json
   def index
-    @awards = @member.awards
+    @award = Award.new
+
     @pending_awards = []
     if(game_admin?(@game))
       @pending_awards = @game.awards.pending
@@ -88,4 +89,46 @@ class AwardsController < ApplicationController
       format.json { head :ok }
     end
   end
+  
+  def approve
+    @award.approved_by = @member
+    @award.save
+    respond_to do |format|
+      format.html { redirect_to :back}
+      format.json { head :ok }
+    end
+  end
+  
+  def assign
+    @award.character_id = params[:character_id]
+    respond_to do |format|
+      if @award.save
+        format.html { redirect_to action: "index", notice: 'Award was successfully assigned.' }
+        format.json { head :ok }
+      else
+        format.html { redirect_to action: "index", error: 'Could not assign.' }
+        format.json { render json: @award.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+  
+  def request_award
+    @award = Award.new
+    @award.member_id = @member.id
+    @award.created_by_id = @member.id
+    @award.amount = params[:award][:amount]
+    @award.currency_id = params[:award][:currency_id]
+    @award.comment = params[:award][:comment]
+    respond_to do |format|
+      if @award.save
+        format.html { redirect_to action: "index", notice: 'Award was successfully requested.' }
+        format.json { render json: @award, status: :created, location: @award }
+      else
+        format.html { render action: "index" }
+        format.json { render json: @award.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+  
+
 end

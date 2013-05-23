@@ -2,6 +2,7 @@ class CurrenciesController < ApplicationController
 
   before_filter :require_game
   before_filter :get_resource_and_match_game, :except => [:index, :new, :create]
+  before_filter :require_game_admin
   
   # GET /currencies
   # GET /currencies.json
@@ -28,7 +29,7 @@ class CurrenciesController < ApplicationController
   # GET /currencies/new.json
   def new
     @currency = Currency.new
-    
+    @currency.game_id = @game.id
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @currency }
@@ -45,7 +46,6 @@ class CurrenciesController < ApplicationController
   def create
     @currency = Currency.new(params[:currency])
 
-    @currency.game_id = @game.id
     
     respond_to do |format|
       if @currency.save

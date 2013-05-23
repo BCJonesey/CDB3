@@ -1,7 +1,7 @@
 class Character < ActiveRecord::Base
-  belongs_to :character_version, :dependent => :destroy
-  #funky shit!
-  alias :real_character_version :character_version
+  before_destroy :delete_versions
+  belongs_to :real_character_version, :class_name => 'CharacterVersion', :foreign_key => 'character_version_id'
+
 
   has_many :awards
   belongs_to :member
@@ -15,7 +15,7 @@ class Character < ActiveRecord::Base
   
   
   def new_version(old_version_desc)
-    self.character_version = self.character_version.create_child_version(old_version_desc)
+    self.real_character_version = self.real_character_version.create_child_version(old_version_desc)
     self.save
     self.character_version
   end
@@ -38,14 +38,25 @@ class Character < ActiveRecord::Base
    
   end
   
-  private
+  
   def create_initial_version
     version = CharacterVersion.create()    
     self.game.skills.default_skills.each do |skill|
       version.set_skill_rank(skill,rank.min_rank)
     end
-    self.real_character_version = version.new_version("New Character")
+    version.save
+    self.character_version_id = version.id
     self.save
+    self.new_version("New Character")
+    self.save
+  end
+  private
+  def delete_versions
+      while self.real_character_version != nil  do
+	version = self.real_character_version
+	self.real_character_version = self.real_character_version.previous_version
+	version.destroy
+      end
   end
   
 end

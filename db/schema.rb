@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(:version => 20121014031707) do
     t.text     "comment"
     t.decimal  "amount"
     t.integer  "currency_id"
+    t.integer  "member_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -62,6 +63,7 @@ ActiveRecord::Schema.define(:version => 20121014031707) do
     t.datetime "end_date"
     t.text     "site"
     t.text     "notes"
+    t.integer  "player_cap"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -112,8 +114,6 @@ ActiveRecord::Schema.define(:version => 20121014031707) do
     t.string   "name"
     t.string   "summary"
     t.text     "description"
-    t.text     "cost"
-    t.text     "rule"
     t.integer  "min_rank",    :default => 0
     t.integer  "max_rank",    :default => 1
     t.datetime "created_at"

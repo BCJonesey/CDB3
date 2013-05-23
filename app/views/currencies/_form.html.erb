@@ -23,13 +23,7 @@
         <%= f.number_field :yearly_cap, :class => 'number_field' %>
       </div>
     </div>
-
-    <div class="control-group">
-      <%= f.label :game_id, :class => 'control-label' %>
-      <div class="controls">
-        <%= f.number_field :game_id, :class => 'number_field' %>
-      </div>
-    </div>
+<%= f.hidden_field :game_id, :class => 'number_field' %>
 
     <div class="form-actions">
       <%= f.submit nil, :class => 'btn btn-primary' %>

@@ -1,8 +1,33 @@
 <div class="row">
-  <div class="span12">
+  <div class="span9">
     <h1><%= @game.name %> Dashboard</h2>
   </div>
 </div>
+
+<% if(@member == nil) %>
+  <div class="row">
+    <div class="span9">
+    
+    <div class="alert alert-success">
+    <div id="flash_notice">You are not currently a member of this game. Becoming a member will allow you to create characters and register for events. This will also allow game admins to see your contact information.
+<% @member = Member.new(:user_id => @logged_in_user.id, :game_id => @game.id) %>
+<%= form_for [@game,@member], :html => { :class => 'form-horizontal' } do |f| %>
+<%= render :partial => 'shared/form_errors', :locals => {:item => @member} %>
+<%= f.hidden_field :game_id %>  
+<%= f.hidden_field :user_id %>
+    <div class="row">
+    <div class="span9">
+      <%= f.submit "Become a member!", :class => 'btn btn-primary' %>
+    </div></div>
+
+<% end %>
+
+    </div>
+  </div>
+      
+    </div>
+  </div>
+<% else %>
 
 <div class="row">
 
@@ -10,8 +35,8 @@
 
 <h2>Your Characters</h2>
 
-<% @characters.each do |character| %>
-<p><%= character.name %></p>
+<% @member.characters.each do |character| %>
+<p><%= link_to character.name, game_character_path(@game,character) %></p>
 <% end %>
 
 <p><%= link_to "Create Character", new_game_character_path(@game) %></p>
@@ -64,5 +89,7 @@
 </div>
 
 </div>
+
+<% end %>
 
 <% end %>

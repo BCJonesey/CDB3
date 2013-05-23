@@ -2,6 +2,8 @@ class GamesController < ApplicationController
   before_filter :require_logged_in_user, :except => [:login]
   before_filter :require_global_admin, :except => [:login, :index, :show]
 
+  
+  
   def login
     @game = Game.find(params[:game_id])
   end
@@ -12,9 +14,8 @@ class GamesController < ApplicationController
 
   def show
     @game = Game.find(params[:id])
-    @characters = Character.all
     
-    @members = nil
+    @member = Member.find_by_user_id_and_game_id(@logged_in_user.id, @game.id)
     
     if @logged_in_user.game_admin?(@game)
       @members = @game.members
@@ -54,5 +55,6 @@ class GamesController < ApplicationController
       redirect_to game_path(@game), :alert => "Must confirm game deletion"
     end
   end
+  
 
 end

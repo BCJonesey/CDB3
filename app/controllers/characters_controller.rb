@@ -110,6 +110,8 @@ class CharactersController < ApplicationController
       format.json { head :ok }
     end
   end
+  
+
 
   private
 end

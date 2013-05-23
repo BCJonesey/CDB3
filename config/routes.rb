@@ -22,7 +22,11 @@ Cdb3::Application.routes.draw do
     end
     resources :currencies
     resources :registrations
-    resources :awards
+    resources :awards do
+      get 'approve',:on => :member
+      get 'assign',:on => :member
+      post 'request_award', :on => :collection
+    end
     resources :tags
   end
 

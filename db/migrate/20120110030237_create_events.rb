@@ -6,6 +6,7 @@ class CreateEvents < ActiveRecord::Migration
       t.datetime :end_date
       t.text    :site
       t.text    :notes
+      t.integer :player_cap
       t.timestamps
     end
   end

@@ -1,21 +1,7 @@
 <%= form_for [@game,@member], :html => { :class => 'form-horizontal' } do |f| %>
 <%= render :partial => 'shared/form_errors', :locals => {:item => @member} %>
   <fieldset>
-    <legend><%= controller.action_name.capitalize %> /Member</legend>
-
-    <div class="control-group">
-      <%= f.label :user_id, :class => 'control-label' %>
-      <div class="controls">
-        <%= f.number_field :user_id, :class => 'number_field' %>
-      </div>
-    </div>
-
-    <div class="control-group">
-      <%= f.label :game_id, :class => 'control-label' %>
-      <div class="controls">
-        <%= f.number_field :game_id, :class => 'number_field' %>
-      </div>
-    </div>
+    <legend><%= controller.action_name.capitalize %> /Member <%= @member.id.nil? ? "":@member.name%></legend>
 
     <div class="control-group">
       <%= f.label :game_admin, :class => 'control-label' %>

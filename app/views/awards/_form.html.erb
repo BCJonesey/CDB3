@@ -1,6 +1,9 @@
 <%= form_for [@game,@award], :html => { :class => 'form-horizontal' } do |f| %>
 <%= render :partial => 'shared/form_errors', :locals => {:item => @award} %>
 
+    <%= f.hidden_field :character_id %>
+    
+    
     <div class="control-group">
     <%= f.label :comment, :class => 'control-label' %>
     <div class="controls">

@@ -2,7 +2,7 @@ class Member < ActiveRecord::Base
   belongs_to :game
   belongs_to :user
   has_many :characters
-  has_many :awards, :through => :characters
+  has_many :awards
   
   validates :user_id, :presence => true
   validates :game_id, :presence => true
@@ -12,5 +12,8 @@ class Member < ActiveRecord::Base
   
   delegate :name, :email, :to=> :user
   
-
+  def is_admin
+    game_admin || user.global_admin
+  end
+  
 end

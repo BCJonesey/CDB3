@@ -2,7 +2,6 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th>ID</th>
       <th>Game</th>
       <th>Created at</th>
       <th>Actions</th>
@@ -16,12 +15,11 @@
     </tr>
     <% @events.upcoming.each do |event| %>
       <tr>
-        <td><%= event.id %></td>
-        <td><%= link_to event.start_date, game_event_path(@game,event) %></td>
+        <td><%= link_to event.start_date.to_formatted_s(:long) , game_event_path(@game,event) %></td>
         <td><%= event.created_at %></td>
         <td>
 	  <%= render :partial => "registration_buttons", :locals => { :event => event } %>
-          <% if(@member.is_admin) %>
+          <% if(@current_member.is_admin) %>
           <%= link_to 'Edit', edit_game_event_path(@game,event), :class => 'btn btn-mini' %>
           <%= link_to 'Destroy', game_event_path(@game,event), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-mini btn-danger' %>
           <% end %>
@@ -35,11 +33,10 @@
     </tr>
     <% @events.past.each do |event| %>
       <tr>
-        <td><%= event.id %></td>
-        <td><%= link_to event.start_date, game_event_path(@game,event) %></td>
+        <td><%= link_to event.start_date.to_formatted_s(:long) , game_event_path(@game,event) %></td>
         <td><%= event.created_at %></td>
         <td>
-        <% if(@member.is_admin) %>
+        <% if(@current_member.is_admin) %>
           <%= link_to 'Edit', edit_game_event_path(@game,event), :class => 'btn btn-mini' %>
           <%= link_to 'Destroy', game_event_path(@game,event), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-mini btn-danger' %>
 	<% end %>
@@ -49,4 +46,6 @@
   </tbody>
 </table>
 
+<% if(@current_member.is_admin) %>
 <%= link_to 'New', new_game_event_path(@game), :class => 'btn btn-primary' %>
+<% end %>

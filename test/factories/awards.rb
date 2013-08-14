@@ -7,9 +7,5 @@ FactoryGirl.define do
     amount "9.99"
     
     
-    association :approved_by, factory: :member
-    association :created_by, factory: :member
-    association :currency
-    association :character
   end
 end

@@ -11,4 +11,7 @@ class Event < ActiveRecord::Base
     registrations.where(:member_id => member.id).count > 0
   end
   
+  def get_registration(member)
+    registrations.where(:member_id => member.id)[0]
+  end
 end

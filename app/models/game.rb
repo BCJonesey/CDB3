@@ -3,6 +3,7 @@ class Game < ActiveRecord::Base
   has_many :events
   has_many :currencies
   has_many :skills
+  has_many :tags
   has_many :characters, :through => :members
   has_many :awards, :through => :characters
   

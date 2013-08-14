@@ -28,7 +28,7 @@ class MembersControllerTest < ActionController::TestCase
         {:user_id => @user}
     end
 
-    assert_redirected_to game_member_path(@game, assigns(:member))
+    assert_redirected_to game_path(@game)
   end
 
   test "should show member" do

@@ -3,17 +3,12 @@ class AwardsController < ApplicationController
   before_filter :require_game
   before_filter :get_member
   before_filter :get_resource_and_match_game, :except => [:index, :new, :create,:request_award]
-  before_filter :require_game_admin,:except => [:index,:request]
+  before_filter :require_game_admin,:except => [:index,:request_award,:assign]
   
   # GET /awards
   # GET /awards.json
   def index
-    @award = Award.new
 
-    @pending_awards = []
-    if(game_admin?(@game))
-      @pending_awards = @game.awards.pending
-    end
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @awards }
@@ -85,7 +80,7 @@ class AwardsController < ApplicationController
     @award.destroy
 
     respond_to do |format|
-      format.html { redirect_to game_awards_url(@game) }
+      format.html { redirect_to(:back, :notice => 'Award was successfully deleted.')  }
       format.json { head :ok }
     end
   end
@@ -103,10 +98,10 @@ class AwardsController < ApplicationController
     @award.character_id = params[:character_id]
     respond_to do |format|
       if @award.save
-        format.html { redirect_to action: "index", notice: 'Award was successfully assigned.' }
+        format.html { redirect_to(:back, :notice=> 'Award was successfully assigned.') }
         format.json { head :ok }
       else
-        format.html { redirect_to action: "index", error: 'Could not assign.' }
+        format.html { redirect_to(:back, :alert => 'Could not assign.') }
         format.json { render json: @award.errors, status: :unprocessable_entity }
       end
     end
@@ -114,17 +109,17 @@ class AwardsController < ApplicationController
   
   def request_award
     @award = Award.new
-    @award.member_id = @current_member.id
     @award.created_by_id = @current_member.id
     @award.amount = params[:award][:amount]
     @award.currency_id = params[:award][:currency_id]
     @award.comment = params[:award][:comment]
+    @award.member_id = params[:award][:member_id]
     respond_to do |format|
       if @award.save
-        format.html { redirect_to action: "index", notice: 'Award was successfully requested.' }
+        format.html { redirect_to(:back, :notice => 'Award was successfully requested.') }
         format.json { render json: @award, status: :created, location: @award }
       else
-        format.html { render action: "index" }
+        format.html { redirect_to(:back, :alert => 'Could not create award.') }
         format.json { render json: @award.errors, status: :unprocessable_entity }
       end
     end

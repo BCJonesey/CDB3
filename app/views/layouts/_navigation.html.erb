@@ -19,12 +19,17 @@
 <% end %>
 
 
-<% if @game.nil? ? false: !@game.id.nil? %>
+<% if !@current_member.nil? %>
 <div class="nav-collapse">
   <ul class="nav">
+    <li><%= link_to @game.name, game_path(@game) %></li>
     <li><%= link_to "Characters", game_characters_path(@game) %></li>
     <li><%= link_to "Events", game_events_path(@game) %></li>
     <li><%= link_to "Awards", game_awards_path(@game) %></li>
+    <% if(@current_member.is_admin) %>
+    <li><%= link_to "Currencies", game_currencies_path(@game) %></li>
+    <li><%= link_to "Members", game_members_path(@game) %></li>
+    <% end %>    
   </ul>
 </div><!--/.nav-collapse -->
 <% end %>

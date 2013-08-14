@@ -1,7 +1,6 @@
 
 class MainController < ApplicationController
   before_filter :first_run_check
-  before_filter :get_logged_in_user
   
   def first_run_check
     if User.count < 1

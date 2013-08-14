@@ -2,7 +2,6 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th>ID</th>
       <th>Name</th>
       <th>Created at</th>
       <th>Actions</th>
@@ -11,12 +10,10 @@
   <tbody>
     <% @characters.each do |character| %>
       <tr>
-        <td><%= character.id %></td>
         <td><%= link_to character.name, game_character_path(@game,character) %></td>
         <td><%= character.created_at %></td>
         <td>
           <%= link_to 'Edit', edit_game_character_path(@game,character), :class => 'btn btn-mini' %>
-          <%= link_to 'Destroy', game_character_path(@game,character), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-mini btn-danger' %>
         </td>
       </tr>
     <% end %>

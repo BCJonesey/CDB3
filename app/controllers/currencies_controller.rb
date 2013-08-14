@@ -2,6 +2,7 @@ class CurrenciesController < ApplicationController
 
   before_filter :require_game
   before_filter :get_resource_and_match_game, :except => [:index, :new, :create]
+  before_filter :get_member
   before_filter :require_game_admin
   
   # GET /currencies

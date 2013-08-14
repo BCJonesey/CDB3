@@ -12,7 +12,7 @@ class GamesControllerTest < ActionController::TestCase
   test "should require logged in user" do
     get :index
     assert_response :redirect
-    assert_not_nil flash[:notice]
+    assert_not_nil flash[:alert]
   end
 
   test "should succeed with global admin" do

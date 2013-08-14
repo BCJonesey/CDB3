@@ -9,12 +9,6 @@ class EventsControllerTest < ActionController::TestCase
     
   end
 
-  test "should fail for non-admin" do
-    get :index, {:game_id => @game.id}, {:user_id => @member.user.id}
-    assert_response :redirect
-    assert_not_nil flash[:alert]
-  end
-
   test "should get index" do
     get :index, {:game_id => @game.id}, {:user_id => @ben.user.id}
     assert_response :success

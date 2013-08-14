@@ -21,14 +21,7 @@ class RegistrationsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should create registration" do
-    assert_difference('Registration.count') do
-      post :create, {registration: @registration.attributes, :game_id => @game.id}, 
-        {:user_id => @user}
-    end
 
-    assert_redirected_to game_registration_path(@game, assigns(:registration))
-  end
 
   test "should show registration" do
     get :show, {id: @registration.to_param, :game_id => @game.id}, {:user_id => @user}

@@ -4,7 +4,7 @@
   </div>
 </div>
 
-<% if(@member == nil) %>
+<% if(@current_member == nil) %>
   <div class="row">
     <div class="span9">
     
@@ -45,18 +45,15 @@
 
 <div class="span6">
 
-<h2>Events</h2>
+<h2><%= link_to "Events", game_events_path(@game) %></h2>
 
 <ul>
 <% @game.events.each do |event| %>
-  <li><%= event.start_date %> <%= event.site %>
-      <%= link_to "[View]", game_event_path(@game, event) %></li>
+  <li><%= event.start_date.to_formatted_s(:long) %> - <%= event.site %></li>
 <% end %>
 </ul>
 
-<% if @logged_in_user.game_admin?(@game) %>
-<%= link_to "New Event", new_game_event_path(@game) %>
-<% end %>
+
 
 </div>
 

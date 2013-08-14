@@ -1,1 +1,432 @@
 <%= render :partial => 'form' %>
+
+
+<% @page_title = "Edit Character" %>
+
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.2/angular.min.js"></script>
+
+<script type="text/javascript">
+
+
+
+  function currency_spent_in_group(currency,group,recursive)
+  {
+    tempCurrencyPack = jQuery.extend(true, {}, currencyPack);
+
+    spend_group(group,recursive);
+    amount = tempCurrencyPack[currency] - currencyPack[currency]
+
+    currencyPack = jQuery.extend(true, {}, tempCurrencyPack);
+    return amount;
+  }
+
+
+  function spend_group(group,recursive)
+  {
+
+    jQuery.each(groups[group], function(index, value) {
+      if(skill_rank(value)>0)
+      {
+        for(j=0;j<skill_rank(value);j++)
+        {
+          eval(allSkills[value].cost)
+        }
+        if(recursive && allSkills[value].is_group)
+        {
+          spend_group(value,currency,recursive)
+        }
+      }
+    });
+
+
+  }
+  function skill_rank(skill_id)
+  {
+    if(skillPack[skill_id]==null)
+    {
+      return 0;
+    }
+    else
+    {
+      return skillPack[skill_id];
+    }
+    return 0;
+  }
+  function group_rank(groupId,recursive)
+  {
+      
+    rank=0;
+    jQuery.each(groups[groupId], function(index, value) {
+      rank=rank+ skill_rank(value);
+      if(recursive && allSkills[value].is_group && skill_rank(value)>0)
+      {
+        rank = rank + group_rank(value,recursive)
+      }
+    });
+    return rank;
+
+  }
+  function group_skill_count(groupId,recursive)
+  {
+
+    rank=0;
+    jQuery.each(groups[groupId], function(index, value) {
+      if(skill_rank(value)>0)
+      {
+        rank++;
+      }
+      if(recursive && allSkills[value].is_group && skill_rank(value)>0)
+      {
+        rank = rank + group_rank(value,recursive)
+      }
+    });
+    return rank;
+
+  }
+
+
+  function is_valid_character()
+  {
+    // Spend the cash
+    for(var i in skillPack)
+    {
+      for(j=0;j<skill_rank(i);j++)
+      {
+        eval(allSkills[i].cost)
+      }
+      
+    }
+    //check to see if this gives you a negitive balance
+    for(var i in currencyPack)
+    {
+   
+      if(currencyPack[i]<0)
+      {
+        errorAlert("Validation Error","That would give you a "+currencyPack[i]+i+" balance.");
+        return false;
+      }
+    }
+    
+    //check to see if the pre-reqs of the open headers are met
+    for(var i in groups)
+    {
+      ERROR_ALERT = '';
+      if(allSkills[i].parent==null && !(eval(allSkills[i].prereq)))
+      {
+        errorAlert("Validation Error","You do not meet the requirements of "+allSkills[i].name+"</br>"+ERROR_ALERT);
+        return false;
+      }
+    }
+
+    //check to see if all of the pre-reqs of the puchaced skills are met
+    for(var i in skillPack)
+    {
+      ERROR_ALERT = '';
+      if(!(eval(allSkills[i].prereq) && ((skill_rank(i))<=allSkills[i].max_rank)))
+      {
+        errorAlert("Validation Error","You do not meet the requirements of "+allSkills[i].name+"</br>"+ERROR_ALERT);
+        return false;
+      }
+    }
+    return true;
+  }
+
+
+  function updateUI()
+  {
+    skillPack = jQuery.extend(true, {}, mySkills);
+
+    for(var i in allSkills)
+    {
+      if(allSkills[i].is_group)
+      {
+        if((skill_rank(i)>0 || allSkills[i].parent==null))
+        {
+          jQuery("#skill_tab_header_"+i).css("display", "block");
+        }
+        else
+        {
+          jQuery("#skill_tab_header_"+i).css("display", "none");
+        }
+      }
+      if(allSkills[i].max_rank > 1)
+      {
+        jQuery("#skill_rank_"+i).text(skill_rank(i));
+      }
+      else
+      {
+        jQuery("#skill_rank_"+i).css("display", "none");
+      }
+      jQuery("#skill_action_minus_"+i).css("display", "none");
+      jQuery("#skill_action_plus_"+i).css("display", "none");
+      jQuery("#skill_action_add_"+i).css("display", "none");
+      jQuery("#skill_action_drop_"+i).css("display", "none");
+
+
+      if(skill_rank(i)<allSkills[i].max_rank && allSkills[i].max_rank > 1)
+      {
+        jQuery("#skill_action_plus_"+i).css("display", "inline");
+      }
+      else if(skill_rank(i)<allSkills[i].max_rank)
+      {
+        jQuery("#skill_action_add_"+i).css("display", "inline");
+      }
+
+      if(skill_rank(i)>allSkills[i].min_rank && allSkills[i].max_rank > 1)
+      {
+        jQuery("#skill_action_minus_"+i).css("display", "inline");
+      }
+      else if(skill_rank(i)>allSkills[i].min_rank)
+      {
+        jQuery("#skill_action_drop_"+i).css("display", "inline");
+      }
+
+
+
+    }
+
+    for(var i in currencyPack)
+    {
+      jQuery("#currency_totals_"+i).text(currencyPack[i]);
+      if(currencyPack[i]<=0)
+      {
+        jQuery("#currency_totals_box_"+i).css("display", "none");
+      }
+      else
+      {
+        jQuery("#currency_totals_box_"+i).css("display", "list-item");
+      }
+    }
+
+
+
+  }
+
+
+  function add_skill_rank(skill_id)
+  {
+    currencyPack = jQuery.extend(true, {}, myCurrencies);
+    skillPack = jQuery.extend(true, {}, mySkills);
+
+    if(skillPack[skill_id])
+    {
+      skillPack[skill_id] = skillPack[skill_id] +1;
+    }
+    else
+    {
+      skillPack[skill_id] = 1
+    }
+    if(is_valid_character())
+    {
+      mySkills = jQuery.extend(true, {}, skillPack);
+      updateUI();
+
+
+    }
+  }
+  function resetToPin()
+  {
+    currencyPack = jQuery.extend(true, {}, myCurrencies);
+    skillPack = {};
+    for(var i in allSkills)
+    {
+
+      if(allSkills[i].min_rank>0)
+      {
+        skillPack[i] = allSkills[i].min_rank;
+      }
+    }
+    
+    if(is_valid_character())
+    {
+      mySkills = jQuery.extend(true, {}, skillPack);
+      updateUI();
+    }
+  }
+  function subtract_skill_rank(skill_id)
+  {
+    currencyPack = jQuery.extend(true, {}, myCurrencies);
+    skillPack = jQuery.extend(true, {}, mySkills);
+
+    if(skillPack[skill_id]>1)
+    {
+      skillPack[skill_id] = skillPack[skill_id] -1;
+    }
+    else
+    {
+      delete skillPack[skill_id];
+    }
+    if(is_valid_character())
+    {
+      mySkills = jQuery.extend(true, {}, skillPack);
+      updateUI();
+
+
+    }
+
+
+
+
+  }
+
+  function SPEND(amount,currency)
+  {
+    currencyPack[currency]=currencyPack[currency] - amount;
+  }
+  function SPEND_COMBO(amount,currency1,currency2)
+  {
+    if(currencyPack[currency1]>=amount)
+    {
+      currencyPack[currency1]=currencyPack[currency1] - amount;
+    }
+    else if(currencyPack[currency1]>0)
+    {
+      currencyPack[currency2]=currencyPack[currency2] - (amount-currencyPack[currency1]);
+      currencyPack[currency1] = 0;
+    }
+    else
+    {
+      currencyPack[currency2]=currencyPack[currency2] - amount;
+    }
+
+
+  }
+
+  function saveChanges()
+  {
+    jQuery.post('./', jQuery('#edit_character_<%= @character.id %>').serialize()+'&'+jQuery.param({skills:mySkills}))
+    .success(function() { jQuery("#save_message").html('<div class="ui-widget"><div style="margin-top: 20px; padding: 0pt 0.7em;" class="ui-state-active ui-corner-all"><p><span style="float: left; margin-right: 0.3em;" class="ui-icon ui-icon-info"></span><strong>Sucess:</strong> Character has been saved.</p></div></div></div>');                          })
+    .error(function() { jQuery("#save_message").html('<div class="ui-widget"><div style="margin-top: 20px;padding: 0pt 0.7em;" class="ui-state-error ui-corner-all"><p><span style="float: left; margin-right:0.3em;" class="ui-icon ui-icon-alert"></span> <strong>Error:</strong> Could not save.</p></div>'); })
+    .complete(function() { jQuery("#save_message").effect("bounce","fast"); });
+
+  }
+
+  function errorAlert(title,body)
+  {
+    jQuery('<div title=\'<span style="color:#f56f8e">'+title+'</span>\'>'+ body +'</div>').dialog();
+  }
+
+
+
+  var skillPack
+  var currencyPack
+  var myCurrencies ={
+<% @character.awards.approved.joins(:currency).select('currencies.id, currencies.short_name as name, sum(awards.amount) as sum').group('currencies.id,currencies.name').each do |award| %>
+
+"<%= award['short_name'].to_s %>":"<%= award['sum'].to_s %>",
+<% end %>
+
+
+  }
+  var groups={
+<%  @game.tags.each do |tag|%>
+<% if tag.skills.count>0 then %>
+  <%= group.id %>:[
+  <% group.children.each do |child| %>
+    <%= child.id %>,
+  <% end %>
+    ],
+    <% end %>
+<% end %>}
+
+
+
+  var mySkills = {
+<%   @character.character_skills.each do |skill| %>
+  <%= skill.skill_id %>:<%= skill.rank %>,
+<% end %>
+  }
+  var allSkills = {
+<%  Skill.all.each do |skill| %>
+  <%= skill.id %> : {
+      "name" : "<%= skill.name %>",
+      "min_rank"       : <%= @character.get_min_rank(skill.id) %> ,
+      "max_rank"       : <%= skill.max_rank %>,
+      "is_group"       : <%= skill.is_group?  %>,
+  <% if(!skill.long_desc.nil?) %>
+        "long_desc"      : "<%= escape_javascript(skill.long_desc) %>",
+  <% end %>
+  <% if(!skill.parent_id.nil?) %>
+        "parent"       : <%= skill.parent_id %>,
+  <% end %>
+      "cost"       : "<%= skill.cost %> ",
+  <% if(skill.prereqs.length==0) then skill.prereqs="true"end %>
+  <% if(skill.parent.nil? || skill.parent.parent.nil?) %>
+        "prereq"       : "<%= skill.prereqs %>"
+  <% else %>
+        "prereq"       : "(<%= skill.prereqs %>)&&skill_rank(<%= skill.parent.id %>)>0"
+  <% end %>
+    },
+<%end%>
+}
+
+jQuery(function() {
+
+<%  SkillType.all.each do |type| %>
+    jQuery( "#type_groups_tabs_<%=type.id%>" ).tabs({selected:0});
+<% end %>
+  jQuery( "#tabs" ).tabs({selected:0});
+  jQuery("button").button();
+  currencyPack = jQuery.extend(true, {}, myCurrencies);
+  skillPack = jQuery.extend(true, {}, mySkills);
+  is_valid_character();
+  updateUI();
+
+
+
+});
+
+
+</script>
+<div class="character-edit-page">
+
+  <div>
+    <% form_for @character do |c| %>
+      <p>Editing character #<%= @character.id %> <%= @character.name %> (<%= @character.player.name %>).
+      <%= link_to "View / Print", character_url(@character) %></p>
+      <p style="display:none"><%= submit_tag("Save All Changes"
+        ) -%>
+        <span id="save-reminder"></span></p>
+      <p>Name: <%= text_field_tag :name, @character.name %></p>
+
+
+
+    <% end %>
+    <button onclick="saveChanges()">Save All Changes</button>
+    <button onclick="resetToPin()">Reset Character to Latest Pin</button>
+  </div>
+  <span id="save_message"></span>
+
+  
+
+
+
+    <div style="margin: 20px;height:50px;">
+      <ul style="display: inline;list-style-type: none;padding-right: 20px;">
+        <%  AwardType.all.each do |at| %>
+          <li title="<%= at.name%> " style="float: left;padding-right:5px;"  id="currency_totals_box_<%= at.short_name %>">
+            <div class="ui-state-default ui-corner-all ui-helper-clearfix" style="padding:4px;text-align:center">
+              <div style="width:100%;border-bottom:solid thin;font-size:x-large">
+                <span id="currency_totals_<%= at.short_name %>"></span>
+              </div>
+              <div style="width:100%;"><%= at.short_name %></div>
+            </div>
+
+          </li><% end %>
+      </ul>
+    </div>
+    <br/>
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+</div>

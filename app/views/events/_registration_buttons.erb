@@ -1,5 +1,9 @@
 <div class="game-<%= event.id %>-registration-buttons">
-<% if(event.is_member_registered?(@member)) %>
+<% if(event.is_member_registered?(@current_member)) %>
+<div>You are registered as <%= event.get_registration(@current_member).cp_game_id.nil? ? "PC" : "NPC" %></div>
+<% if(event.get_registration(@current_member).cp_game_id.nil? && event.get_registration(@current_member).waitlist_spot >= 0) %>
+You are currently on the waitlist. There are <%= event.get_registration(@current_member).waitlist_spot %> players infront of you on the list.
+<% end %>
 <a href="#" onclick='delete_reg(<%= event.id %>,<%= event.registrations.where(:member_id => @current_member.id).first.id %>);return false;'  class='btn btn-mini btn-danger'>Destroy Reg</a>
 <% else %>
   <div class="btn-group">
@@ -8,17 +12,17 @@
       <span class="caret"></span>
     </button>
     <ul class="dropdown-menu">
+      <% @current_member.characters.each do |char| %>
       <li>
-	<a  href="#" onclick="register_member(<%= event.id %>,<%= @current_member.id %>);return false;">Register as a PC</a>
+	<a  href="#" onclick="register_member(<%= event.id %>,<%= @current_member.id %>,<%= char.id %>,null);return false;">Register as a PC (<%= char.name %>)</a>
       </li>
-      <li>
-	<a href="#"><%= @current_member.name %></a></li>
-      <li>
-	<a href="#">Something else here</a></li>
+      <% end %>
       <li class="divider"></li>
+      <% Game.all.each do |game| %>
       <li>
-	<a href="#">Separated link</a>
+	<a  href="#" onclick="register_member(<%= event.id %>,<%= @current_member.id %>,null,<%= game.id %>);return false;">Register as NPC and send CP to <%= game.name %></a>
       </li>
+      <% end %>
     </ul>
   </div>
 <% end %>
@@ -26,19 +30,21 @@
 
   
 <%= hidden_field_tag(:event_id,event.id) %>
-<%= hidden_field_tag(:member_id,@member.id) %>
+<%= hidden_field_tag(:member_id,@current_member.id) %>
 <%= hidden_field_tag(:character_id,nil) %>
 <%= hidden_field_tag(:is_prereged,true) %>
 <%= hidden_field_tag(:cp_game_id,nil) %>
 
 <script>
-function register_member(event_id,member_id){
+function register_member(event_id,member_id,character_id,cp_game_id){
   $.ajax({
       url: "<%= game_registrations_path(@game) %>.json",
       type: "POST",
       data: {registration: {
 	      event_id: event_id,
-	      member_id: member_id, 
+	      member_id: member_id,
+	      character_id: character_id,
+	      cp_game_id: cp_game_id,
 	      is_prereged: true}},
   }).done(refresh_buttons(event_id));
 }

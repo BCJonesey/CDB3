@@ -6,12 +6,14 @@ class Registration < ActiveRecord::Base
   validates_uniqueness_of :event_id,:scope => :member_id
   
   
-  scope :pcs, where(:cp_to_game_id =>nil)
-  scope :npcs, where("cp_to_game_id IS NOT NULL")
+  scope :pcs, where(:cp_game_id =>nil)
+  scope :npcs, where("cp_game_id IS NOT NULL")
   scope :prereged, where(:prereged=>true)
   scope :present, where(:present=>true)
   
-  
+  def waitlist_spot
+    event.registrations.pcs.where("created_at < ?", created_at).count - event.player_cap
+  end
   
 
 end

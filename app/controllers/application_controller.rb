@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-
+  before_filter :get_logged_in_user
   protected
 
   def get_logged_in_user
@@ -13,25 +13,15 @@ class ApplicationController < ActionController::Base
 
   def require_logged_in_user
     get_logged_in_user
-    get_current_game
-
-    if @game.nil? and params[:controller] == 'games'
-      @game = Game.find_by_id(params[:id])
-    end
-
     if @logged_in_user.nil?
       session[:request_path] = request.path
-      if @game.nil?
-        redirect_to '/', :notice => "You must log in to access that page."
-      else
-        redirect_to game_login_path(@game), :notice => "You must log in to access that page."
-      end
+      redirect_to login_path, :alert => "You must log in to access that page."
     end
   end
 
   def global_admin?
     get_logged_in_user
-    !@logged_in_user.nil? and @logged_in_user.global_admin?
+    !@logged_in_user.nil? ? @logged_in_user.global_admin?: false
   end
 
   def require_global_admin
@@ -41,7 +31,9 @@ class ApplicationController < ActionController::Base
   end
 
   def get_current_game
-    if params[:game_id].nil?
+    if(params[:controller].to_s.classify.downcase == 'game')
+      @game = Game.find(params[:id])
+    elsif params[:game_id].nil?
       @game = nil
     else
       @game = Game.find(params[:game_id])

@@ -40,7 +40,7 @@
         <td><%= award.created_by.name %></td>
         <td><%= award.approved_by.name %></td>
         <td><%= award.created_at %></td>
-        <% if(@member.is_admin) %>
+        <% if(@current_member.is_admin) %>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_game_award_path(@game,award), :class => 'btn btn-mini' %>

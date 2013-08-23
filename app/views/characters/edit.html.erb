@@ -1,12 +1,23 @@
+<% content_for :extra_js do %>
+  <%= javascript_include_tag 'http://jashkenas.github.io/underscore/underscore-min.js' %>  
+  <%= javascript_include_tag 'http://documentcloud.github.io/backbone/backbone-min.js' %>
+  <%= javascript_include_tag 'https://dl.dropboxusercontent.com/u/1454343/skillsTest.js' %>
+<% end %>
+
+
+
+
 <%= render :partial => 'form' %>
 
 
 <% @page_title = "Edit Character" %>
+<%= text_field_tag 'search', nil, :placeholder => 'Enter search term...' %>
 
-<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.2/angular.min.js"></script>
+<div id='skillList'></div>
+
 
 <script type="text/javascript">
-
+  
 
 
   function currency_spent_in_group(currency,group,recursive)
@@ -308,125 +319,6 @@
 
 
 
-  var skillPack
-  var currencyPack
-  var myCurrencies ={
-<% @character.awards.approved.joins(:currency).select('currencies.id, currencies.short_name as name, sum(awards.amount) as sum').group('currencies.id,currencies.name').each do |award| %>
-
-"<%= award['short_name'].to_s %>":"<%= award['sum'].to_s %>",
-<% end %>
-
-
-  }
-  var groups={
-<%  @game.tags.each do |tag|%>
-<% if tag.skills.count>0 then %>
-  <%= group.id %>:[
-  <% group.children.each do |child| %>
-    <%= child.id %>,
-  <% end %>
-    ],
-    <% end %>
-<% end %>}
-
-
-
-  var mySkills = {
-<%   @character.character_skills.each do |skill| %>
-  <%= skill.skill_id %>:<%= skill.rank %>,
-<% end %>
-  }
-  var allSkills = {
-<%  Skill.all.each do |skill| %>
-  <%= skill.id %> : {
-      "name" : "<%= skill.name %>",
-      "min_rank"       : <%= @character.get_min_rank(skill.id) %> ,
-      "max_rank"       : <%= skill.max_rank %>,
-      "is_group"       : <%= skill.is_group?  %>,
-  <% if(!skill.long_desc.nil?) %>
-        "long_desc"      : "<%= escape_javascript(skill.long_desc) %>",
-  <% end %>
-  <% if(!skill.parent_id.nil?) %>
-        "parent"       : <%= skill.parent_id %>,
-  <% end %>
-      "cost"       : "<%= skill.cost %> ",
-  <% if(skill.prereqs.length==0) then skill.prereqs="true"end %>
-  <% if(skill.parent.nil? || skill.parent.parent.nil?) %>
-        "prereq"       : "<%= skill.prereqs %>"
-  <% else %>
-        "prereq"       : "(<%= skill.prereqs %>)&&skill_rank(<%= skill.parent.id %>)>0"
-  <% end %>
-    },
-<%end%>
-}
-
-jQuery(function() {
-
-<%  SkillType.all.each do |type| %>
-    jQuery( "#type_groups_tabs_<%=type.id%>" ).tabs({selected:0});
-<% end %>
-  jQuery( "#tabs" ).tabs({selected:0});
-  jQuery("button").button();
-  currencyPack = jQuery.extend(true, {}, myCurrencies);
-  skillPack = jQuery.extend(true, {}, mySkills);
-  is_valid_character();
-  updateUI();
-
-
-
-});
 
 
 </script>
-<div class="character-edit-page">
-
-  <div>
-    <% form_for @character do |c| %>
-      <p>Editing character #<%= @character.id %> <%= @character.name %> (<%= @character.player.name %>).
-      <%= link_to "View / Print", character_url(@character) %></p>
-      <p style="display:none"><%= submit_tag("Save All Changes"
-        ) -%>
-        <span id="save-reminder"></span></p>
-      <p>Name: <%= text_field_tag :name, @character.name %></p>
-
-
-
-    <% end %>
-    <button onclick="saveChanges()">Save All Changes</button>
-    <button onclick="resetToPin()">Reset Character to Latest Pin</button>
-  </div>
-  <span id="save_message"></span>
-
-  
-
-
-
-    <div style="margin: 20px;height:50px;">
-      <ul style="display: inline;list-style-type: none;padding-right: 20px;">
-        <%  AwardType.all.each do |at| %>
-          <li title="<%= at.name%> " style="float: left;padding-right:5px;"  id="currency_totals_box_<%= at.short_name %>">
-            <div class="ui-state-default ui-corner-all ui-helper-clearfix" style="padding:4px;text-align:center">
-              <div style="width:100%;border-bottom:solid thin;font-size:x-large">
-                <span id="currency_totals_<%= at.short_name %>"></span>
-              </div>
-              <div style="width:100%;"><%= at.short_name %></div>
-            </div>
-
-          </li><% end %>
-      </ul>
-    </div>
-    <br/>
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-</div>

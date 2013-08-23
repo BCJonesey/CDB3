@@ -1,6 +1,4 @@
 Cdb3::Application.routes.draw do
-  
-
   get "main/index"
   root :to => 'main#index'
 
@@ -12,7 +10,9 @@ Cdb3::Application.routes.draw do
   resources :games do
     match 'login'
     resources :members
-    resources :characters
+    resources :characters do
+      get 'character_version',:on => :member
+    end
     resources :skills do
       put 'add_tag', :on => :member
       put 'remove_tag', :on => :member
@@ -20,6 +20,7 @@ Cdb3::Application.routes.draw do
     resources :events do
       get 'registration_buttons',:on => :member
     end
+    resources :character_skills
     resources :currencies
     resources :registrations
     resources :awards do

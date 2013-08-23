@@ -33,7 +33,7 @@ class CharactersController < ApplicationController
     
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @character }
+      format.json { render json: @character.to_json(:include => {:character_version => {:include=>:character_skills}} )}
     end
   end
 
@@ -111,7 +111,12 @@ class CharactersController < ApplicationController
     end
   end
   
+  
+  def character_version
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @character.get_or_create_version.to_json(:include=>:character_skills)  }
+    end
+  end
 
-
-  private
 end

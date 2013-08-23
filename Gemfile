@@ -19,7 +19,6 @@ end
 gem "twitter-bootstrap-rails"
 gem 'less-rails'
 gem 'jquery-rails'
-
 gem 'friendly_id'
 
 # To use ActiveModel has_secure_password

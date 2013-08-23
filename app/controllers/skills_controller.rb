@@ -9,7 +9,7 @@ class SkillsController < ApplicationController
     @skills = @game.skills
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @skills }
+      format.json { render json: @skills.to_json(:include=>:tags)  }
     end
   end
 
@@ -19,7 +19,7 @@ class SkillsController < ApplicationController
     @skillTag = SkillTag.new({:skill_id => @skill.id})
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @skill }
+      format.json { render json: @skill}
     end
   end
 

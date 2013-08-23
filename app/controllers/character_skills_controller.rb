@@ -8,7 +8,7 @@ class CharacterSkillsController < ApplicationController
     @character_skill = CharacterSkill.new(params[:character_skill])
     respond_to do |format|
       if @character_skill.save
-        format.json { render json: @character_skill, status: :created, location: @character_skill }
+        format.json { render json: @character_skill, status: :created, location: [@game,@character_skill] }
       else
         format.json { render json: @character_skill.errors, status: :unprocessable_entity }
       end

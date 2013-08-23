@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130822175731) do
+ActiveRecord::Schema.define(:version => 20130823165053) do
 
   create_table "awards", :force => true do |t|
     t.integer  "character_id"
@@ -119,6 +119,8 @@ ActiveRecord::Schema.define(:version => 20130822175731) do
     t.integer  "max_rank",    :default => 1
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "cost"
+    t.text     "rule"
   end
 
   create_table "tags", :force => true do |t|
@@ -131,9 +133,10 @@ ActiveRecord::Schema.define(:version => 20130822175731) do
   create_table "users", :force => true do |t|
     t.string   "name"
     t.string   "email"
-    t.boolean  "global_admin", :default => false
+    t.boolean  "global_admin",    :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "password_digest"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

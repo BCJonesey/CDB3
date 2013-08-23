@@ -17,7 +17,21 @@
       </div>
     </div>
     
-    <% if !@logged_in_user.nil? ? @logged_in_user.global_admin?: false %>
+    <div class="control-group">
+      <%= f.label :password , :class => 'control-label' %>
+      <div class="controls">
+        <%= f.password_field :password , :class => 'text_field' %>
+      </div>
+    </div>
+    
+    <div class="control-group">
+      <%= f.label :password_confirmation, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.password_field :password_confirmation, :class => 'text_field' %>
+      </div>
+    </div>
+    
+    <% if @logged_in_user.nil? ? false : @logged_in_user.global_admin? %>
     <div class="control-group">
       <%= f.label :global_admin, :class => 'control-label' %>
       <div class="controls">

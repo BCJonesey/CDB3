@@ -18,18 +18,16 @@ class MainController < ApplicationController
   end
 
   def login
-    @user = User.find_by_email(params[:email])
-    
-    if @user.nil?
+    user = User.find_by_email(params[:email])
+    if user && user.authenticate(params[:password])
       session[:user_id] = nil
       if request.post?
-        flash[:alert] = "No such user"
+        session[:user_id] = user.id
+	session[:request_path] ||= '/games'
+	redirect_to session[:request_path], :notice => "Logged in as #{user.name}"
       end
-      return
     else
-      session[:user_id] = @user.id
-      session[:request_path] ||= '/games'
-      redirect_to session[:request_path], :notice => "Logged in as #{@user.name}"
+      flash[:alert] = "Invalid email or password"
     end
   end
 

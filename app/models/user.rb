@@ -1,14 +1,16 @@
 class User < ActiveRecord::Base
   has_many :members
   has_many :games, :through => :members
-
+  has_secure_password
   validates :name, :presence => true
   validates :email, :presence => true, :uniqueness => true , 
-    :format => {:with => /^[^A-Z]+$/}
+    :format => {:with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, :message => "Hmmmmm.... that doesn't look like an email address"}
   
   before_validation :lower_email
   before_destroy :verify_no_members
-
+  validates_presence_of :password, :on => :create
+  
+  
   def game_admin?(game)
     if global_admin?
       true

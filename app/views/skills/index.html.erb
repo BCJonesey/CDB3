@@ -2,6 +2,7 @@
 <table class="table table-striped">
   <thead>
     <tr>
+      <th>ID</th>
       <th>Name</th>
       <th>Created at</th>
       <th>Actions</th>
@@ -10,6 +11,7 @@
   <tbody>
     <% @skills.each do |skill| %>
       <tr>
+	<td><%= skill.id %></td>
         <td><%= link_to skill.name, game_skill_path(@game,skill) %></td>
         <td><%= skill.created_at %></td>
         <td>

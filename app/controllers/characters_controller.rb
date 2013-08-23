@@ -30,7 +30,7 @@ class CharactersController < ApplicationController
   # GET /characters/1
   # GET /characters/1.json
   def show
-    
+    @character.get_or_create_version
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @character.to_json(:include => {:character_version => {:include=>:character_skills}} )}

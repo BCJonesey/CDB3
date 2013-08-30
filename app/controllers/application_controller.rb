@@ -81,7 +81,14 @@ class ApplicationController < ActionController::Base
     get_current_game
 
     unless game_admin?(@game)
-      redirect_to '/', :alert => "Access denied: requires game admin"
+      redirect_to @game, :alert => "Access denied: requires game admin"
+    end
+  end
+  
+  def require_member
+    get_member
+    unless !@current_member.nil?
+      redirect_to @game, :alert => "You must be a member of this game to visit that page"
     end
   end
 

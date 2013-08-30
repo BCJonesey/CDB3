@@ -45,7 +45,6 @@
         <td><%= skill_tag.tag.name %></td>
         <td><%= skill_tag.gives %></td>
         <td>
-          <%= link_to 'Edit', edit_game_skill_path(@game,@skill), :class => 'btn btn-mini' %>
           <%= link_to 'Destroy', game_skill_path(@game,@skill)+"/remove_tag?skill_tag_id="+skill_tag.id.to_s , :method => :put, :confirm => 'Are you sure?', :class => 'btn btn-mini btn-danger' %>
         </td>
       </tr>

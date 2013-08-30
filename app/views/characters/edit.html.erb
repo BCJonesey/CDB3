@@ -1,8 +1,8 @@
 <% content_for :extra_js do %>
   <%= javascript_include_tag 'http://jashkenas.github.io/underscore/underscore-min.js' %>  
   <%= javascript_include_tag 'http://documentcloud.github.io/backbone/backbone-min.js' %>
-  <%= javascript_include_tag 'https://dl.dropboxusercontent.com/u/1454343/skillsTest.js' %>
-  <%= javascript_include_tag 'https://dl.dropboxusercontent.com/u/1454343/skillsTestEvals.js' %>
+  <%= javascript_include_tag 'characterDisplay.js' %>
+  <%= javascript_include_tag 'characterRules.js' %>
 <% end %>
 
 
@@ -13,7 +13,7 @@
 
 <% @page_title = "Edit Character" %>
 <%= text_field_tag 'search', nil, :placeholder => 'Enter search term...' %>
-
+<div id="searchedTags"></div>
 <div id='skillList'></div>
 
 

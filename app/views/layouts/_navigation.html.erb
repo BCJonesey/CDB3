@@ -3,33 +3,37 @@
   <span class="icon-bar"></span>
   <span class="icon-bar"></span>
 </a>
-<%= link_to "CDB3", root_path, :class=>"brand" %>
-<% if @logged_in_user.nil? %>
-<%= link_to "Log In", '/main/login', :class=>'btn pull-right icon-user' %>
-<% else %>
-  <div class="btn-group pull-right">
-    <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-      <i class="icon-user"></i> <%= @logged_in_user.name %>
-      <span class="caret"></span>
-    </a>
-    <ul class="dropdown-menu">
-      <li><%= link_to "Log Out", '/main/logout' %></li>
-    </ul>
-  </div>
-<% end %>
+<%= link_to "LarpTool", root_path, :class=>"brand" %>
 
 
-<% if !@current_member.nil? %>
+
 <div class="nav-collapse">
   <ul class="nav">
-    <li><%= link_to @game.name, game_path(@game) %></li>
+    <% if !@current_member.nil? %><li><%= link_to @game.name, game_path(@game) %></li>
     <li><%= link_to "Characters", game_characters_path(@game) %></li>
     <li><%= link_to "Events", game_events_path(@game) %></li>
     <li><%= link_to "Awards", game_awards_path(@game) %></li>
     <% if(@current_member.is_admin) %>
-    <li><%= link_to "Currencies", game_currencies_path(@game) %></li>
-    <li><%= link_to "Members", game_members_path(@game) %></li>
-    <% end %>    
+    <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin<b class="caret"></b></a>
+        <ul class="dropdown-menu">
+              <li><%= link_to "Currencies", game_currencies_path(@game) %></li>
+	      <li><%= link_to "Members", game_members_path(@game) %></li>
+	      <li><%= link_to "Skills", game_skills_path(@game) %></li>
+	      <li><%= link_to "Tags", game_tags_path(@game) %></li>
+        </ul>
+      </li>
+    <% end %>
+    <% end %>  
+    <% if @logged_in_user.nil? %>
+      <li><%= link_to "Log In", '/main/login' %></li>
+    <% else %>
+      <li class="dropdown">
+	<a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= @logged_in_user.name %><b class="caret"></b></a>
+	<ul class="dropdown-menu">
+	  <li><%= link_to "Log Out", '/main/logout' %></li>
+	</ul>
+      </li>
+    <% end %>
   </ul>
 </div><!--/.nav-collapse -->
-<% end %>

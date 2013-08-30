@@ -1,6 +1,8 @@
 class SkillsController < ApplicationController
   before_filter :require_logged_in_user
   before_filter :require_game
+  before_filter :get_member
+  before_filter :require_game_admin, :except => [:index,:show]
   before_filter :get_resource_and_match_game, :except => [:index, :new, :create]
   
   # GET /skills
@@ -8,7 +10,7 @@ class SkillsController < ApplicationController
   def index
     @skills = @game.skills
     respond_to do |format|
-      format.html # index.html.erb
+      format.html { require_game_admin }
       format.json { render json: @skills.to_json(:include=>:tags)  }
     end
   end

@@ -19,14 +19,14 @@
   <div class="control-group">
     <%= f.label :comment, :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_area :comment, :class => 'text_area' %>
+      <%= f.text_area :comment, :class => 'text_area',:rows=>'4' %>
     </div>
   </div>
 
   <%= f.hidden_field(:member_id) %>
   
   <div class="form-actions">
-    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= f.submit "Request Award", :class => 'btn btn-primary' %>
   </div>
 <% end %>
 

@@ -8,3 +8,25 @@
 /*
  *= require bootstrap_and_overrides
  */
+
+
+.skill-info {
+    height: 34px;
+    font-size: 20px;
+    padding-top: 5px
+;
+}
+
+.skill-controls span {
+    margin-left: 0px;
+}
+
+.skill-controls input[type='number'] {
+    width: 40px;
+    height: 20px;
+}
+
+.skill-tags .label {
+    margin-right: 5px;
+    padding: 4px 10px;
+}

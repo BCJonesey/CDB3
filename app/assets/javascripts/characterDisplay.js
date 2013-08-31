@@ -106,7 +106,7 @@ var CharSkillView  = Backbone.View.extend({
 		this.model.on('destroy', this.remove, this);
 	},
 	render: function(){
-		var html = "<input type='number' max='40' value='"+this.model.get("rank")+"'\>";
+		var html = "<input type='number' max='40' value='"+this.model.get("rank")+"'/>";
 		return this.$el.html(html);
 	},
 	remove: function(){

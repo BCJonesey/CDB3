@@ -11,15 +11,6 @@
 
 
 
-
-<% @character.awards.approved.joins(:currency).select('currencies.id, currencies.short_name as name, sum(awards.amount) as sum').group('currencies.id,currencies.name').each do |award| %>
-<div class="well well-small pull-left">
-<%= award['sum'].to_s %><%= award['name'].to_s %>
-</div>
-<% end %>
-
-
-
 <table class="table table-striped">
   <thead>
     <tr>

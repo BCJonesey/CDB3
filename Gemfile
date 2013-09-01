@@ -16,7 +16,10 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-gem "twitter-bootstrap-rails"
+gem 'therubyracer'  # If using Ruby
+gem 'therubyrhino'  # If using JRuby
+gem 'jquery-rails'  # If using Bootstrap's JS plugins.
+gem 'less-rails-bootstrap'
 gem 'less-rails'
 gem 'jquery-rails'
 gem 'friendly_id'

@@ -67,7 +67,7 @@ class CharactersController < ApplicationController
     if params[:user_id]
       @user = User.find(params[:user_id])
     else
-      @user = @logged_in_user
+      @user = current_user
     end
 
     @member = Member.find_or_create_by_user_id_and_game_id(@user.id, @game.id)

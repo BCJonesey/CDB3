@@ -11,7 +11,7 @@ class Game < ActiveRecord::Base
   validates :slug, :presence => true, :uniqueness => true
   
   extend FriendlyId
-  friendly_id :slug
+  friendly_id :slug, use: [:finders]
 
   def logo_image
     logo = self.name + '_logo.png'

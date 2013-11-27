@@ -10,7 +10,7 @@ class GamesController < ApplicationController
   end
 
   def show
-    if @logged_in_user.game_admin?(@game)
+    if current_user.game_admin?(@game)
       @members = @game.members
     end
   end

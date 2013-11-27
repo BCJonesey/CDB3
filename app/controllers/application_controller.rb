@@ -1,19 +1,18 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  before_filter :get_logged_in_user
   protected
 
   def get_logged_in_user
     if session[:user_id].nil?
-      @logged_in_user = nil
+      current_user = nil
     else
-      @logged_in_user = User.find(session[:user_id])
+      current_user = User.find(session[:user_id])
     end
   end
 
   def require_logged_in_user
     get_logged_in_user
-    if @logged_in_user.nil?
+    if current_user.nil?
       session[:request_path] = request.path
       redirect_to login_path, :alert => "You must log in to access that page."
     end
@@ -21,7 +20,7 @@ class ApplicationController < ActionController::Base
 
   def global_admin?
     get_logged_in_user
-    !@logged_in_user.nil? ? @logged_in_user.global_admin?: false
+    !current_user.nil? ? current_user.global_admin?: false
   end
 
   def require_global_admin
@@ -59,14 +58,14 @@ class ApplicationController < ActionController::Base
   def game_admin?(game)
     get_logged_in_user
 
-    if game.nil? or @logged_in_user.nil? 
+    if game.nil? or current_user.nil? 
       return false
     end
 
     if global_admin?
       return true
     else
-      member = Member.find_by_user_id_and_game_id(@logged_in_user.id, @game.id)
+      member = Member.find_by_user_id_and_game_id(current_user.id, @game.id)
 
       if member.nil? || !member.game_admin?
         return false
@@ -96,13 +95,13 @@ class ApplicationController < ActionController::Base
     get_logged_in_user
     get_current_game
 
-    @current_member = Member.find_or_create_by_user_id_and_game_id(@logged_in_user.id, @game.id)
+    @current_member = Member.find_or_create_by_user_id_and_game_id(current_user.id, @game.id)
   end
   
   def get_member
     get_logged_in_user
     get_current_game
 
-    @current_member = Member.find_by_user_id_and_game_id(@logged_in_user.id, @game.id)
+    @current_member = Member.find_by_user_id_and_game_id(current_user.id, @game.id)
   end
 end

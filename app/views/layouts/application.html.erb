@@ -21,23 +21,17 @@
     <link href="images/apple-touch-icon-114x114.png" rel="apple-touch-icon" sizes="114x114">
   </head>
   <body>
+  <%= render 'layouts/navigation' %>
 
-    <div class="navbar navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container-fluid">
-          <%= render 'layouts/navigation' %>
-        </div>
-      </div>
-    </div>
 
     <div class="container">
       <div class="content">
         <div class="row">
-           <div class="span9">
+           <div class="col-md-9">
 	      <%= render 'layouts/messages' %>
               <%= yield %>
             </div>
-            <!-- <div class="span3">
+            <!-- <div class="col-md-3">
               <div class="well sidebar-nav">
                 <h3>Upcomming Events</h3>
                 <ul class="nav nav-list">

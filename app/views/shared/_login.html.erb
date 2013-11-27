@@ -1,11 +1,11 @@
 <div class="row">
 
-<div class="span2">&nbsp</div>
+<div class="col-md-2">&nbsp</div>
 
-<div class="span8">
+<div class="col-md-8">
 <h2>Please log in</h2>
 
-<%= form_tag login_path do %>
+<%= form_tag session_path do %>
 <table>
 <tr>
   <td><%= label_tag :email %></td> 
@@ -26,6 +26,6 @@
 <p><%= link_to "Register", new_user_path %></p>
 </div>
 
-<div class="span2">&nbsp;</div>
+<div class="col-md-2">&nbsp;</div>
 
 </div>

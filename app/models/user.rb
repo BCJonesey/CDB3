@@ -1,14 +1,14 @@
 class User < ActiveRecord::Base
+  authenticates_with_sorcery!
   has_many :members
   has_many :games, :through => :members
-  has_secure_password
+
   validates :name, :presence => true
   validates :email, :presence => true, :uniqueness => true , 
     :format => {:with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, :message => "Hmmmmm.... that doesn't look like an email address"}
   
   before_validation :lower_email
   before_destroy :verify_no_members
-  validates_presence_of :password, :on => :create
   
   
   def game_admin?(game)
@@ -35,4 +35,5 @@ class User < ActiveRecord::Base
       raise "Cannot delete a user with members"
     end
   end
+
 end

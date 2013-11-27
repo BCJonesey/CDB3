@@ -18,16 +18,6 @@ class MainController < ApplicationController
   end
 
   def login
-    if request.post?
-      user = User.find_by_email(params[:email])
-      if user && user.authenticate(params[:password])
-          session[:user_id] = user.id
-          session[:request_path] ||= '/games'
-          redirect_to session[:request_path], :notice => "Logged in as #{user.name}"
-      else
-        flash[:alert] = "Invalid email or password"
-      end
-    end
   end
 
   def logout

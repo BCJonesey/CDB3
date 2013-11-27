@@ -28,7 +28,7 @@ class MembersController < ApplicationController
   # GET /members/new
   # GET /members/new.json
   def new
-    @member = Member.find_by_game_id_and_user_id(@game.id, @logged_in_user.id)
+    @member = Member.find_by_game_id_and_user_id(@game.id, current_user.id)
 
     if @member and !@member.game_admin?
       redirect_to game_path(@game), :notice => "You are already a member."
@@ -36,7 +36,7 @@ class MembersController < ApplicationController
     end
 
     if @member.nil?
-      @member = Member.new(:user_id => @logged_in_user.id, :game_id => @game.id)
+      @member = Member.new(:user_id => current_user.id, :game_id => @game.id)
     end
     
     respond_to do |format|
@@ -56,8 +56,8 @@ class MembersController < ApplicationController
     @member = Member.new(params[:member])
     @member.game = @game
     
-    unless @logged_in_user.game_admin?(@game)
-      @member.user = @logged_in_user
+    unless current_user.game_admin?(@game)
+      @member.user = current_user
     end
     
     respond_to do |format|

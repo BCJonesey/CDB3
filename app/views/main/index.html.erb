@@ -3,7 +3,7 @@
 
 <div class="row">
 
-<div class="span6">
+<div class="col-md-6">
 
 <h2>Pick a Game</h2>
 
@@ -15,7 +15,7 @@
 
 </div>
 
-<div class="span6">
+<div class="col-md-6">
 
 <h2>Upcoming Events</h2>
 
@@ -32,11 +32,11 @@
 
 <div class="spacer" style="height: 2em">&nbsp;</div>
 
-<% if @logged_in_user and @logged_in_user.global_admin? %>
+<% if current_user and current_user.global_admin? %>
 
 <div class="row">
 
-<div class="span6">
+<div class="col-md-6">
 
 <h2>Global Admin</h2>
 
@@ -45,7 +45,7 @@
 
 </div>
 
-<div class="span6">
+<div class="col-md-6">
 &nbsp;
 </div>
 

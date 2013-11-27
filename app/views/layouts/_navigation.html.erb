@@ -1,39 +1,59 @@
-<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-  <span class="icon-bar"></span>
-  <span class="icon-bar"></span>
-  <span class="icon-bar"></span>
-</a>
-<%= link_to "LarpTool", root_path, :class=>"brand" %>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="navbar-header">
+    <%= link_to "LarpTool", root_path, :class=>"navbar-brand" %>
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+  </div>
+  <div class="navbar-header navbar-right">
+    <% if !logged_in? %>
+    <p class="navbar-text">
+    <%= link_to "Log In", '/main/login',  :class=>"navbar-link" %>
+    </p>
+    <% else %>
+    <div class="dropdown">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= current_user.name %><b class="caret"></b></a>
+      <ul class="dropdown-menu">
+        <li><%= link_to "Log Out", '/main/logout' %></li>
+      </ul>
+    </dic>
+    <% end %>
+  </div>
+  <div class="navbar-collapse collapse">
+    <ul class="nav navbar-nav">
+      <!-- figure out class="active" -->
 
-
-
-<div class="nav-collapse">
-  <ul class="nav">
-    <% if !@current_member.nil? %><li><%= link_to @game.name, game_path(@game) %></li>
-    <li><%= link_to "Characters", game_characters_path(@game) %></li>
-    <li><%= link_to "Events", game_events_path(@game) %></li>
-    <li><%= link_to "Awards", game_awards_path(@game) %></li>
-    <% if(@current_member.is_admin) %>
-    <li class="dropdown">
+      <% if !@current_member.nil? %><li><%= link_to @game.name, game_path(@game) %></li>
+      <li><%= link_to "Characters", game_characters_path(@game) %></li>
+      <li><%= link_to "Events", game_events_path(@game) %></li>
+      <li><%= link_to "Awards", game_awards_path(@game) %></li>
+      <% if(@current_member.is_admin) %>
+      <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin<b class="caret"></b></a>
         <ul class="dropdown-menu">
-              <li><%= link_to "Currencies", game_currencies_path(@game) %></li>
-	      <li><%= link_to "Members", game_members_path(@game) %></li>
-	      <li><%= link_to "Skills", game_skills_path(@game) %></li>
-	      <li><%= link_to "Tags", game_tags_path(@game) %></li>
+          <li><%= link_to "Currencies", game_currencies_path(@game) %></li>
+          <li><%= link_to "Members", game_members_path(@game) %></li>
+          <li><%= link_to "Skills", game_skills_path(@game) %></li>
+          <li><%= link_to "Tags", game_tags_path(@game) %></li>
         </ul>
       </li>
-    <% end %>
-    <% end %>  
-    <% if @logged_in_user.nil? %>
-      <li><%= link_to "Log In", '/main/login' %></li>
-    <% else %>
-      <li class="dropdown">
-	<a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= @logged_in_user.name %><b class="caret"></b></a>
-	<ul class="dropdown-menu">
-	  <li><%= link_to "Log Out", '/main/logout' %></li>
-	</ul>
-      </li>
-    <% end %>
-  </ul>
-</div><!--/.nav-collapse -->
+      <% end %>
+      <% end %>
+    </ul>
+  </div>
+</nav>
+
+
+
+
+
+
+
+
+
+
+
+
+

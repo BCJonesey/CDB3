@@ -45,7 +45,7 @@
         <td><%= skill_tag.tag.name %></td>
         <td><%= skill_tag.gives %></td>
         <td>
-          <%= link_to 'Destroy', game_skill_path(@game,@skill)+"/remove_tag?skill_tag_id="+skill_tag.id.to_s , :method => :put, :confirm => 'Are you sure?', :class => 'btn btn-mini btn-danger' %>
+          <%= link_to 'Destroy', game_skill_path(@game,@skill)+"/remove_tag?skill_tag_id="+skill_tag.id.to_s , :method => :put, :confirm => 'Are you sure?', :class => 'btn btn-default btn-xs btn-danger' %>
         </td>
       </tr>
     <% end %>
@@ -70,7 +70,7 @@
         <%= f.check_box(:gives) %>
       </div>
     </div>
-    <%= f.submit "Add Tag", :class => 'btn btn-primary' %>
+    <%= f.submit "Add Tag", :class => 'btn btn-default btn-primary' %>
   </fieldset>
 <% end %>
 
@@ -78,5 +78,5 @@
 <div class="form-actions">
   <%= link_to 'Back', game_skills_path(@game), :class => 'btn'  %>
   <%= link_to 'Edit', edit_game_skill_path(@game,@skill), :class => 'btn' %>
-  <%= link_to 'Delete', game_skill_path(@game,@skill), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-danger' %>
+  <%= link_to 'Delete', game_skill_path(@game,@skill), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-default btn-danger' %>
 </div>

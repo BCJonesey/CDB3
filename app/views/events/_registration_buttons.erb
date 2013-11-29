@@ -4,11 +4,11 @@
 <% if(event.get_registration(@current_member).cp_game_id.nil? && event.get_registration(@current_member).waitlist_spot >= 0) %>
 You are currently on the waitlist. There are <%= event.get_registration(@current_member).waitlist_spot %> players infront of you on the list.
 <% end %>
-<a href="#" onclick='delete_reg(<%= event.id %>,<%= event.registrations.where(:member_id => @current_member.id).first.id %>);return false;'  class='btn btn-mini btn-danger'>Destroy Reg</a>
+<a href="#" onclick='delete_reg(<%= event.id %>,<%= event.registrations.where(:member_id => @current_member.id).first.id %>);return false;'  class='btn btn-default btn-xs btn-danger'>Destroy Reg</a>
 <% else %>
   <div class="btn-group">
     <button class="btn">Action</button>
-    <button class="btn dropdown-toggle" data-toggle="dropdown">
+    <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
       <span class="caret"></span>
     </button>
     <ul class="dropdown-menu">

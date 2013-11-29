@@ -54,6 +54,4 @@ group :test do
 end
 gem "sorcery"
 gem 'friendly_id', '~> 5.0.0'
-gem 'anjlab-bootstrap-rails', :require => 'bootstrap-rails',
-                              :github => 'anjlab/bootstrap-rails'
         

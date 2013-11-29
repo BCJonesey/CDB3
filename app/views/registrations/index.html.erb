@@ -15,12 +15,12 @@
         <td><%= link_to registration.event_id, game_registration_path(@game,registration) %></td>
         <td><%= registration.created_at %></td>
         <td>
-          <%= link_to 'Edit', edit_game_registration_path(@game,registration), :class => 'btn btn-mini' %>
-          <%= link_to 'Destroy', game_registration_path(@game,registration), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-mini btn-danger' %>
+          <%= link_to 'Edit', edit_game_registration_path(@game,registration), :class => 'btn btn-default btn-xs' %>
+          <%= link_to 'Destroy', game_registration_path(@game,registration), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-default btn-xs btn-danger' %>
         </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<%= link_to 'New', new_game_registration_path(@game), :class => 'btn btn-primary' %>
+<%= link_to 'New', new_game_registration_path(@game), :class => 'btn btn-default btn-primary' %>

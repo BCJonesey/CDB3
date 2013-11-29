@@ -26,7 +26,7 @@
   <%= f.hidden_field(:member_id) %>
   
   <div class="form-actions">
-    <%= f.submit "Request Award", :class => 'btn btn-primary' %>
+    <%= f.submit "Request Award", :class => 'btn btn-default btn-primary' %>
   </div>
 <% end %>
 
@@ -58,7 +58,7 @@
         <td>
           <div class="btn-group">
 	    <button class="btn">Assign to Character</button>
-	    <button class="btn dropdown-toggle" data-toggle="dropdown">
+	    <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
 	      <span class="caret"></span>
 	    </button>
 	    <ul class="dropdown-menu">
@@ -72,12 +72,12 @@
         <% if(@current_member.is_admin) %>
         
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_game_award_path(@game,award), :class => 'btn btn-mini' %>
+                      edit_game_award_path(@game,award), :class => 'btn btn-default btn-xs' %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
                       game_award_path(@game,award),
                       :method => :delete,
                       :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')),
-                      :class => 'btn btn-mini btn-danger' %>
+                      :class => 'btn btn-default btn-xs btn-danger' %>
         
         <% end %>
         </td>
@@ -97,15 +97,15 @@
         <% if(@current_member.is_admin) %>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_game_award_path(@game,award), :class => 'btn btn-mini' %>
+                      edit_game_award_path(@game,award), :class => 'btn btn-default btn-xs' %>
 	  <%= link_to 'Approve',
                       approve_game_award_path(@game,award),
-                      :class => 'btn btn-mini btn-success' %>
+                      :class => 'btn btn-default btn-xs btn-success' %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
                       game_award_path(@game,award),
                       :method => :delete,
                       :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')),
-                      :class => 'btn btn-mini btn-danger' %>
+                      :class => 'btn btn-default btn-xs btn-danger' %>
         </td>
         <% end %>
       </tr>
@@ -129,7 +129,7 @@
 	    <% if(@current_member.is_admin) %>
 	      <div class="btn-group">
 		<button class="btn">Assign to Character</button>
-		<button class="btn dropdown-toggle" data-toggle="dropdown">
+		<button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
 		  <span class="caret"></span>
 		</button>
 		<ul class="dropdown-menu">
@@ -143,12 +143,12 @@
 	    
 	    
 	      <%= link_to t('.edit', :default => t("helpers.links.edit")),
-			  edit_game_award_path(@game,award), :class => 'btn btn-mini' %>
+			  edit_game_award_path(@game,award), :class => 'btn btn-default btn-xs' %>
 	      <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
 			  game_award_path(@game,award),
 			  :method => :delete,
 			  :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')),
-			  :class => 'btn btn-mini btn-danger' %>
+			  :class => 'btn btn-default btn-xs btn-danger' %>
 	    
 	    <% end %>
 	    </td>

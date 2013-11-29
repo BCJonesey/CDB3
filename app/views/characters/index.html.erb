@@ -13,11 +13,11 @@
         <td><%= link_to character.name, game_character_path(@game,character) %></td>
         <td><%= character.created_at %></td>
         <td>
-          <%= link_to 'Edit', edit_game_character_path(@game,character), :class => 'btn btn-mini' %>
+          <%= link_to 'Edit', edit_game_character_path(@game,character), :class => 'btn btn-default btn-xs' %>
         </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<%= link_to 'New', new_game_character_path(@game), :class => 'btn btn-primary' %>
+<%= link_to 'New', new_game_character_path(@game), :class => 'btn btn-default btn-primary' %>

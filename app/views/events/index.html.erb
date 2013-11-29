@@ -20,8 +20,8 @@
         <td>
 	  <%= render :partial => "registration_buttons", :locals => { :event => event } %>
           <% if(@current_member.is_admin) %>
-          <%= link_to 'Edit', edit_game_event_path(@game,event), :class => 'btn btn-mini' %>
-          <%= link_to 'Destroy', game_event_path(@game,event), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-mini btn-danger' %>
+          <%= link_to 'Edit', edit_game_event_path(@game,event), :class => 'btn btn-default btn-xs' %>
+          <%= link_to 'Destroy', game_event_path(@game,event), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-default btn-xs btn-danger' %>
           <% end %>
         </td>
       </tr>
@@ -37,8 +37,8 @@
         <td><%= event.created_at %></td>
         <td>
         <% if(@current_member.is_admin) %>
-          <%= link_to 'Edit', edit_game_event_path(@game,event), :class => 'btn btn-mini' %>
-          <%= link_to 'Destroy', game_event_path(@game,event), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-mini btn-danger' %>
+          <%= link_to 'Edit', edit_game_event_path(@game,event), :class => 'btn btn-default btn-xs' %>
+          <%= link_to 'Destroy', game_event_path(@game,event), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-default btn-xs btn-danger' %>
 	<% end %>
         </td>
       </tr>
@@ -47,5 +47,5 @@
 </table>
 
 <% if(@current_member.is_admin) %>
-<%= link_to 'New', new_game_event_path(@game), :class => 'btn btn-primary' %>
+<%= link_to 'New', new_game_event_path(@game), :class => 'btn btn-default btn-primary' %>
 <% end %>

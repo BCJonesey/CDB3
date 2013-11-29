@@ -15,12 +15,12 @@
         <td><%= link_to game.name, game_path(game) %></td>
         <td><%= game.created_at %></td>
         <td>
-          <%= link_to 'Edit', edit_game_path(game), :class => 'btn btn-mini' %>
-          <%= link_to 'Destroy', game_path(game), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-mini btn-danger' %>
+          <%= link_to 'Edit', edit_game_path(game), :class => 'btn btn-default btn-xs' %>
+          <%= link_to 'Destroy', game_path(game), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-default btn-xs btn-danger' %>
         </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<%= link_to 'New', new_game_path, :class => 'btn btn-primary' %>
+<%= link_to 'New', new_game_path, :class => 'btn btn-default btn-primary' %>

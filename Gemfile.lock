@@ -1,11 +1,3 @@
-GIT
-  remote: git://github.com/anjlab/bootstrap-rails.git
-  revision: 0d3574472f3b84800f0d6ddf2c72b30d3131db1b
-  specs:
-    anjlab-bootstrap-rails (3.0.2.0)
-      railties (>= 3.0)
-      sass (>= 3.2)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -161,7 +153,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  anjlab-bootstrap-rails!
   capybara
   coffee-rails (~> 4.0.0)
   database_cleaner

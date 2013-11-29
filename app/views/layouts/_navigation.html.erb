@@ -1,37 +1,30 @@
-<nav class="navbar navbar-inverse navbar-fixed-top">
+
+
+
+<nav class="navbar navbar-default" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
   <div class="navbar-header">
-    <%= link_to "LarpTool", root_path, :class=>"navbar-brand" %>
-    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
+    <%= link_to "LarpTool", root_path, :class=>"navbar-brand" %>
   </div>
-  <div class="navbar-header navbar-right">
-    <% if !logged_in? %>
-    <p class="navbar-text">
-    <%= link_to "Log In", '/main/login',  :class=>"navbar-link" %>
-    </p>
-    <% else %>
-    <div class="dropdown">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= current_user.name %><b class="caret"></b></a>
-      <ul class="dropdown-menu">
-        <li><%= link_to "Log Out", '/main/logout' %></li>
-      </ul>
-    </dic>
-    <% end %>
-  </div>
-  <div class="navbar-collapse collapse">
-    <ul class="nav navbar-nav">
-      <!-- figure out class="active" -->
 
-      <% if !@current_member.nil? %><li><%= link_to @game.name, game_path(@game) %></li>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+     <!-- figure out  class="active" -->
+      <% if !@current_member.nil? %>
+      <li><%= link_to @game.name, game_path(@game) %></li>
       <li><%= link_to "Characters", game_characters_path(@game) %></li>
       <li><%= link_to "Events", game_events_path(@game) %></li>
       <li><%= link_to "Awards", game_awards_path(@game) %></li>
       <% if(@current_member.is_admin) %>
       <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin<b class="caret"></b></a>
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
         <ul class="dropdown-menu">
           <li><%= link_to "Currencies", game_currencies_path(@game) %></li>
           <li><%= link_to "Members", game_members_path(@game) %></li>
@@ -42,7 +35,27 @@
       <% end %>
       <% end %>
     </ul>
-  </div>
+    <!--  perhaps we will have the login form here?
+    <form class="navbar-form navbar-left" role="search">
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+    -->
+    <ul class="nav navbar-nav navbar-right">
+      <% if !logged_in? %>
+      <li><%= link_to "Log In", '/main/login',  :class=>"navbar-link" %></li>
+      <% else %>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= current_user.name %> <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+          <li><%= link_to "Log Out", '/main/logout' %></li>
+        </ul>
+      </li>
+      <% end %>
+    </ul>
+  </div><!-- /.navbar-collapse -->
 </nav>
 
 

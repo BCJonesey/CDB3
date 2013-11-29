@@ -24,7 +24,7 @@
       <li><%= link_to "Awards", game_awards_path(@game) %></li>
       <% if(@current_member.is_admin) %>
       <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin <b class="caret"></b></a>
         <ul class="dropdown-menu">
           <li><%= link_to "Currencies", game_currencies_path(@game) %></li>
           <li><%= link_to "Members", game_members_path(@game) %></li>

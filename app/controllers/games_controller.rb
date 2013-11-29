@@ -1,5 +1,5 @@
 class GamesController < ApplicationController
-  before_filter :require_logged_in_user
+  before_filter :require_login
   before_filter :require_global_admin, :except => [:show]
   before_filter :get_member, :except=>[:new, :create,:index]
   

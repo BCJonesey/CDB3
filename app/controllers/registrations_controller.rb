@@ -1,5 +1,5 @@
 class RegistrationsController < ApplicationController
-  before_filter :require_logged_in_user
+  before_filter :require_login
   before_filter :require_game
 
   # GET /registrations

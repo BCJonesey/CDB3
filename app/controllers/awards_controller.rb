@@ -1,5 +1,5 @@
 class AwardsController < ApplicationController
-  before_filter :require_logged_in_user
+  before_filter :require_login
   before_filter :require_game
   before_filter :get_member
   before_filter :get_resource_and_match_game, :except => [:index, :new, :create,:request_award]

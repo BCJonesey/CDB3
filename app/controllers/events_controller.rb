@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_filter :require_logged_in_user
+  before_filter :require_login
   before_filter :require_game
   before_filter :get_member
   before_filter :require_game_admin, :except => [:index,:show,:registration_buttons]

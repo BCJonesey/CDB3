@@ -20,5 +20,9 @@ module CDB3
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
     config.action_controller.permit_all_parameters = true
+    console do
+        require "pry"
+        config.console = Pry
+    end
   end
 end

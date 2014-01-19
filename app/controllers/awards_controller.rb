@@ -45,10 +45,12 @@ class AwardsController < ApplicationController
   # POST /awards
   # POST /awards.json
   def create
-    @award = Award.new(params[:award])
+    @award = Award.new
+    @award.created_by_id = @current_member.id
+    set_vars
     respond_to do |format|
       if @award.save
-        format.html { redirect_to [@game,@award], notice: 'Award was successfully created.' }
+        format.html { redirect_to :back, notice: 'Award was successfully created.' }
         format.json { render json: @award, status: :created, location: @award }
       else
         format.html { render action: "new" }
@@ -61,10 +63,10 @@ class AwardsController < ApplicationController
   # PUT /awards/1.json
   def update
     @award = Award.find(params[:id])
-
+    set_vars
     respond_to do |format|
-      if @award.update_attributes(params[:award])
-        format.html { redirect_to [@game,@award], notice: 'Award was successfully updated.' }
+      if @award.save
+        format.html { redirect_to :back, notice: 'Award was successfully updated.' }
         format.json { head :ok }
       else
         format.html { render action: "edit" }
@@ -84,44 +86,16 @@ class AwardsController < ApplicationController
       format.json { head :ok }
     end
   end
-  
-  def approve
-    @award.approved_by = @current_member
-    @award.save
-    respond_to do |format|
-      format.html { redirect_to :back}
-      format.json { head :ok }
-    end
-  end
-  
-  def assign
-    @award.character_id = params[:character_id]
-    respond_to do |format|
-      if @award.save
-        format.html { redirect_to(:back, :notice=> 'Award was successfully assigned.') }
-        format.json { head :ok }
-      else
-        format.html { redirect_to(:back, :alert => 'Could not assign.') }
-        format.json { render json: @award.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-  
-  def request_award
-    @award = Award.new
-    @award.created_by_id = @current_member.id
-    @award.amount = params[:award][:amount]
-    @award.currency_id = params[:award][:currency_id]
-    @award.comment = params[:award][:comment]
-    @award.member_id = params[:award][:member_id]
-    respond_to do |format|
-      if @award.save
-        format.html { redirect_to(:back, :notice => 'Award was successfully requested.') }
-        format.json { render json: @award, status: :created, location: @award }
-      else
-        format.html { redirect_to(:back, :alert => 'Could not create award.') }
-        format.json { render json: @award.errors, status: :unprocessable_entity }
-      end
+
+  private 
+
+  def set_vars
+    @award.amount = params[:award][:amount] if params[:award].has_key?(:amount)
+    @award.currency_id = params[:award][:currency_id] if params[:award].has_key?(:currency_id)
+    @award.comment = params[:award][:comment] if params[:award].has_key?(:comment)
+    @award.member_id = params[:award][:member_id] if params[:award].has_key?(:member_id)
+    if @current_member.is_admin
+      @award.approved_by = @current_member if params[:award].has_key?(:approve)
     end
   end
   

@@ -1,33 +1,33 @@
 
 <% @award = Award.new %>
 <% @award.member_id = member.id %>
-<%= form_for [@game,@award],:url=>request_award_game_awards_path(@game), :html => { :class => 'form-horizontal' } do |f| %>
+<%= form_for [@game,@award], :html => { :class => 'form-horizontal' } do |f| %>
 <%= render :partial => 'shared/form_errors', :locals => {:item => @award} %>
-  
-  <div class="control-group">
-    <%= f.label :amount, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.number_field :amount, :class => 'number_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :currency_id, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.select :currency_id, options_from_collection_for_select(@game.currencies, "id", "name"), :class => 'control-label' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :comment, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_area :comment, :class => 'text_area',:rows=>'4' %>
-    </div>
-  </div>
 
-  <%= f.hidden_field(:member_id) %>
-  
-  <div class="form-actions">
-    <%= f.submit "Request Award", :class => 'btn btn-default btn-primary' %>
+<div class="control-group">
+  <%= f.label :amount, :class => 'control-label' %>
+  <div class="controls">
+    <%= f.number_field :amount, :class => 'number_field' %>
   </div>
+</div>
+<div class="control-group">
+  <%= f.label :currency_id, :class => 'control-label' %>
+  <div class="controls">
+    <%= f.select :currency_id, options_from_collection_for_select(@game.currencies, "id", "name"), :class => 'control-label' %>
+  </div>
+</div>
+<div class="control-group">
+  <%= f.label :comment, :class => 'control-label' %>
+  <div class="controls">
+    <%= f.text_area :comment, :class => 'text_area',:rows=>'4' %>
+  </div>
+</div>
+
+<%= f.hidden_field(:member_id) %>
+
+<div class="form-actions">
+  <%= f.submit "Request Award", :class => 'btn btn-default btn-primary' %>
+</div>
 <% end %>
 
 
@@ -44,10 +44,10 @@
     </tr>
   </thead>
   <tbody>
-  <tr>
-	<td colspan="8"><h3>Unassigned Awards</h3></td>
-      <tr>
-    <% member.awards.unassigned.approved.each do |award| %>
+    <tr>
+     <td colspan="8"><h3>Unassigned Awards</h3></td>
+     <tr>
+      <% member.awards(true).unassigned.approved.each do |award| %>
       <tr>
         <td><%= award.amount %></td>
         <td><%= award.currency.name %></td>
@@ -56,104 +56,106 @@
         <td><%= award.approved_by.name %></td>
         <td><%= award.created_at %></td>
         <td>
-          <div class="btn-group">
-	    <button class="btn">Assign to Character</button>
-	    <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-	      <span class="caret"></span>
-	    </button>
-	    <ul class="dropdown-menu">
-	      <% member.characters.each do |character| %>
-	      <li>
-		<%= link_to character.name, assign_game_award_path(@game,award,:character_id=>character.id) %>
-	      </li>
-	      <% end %>
-	    </ul>
-	  </div>
-        <% if(@current_member.is_admin) %>
-        
+
+          <%= form_for [@game,award], :html => { :class => 'form-horizontal' } do |f| %>
+          <div class="control-group">
+            <%= f.label :character_id, :class => 'control-label' %>
+            <div class="controls">
+              <%= f.select :character_id, options_from_collection_for_select(member.characters, "id", "name"), :class => 'control-label' %>
+            </div>
+          </div>
+          <div class="form-actions">
+            <%= f.submit "Assign Award", :class => 'btn btn-default btn-primary' %>
+          </div>
+          <% end %>
+
+
+          <% if(@current_member.is_admin) %>
+
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_game_award_path(@game,award), :class => 'btn btn-default btn-xs' %>
+          edit_game_award_path(@game,award), :class => 'btn btn-default btn-xs' %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                      game_award_path(@game,award),
-                      :method => :delete,
-                      :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')),
-                      :class => 'btn btn-default btn-xs btn-danger' %>
-        
-        <% end %>
+          game_award_path(@game,award),
+          :method => :delete,
+          :data => { :confirm => 'Are you sure?' },
+          :class => 'btn btn-default btn-xs btn-danger' %>
+
+          <% end %>
         </td>
       </tr>
-    <% end %>
+      <% end %>
       <tr>
-	<td colspan="8">Pending Awards</td>
-      <tr>
-    <% member.awards.pending.each do |award| %>
+       <td colspan="8">Pending Awards</td>
+       <tr>
+        <% member.awards(true).pending.each do |award| %>
         <tr>
-        <td><%= award.amount %></td>
-        <td><%= award.currency.name%></td>
-        <td><%= award.comment %></td>
-        <td><%= award.created_by.name %></td>
-        <td></td>
-        <td><%= award.created_at %></td>
-        <% if(@current_member.is_admin) %>
-        <td>
-          <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_game_award_path(@game,award), :class => 'btn btn-default btn-xs' %>
-	  <%= link_to 'Approve',
-                      approve_game_award_path(@game,award),
-                      :class => 'btn btn-default btn-xs btn-success' %>
-          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                      game_award_path(@game,award),
-                      :method => :delete,
-                      :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')),
-                      :class => 'btn btn-default btn-xs btn-danger' %>
-        </td>
+          <td><%= award.amount %></td>
+          <td><%= award.currency.name%></td>
+          <td><%= award.comment %></td>
+          <td><%= award.created_by.name %></td>
+          <td></td>
+          <td><%= award.created_at %></td>
+          <% if(@current_member.is_admin) %>
+          <td>
+            <%= link_to t('.edit', :default => t("helpers.links.edit")),
+            edit_game_award_path(@game,award), :class => 'btn btn-default btn-xs' %>
+
+            <%= form_for [@game,award], :html => { :class => 'form-horizontal' } do |f| %>
+            <%= hidden_field_tag("award[approve]", "true") %>
+            <%= f.submit "Approve", :class => 'btn btn-default btn-primary' %>
+            <% end %>
+
+            <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+            game_award_path(@game,award),
+            :method => :delete,
+            :data => { :confirm => 'Are you sure?' },
+            :class => 'btn btn-default btn-xs btn-danger' %>
+          </td>
+          <% end %>
+        </tr>
         <% end %>
-      </tr>
-    <% end %>
-    <tr>
-	<td colspan="8"><h3>Assigned Awards</h3></td>
-      <tr>
-      <% member.characters.each do |char| %>
+        <tr>
+         <td colspan="8"><h3>Assigned Awards</h3></td>
+         <tr>
+          <% member.characters.each do |char| %>
           <tr>
-	<td colspan="8"><h4><%= char.name %></h4></td>
-      <tr>
-	<% char.awards.each do |award| %>
-	  <tr>
-	    <td><%= award.amount %></td>
-	    <td><%= award.currency.name %></td>
-	    <td><%= award.comment %></td>
-	    <td><%= award.created_by.name %></td>
-	    <td><%= award.approved_by.name %></td>
-	    <td><%= award.created_at %></td>
-	    <td>
-	    <% if(@current_member.is_admin) %>
-	      <div class="btn-group">
-		<button class="btn">Assign to Character</button>
-		<button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-		  <span class="caret"></span>
-		</button>
-		<ul class="dropdown-menu">
-		  <% member.characters.each do |character| %>
-		  <li>
-		    <%= link_to character.name, assign_game_award_path(@game,award,:character_id=>character.id) %>
-		  </li>
-		  <% end %>
-		</ul>
-	      </div>
-	    
-	    
-	      <%= link_to t('.edit', :default => t("helpers.links.edit")),
-			  edit_game_award_path(@game,award), :class => 'btn btn-default btn-xs' %>
-	      <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-			  game_award_path(@game,award),
-			  :method => :delete,
-			  :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')),
-			  :class => 'btn btn-default btn-xs btn-danger' %>
-	    
-	    <% end %>
-	    </td>
-	  </tr>
-	<% end %>
-    <% end %>
-  </tbody>
-</table>
+           <td colspan="8"><h4><%= char.name %></h4></td>
+           <tr>
+             <% char.awards(true).each do |award| %>
+             <tr>
+               <td><%= award.amount %></td>
+               <td><%= award.currency.name %></td>
+               <td><%= award.comment %></td>
+               <td><%= award.created_by.name %></td>
+               <td><%= award.approved_by.name %></td>
+               <td><%= award.created_at %></td>
+               <td>
+                 <% if(@current_member.is_admin) %>
+                 <%= form_for [@game,award], :html => { :class => 'form-horizontal' } do |f| %>
+                 <div class="control-group">
+                  <%= f.label :character_id, :class => 'control-label' %>
+                  <div class="controls">
+                    <%= f.select :character_id, options_from_collection_for_select(member.characters, "id", "name"), :class => 'control-label' %>
+                  </div>
+                </div>
+                <div class="form-actions">
+                  <%= f.submit "Assign Award", :class => 'btn btn-default btn-primary' %>
+                </div>
+                <% end %>
+
+
+                <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                edit_game_award_path(@game,award), :class => 'btn btn-default btn-xs' %>
+                <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                game_award_path(@game,award),
+                :method => :delete,
+                :data => { :confirm => 'Are you sure?' },
+                :class => 'btn btn-default btn-xs btn-danger' %>
+
+                <% end %>
+              </td>
+            </tr>
+            <% end %>
+            <% end %>
+          </tbody>
+        </table>

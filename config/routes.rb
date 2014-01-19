@@ -78,11 +78,7 @@ resource :session, :only => [:create]
     resources :character_skills
     resources :currencies
     resources :registrations
-    resources :awards do
-      get 'approve',:on => :member
-      get 'assign',:on => :member
-      post 'request_award', :on => :collection
-    end
+    resources :awards
     resources :tags
   end
 end

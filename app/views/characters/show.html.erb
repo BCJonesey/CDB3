@@ -5,7 +5,7 @@
 <div class="form-actions">
   <%= link_to 'Back', game_characters_path(@game), :class => 'btn'  %>
   <%= link_to 'Edit', edit_game_character_path(@game,@character), :class => 'btn' %>
-  <%= link_to 'Delete', game_character_path(@game,@character), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-default btn-danger' %>
+  <%= link_to 'Delete', game_character_path(@game,@character), :method => 'delete', :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-default btn-danger' %>
 </div>
 
 
@@ -38,7 +38,7 @@
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
                       game_award_path(@game,award),
                       :method => :delete,
-                      :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')),
+                      :data => { :confirm => 'Are you sure?' },
                       :class => 'btn btn-default btn-xs btn-danger' %>
         </td>
         <% end %>

@@ -29,6 +29,6 @@
   <%= link_to 'Back', game_events_path(@game), :class => 'btn'  %>
   <% if(@current_member.is_admin) %>
 <%= link_to 'Edit', edit_game_event_path(@game,@event), :class => 'btn' %>
-  <%= link_to 'Delete', game_event_path(@game,@event), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-default btn-danger' %>
+  <%= link_to 'Delete', game_event_path(@game,@event), :method => 'delete', :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-default btn-danger' %>
     <% end %>
 </div>

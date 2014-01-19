@@ -43,5 +43,5 @@
 <div class="form-actions">
   <%= link_to 'Back', game_registrations_path(@game), :class => 'btn'  %>
   <%= link_to 'Edit', edit_game_registration_path(@game,@registration), :class => 'btn' %>
-  <%= link_to 'Delete', game_registration_path(@game,@registration), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-default btn-danger' %>
+  <%= link_to 'Delete', game_registration_path(@game,@registration), :method => 'delete', :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-default btn-danger' %>
 </div>

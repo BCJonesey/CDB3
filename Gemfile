@@ -54,4 +54,4 @@ group :test do
 end
 gem "sorcery"
 gem 'friendly_id', '~> 5.0.0'
-        
+gem 'pry'

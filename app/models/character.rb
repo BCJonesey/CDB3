@@ -43,4 +43,14 @@ class Character < ActiveRecord::Base
     self.new_version("New Character")
     self.save
   end
+
+  def skill_rank(skill_id)
+    character_version.skill_rank(skill_id)
+  end
+
+  def set_skill_rank(skill_id,rank)
+    return character_version.set_skill_rank(skill_id,rank)
+  end
+
+
 end

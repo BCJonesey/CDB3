@@ -6,14 +6,17 @@ class CharacterVersion < ActiveRecord::Base
   has_one :game, :through => :character
   validates :character, :presence => true
   
-  def set_skill_rank(skill,rank)
-    
+  def set_skill_rank(skill_id,rank)
     if(rank>0)
-      self.character_skills.find_or_create_by_skill(:skill=>skill,:rank=>rank)
+      return self.character_skills.find_or_create_by_skill_id(:skill_id=>skill_id,:rank=>rank).save! 
     else
-      self.character_skills.destroy_all(:skill=>skill)
+      return self.character_skills.destroy_all(:skill_id=>skill_id)
     end
-    
+  end
+
+  def skill_rank(skill_id)
+    char_skill = self.character_skills.find_or_create_by_skill_id(:skill_id=>skill_id)
+    char_skill.id.nil? ? 0 : char_skill.rank
   end
   
   def create_child_version(old_version_desc)

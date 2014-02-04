@@ -67,6 +67,7 @@ resource :session, :only => [:create]
     resources :members
     resources :characters do
       get 'character_version',:on => :member
+      resources :skills, controller: 'character_skills'
     end
     resources :skills do
       put 'add_tag', :on => :member

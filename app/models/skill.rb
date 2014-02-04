@@ -15,4 +15,5 @@ class Skill < ActiveRecord::Base
   
   
   scope :default_skills, where("min_rank > ?", 0)
+
 end

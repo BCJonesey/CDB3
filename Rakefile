@@ -4,7 +4,7 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Cdb3::Application.load_tasks
+CDB3::Application.load_tasks
 
 namespace :db do
   task :nuke do

@@ -9,7 +9,7 @@
     </tr>
   </thead>
   <tbody>
-    <% @skills.each do |skill| %>
+    <% @skills.order(:id).each do |skill| %>
       <tr>
 	<td><%= skill.id %></td>
         <td><%= link_to skill.name, game_skill_path(@game,skill) %></td>

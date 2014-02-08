@@ -18,7 +18,6 @@ class AwardsController < ApplicationController
   # GET /awards/1
   # GET /awards/1.json
   def show
-    @award = Award.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -62,7 +61,6 @@ class AwardsController < ApplicationController
   # PUT /awards/1
   # PUT /awards/1.json
   def update
-    @award = Award.find(params[:id])
     set_vars
     respond_to do |format|
       if @award.save
@@ -78,7 +76,6 @@ class AwardsController < ApplicationController
   # DELETE /awards/1
   # DELETE /awards/1.json
   def destroy
-    @award = Award.find(params[:id])
     @award.destroy
 
     respond_to do |format|
@@ -94,6 +91,7 @@ class AwardsController < ApplicationController
     @award.currency_id = params[:award][:currency_id] if params[:award].has_key?(:currency_id)
     @award.comment = params[:award][:comment] if params[:award].has_key?(:comment)
     @award.member_id = params[:award][:member_id] if params[:award].has_key?(:member_id)
+    @award.character_id = params[:award][:character_id] if params[:award].has_key?(:character_id)
     if @current_member.is_admin
       @award.approved_by = @current_member if params[:award].has_key?(:approve)
     end

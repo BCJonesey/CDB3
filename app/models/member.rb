@@ -15,5 +15,13 @@ class Member < ActiveRecord::Base
   def is_admin
     game_admin || user.global_admin
   end
+
+  def pending_awards
+    self.awards.where(:approved_by_id => nil)
+  end
+
+  def unassigned_awards
+    self.awards.where(:character_id => nil).where("approved_by_id IS NOT NULL")
+  end
   
 end

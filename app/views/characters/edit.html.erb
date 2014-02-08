@@ -3,12 +3,10 @@
 	<%= javascript_include_tag 'https://ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular.min.js' %>
 	<%= javascript_include_tag 'http://code.angularjs.org/1.2.12/angular-resource.js' %>
 	<%= javascript_include_tag 'http://code.angularjs.org/1.2.12/angular-route.js' %>
-
 	<%= javascript_include_tag "http://cdnjs.cloudflare.com/ajax/libs/restangular/1.3.1/restangular.js" %>
 	<%= javascript_include_tag 'https://dl.dropboxusercontent.com/u/1454343/bootstrap/assets/js/app.js' %>  
-	<%= javascript_include_tag 'https://dl.dropboxusercontent.com/u/1454343/bootstrap/assets/js/services.js' %>  
+
   <%= javascript_include_tag 'https://dl.dropboxusercontent.com/u/1454343/bootstrap/assets/js/controllers.js' %>  
-  <%= javascript_include_tag 'https://dl.dropboxusercontent.com/u/1454343/bootstrap/assets/js/filters.js' %>  
 
 <% end %>
 
@@ -23,7 +21,7 @@
     <li class="skill" ng-repeat="skill in skills | filter:query">
 		<div class="skill-controls">
 			<div class="skill-controls-plusMinus">
-				<a class="glyphicon glyphicon-minus" ng-click="addRank(skill)" href="#"></a>
+				<a class="glyphicon glyphicon-minus" ng-click="subtractRank(skill)" href="#"></a>
 				<span class="skillRank">{{skill.rank}}</span>
 				<a class="glyphicon glyphicon-plus" ng-click="addRank(skill)" href="#"></a>
 			</div>

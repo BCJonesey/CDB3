@@ -47,7 +47,7 @@
     <tr>
      <td colspan="8"><h3>Unassigned Awards</h3></td>
      <tr>
-      <% member.awards(true).unassigned.approved.each do |award| %>
+      <% member.unassigned_awards.each do |award| %>
       <tr>
         <td><%= award.amount %></td>
         <td><%= award.currency.name %></td>
@@ -87,7 +87,7 @@
       <tr>
        <td colspan="8">Pending Awards</td>
        <tr>
-        <% member.awards(true).pending.each do |award| %>
+        <% member.pending_awards.each do |award| %>
         <tr>
           <td><%= award.amount %></td>
           <td><%= award.currency.name%></td>

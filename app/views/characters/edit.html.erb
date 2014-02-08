@@ -25,8 +25,8 @@
 				</div>
 			</div>
 			<div class="skill-info">
-				<span class="skill-info-cost">13CP</span>
-				<span class="skill-info-name">{{skill.name}}</span>
+				<span class="skill-info-name h2">{{skill.name}}</span>
+				<span class="skill-info-cost">{{getCost(skill)}}</span>
 				<span class="skill-info-shortDescription">{{skill.summary}}</span>
 				<span class="skill-info-moreInfo"><a href="#" class=""   ng-click="showModal(skill)"><i class="glyphicon glyphicon-info-sign"></i></a></span>
 

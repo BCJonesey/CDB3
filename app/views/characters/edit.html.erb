@@ -1,26 +1,67 @@
 <% content_for :extra_js do %>
-  <%= javascript_include_tag 'http://jashkenas.github.io/underscore/underscore-min.js' %>  
-  <%= javascript_include_tag 'http://documentcloud.github.io/backbone/backbone-min.js' %>
+
+	<%= javascript_include_tag 'https://ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular.min.js' %>
+	<%= javascript_include_tag 'http://code.angularjs.org/1.2.12/angular-resource.js' %>
+	<%= javascript_include_tag 'https://dl.dropboxusercontent.com/u/1454343/bootstrap/assets/js/app.js' %>  
+	<%= javascript_include_tag 'https://dl.dropboxusercontent.com/u/1454343/bootstrap/assets/js/services.js' %>  
+  <%= javascript_include_tag 'https://dl.dropboxusercontent.com/u/1454343/bootstrap/assets/js/controllers.js' %>  
+
+  <%= javascript_include_tag 'https://dl.dropboxusercontent.com/u/1454343/bootstrap/assets/js/filters.js' %>  
   <%= javascript_include_tag 'characterDisplay.js' %>
   <%= javascript_include_tag 'characterRules.js' %>
 <% end %>
 
 
+<div  ng-app="chareditApp"><div ng-controller="SkillListCrl">
 
 
-<div id="characteInfo"></div>
+
+	Search: <input ng-model="query">
+    <ul class="container">
+	
+    <li class="skill" ng-repeat="skill in skills | filter:query">
+		<div class="skill-controls">
+			<div class="skill-controls-plusMinus">
+				<a class="glyphicon glyphicon-minus" ng-click="addRank(skill)" href="#"></a>
+				<span class="skillRank">{{skill.rank}}</span>
+				<a class="glyphicon glyphicon-plus" ng-click="addRank(skill)" href="#"></a>
+			</div>
+		</div>
+		<div class="skill-info">
+			<span class="skill-info-cost">13CP</span>
+			<span class="skill-info-name">{{skill.name}}</span>
+			<span class="skill-info-shortDescription">{{skill.summary}}</span>
+			<span class="skill-info-moreInfo"><a href="#" class="" rel="popover" data-content="{{skill.description}}" data-original-title="{{skill.name}}"><i class="icon-info-sign"></i></a></span>
+		</div>
+		<ul class="skill-tags">
+			<li ng-repeat="tag in skill.tags" href="#" class="label label-default">{{tag.name}}</li>
+		</ul>
+	</li>
+    
+    </ul> <!-- /container -->
 
 
-<% @page_title = "Edit Character" %>
-<%= text_field_tag 'search', nil, :placeholder => 'Enter search term...' %>
-<div id="searchedTags"></div>
-<div id='skillList'></div>
+
+</div></div>
 
 
+
+		<style>
+		.skill div{
+			display:inline;
+		}
+    .skill-tags li{display:inline; margin-right:4px;}
+	</style>
 <script type="text/javascript">
+
+  var skillsUrl = '<%= game_character_skills_path(@game,@character) %>.json';
   
-  var consts = {charId: <%= @character.id %>, game_url:'<%= url_for(@game) %>'}
+  var consts = {charId: <%= @character.id %>, game_url:'<%= url_for(@game) %>'};
   
   var myCurrencies = <%= @character.awards.group("currency_id").sum("amount").to_json().html_safe %>;
+
+
+
+
   
 </script>

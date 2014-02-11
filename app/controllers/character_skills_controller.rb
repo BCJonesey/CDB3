@@ -12,9 +12,12 @@ class CharacterSkillsController < ApplicationController
   def index
     @skills = Skill.all
     @skills_hash = @skills.as_json(:include => [:tags])
-    @skills_hash.map! do |x| 
-      x["rank"] = @character.skill_rank(x["id"]) 
-      x
+    @rank_hash = Hash.new(0)
+    @character.get_or_create_version.character_skills.each do |x|
+      @rank_hash[x.skill_id] = x.rank
+    end
+    @skills_hash.each do |x| 
+      x["rank"] = @rank_hash[x["id"]] 
     end
     render json: @skills_hash
   end

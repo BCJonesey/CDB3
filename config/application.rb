@@ -24,6 +24,7 @@ module CDB3
     # config.i18n.default_locale = :de
     config.action_controller.permit_all_parameters = true
     config.assets.paths << Rails.root.join('vendor', 'assets', 'fonts')
+    config.assets.precompile += %w( .svg .eot .woff .ttf)
     console do
         require "pry"
         config.console = Pry

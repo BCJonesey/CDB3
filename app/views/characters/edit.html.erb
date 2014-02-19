@@ -1,4 +1,5 @@
 <% content_for :extra_js do %>
+<%= javascript_include_tag 'https://dl.dropboxusercontent.com/u/1454343/bootstrap/assets/js/rules.js' %> 
 <%= javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.js' %>
 <%= javascript_include_tag 'https://ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular.min.js' %>
 <%= javascript_include_tag 'http://code.angularjs.org/1.2.12/angular-resource.js' %>
@@ -13,30 +14,31 @@
 
 <div  ng-app="chareditApp">
 <div ng-controller="SkillListCrl">
-	Search: <input ng-model="query">
-	<ul class="container">
+<ul>
+	<li ng-repeat="currency in currencies">{{currency.total}}{{currency.shortname}} / {{currency.remaining}}{{currency.shortname}} </li>
+</ul>
 
-		<li class="skill" ng-repeat="skill in skills | filter:query">
+	Search: <input ng-model="query">
+	<ul class="skill-tags">
+		<li ng-repeat="tag in filterTags" href="#" class="label label-default" ng-click="tagUnClick(tag)">{{tag.name}}</li>
+	</ul>
+	<ul class="container">
+		<li class="skill" ng-repeat="skill in skills | filter:query | filter:tagFilter">
 			<div class="skill-controls">
 				<div class="skill-controls-plusMinus">
-					<a class="glyphicon glyphicon-minus" ng-click="subtractRank(skill)" href="#"></a>
+					<span class="glyphicon glyphicon-minus" ng-click="subtractRank(skill)"></span>
 					<span class="skillRank">{{skill.rank}}</span>
-					<a class="glyphicon glyphicon-plus" ng-click="addRank(skill)" href="#"></a>
+					<span class="glyphicon glyphicon-plus" ng-click="addRank(skill)"></span>
 				</div>
 			</div>
 			<div class="skill-info">
 				<span class="skill-info-name h2">{{skill.name}}</span>
 				<span class="skill-info-cost">{{getCost(skill)}}</span>
 				<span class="skill-info-shortDescription">{{skill.summary}}</span>
-				<span class="skill-info-moreInfo"><a href="#" class=""   ng-click="showModal(skill)"><i class="glyphicon glyphicon-info-sign"></i></a></span>
-
-				
-
-
-
+				<span class="skill-info-moreInfo"><span href="#" class="" ng-hide='skill.description==""'  ng-click="showModal(skill)"><i class="glyphicon glyphicon-info-sign"></i></span></span>
 			</div>
 			<ul class="skill-tags">
-				<li ng-repeat="tag in skill.tags" href="#" class="label label-default">{{tag.name}}</li>
+				<li ng-repeat="tag in skill.tags" href="#" class="label label-default" ng-click="tagClick(tag)">{{tag.name}}</li>
 			</ul>
 		</li>
 
@@ -81,7 +83,7 @@
 
 	var consts = {charId: <%= @character.id %>, game_url:'<%= url_for(@game) %>'};
 
-	var myCurrencies = <%= @character.awards.group("currency_id").sum("amount").to_json().html_safe %>;
+	var myCurrencies = <%= @character.awards.joins(:currency).group('currencies.short_name').sum(:amount).to_json().html_safe %>;
 
 
 

@@ -23,7 +23,7 @@
     </tr>
   </thead>
   <tbody>
-    <% @character.awards.approved.each do |award| %>
+    <% @character.awards.each do |award| %>
       <tr>
         <td><%= award.amount %></td>
         <td><%= award.currency.name %></td>

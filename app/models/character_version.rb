@@ -8,7 +8,9 @@ class CharacterVersion < ActiveRecord::Base
   
   def set_skill_rank(skill_id,rank)
     if(rank>0)
-      return self.character_skills.find_or_create_by_skill_id(:skill_id=>skill_id,:rank=>rank).save! 
+      cskill =  self.character_skills.find_or_create_by_skill_id(:skill_id=>skill_id)
+      cskill.rank = rank
+      return cskill.save! 
     else
       return self.character_skills.destroy_all(:skill_id=>skill_id)
     end

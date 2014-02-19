@@ -1,7 +1,7 @@
 class CharacterSkillsController < ApplicationController
-  before_filter :require_login
+  #before_filter :require_login
   before_filter :require_game
-  before_filter :get_member
+  #before_filter :get_member
   before_filter :get_character
   #before_filter :require_game_admin, :except => [:index,:show]
   #before_filter :get_resource_and_match_game, :except => [:index, :new, :create]
@@ -34,7 +34,7 @@ class CharacterSkillsController < ApplicationController
   # PUT /tags/1
   # PUT /tags/1.json
   def update
-    if @character.set_skill_rank(params[:id],params[:skill][:rank])
+    if @character.set_skill_rank(params[:id],params[:character_skill][:rank])
       head :ok
     else
       render text: "error", status: :unprocessable_entity

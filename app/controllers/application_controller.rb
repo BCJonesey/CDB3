@@ -10,12 +10,8 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def require_logged_in_user
-    get_logged_in_user
-    if current_user.nil?
-      session[:request_path] = request.path
-      redirect_to login_path, :alert => "You must log in to access that page."
-    end
+  def not_authenticated
+    redirect_to login_path, :alert => "You must log in to access that page."
   end
 
   def global_admin?

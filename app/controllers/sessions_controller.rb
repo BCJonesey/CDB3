@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
     	redirect_back_or_to root_url, :notice => "Logged in as #{user.name}"
     else
 		flash[:alert] = "Invalid email or password"
-		redirect_to root_path
+		redirect_to login_path
     end
   end
 

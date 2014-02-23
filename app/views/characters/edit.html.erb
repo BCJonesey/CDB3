@@ -1,13 +1,12 @@
 <% content_for :extra_js do %>
-<%= javascript_include_tag 'https://dl.dropboxusercontent.com/u/1454343/bootstrap/assets/js/rules.js' %> 
-<%= javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.js' %>
-<%= javascript_include_tag 'https://ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular.min.js' %>
-<%= javascript_include_tag 'http://code.angularjs.org/1.2.12/angular-resource.js' %>
-<%= javascript_include_tag 'http://code.angularjs.org/1.2.12/angular-route.js' %>
-<%= javascript_include_tag "http://cdnjs.cloudflare.com/ajax/libs/restangular/1.3.1/restangular.js" %>
-<%= javascript_include_tag 'https://dl.dropboxusercontent.com/u/1454343/bootstrap/assets/js/app.js' %>  
 
-<%= javascript_include_tag 'https://dl.dropboxusercontent.com/u/1454343/bootstrap/assets/js/controllers.js' %>  
+<%= javascript_include_tag 'angular/core/lodash.min.js' %>
+<%= javascript_include_tag 'angular/core/angular.min.js' %>
+<%= javascript_include_tag "angular/restangular/restangular.min.js" %>
+
+<%= javascript_include_tag 'angular/custom/rules.js' %> 
+<%= javascript_include_tag 'angular/custom/app.js' %>  
+<%= javascript_include_tag 'angular/custom/controllers.js' %>  
 
 <% end %>
 
@@ -38,7 +37,7 @@
 				<span class="skill-info-moreInfo"><span href="#" class="" ng-hide='skill.description==""'  ng-click="showModal(skill)"><i class="glyphicon glyphicon-info-sign"></i></span></span>
 			</div>
 			<ul class="skill-tags">
-				<li ng-repeat="tag in skill.tags" href="#" class="label label-default" ng-click="tagClick(tag)">{{tag.name}}</li>
+				<li ng-repeat="skill_tag in skill.skill_tags" href="#" class="label label-default" ng-click="tagClick(skill_tag.tag)">{{skill_tag.tag.name}}</li>
 			</ul>
 		</li>
 

@@ -9,7 +9,14 @@ chareditControllers.controller('SkillListCrl', ['$scope','Restangular',
 
   	$scope.skills = Restangular.all('skills').getList().$object;
     $scope.filterTags = [];
-    
+
+    $scope.givenTags = function(){
+      var allSkillTags = [];
+      _.forEach(_.filter($scope.skills,function(skill){return skill.rank>0}),function(skill){allSkillTags.concat(skill.skill_tags)});
+      
+
+    }
+
     $scope.initCurrencies = function(currencies){
       var retVal = [];
       for (var cur in currencies)

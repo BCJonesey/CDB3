@@ -5,7 +5,7 @@ var LT = {};
 LT.printer = {};
 
 LT.printer.spend = function(cost, currency){
-	return cost + currency
+	return cost + currency;
 };
 
 LT.clearCache = function(){
@@ -30,5 +30,5 @@ LT.spend = function(cost, currency){
 	if(LT.cache.currencies[currency] === undefined){
 		LT.cache.currencies[currency] = 0;
 	}
-	LT.cache.currencies[currency] = LT.cache.currencies[currency] - cost
+	LT.cache.currencies[currency] = LT.cache.currencies[currency] - cost;
 };

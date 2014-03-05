@@ -5,8 +5,4 @@ var chareditApp = angular.module('chareditApp', [
 
 RestangularProvider.setBaseUrl(skillsUrl);
 
-
-
-
-
 });

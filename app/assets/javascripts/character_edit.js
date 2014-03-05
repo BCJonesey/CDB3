@@ -10,8 +10,6 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-
-
 //= require angular/core/lodash.min
 //= require angular/core/angular.min
 //= require angular/restangular/restangular.min

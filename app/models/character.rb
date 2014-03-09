@@ -33,10 +33,7 @@ class Character < ActiveRecord::Base
   
   
   def create_initial_version
-    version = character_versions.build()   
-    self.game.skills.default_skills.each do |skill|
-      version.set_skill_rank(skill,rank.min_rank)
-    end
+    version = character_versions.build()
     version.save
     self.character_version = version
     self.save

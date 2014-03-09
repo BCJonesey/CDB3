@@ -10,10 +10,18 @@ class Skill < ActiveRecord::Base
   validates :name, :presence => true
   validates :game_id, :presence => true
   belongs_to :game
-  validates :min_rank, :presence => true,:numericality =>{only_integer: true,  greater_than_or_equal_to: 0}
   validates :max_rank, :presence => true,:numericality =>{only_integer: true,  greater_than_or_equal_to: 1}
   
   
-  scope :default_skills, where("min_rank > ?", 0)
+
+  def clean_up_data!
+    if self.cost.length > 0
+      self.cost = self.cost.gsub(/LT.spend\(/, "LT.spend(options,")
+    end
+    if self.rule.length > 0
+      self.rule = self.rule.gsub(/LT.skill_rank\(/, "LT.skill_rank(options,")
+    end
+    self.save
+  end
 
 end

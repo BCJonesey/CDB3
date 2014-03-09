@@ -61,7 +61,7 @@
     <div class="control-group">
       <%= f.label "Select a tag", :class => 'control-tag' %>
       <div class="controls">
-        <%= f.select(:tag_id, options_from_collection_for_select(Tag.unaffiliated_by_skill(@skill) , "id", "name")) %>
+        <%= f.select(:tag_id, options_from_collection_for_select(@game.tags.unaffiliated_by_skill(@skill) , "id", "name")) %>
       </div>
     </div>
     <div class="control-group">

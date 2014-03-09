@@ -30,18 +30,20 @@ chareditControllers.controller('SkillListCrl', ['$scope','Restangular',
       return retVal;
     }
     $scope.addRank = function(skill) {
+      var options = {skill: {prevRank:skill.rank,skill: skill}};
       skill.rank++;
-      $scope.validate();
-      $scope.save(skill);
+      $scope.validate(options);
     };
     $scope.subtractRank = function(skill) {
+      var options = {skill: {prevRank:skill.rank,skill: skill}};
       skill.rank--;
-      $scope.validate();
-      $scope.save(skill);
+      $scope.validate(options);
     };
     
-    $scope.validate = function(){
-      return LT.validate($scope);
+    $scope.validate = function(options){
+      if(LT.validate(options,$scope)){
+        $scope.save(skill);
+      }
     };
 
     $scope.save = function(skill){
@@ -49,6 +51,7 @@ chareditControllers.controller('SkillListCrl', ['$scope','Restangular',
     };
 
     $scope.getCost = function(skill){
+      var options = {};
     	return eval(skill.cost.replace("LT.","LT.printer."));
     };
 
@@ -58,9 +61,7 @@ chareditControllers.controller('SkillListCrl', ['$scope','Restangular',
     }
 
     $scope.showModal = function(skill){
-    	$('#more-info-modal #myModalLabel').text(skill.name);
-    	$('#more-info-modal .modal-body').html(skill.description);
-    	$('#more-info-modal').modal();
+      LT.showModal(skill.name,skill.description);
     };
     $scope.tagClick = function(tag){
       if(_.where($scope.filterTags, {id: tag.id}).length == 0){

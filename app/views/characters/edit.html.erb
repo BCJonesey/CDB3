@@ -19,9 +19,9 @@
 		<li class="skill" ng-repeat="skill in skills | filter:query | filter:tagFilter">
 			<div class="skill-controls">
 				<div class="skill-controls-plusMinus">
-					<span class="glyphicon glyphicon-minus" ng-click="subtractRank(skill)"></span>
+					<span class="glyphicon glyphicon-minus" ng-click="subtractRank(skill)" ng-show="skill.rank>0"></span>
 					<span class="skillRank">{{skill.rank}}</span>
-					<span class="glyphicon glyphicon-plus" ng-click="addRank(skill)"></span>
+					<span class="glyphicon glyphicon-plus" ng-click="addRank(skill)" ng-show="skill.rank<skill.max_rank"></span>
 				</div>
 			</div>
 			<div class="skill-info">

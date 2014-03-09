@@ -51,6 +51,10 @@
         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= current_user.name %> <b class="caret"></b></a>
         <ul class="dropdown-menu">
           <li><%= link_to "Log Out", '/main/logout' %></li>
+          <li role="presentation" class="dropdown-header">My Games</li>
+          <% current_user.games.each do |mg| %>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="<%= game_path(mg) %>"><%= mg.name %></a></li>
+          <% end %>
         </ul>
       </li>
       <% end %>

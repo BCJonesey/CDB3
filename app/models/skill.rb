@@ -12,16 +12,5 @@ class Skill < ActiveRecord::Base
   belongs_to :game
   validates :max_rank, :presence => true,:numericality =>{only_integer: true,  greater_than_or_equal_to: 1}
   
-  
-
-  def clean_up_data!
-    if self.cost.length > 0
-      self.cost = self.cost.gsub(/LT.spend\(/, "LT.spend(options,")
-    end
-    if self.rule.length > 0
-      self.rule = self.rule.gsub(/LT.skill_rank\(/, "LT.skill_rank(options,")
-    end
-    self.save
-  end
 
 end

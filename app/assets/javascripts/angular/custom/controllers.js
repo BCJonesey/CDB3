@@ -13,7 +13,7 @@ chareditControllers.controller('SkillListCrl', ['$scope','Restangular',
     $scope.givenTags = function(){
       var allSkillTags = [];
       _.forEach(_.filter($scope.skills,function(skill){return skill.rank>0}),function(skill){allSkillTags.concat(skill.skill_tags)});
-      
+
 
     }
 
@@ -39,7 +39,7 @@ chareditControllers.controller('SkillListCrl', ['$scope','Restangular',
       skill.rank--;
       $scope.validate(options);
     };
-    
+
     $scope.validate = function(options){
       if(LT.validate(options,$scope)){
         $scope.save(skill);
@@ -52,6 +52,9 @@ chareditControllers.controller('SkillListCrl', ['$scope','Restangular',
 
     $scope.getCost = function(skill){
       var options = {};
+      if(skill.cost==""){
+        return "free";
+      }
     	return eval(skill.cost.replace("LT.","LT.printer."));
     };
 

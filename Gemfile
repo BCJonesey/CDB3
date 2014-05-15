@@ -56,6 +56,7 @@ gem "sorcery"
 gem 'friendly_id', '~> 5.0.0'
 gem 'pry'
 gem 'thin'
+gem 'newrelic_rpm'
 
 gem 'rails_12factor', group: :production
 

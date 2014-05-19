@@ -5,19 +5,20 @@ class CharacterSkillsController < ApplicationController
   before_filter :get_character
   #before_filter :require_game_admin, :except => [:index,:show]
   #before_filter :get_resource_and_match_game, :except => [:index, :new, :create]
-  
-  
+
+
   # GET /tags
   # GET /tags.json
   def index
-    @skills = Skill.all
+
+    @skills = @game.skills.includes(skill_tags: :tag)
     @skills_hash = @skills.as_json(include: {skill_tags:{ include: :tag,only:[:gives]}})
     @rank_hash = Hash.new(0)
     @character.get_or_create_version.character_skills.each do |x|
       @rank_hash[x.skill_id] = x.rank
     end
-    @skills_hash.each do |x| 
-      x["rank"] = @rank_hash[x["id"]] 
+    @skills_hash.each do |x|
+      x["rank"] = @rank_hash[x["id"]]
     end
     render json: @skills_hash
   end

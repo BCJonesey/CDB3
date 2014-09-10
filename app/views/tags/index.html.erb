@@ -2,6 +2,7 @@
 
 <table>
   <tr>
+    <th>ID</th>
     <th>Name</th>
     <th></th>
     <th></th>
@@ -10,6 +11,7 @@
 
 <% @tags.each do |tag| %>
   <tr>
+    <td><%= tag.id %></td>
     <td><%= tag.name %></td>
     <td><%= link_to 'Show', game_tag_path(@game,tag) %></td>
     <td><%= link_to 'Edit', edit_game_tag_path(@game,tag) %></td>

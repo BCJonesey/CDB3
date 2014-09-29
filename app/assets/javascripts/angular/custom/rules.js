@@ -51,6 +51,7 @@ LT.validate = function(options,$scope){
 	}
 	if(LT.cache.errors.length == 0){
 		LT.updateScope($scope);
+		return true;
 	}
 	else{
 		options.skill.skill.rank = options.skill.prevRank;

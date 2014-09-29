@@ -42,7 +42,7 @@ chareditControllers.controller('SkillListCrl', ['$scope','Restangular',
 
     $scope.validate = function(options){
       if(LT.validate(options,$scope)){
-        $scope.save(skill);
+        $scope.save(options.skill.skill);
       }
     };
 

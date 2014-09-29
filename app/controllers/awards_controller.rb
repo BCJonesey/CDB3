@@ -2,9 +2,9 @@ class AwardsController < ApplicationController
   before_filter :require_login
   before_filter :require_game
   before_filter :get_member
-  before_filter :get_resource_and_match_game, :except => [:index, :new, :create,:request_award]
-  before_filter :require_game_admin,:except => [:index,:request_award,:assign]
-  
+  before_filter :get_resource_and_match_game, :except => [:index, :new, :create]
+  before_filter :require_game_admin,:except => [:index,:create,:assign,:update]
+
   # GET /awards
   # GET /awards.json
   def index
@@ -84,7 +84,7 @@ class AwardsController < ApplicationController
     end
   end
 
-  private 
+  private
 
   def set_vars
     @award.amount = params[:award][:amount] if params[:award].has_key?(:amount)
@@ -96,6 +96,6 @@ class AwardsController < ApplicationController
       @award.approved_by = @current_member if params[:award].has_key?(:approve)
     end
   end
-  
+
 
 end

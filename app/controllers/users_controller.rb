@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
-  before_filter :require_global_admin, :except => [:new,:create]
-  
+  before_filter :require_global_admin, :except => [:new,:create,:edit,:update]
+  before_filter :require_global_admin_unless_owned, :only => [:edit,:update]
+
   # GET /users
   # GET /users.json
   def index
@@ -51,8 +52,8 @@ class UsersController < ApplicationController
         UserMailer.welcome_email(@user).deliver
 
         format.html do
-          redirect_to login_path, 
-            :notice => 'User was successfully created.' 
+          redirect_to login_path,
+            :notice => 'User was successfully created.'
         end
         format.json { render json: @user, status: :created, location: @user }
       else
@@ -65,10 +66,12 @@ class UsersController < ApplicationController
   # PUT /users/1
   # PUT /users/1.json
   def update
+    params["user"].delete("password") if params["user"]["password"] == ""
     @user = User.find(params[:id])
 
     respond_to do |format|
       if @user.update_attributes(params[:user])
+        format.html { redirect_to root_path, notice: 'User was successfully updated.' } if @user.id == current_user.id
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
         format.json { head :ok }
       else
@@ -88,5 +91,10 @@ class UsersController < ApplicationController
       format.html { redirect_to users_url }
       format.json { head :ok }
     end
+  end
+
+  def require_global_admin_unless_owned
+    @user = User.find(params[:id])
+    require_global_admin unless @user.id == current_user.id
   end
 end

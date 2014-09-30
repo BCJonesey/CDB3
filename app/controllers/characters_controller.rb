@@ -5,7 +5,8 @@ class CharactersController < ApplicationController
   before_filter :get_member
   before_filter :require_game_admin, :only => [:destroy]
   before_filter :get_resource_and_match_game, :except => [:index, :new, :create]
-  
+  before_filter before_filter(:only => [:show, :edit, :update]) { |c| c.require_member_match_or_admin @character.member }
+
   # GET /characters
   # GET /characters.json
   def index
@@ -16,7 +17,7 @@ class CharactersController < ApplicationController
     end
 
     @all_characters = []
-    
+
     if game_admin?(@game) or global_admin?
       @all_characters = @game.characters
     end
@@ -56,7 +57,7 @@ class CharactersController < ApplicationController
 
   # GET /characters/1/edit
   def edit
-    
+
   end
 
   # POST /characters
@@ -110,8 +111,8 @@ class CharactersController < ApplicationController
       format.json { head :ok }
     end
   end
-  
-  
+
+
   def character_version
     respond_to do |format|
       format.html # index.html.erb

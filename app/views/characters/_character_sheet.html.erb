@@ -1,0 +1,31 @@
+<div class="character-sheet ">
+  <h1>Skills:</h1>
+  <div class="skill-list">
+  <% @character.get_or_create_version.character_skills.each do |char_skill| %>
+    <% if !char_skill.skill.nil? %>
+      <div class="skill-name"><%= char_skill.skill.name %></div>
+      <% if char_skill.skill.max_rank > 1 %>
+        <div class="skill-rank">X <%= char_skill.rank %></div>
+      <% end %>
+      <div class="skill-description"><%= char_skill.skill.summary %></div>
+    <% end %>
+  <% end %>
+  </div>
+</div>
+
+
+<style>
+.character-sheet .skill-name,.character-sheet .skill-rank{
+  font-size:20px;
+  display:inline-block;
+}
+@media print {
+    h1 {
+        font-size: 20px;
+        color: red;
+    }
+    .form-actions,footer,.awards-table{
+      display:none;
+    }
+}
+</style>

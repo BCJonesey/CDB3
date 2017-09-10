@@ -1,6 +1,6 @@
 class Skill < ActiveRecord::Base
   has_many :skill_tags, :dependent => :delete_all
-  has_many :provided_skill_tags, :class_name => "SkillTag", :conditions => { :gives=>true}
+  has_many :provided_skill_tags, -> { where(gives: true) }, :class_name => "SkillTag"
   has_many :tags, :through => :skill_tags
   has_many :tags_provided,:class_name => "Tag", :through => :provided_skill_tags, :source=>:tag
   has_many :character_skills

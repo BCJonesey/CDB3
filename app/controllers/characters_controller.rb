@@ -5,7 +5,7 @@ class CharactersController < ApplicationController
   before_filter :get_member
   before_filter :require_game_admin, :only => [:destroy]
   before_filter :get_resource_and_match_game, :except => [:index, :new, :create]
-  before_filter before_filter(:only => [:show, :edit, :update]) { |c| c.require_member_match_or_admin @character.member }
+  before_filter :check_character_access, :only => [:show, :edit, :update]
 
   # GET /characters
   # GET /characters.json
@@ -118,6 +118,11 @@ class CharactersController < ApplicationController
       format.html # index.html.erb
       format.json { render json: @character.get_or_create_version.to_json(:include=>:character_skills)  }
     end
+  end
+
+
+  def check_character_access
+    require_member_match_or_admin @character.member
   end
 
 end

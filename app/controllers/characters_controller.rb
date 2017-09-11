@@ -71,7 +71,7 @@ class CharactersController < ApplicationController
       @user = current_user
     end
 
-    @member = Member.find_or_create_by_user_id_and_game_id(@user.id, @game.id)
+    @member = Member.find_or_create_by(user_id: @user.id, game_id: @game.id)
     @character.member_id = @member.id
 
 

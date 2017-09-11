@@ -80,7 +80,7 @@ CDB3::Application.configure do
 
   config.action_mailer.delivery_method = :mailgun
   config.action_mailer.mailgun_settings = {
-    api_key: 'key-060715f3e001a2302e7fcbc2d3c0ca19',
+    api_key: ENV['MAILGUN_API_KEY'],
     domain: 'mg.larp.ninja',
   }
 end

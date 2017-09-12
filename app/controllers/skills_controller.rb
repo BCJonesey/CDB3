@@ -48,7 +48,7 @@ class SkillsController < ApplicationController
     @skill.game = @game
     respond_to do |format|
       if @skill.save
-        format.html { redirect_to [@game,@skill], notice: 'Skill was successfully created.' }
+        format.html { redirect_to game_skills_url(@game) , notice: 'Skill was successfully created.' }
         format.json { render json: @skill, status: :created, location: @skill }
       else
         format.html { render action: "new" }

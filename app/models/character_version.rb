@@ -12,7 +12,7 @@ class CharacterVersion < ActiveRecord::Base
       cskill.rank = rank
       return cskill.save! 
     else
-      return self.character_skills.destroy_all(:skill_id=>skill_id)
+      return self.character_skills.where(skill_id: skill_id).destroy_all
     end
   end
 

@@ -11,3 +11,11 @@ services:
       - "32785:32785"
     depends_on:
       - db
+      - packer
+  packer:
+    build: .
+    command: ./bin/webpack-dev-server --progress --inline
+    volumes:
+      - .:/CDB3
+    ports:
+      - "3035:3035"

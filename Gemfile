@@ -29,6 +29,8 @@ gem 'jbuilder', '~> 1.2'
 
 gem 'responders', '~> 2.0'
 
+gem 'webpacker', '~> 3.0'
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false

@@ -24,3 +24,4 @@ ADD Gemfile /CDB3/Gemfile
 ADD Gemfile.lock /CDB3/Gemfile.lock
 RUN bundle install
 ADD . /CDB3
+

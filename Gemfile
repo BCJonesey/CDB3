@@ -31,6 +31,8 @@ gem 'responders', '~> 2.0'
 
 gem 'webpacker', '~> 3.0'
 
+gem 'raygun4ruby'
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false

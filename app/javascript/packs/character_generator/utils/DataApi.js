@@ -1,4 +1,6 @@
 
+var Fetch = require('whatwg-fetch');
+
 class DataApi{
     
     constructor(gameUrl, characterId) {
@@ -6,12 +8,20 @@ class DataApi{
         this.characterId = characterId;
     }
     getSkills(successCallBack){
-        $.ajax({
-            url: `${game_url}`,
-            data: data,
-            success: success,
-            dataType: dataType
-          });
+
+        fetch(`${this.gameUrl}/characters/${this.characterId}/skills.json`,{
+            credentials: 'same-origin'
+          })
+        .then(function(response) {
+          return response.json()
+        }).then(function(json) {
+            successCallBack(json);
+          console.log('parsed json', json);
+        }).catch(function(ex) {
+          console.log('parsing failed', ex)
+        })
+
+
     }
 
     getUrl(){

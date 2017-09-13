@@ -14,7 +14,7 @@ services:
       - packer
   packer:
     build: .
-    command: ./bin/webpack-dev-server --progress --inline
+    command: ./bin/webpack-dev-server --progress --inline --host 0.0.0.0
     volumes:
       - .:/CDB3
     ports:

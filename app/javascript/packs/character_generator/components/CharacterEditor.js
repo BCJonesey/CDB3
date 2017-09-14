@@ -28,7 +28,7 @@ class CharacterEditor extends React.Component {
     return (
       <div>
       <p>Character Name! {this.state.skills.length}</p>
-      {this.state.skills.map( (skill) => {return(<Skill skill={skill} />)} )}
+      {this.state.skills.map( (skill) => {return(<Skill skill={skill} key={skill.id} />)} )}
       </div>
     )
   }

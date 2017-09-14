@@ -7,7 +7,7 @@ gem 'rails', '4.2.2'
 gem 'pg'
 
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 4.0.0'
+gem 'sass-rails'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
@@ -32,6 +32,9 @@ gem 'responders', '~> 2.0'
 gem 'webpacker', '~> 3.0'
 
 gem 'raygun4ruby'
+
+# Boooot strap
+gem 'bootstrap', '~> 4.0.0.beta'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

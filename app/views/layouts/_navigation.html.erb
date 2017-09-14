@@ -1,77 +1,41 @@
-
-
-
-<nav class="navbar navbar-default" role="navigation">
-  <!-- Brand and toggle get grouped for better mobile display -->
-  <div class="navbar-header">
-    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-      <span class="sr-only">Toggle navigation</span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-    </button>
-    <%= link_to "LARP.ninja", root_path, :class=>"navbar-brand" %>
-  </div>
-
-  <!-- Collect the nav links, forms, and other content for toggling -->
-  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-    <ul class="nav navbar-nav">
-     <!-- figure out  class="active" -->
-      <% if !@current_member.nil? %>
-      <li><%= link_to @game.name, game_path(@game) %></li>
-      <li><%= link_to "Characters", game_characters_path(@game) %></li>
-      <li><%= link_to "Events", game_events_path(@game) %></li>
-      <li><%= link_to "Awards", game_awards_path(@game) %></li>
+<nav class="navbar navbar-light bg-light">
+  <%= link_to "LARP.ninja", root_path, :class=>"navbar-brand" %>
+  <ul class="nav">
+   <!-- figure out  class="active" -->
+   <% if !@current_member.nil? %>
+      <li class="nav-item"><%= link_to @game.name, game_path(@game), :class=>"nav-link" %></li>
+      <li class="nav-item"><%= link_to "Characters", game_characters_path(@game), :class=>"nav-link" %></li>
+      <li class="nav-item"><%= link_to "Events", game_events_path(@game), :class=>"nav-link" %></li>
+      <li class="nav-item"><%= link_to "Awards", game_awards_path(@game), :class=>"nav-link" %></li>
       <% if(@current_member.is_admin) %>
-      <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin <b class="caret"></b></a>
-        <ul class="dropdown-menu">
-          <li><%= link_to "Currencies", game_currencies_path(@game) %></li>
-          <li><%= link_to "Members", game_members_path(@game) %></li>
-          <li><%= link_to "Skills", game_skills_path(@game) %></li>
-          <li><%= link_to "Tags", game_tags_path(@game) %></li>
-        </ul>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Admin</a>
+        <div class="dropdown-menu">
+            <%= link_to "Currencies", game_currencies_path(@game), :class=>"dropdown-item"  %>
+            <%= link_to "Members", game_members_path(@game), :class=>"dropdown-item" %>
+            <%= link_to "Skills", game_skills_path(@game), :class=>"dropdown-item" %>
+            <%= link_to "Tags", game_tags_path(@game), :class=>"dropdown-item" %>
+        </div>
       </li>
       <% end %>
-      <% end %>
     </ul>
-    <!--  perhaps we will have the login form here?
-    <form class="navbar-form navbar-left" role="search">
-      <div class="form-group">
-        <input type="text" class="form-control" placeholder="Search">
-      </div>
-      <button type="submit" class="btn btn-default">Submit</button>
-    </form>
-    -->
-    <ul class="nav navbar-nav navbar-right">
+    <ul class="nav ml-auto">
+    <% end %>
       <% if !logged_in? %>
-      <li><%= link_to "Log In", '/main/login',  :class=>"navbar-link" %></li>
+      <li  class="nav-item"><%= link_to "Log In", '/main/login',  :class=>"nav-link" %></li>
       <% else %>
-      <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= current_user.name %> <b class="caret"></b></a>
-        <ul class="dropdown-menu">
-          <li><%= link_to "Edit User", edit_user_path(current_user) %></li>
-          <li><%= link_to "Log Out", '/main/logout' %></li>
-          <li role="presentation" class="dropdown-header">My Games</li>
+      <li class="nav-item dropdown ml-auto">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><%= current_user.name %></a>
+        
+        <div class="dropdown-menu">
+          <%= link_to "Edit User", edit_user_path(current_user), :class=>"dropdown-item"  %>
+          <%= link_to "Log Out", '/main/logout', :class=>"dropdown-item"  %>
+          <div role="separator" class="dropdown-divider">My Games</div>
           <% current_user.games.each do |mg| %>
-            <li role="presentation"><a role="menuitem" tabindex="-1" href="<%= game_path(mg) %>"><%= mg.name %></a></li>
+            <%= link_to mg.name, game_path(mg) , :class=>"dropdown-item"  %>
           <% end %>
-        </ul>
+        </div>
       </li>
-      <% end %>
-    </ul>
-  </div><!-- /.navbar-collapse -->
+      <% end %>    
+  
 </nav>
-
-
-
-
-
-
-
-
-
-
-
-
-

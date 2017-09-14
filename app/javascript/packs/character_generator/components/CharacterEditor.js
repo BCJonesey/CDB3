@@ -1,6 +1,8 @@
 var React = require('react');
 var DataApi = require('../utils/DataApi');
-var Skill = require('./Skill');
+var SkillList = require('./SkillList');
+var SearchAndFilter = require('./SearchAndFilter');
+
 
 
 class CharacterEditor extends React.Component {
@@ -26,9 +28,10 @@ class CharacterEditor extends React.Component {
 
   render() {
     return (
-      <div>
-      <p>Character Name! {this.state.skills.length}</p>
-      {this.state.skills.map( (skill) => {return(<Skill skill={skill} key={skill.id} />)} )}
+      <div className='container'>
+        <p>Character Name!</p>
+        <SearchAndFilter />
+        <SkillList skills={this.state.skills} />
       </div>
     )
   }

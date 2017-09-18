@@ -59,7 +59,7 @@ class Character < ActiveRecord::Base
 
   def award_starting_currencies
     game.currencies.where.not(starting_amount: nil).each do |currency|
-      awards.create({comment:"Starting Currency", currency: currency, amount: 30, member: member, approved_by: member, created_by: member})
+      awards.create({comment:"Starting Currency", currency: currency, amount: currency.starting_amount, member: member, approved_by: member, created_by: member})
     end
   end
 

@@ -1,7 +1,11 @@
 var React = require('react');
 var DataApi = require('../utils/DataApi');
-var Skill = require('./Skill');
-
+var SkillList = require('./SkillList');
+var CharacterDetails = require('./CharacterDetails');
+var StatusMessages = require('./StatusMessages');
+var SearchAndFilter = require('./SearchAndFilter');
+var RulesProcessor = require('../utils/RulesProcessor');
+var LangUtils = require('../utils/LangUtils');
 
 class CharacterEditor extends React.Component {
 
@@ -9,26 +13,57 @@ class CharacterEditor extends React.Component {
     super(props);
     this.dataApi = new DataApi(this.props.gameUrl, this.props.characterId);
     this.state = {
-      skills: [],
-      name: "",
+      skills: {},
+      character: {},
+      currencySpend: {},
+      errorMessages: []
     }
   }
 
   componentWillMount(){
     this.dataApi.getSkills(this._skillsUpdate.bind(this))
+    this.dataApi.getCharacterData(this._characterUpdate.bind(this))
   }
+
+ 
 
   _skillsUpdate(skills){
     this.setState({skills: skills})
+    this._evalCharacterState()
   }
 
+  _characterUpdate(characterData){
+    this.setState({character: characterData})
+    this._evalCharacterState()
+  }
+
+  _evalCharacterState(){
+    if(!(this.state.character.currency_totals === undefined) && Object.keys(this.state.skills).length > 0){
+      this.setState(RulesProcessor.evalRulesAndSpend(this.state.skills, this.state.character.currency_totals))
+    }
+  }
+
+  _rankChangeHandler(skillId, newRank){
+    var skillCopy = LangUtils.deepCopy(this.state.skills);
+    skillCopy[skillId].rank = newRank
+    var result = RulesProcessor.evalRulesAndSpend(skillCopy, this.state.character.currency_totals)
+    if(result.errorMessages.length == 0){
+      this.dataApi.updateSkillRank(skillId, newRank, this._skillsUpdate.bind(this));
+      result.skills = skillCopy
+    }
+
+    this.setState(result)
+    
+  }
 
 
   render() {
     return (
-      <div>
-      <p>Character Name! {this.state.skills.length}</p>
-      {this.state.skills.map( (skill) => {return(<Skill skill={skill} key={skill.id} />)} )}
+      <div className='container'>
+        <CharacterDetails character={this.state.character} currencySpend={this.state.currencySpend} />
+        <SearchAndFilter />
+        <StatusMessages errorMessages={this.state.errorMessages} />
+        <SkillList skills={this.state.skills} rankChangeHandler={this._rankChangeHandler.bind(this)} />
       </div>
     )
   }

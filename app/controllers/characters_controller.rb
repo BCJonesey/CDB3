@@ -34,7 +34,7 @@ class CharactersController < ApplicationController
     @character.get_or_create_version
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @character.to_json(:include => {:character_version => {:include=>:character_skills}} )}
+      format.json { render json: @character.to_json(:methods => :currency_totals)}
     end
   end
 
@@ -72,11 +72,12 @@ class CharactersController < ApplicationController
     end
 
     @member = Member.find_or_create_by(user_id: @user.id, game_id: @game.id)
-    @character.member_id = @member.id
+    @character.member = @member
 
 
     respond_to do |format|
       if @character.save
+        @character.award_starting_currencies
         format.html { redirect_to [@game, @character], notice: 'Character was successfully created.' }
         format.json { render json: @character, status: :created, location: @character }
       else

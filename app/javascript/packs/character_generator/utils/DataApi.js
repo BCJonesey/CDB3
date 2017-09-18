@@ -11,17 +11,49 @@ class DataApi{
 
         fetch(`${this.gameUrl}/characters/${this.characterId}/skills.json`,{
             credentials: 'same-origin'
-          })
-        .then(function(response) {
+          }).then(function(response) {
           return response.json()
         }).then(function(json) {
             successCallBack(json);
-          console.log('parsed json', json);
         }).catch(function(ex) {
           console.log('parsing failed', ex)
         })
 
 
+    }
+
+    getCharacterData(successCallBack){
+        fetch(`${this.gameUrl}/characters/${this.characterId}.json`,{
+            credentials: 'same-origin'
+          }).then(function(response) {
+          return response.json()
+        }).then(function(json) {
+            successCallBack(json);
+        }).catch(function(ex) {
+          console.log('parsing failed', ex)
+        })
+    }
+
+ 
+    updateSkillRank(skillId, newRank, successCallBack){
+        fetch(`${this.gameUrl}/characters/${this.characterId}/skills/${skillId}.json`, {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            credentials: 'same-origin',
+            body: JSON.stringify({
+                character_skill: {
+                    rank: newRank
+                }
+            })
+        }).then(function(response) {
+          return response.json()
+        }).then(function(json) {
+            successCallBack(json);
+        }).catch(function(ex) {
+          console.log('parsing failed', ex)
+        })
     }
 
     getUrl(){

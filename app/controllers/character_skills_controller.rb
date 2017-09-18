@@ -10,17 +10,7 @@ class CharacterSkillsController < ApplicationController
   # GET /tags
   # GET /tags.json
   def index
-
-    @skills = @game.skills.includes(skill_tags: :tag)
-    @skills_hash = @skills.as_json(include: {skill_tags:{ include: :tag,only:[:gives]}})
-    @rank_hash = Hash.new(0)
-    @character.get_or_create_version.character_skills.each do |x|
-      @rank_hash[x.skill_id] = x.rank
-    end
-    @skills_hash.each do |x|
-      x["rank"] = @rank_hash[x["id"]]
-    end
-    render json: @skills_hash
+    render json: skills_hash
   end
 
   # GET /tags/1
@@ -36,7 +26,7 @@ class CharacterSkillsController < ApplicationController
   # PUT /tags/1.json
   def update
     if @character.set_skill_rank(params[:id],params[:character_skill][:rank])
-      head :ok
+      render json: skills_hash
     else
       render text: "error", status: :unprocessable_entity
     end
@@ -44,6 +34,24 @@ class CharacterSkillsController < ApplicationController
 
   def get_character
     @character = Character.find(params["character_id"])
+  end
+
+
+  private
+  def skills_hash
+    skills = @game.skills.includes(skill_tags: :tag)
+    
+    
+    
+    skills_hash = skills.as_json(include: {skill_tags:{ include: :tag,only:[:gives]}})
+    rank_hash = Hash.new(0)
+    @character.get_or_create_version.character_skills.each do |x|
+      rank_hash[x.skill_id] = x.rank
+    end
+    skills_hash.each do |x|
+      x["rank"] = rank_hash[x["id"]]
+    end
+    Hash[skills_hash.collect { |skill| [skill["id"], skill] }]
   end
 
 end

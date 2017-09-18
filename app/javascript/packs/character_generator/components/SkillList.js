@@ -8,12 +8,15 @@ class SkillList extends React.Component {
   render() {
     return (
       <div className='container'>
-          {this.props.skills.map( (skill) => {return(<Skill skill={skill} key={skill.id} />)} )}
+          {Object.keys(this.props.skills).map( (skillId) => {return(<Skill rankChangeHandler={this.props.rankChangeHandler.bind(this)} skill={this.props.skills[skillId]} key={skillId} />)} )}
       </div>
     )
   }
+
 
   
 }
 
 module.exports = SkillList;
+
+

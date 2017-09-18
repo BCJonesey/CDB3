@@ -1,5 +1,6 @@
 var React = require('react');
 var SkillUpAndDown = require('./SkillUpAndDown');
+var RulesProcessor = require('../utils/RulesProcessor');
 
 class Skill extends React.Component {
 
@@ -15,6 +16,7 @@ class Skill extends React.Component {
             <div className="col">
                 <SkillUpAndDown value={this.props.skill.rank} rankChangeHandler={this._rankChangeHandler.bind(this)}/>
             </div>
+            <div className="col">{RulesProcessor.getCostString(this.props.skill)}</div>
             <div className="col">{this.props.skill.summary}</div>
             </div>
         </div>
@@ -22,8 +24,7 @@ class Skill extends React.Component {
   }
 
   _rankChangeHandler(newValue){
-      console.log(this.props.skill.name)
-      console.log(newValue)
+      this.props.rankChangeHandler(this.props.skill.id,newValue);
   }
 
   

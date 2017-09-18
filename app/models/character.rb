@@ -49,5 +49,18 @@ class Character < ActiveRecord::Base
     return character_version.set_skill_rank(skill_id,rank)
   end
 
+  def currency_totals
+    res = awards.joins(:currency).group("currencies.short_name").sum(:amount)
+    res.each do |key, val|
+      res[key] = val.to_i
+    end
+    res
+  end
+
+  def award_starting_currencies
+    game.currencies.where.not(starting_amount: nil).each do |currency|
+      awards.create({comment:"Starting Currency", currency: currency, amount: 30, member: member, approved_by: member, created_by: member})
+    end
+  end
 
 end

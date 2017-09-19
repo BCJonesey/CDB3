@@ -6,13 +6,15 @@ class SkillUpAndDown extends React.Component {
 
   render() {
     return (
-      <div className='container'>
-          <div className='row'>
-          <div className='col' onClick={this._handleMinusClick.bind(this)}>-</div>
-          <div className='col'>{this.props.value}</div>
-          <div className='col' onClick={this._handlePlusClick.bind(this)}>+</div>
+        <div className="input-group input-group-quantity" data-toggle="quantity">
+            <span className="input-group-btn">
+              <input type="button" value="-" className="btn btn-secondary quantity-down" field="quantity"  onClick={this._handleMinusClick.bind(this)} />
+            </span>
+            <input type="text" name="quantity" value={this.props.value} className="quantity form-control" />
+            <span className="input-group-btn">
+              <input type="button" value="+" className="btn btn-secondary quantity-up" field="quantity"  onClick={this._handlePlusClick.bind(this)} />
+            </span>
           </div>
-      </div>
     )
   }
 
@@ -27,3 +29,6 @@ _handleMinusClick(){
 }
 
 module.exports = SkillUpAndDown;
+
+
+

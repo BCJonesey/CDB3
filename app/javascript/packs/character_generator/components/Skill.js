@@ -4,22 +4,22 @@ var RulesProcessor = require('../utils/RulesProcessor');
 
 class Skill extends React.Component {
 
-
+    
   render() {
     return (
-        <div className="container">
-            <div className="row">
-            <div className="col"><h4 className="card-title">{this.props.skill.name}</h4></div>
-                
-            </div>
-            <div className="row">
-            <div className="col">
-                <SkillUpAndDown value={this.props.skill.rank} rankChangeHandler={this._rankChangeHandler.bind(this)}/>
-            </div>
-            <div className="col">{RulesProcessor.getCostString(this.props.skill)}</div>
-            <div className="col">{this.props.skill.summary}</div>
-            </div>
-        </div>
+        <tr>
+        <td>
+        <SkillUpAndDown value={this.props.skill.rank} rankChangeHandler={this._rankChangeHandler.bind(this)}/>
+        </td>
+        
+        <td> <span className="font-weight-bold">{this.props.skill.name}</span> </td>
+        <td>{RulesProcessor.getCostString(this.props.skill)}</td>
+        <td className="text-center">
+        {this.props.skill.summary}
+        </td>
+      </tr>
+
+
     )
   }
 

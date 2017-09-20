@@ -1,0 +1,17 @@
+//======================================
+// Overflow functionality 
+//======================================
+
+.overflow-x {
+  overflow-x: auto;
+}
+.overflow-y {
+  overflow-y: auto;
+}
+
+// scrollbars
+[data-toggle="scrollbar"] {
+  -webkit-flex-wrap: nowrap!important;
+  -ms-flex-wrap: nowrap!important;
+  flex-wrap: nowrap!important;
+}

@@ -1,0 +1,68 @@
+//
+// Alerts:
+// See: https://github.com/twbs/bootstrap/blob/v4-dev/scss/mixins/_alert.scss
+// --------------------------------------------------
+// Custom styles
+.alert-secondary {
+  background-color: white;
+  border-color: #ccc;
+  color: $gray;
+  
+  hr {
+    border-top-color: #ccc;
+  }
+  .alert-link {
+    color: darken($gray, 10%);
+  }   
+}
+.alert-primary {
+  background-color: rgba($brand-primary, 25%/100.0%);
+  border-color: rgba($brand-primary, 80%/100.0%);
+  color: darken($brand-primary, 20%);
+  
+  hr {
+    border-top-color: rgba($brand-primary, 85%/100.0%);
+  }
+  .alert-link {
+    color: darken($brand-primary, 20%);
+  }  
+}
+.alert-inverse {
+  background-color: $brand-inverse;
+  border-color: darken($brand-inverse, 10%);
+  color: white;
+  
+  hr {
+    border-top-color: darken($brand-inverse, 20%);
+  }
+  .alert-link {
+    color: white;
+  }
+  
+  .close:focus, .close:hover {
+    color: white;
+  }
+}
+
+// Extra theme colours
+// -------------------------------------------
+@if $extended-colour-options == true {
+  @each $name, $value in $theme-colours {
+    .alert-#{$name} {
+      background-color: lighten($value, 18%);
+      border-color: darken($value, 8%);
+      color: darken($value, 15%);
+      
+      hr {
+        border-top-color: darken($value, 10%);
+      }
+      .alert-link {
+        color: white;
+      }
+      
+      .close:focus, .close:hover {
+        color: white;
+      }
+    }  
+  }
+}

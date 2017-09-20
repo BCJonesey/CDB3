@@ -1,0 +1,68 @@
+// -------------------------------------------
+// Colour utils
+// -------------------------------------------
+
+// Text/links
+// -------------------------------------------
+.text-grey {
+  color: #eee !important;
+}
+.text-grey-dark {
+  color: darken(#eee, 60%)  !important;
+}
+.text-black {
+  color: #000 !important;
+}
+.text-inverse {
+  color: $brand-inverse !important;
+}
+
+// Backgrounds
+// -------------------------------------------
+.bg-transparent  {
+  background: transparent !important;
+}
+.bg-inverse {
+  background-color: $brand-inverse !important;
+}
+.bg-inverse-dark {
+  background-color: darken($brand-inverse, 3%) !important;
+}
+.bg-white {
+  background-color: white !important;
+}
+.bg-faded {
+  background-color: #f7f7f7 !important;
+}
+.bg-grey {
+  background-color: $brand-grey !important;
+}
+.bg-grey-dark {
+  background-color: $brand-grey-dark !important;
+}
+.bg-black {
+  background-color: #000000 !important;
+}
+
+.bg-shadow {
+  @include box-shadow(1px 1px 5px darken($gray-lighter, 8%));
+}
+.bg-gradient {
+  @include gradient-y($white, darken($white, 8%));
+}
+.bg-gradient-flip {
+  @include gradient-y(darken($white, 8%), $white);
+}
+
+// Extra theme colours
+// -------------------------------------------
+@if $extended-colour-options == true {
+  @each $name, $value in $theme-colours {
+    .bg-#{$name} {
+      background-color: $value !important;
+    }
+    .text-#{$name} {
+      color: $value !important;
+    }  
+  }
+}

@@ -1,0 +1,132 @@
+// -------------------------------------------
+// Opacity helpers
+// -------------------------------------------
+
+// ie. op-1 = opacity 0.1
+// -------------------------------------------
+@each $name, $value in $op {
+  .op-#{$name} {
+    @include opacity($value !important);
+  }
+  a.op-#{$name}:hover {
+    opacity: 1 !important;
+  }  
+}
+
+// Background colours
+// -------------------------------------------
+@each $name, $value in $op {
+  .bg-op-#{$name} {
+    &.bg-faded {
+      @include translucent_background(darken($body-bg, 3%), $value, 1);
+    }
+    &.bg-primary {
+      @include translucent_background($brand-primary, $value, 1);
+    }
+    &.bg-success {
+      @include translucent_background($brand-success, $value, 1);
+    }
+    &.bg-info {
+      @include translucent_background($brand-info, $value, 1);
+    }
+    &.bg-warning {
+      @include translucent_background($brand-warning, $value, 1);
+    }
+    &.bg-danger {
+      @include translucent_background($brand-danger, $value, 1);
+    }
+    &.bg-inverse,
+    &.bg-dark {
+      @include translucent_background($brand-inverse, $value, 1);
+    }
+    
+    &.bg-inverse-dark {
+      @include translucent_background(darken($brand-inverse, 3%), $value, 1);
+    }
+    &.bg-white {
+      @include translucent_background(white, $value, 1);
+    }
+    &.bg-grey {
+      @include translucent_background($brand-grey, $value, 1);
+    }
+    &.bg-grey-dark {
+      @include translucent_background($brand-grey-dark, $value, 1);
+    }
+    &.bg-black {
+      @include translucent_background(#000000, $value, 1);
+    }
+    &.bg-light {
+      @include translucent_background($gray-100, $value, 1);
+    }    
+    
+    &.bg-gradient {
+      @include gradient-y($white, alpha(darken($white, 8%), $value));
+    }
+    &.bg-gradient-flip {
+      @include gradient-y(alpha(darken($white, 8%), $value), $white);
+    }
+    
+    // Extra theme colours
+    // -------------------------------------------
+    @each $colour_name, $colour_value in $theme-colours {
+      &.bg-#{$colour_name} {
+        @include translucent_background($colour_value, $value, 1);
+      }
+    }
+  }
+}
+
+// Borders
+// -------------------------------------------
+@each $name, $value in $op {
+  .border-op-#{$name} {
+    &.border-primary {
+      @include translucent_border($primary_colour, $value);
+    }
+    &.border-success {
+      @include translucent_border($brand-success, $value);
+    }
+    &.border-info {
+      @include translucent_border($brand-info, $value);
+    }
+    &.border-warning {
+      @include translucent_border($brand-warning, $value);
+    }
+    &.border-danger {
+      @include translucent_border($brand-danger, $value);
+    }
+    &.border-grey {
+      @include translucent_border(#eee, $value);
+    }
+    &.border-faded {
+      @include translucent_border(#f7f7f9, $value);
+    }
+    &.border-grey-dark {
+      @include translucent_border(darken(#eee, 60%), $value);
+    }
+    &.border-primary-faded {
+      @include translucent_border(rgba($primary_colour, 30%/100.0%), $value);
+    }
+    &.border-primary-darkend {
+      @include translucent_border(darken($primary_colour, 20%), $value);
+    }
+    &.border-inverse,
+    &.border-dark {
+      @include translucent_border($brand-inverse, $value);
+    }
+    &.border-light {
+      @include translucent_border($gray-100, $value);
+    }
+    
+    // Extra theme colours
+    // -------------------------------------------
+    @each $colour_name, $colour_value in $theme-colours {
+      &.border-#{$colour_name} {
+        @include translucent_border($colour_value, $value);
+      }
+    }    
+  }
+}
+
+// @todo - buttons
+// -------------------------------------------

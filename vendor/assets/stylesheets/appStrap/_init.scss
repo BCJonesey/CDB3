@@ -1,0 +1,17 @@
+/*******************************************************
+ * Custom theme code styles
+ * Written by Themelize.me (http://themelize.me)
+ *
+ * Includes the base variables & mixins needed for all
+ * scss files
+ *******************************************************/
+
+// -------------------------------------------
+// REQUIRED: Variables & Mixins
+// -------------------------------------------
+@import 'appStrap/assets/bootstrap_src/functions.scss'; // Bootstrap core functions
+@import 'appStrap/assets/bootstrap_src/variables.scss'; // Bootstrap core variable
+@import "appStrap/core/variables.scss"; // Custom variables & overrides
+@import "appStrap/custom/custom-variables.scss"; // Custom site variables
+@import 'appStrap/assets/bootstrap_src/mixins.scss'; // Bootstrap core mixins
+@import "appStrap/core/mixins.scss";

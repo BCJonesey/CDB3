@@ -1,0 +1,76 @@
+// -------------------------------------------
+// Theme utilities & helper class
+// -------------------------------------------
+
+// Border helpers
+// -------------------------------------------
+.border-primary {
+  border: 1px solid transparent;
+  border-color: $primary_colour !important;
+}
+.border-success {
+  border: 1px solid transparent;
+  border-color: $brand-success !important;
+}
+.border-info {
+  border: 1px solid transparent;
+  border-color: $brand-info !important;
+}
+.border-warning {
+  border: 1px solid transparent;
+  border-color: $brand-warning !important;
+}
+.border-danger {
+  border: 1px solid transparent;
+  border-color: $brand-danger !important;
+}
+.border-grey {
+  border: 1px solid transparent;
+  border-color: #eee !important;  
+}
+.border-faded {
+  border: 1px solid transparent;
+  border-color: #f7f7f9 !important;
+}
+.border-grey-dark {
+  border: 1px solid transparent;
+  border-color: darken(#eee, 60%)  !important;
+}
+.border-primary-faded {
+  border: 1px solid transparent; 
+}
+.border-primary-darkend {
+  border: 1px solid transparent; 
+}
+.border-inverse {
+  border: 1px solid transparent;
+  border-color: $brand-inverse;   
+}
+.border-white {
+  border: 1px solid transparent;
+  border-color: white !important;   
+}
+
+.border-w-2 {
+  border-width: 2px;
+}
+.border-w-3 {
+  border-width: 3px;
+}
+.border-w-4 {
+  border-width: 4px;
+}
+.border-w-5 {
+  border-width: 5px;
+}
+
+// Extra theme colours
+// -------------------------------------------
+@if $extended-colour-options == true {
+  @each $name, $value in $theme-colours {
+    .border-#{$name} {
+      border: 1px solid transparent;
+      border-color: $value !important;
+    }  
+  }
+}

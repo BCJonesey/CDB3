@@ -263,7 +263,7 @@ DEPENDENCIES
   rake
   raygun4ruby
   responders (~> 2.0)
-  sass-rails (>= 5.0.6)
+  sass-rails
   sdoc
   sorcery
   therubyracer

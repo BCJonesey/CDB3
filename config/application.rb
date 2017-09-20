@@ -27,6 +27,7 @@ module CDB3
     config.assets.precompile += %w( .svg .eot .woff .ttf)
     config.sass.load_paths << File.expand_path('../../lib/assets/stylesheets/')
     config.sass.load_paths << File.expand_path('../../vendor/assets/stylesheets/')
+    config.assets.paths << Rails.root.join("vendor", "assets", "images")
     console do
         require "pry"
         config.console = Pry

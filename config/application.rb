@@ -25,7 +25,8 @@ module CDB3
     config.action_controller.permit_all_parameters = true
     config.assets.paths << Rails.root.join('vendor', 'assets', 'fonts')
     config.assets.precompile += %w( .svg .eot .woff .ttf)
-    config.assets.precompile += %w( character_edit.js )
+    config.sass.load_paths << File.expand_path('../../lib/assets/stylesheets/')
+    config.sass.load_paths << File.expand_path('../../vendor/assets/stylesheets/')
     console do
         require "pry"
         config.console = Pry

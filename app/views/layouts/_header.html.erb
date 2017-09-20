@@ -3,39 +3,10 @@
 
 
 
-    <!--Header upper region-->
-    <div class="header-upper">
-
-        <!-- all direct children of the .header-inner element will be vertically aligned with each other you can override all the behaviours using the flexbox utilities (flexbox.htm) All elements with .header-brand & .header-block-flex wrappers will automatically be aligned inline & vertically using flexbox, this can be overridden using the flexbox utilities (flexbox.htm) Use .header-block to stack elements within on small screen & "float" on larger screens use .order-first or/and .order-last classes to make an element show first or last within .header-inner or .headr-block elements -->
-        <div class="header-inner container">
-            <!--user menu-->
-            <div class="header-block-flex order-1 mr-auto">
-                <nav class="nav nav-sm header-block-flex">
-                    <a class="nav-link d-md-none" href="login.html"><i class="fa fa-user"></i></a>
-                    <a class="nav-link text-xs text-uppercase d-none d-md-block" href="#signup-modal" data-toggle="modal">Sign Up</a>                    <a class="nav-link text-xs text-uppercase d-none d-md-block" href="#login-modal" data-toggle="modal">Login</a>
-                </nav>
-                <div class="header-divider header-divider-sm"></div>
-            </div>
-            <!--social media icons-->
-            <div class="nav nav-icons header-block order-12">
-                <!--@todo: replace with company social media details-->
-                <a href="#" class="nav-link"> <i class="fa fa-twitter-square icon-1x"></i> <span class="sr-only">Twitter</span> </a>
-                <a href="#" class="nav-link"> <i class="fa fa-facebook-square icon-1x"></i> <span class="sr-only">Facebook</span> </a>
-                <a href="#" class="nav-link"> <i class="fa fa-linkedin-square icon-1x"></i> <span class="sr-only">Linkedin</span> </a>
-                <a href="#" class="nav-link"> <i class="fa fa-google-plus-square icon-1x"></i> <span class="sr-only">Google plus</span> </a>
-            </div>
-        </div>
-    </div>
+    v>
     <div data-toggle="sticky">
 
-        <!--Header search region - hidden by default -->
-        <div class="header-search collapse" id="search">
-            <form class="search-form container">
-                <input type="text" name="search" class="form-control search" value="" placeholder="Search">
-                <button type="button" class="btn btn-link"><span class="sr-only">Search </span><i class="fa fa-search fa-flip-horizontal search-icon"></i></button>
-                <button type="button" class="btn btn-link close-btn" data-toggle="search-form-close"><span class="sr-only">Close </span><i class="fa fa-times search-icon"></i></button>
-            </form>
-        </div>
+
 
         <!--Header & Branding region-->
         <div class="header">
@@ -45,18 +16,16 @@
                 <div class="header-brand">
                     <a class="header-brand-text" href="index.html" title="Home">
                         <h1>
-                            <span>App</span>Strap<span>.</span>
+                            <span>LARP</span>.<span>ninja</span>
                         </h1>
                     </a>
                     <div class="header-divider d-none d-lg-block"></div>
-                    <div class="header-slogan d-none d-lg-block">Bootstrap 4 Theme</div>
+                    <div class="header-slogan d-none d-lg-block">Sneaking into LARPing</div>
                 </div>
                 <!-- other header content -->
                 <div class="header-block order-12">
 
-                    <!--Search trigger -->
-                    <a href="#search" class="btn btn-icon btn-link header-btn float-right order-11" data-toggle="search-form" data-target=".header-search"><i class="fa fa-search fa-flip-horizontal search-icon"></i></a>
-
+                 
                     <!-- mobile collapse menu button - data-toggle="collapse" = default BS menu - data-toggle="jpanel-menu" = jPanel Menu - data-toggle="overlay" = Overlay Menu -->
                     <a href="#top" class="btn btn-link btn-icon header-btn float-right d-lg-none" data-toggle="jpanel-menu" data-target=".navbar-main"
                         data-direction="right"> <i class="fa fa-bars"></i> </a>

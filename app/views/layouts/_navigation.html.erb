@@ -19,7 +19,7 @@
                     
                     <a href="customers.html" class="dropdown-item">Customers</a> 
                     <% if(@current_member.is_admin) %>
-                    <div class="dropdown dropdown-submenu dropdown-menu-left">
+                    <div class="dropdown dropdown-submenu">
                             <a href="#" class="dropdown-item dropdown-toggle" id="about-drop" data-toggle="dropdown" data-hover="dropdown" data-close-others="false">Admin</a>
                             <!-- Dropdown Menu -->
                             <div class="dropdown-menu" role="menu" aria-labelledby="about-drop">
@@ -33,6 +33,23 @@
                 <% end %>
             </li>
             <% end %>
+            <% if !logged_in? %>
+            <li  class="nav-item"><%= link_to "Log In", '/main/login',  :class=>"nav-link" %></li>
+            <% else %>
+            <li class="nav-item dropdown">
+             <a href="#" class="nav-link dropdown-toggle animated dropdown" data-toggle="dropdown" data-hover="dropdown" aria-expanded="false"><i class="fa fa-user nav-link-icon" aria-hidden="true"></i><%= current_user.name %></a>
+
+              
+             <div class="dropdown-menu" role="menu" aria-labelledby="about-drop">
+                <%= link_to "Edit User", edit_user_path(current_user), :class=>"dropdown-item"  %>
+                <%= link_to "Log Out", '/main/logout', :class=>"dropdown-item"  %>
+                <div role="separator" class="dropdown-divider">My Games</div>
+                <% current_user.games.each do |mg| %>
+                  <%= link_to mg.name, game_path(mg) , :class=>"dropdown-item"  %>
+                <% end %>
+              </div>
+            </li>
+            <% end %>    
 
         </ul>
     </div>

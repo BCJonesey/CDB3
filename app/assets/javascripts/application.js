@@ -12,4 +12,3 @@
 //
 
 //= require jquery_ujs
-//= require appStrap/script.js

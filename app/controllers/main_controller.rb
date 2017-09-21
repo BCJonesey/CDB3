@@ -12,6 +12,7 @@ class MainController < ApplicationController
   
   def index
     session[:request_path] = '/'
+    @use_highlighted = true
     
     @games  = Game.all.find_all {|g| g.public? }
     @events = Event.all 

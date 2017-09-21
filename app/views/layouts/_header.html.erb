@@ -13,11 +13,12 @@
             <div class="header-inner container">
                 <!--branding/logo -->
                 <div class="header-brand">
-                    <a class="header-brand-text" href="index.html" title="Home">
+                    <%= link_to root_path, {class: "header-brand-text",title:"Home"} do %>
+                    
                         <h1>
                             <span>LARP</span>.<span>ninja</span>
                         </h1>
-                    </a>
+                    <% end %>
                     <div class="header-divider d-none d-lg-block"></div>
                     <div class="header-slogan d-none d-lg-block">Sneaking into LARPing</div>
                 </div>

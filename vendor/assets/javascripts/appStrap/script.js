@@ -6,7 +6,7 @@
  *******************************************************/
 var jPM = {},
   pageLoaderDone = false;
-var PLUGINS_LOCALPATH = '/assets/appStrap/plugins/';
+var PLUGINS_LOCALPATH = '/badpath/';
 var loadedFiles = [];
 
 (function($) {
@@ -1114,7 +1114,11 @@ var loadedFiles = [];
         if (url.indexOf('http://') === 0 || url.indexOf('https://') === 0) {
           return url;
         }
+        if(window.appStrapPluginUrls[url]){
+          return window.appStrapPluginUrls[url];
+        }
         var location = $document.getScriptLocation();
+        console.error("no url for: "+ url);
         return location + url;
       };
 

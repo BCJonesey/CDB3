@@ -24,7 +24,7 @@ module CDB3
     # config.i18n.default_locale = :de
     config.action_controller.permit_all_parameters = true
     config.assets.paths << Rails.root.join('vendor', 'assets', 'fonts')
-    config.assets.precompile += %w( .svg .eot .woff .ttf appStrap.js)
+    config.assets.precompile += %w( .svg .eot .woff .ttf appStrap.js appStrap/plugins/jPanelMenu/jquery.jpanelmenu.min.js appStrap/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js )
     config.sass.load_paths << File.expand_path('../../lib/assets/stylesheets/')
     config.sass.load_paths << File.expand_path('../../vendor/assets/stylesheets/')
     config.assets.paths << Rails.root.join("vendor", "assets", "images")

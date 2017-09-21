@@ -13,6 +13,7 @@ class GamesController < ApplicationController
     if current_user.game_admin?(@game)
       @members = @game.members
     end
+    @use_highlighted = true
   end
 
   def new

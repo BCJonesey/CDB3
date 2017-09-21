@@ -1,33 +1,46 @@
-<div class="row">
-  <div class="col-md-9">
-    <h1><%= @game.name %> Dashboard</h2>
-  </div>
-</div>
+<% content_for :highlighted_region do %>
+<!-- Image Banner: Use the the data-bg-img functionality to create a simple image banner Use spacer classes to make the banner larger with padding, allows for easy responsive changes too see: elements-ctas.htm To make the banner full height/screen add the attributes: data-toggle="full-height" data-offset="#header" -->
+<div class="bg-white overlay overlay-op-8 text-center px-3 py-5 py-lg-10 flex-valign" data-bg-img="<%= asset_url('after_dark.jpg') %>"
+data-css='{"background-position": "right bottom"}'>
+<h2 class="display-4 text-white mt-7" data-animate="fadeIn" data-animate-delay="0.2">
+    <%= @game.name %>
+</h2>
+
+<h3 class="text-white font-weight-normal" data-animate="fadeIn" data-animate-delay="0.35">
+    <a href="http://www.clockworksaga.com/games/after-dark/">http://www.clockworksaga.com/games/after-dark/</a>
+</h3>
+
+
+
+
 
 <% if(@current_member == nil) %>
-  <div class="row">
-    <div class="col-md-9">
-    
-    <div class="alert alert-success">
-    <div id="flash_notice">You are not currently a member of this game. Becoming a member will allow you to create characters and register for events. This will also allow game admins to see your contact information.
-<% @member = Member.new(:user_id => current_user.id, :game_id => @game.id) %>
+<hr class="hr-grey w-20 mx-auto my-4 mb-5" data-animate="fadeIn" data-animate-delay="0.45" />
+<div class="col-md-4 mx-auto" data-animate="fadeIn" data-animate-delay="0.55"> 
+
+    <% @member = Member.new(:user_id => current_user.id, :game_id => @game.id) %>
 <%= form_for [@game,@member], :html => { :class => 'form-horizontal' } do |f| %>
 <%= render :partial => 'shared/form_errors', :locals => {:item => @member} %>
 <%= f.hidden_field :game_id %>  
 <%= f.hidden_field :user_id %>
-    <div class="row">
-    <div class="col-md-9">
-      <%= f.submit "Become a member!", :class => 'btn btn-default btn-primary' %>
-    </div></div>
+
+    <%= f.submit "Become a member!", :class => 'btn btn-xlg btn-rounded btn-primary mt-4' %>
+  </div>
+</div>
+
 
 <% end %>
 
-    </div>
-  </div>
-      
-    </div>
-  </div>
-<% else %>
+
+<% end %>
+<% end %>
+
+
+
+
+
+<% if(@current_member.present?) %>
+
 
 <div class="row">
 

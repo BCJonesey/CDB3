@@ -9,7 +9,7 @@ class Skill extends React.Component {
     return (
         <tr>
         <td>
-        <SkillUpAndDown value={this.props.skill.rank} rankChangeHandler={this._rankChangeHandler.bind(this)}/>
+        <SkillUpAndDown value={this.props.skill.rank} skill={this.props.skill} rankChangeHandler={this._rankChangeHandler.bind(this)}/>
         </td>
         
         <td> <span className="font-weight-bold">{this.props.skill.name}</span> </td>

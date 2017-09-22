@@ -18,13 +18,13 @@ class Currency extends React.Component {
 
   render() {
     return (
-      <div className='container'>
-          <div className='row'>
-                  {this._amountRemaining()}
-              </div>
-              <div className='row'>
-                {this.props.shortName}
-              </div>
+      <div className='card'>
+          <div className='card-body'>
+                  
+                  <h4 className="card-title text-primary">{this._amountRemaining()}</h4>
+                  <h4 className="card-title">{this.props.shortName}</h4>
+
+        </div>
       </div>
     )
   }
@@ -33,3 +33,4 @@ class Currency extends React.Component {
 }
 
 module.exports = Currency;
+

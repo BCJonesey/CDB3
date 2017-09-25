@@ -4,28 +4,28 @@
 <%= form_for [@game,@award], :html => { :class => 'form-horizontal' } do |f| %>
 <%= render :partial => 'shared/form_errors', :locals => {:item => @award} %>
 
-<div class="control-group">
-  <%= f.label :amount, :class => 'control-label' %>
+<div class="form-group">
+  <%= f.label :amount %>
   <div class="controls">
-    <%= f.number_field :amount, :class => 'number_field', :step => 'any' %>
+    <%= f.number_field :amount, :class => 'form-control', :step => 'any' %>
   </div>
 </div>
-<div class="control-group">
-  <%= f.label :currency_id, :class => 'control-label' %>
+<div class="form-group">
+  <%= f.label :currency_id %>
   <div class="controls">
-    <%= f.select :currency_id, options_from_collection_for_select(@game.currencies, "id", "name"), :class => 'control-label' %>
+    <%= f.select :currency_id, options_from_collection_for_select(@game.currencies, "id", "name"), {},:class => 'form-control' %>
   </div>
 </div>
-<div class="control-group">
-  <%= f.label :comment, :class => 'control-label' %>
-  <div class="controls">
-    <%= f.text_area :comment, :class => 'text_area',:rows=>'4' %>
-  </div>
+<div class="form-group">
+  <%= f.label :comment%>
+
+    <%= f.text_area :comment, :class => 'form-control',:rows=>'4' %>
+
 </div>
 
 <%= f.hidden_field(:member_id) %>
 
-<div class="form-actions">
+<div class="form-group">
   <%= f.submit "Request Award", :class => 'btn btn-default btn-primary' %>
 </div>
 <% end %>

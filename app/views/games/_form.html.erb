@@ -1,30 +1,30 @@
-<%= form_for @game, :html => { :class => 'form-horizontal' } do |f| %>
+<%= form_for @game do |f| %>
 <%= render :partial => 'shared/form_errors', :locals => {:item => @game} %>
   <fieldset>
     <legend><%= controller.action_name.capitalize %> /Game</legend>
 
-    <div class="control-group">
-      <%= f.label :name, :class => 'control-label' %>
-      <div class="controls">
-        <%= f.text_field :name, :class => 'text_field' %>
-      </div>
+    <div class="form-group">
+      <%= f.label :name %>
+
+        <%= f.text_field :name, :class => 'form-control' %>
+
     </div>
 
-    <div class="control-group">
-      <%= f.label :slug, :class => 'control-label' %>
-      <div class="controls">
-        <%= f.text_field :slug, :class => 'text_field' %>
-      </div>
+    <div class="form-group">
+      <%= f.label :slug %>
+
+        <%= f.text_field :slug, :class => 'form-control' %>
+
     </div>
 
-    <div class="control-group">
-      <%= f.label :public, :class => 'control-label' %>
-      <div class="controls">
-        <%= f.check_box :public, :class => 'check_box' %>
-      </div>
+    <div class="form-check">
+      <%= f.label :public, {}, class: "form-check-label" %>
+
+        <%= f.check_box :public, :class => 'form-check-input' %>
+
     </div>
 
-    <div class="form-actions">
+    <div class="form-group">
       <%= f.submit nil, :class => 'btn btn-default btn-primary' %>
       <%= link_to 'Cancel', games_path, :class => 'btn' %>
     </div>

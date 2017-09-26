@@ -53,13 +53,13 @@
 <%= render :partial => 'shared/form_errors', :locals => {:item => @skillTag} %>
   <fieldset>
     <%= f.hidden_field(:skill_id) %>
-    <div class="control-group">
+    <div class="form-group">
       <%= f.label "Select a tag", :class => 'control-tag' %>
       <div class="controls">
         <%= f.select(:tag_id, options_from_collection_for_select(@game.tags.unaffiliated_by_skill(@skill) , "id", "name")) %>
       </div>
     </div>
-    <div class="control-group">
+    <div class="form-group">
       <%= f.label "Does this skill give this tag?", :class => 'control-tag' %>
       <div class="controls">
         <%= f.check_box(:gives) %>

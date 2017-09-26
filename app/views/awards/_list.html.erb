@@ -1,7 +1,7 @@
 
 <% @award = Award.new %>
 <% @award.member_id = member.id %>
-<%= form_for [@game,@award], :html => { :class => 'form-horizontal' } do |f| %>
+<%= form_for [@game,@award] do |f| %>
 <%= render :partial => 'shared/form_errors', :locals => {:item => @award} %>
 
 <div class="form-group">
@@ -57,11 +57,11 @@
         <td><%= award.created_at %></td>
         <td>
 
-          <%= form_for [@game,award], :html => { :class => 'form-horizontal' } do |f| %>
+          <%= form_for [@game,award] do |f| %>
           <div class="control-group">
-            <%= f.label :character_id, :class => 'control-label' %>
+            <%= f.label :character_id %>
             <div class="controls">
-              <%= f.select :character_id, options_from_collection_for_select(member.characters, "id", "name"), :class => 'control-label' %>
+              <%= f.select :character_id, options_from_collection_for_select(member.characters, "id", "name") %>
             </div>
           </div>
           <div class="form-actions">
@@ -100,7 +100,7 @@
             <%= link_to t('.edit', :default => t("helpers.links.edit")),
             edit_game_award_path(@game,award), :class => 'btn btn-default btn-xs' %>
 
-            <%= form_for [@game,award], :html => { :class => 'form-horizontal' } do |f| %>
+            <%= form_for [@game,award] do |f| %>
             <%= hidden_field_tag("award[approve]", "true") %>
             <%= f.submit "Approve", :class => 'btn btn-default btn-primary' %>
             <% end %>
@@ -131,11 +131,11 @@
                <td><%= award.created_at %></td>
                <td>
                  <% if(@current_member.is_admin) %>
-                 <%= form_for [@game,award], :html => { :class => 'form-horizontal' } do |f| %>
+                 <%= form_for [@game,award] do |f| %>
                  <div class="control-group">
-                  <%= f.label :character_id, :class => 'control-label' %>
+                  <%= f.label :character_id %>
                   <div class="controls">
-                    <%= f.select :character_id, options_from_collection_for_select(member.characters, "id", "name"), :class => 'control-label' %>
+                    <%= f.select :character_id, options_from_collection_for_select(member.characters, "id", "name") %>
                   </div>
                 </div>
                 <div class="form-actions">

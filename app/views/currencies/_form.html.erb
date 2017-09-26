@@ -1,31 +1,31 @@
-<%= form_for [@game,@currency], :html => { :class => 'form-horizontal' } do |f| %>
+<%= form_for [@game,@currency] do |f| %>
 <%= render :partial => 'shared/form_errors', :locals => {:item => @currency} %>
   <fieldset>
     <legend><%= controller.action_name.capitalize %> /Currency</legend>
 
-    <div class="control-group">
-      <%= f.label :name, :class => 'control-label' %>
-      <div class="controls">
-        <%= f.text_field :name, :class => 'text_field' %>
-      </div>
+    <div class="form-group">
+      <%= f.label :name %>
+      
+        <%= f.text_field :name, :class => 'form-control' %>
+      
     </div>
 
-    <div class="control-group">
-      <%= f.label :short_name, :class => 'control-label' %>
-      <div class="controls">
-        <%= f.text_field :short_name, :class => 'text_field' %>
-      </div>
+    <div class="form-group">
+      <%= f.label :short_name %>
+      
+        <%= f.text_field :short_name, :class => 'form-control' %>
+     
     </div>
 
-    <div class="control-group">
-      <%= f.label :starting_amount, :class => 'control-label' %>
-      <div class="controls">
-        <%= f.number_field :starting_amount, :class => 'number_field' %>
-      </div>
+    <div class="form-group">
+      <%= f.label :starting_amount %>
+     
+        <%= f.number_field :starting_amount, :class => 'form-control' %>
+     
     </div>
-<%= f.hidden_field :game_id, :class => 'number_field' %>
+<%= f.hidden_field :game_id %>
 
-    <div class="form-actions">
+    <div class="form-group">
       <%= f.submit nil, :class => 'btn btn-default btn-primary' %>
       <%= link_to 'Cancel', game_currencies_path(@game), :class => 'btn' %>
     </div>

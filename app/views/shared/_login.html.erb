@@ -1,31 +1,29 @@
-<div class="row">
-
-<div class="col-md-2">&nbsp</div>
-
-<div class="col-md-8">
-<h2>Please log in</h2>
+<h2>
+  Please log in</h2>
 
 <%= form_tag session_path do %>
-<table>
-<tr>
-  <td><%= label_tag :email %></td> 
-  <td><%= text_field_tag :email %></td>
-</td>
-<tr>
-  <td><%= label_tag :password %></td> 
-  <td><%= password_field_tag :password %></td>
-</td>
-<tr>
-  <td>&nbsp;</td>
-  <td><%= submit_tag "Log In" %></td>
-</tr>
-</table>
-<% end %>
 
-<h2>Register</h2>
-<p><%= link_to "Register", new_user_path %></p>
-</div>
+  <div class="form-group">
+    <%= label_tag :email %>
+      <%= text_field_tag :email, nil,{class: "form-control","aria-describedby": "emailHelp",placeholder: "Enter email"} %>
+        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+  </div>
+  <div class="form-group">
+    <%= label_tag :password %>
+      <%= password_field_tag :password, nil,{class: "form-control",placeholder: "Password"} %>
+  </div>
 
-<div class="col-md-2">&nbsp;</div>
+  <%= submit_tag "Log In", {class: "btn btn-primary"} %>
 
-</div>
+    <% end %>
+
+
+
+
+
+
+
+
+      <p>
+        <%= link_to "Not a member yet? Register Here!", new_user_path %>
+      </p>

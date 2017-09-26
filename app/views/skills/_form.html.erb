@@ -1,56 +1,44 @@
-<%= form_for [@game,@skill], :html => { :class => 'form-horizontal' } do |f| %>
+<%= form_for [@game,@skill] do |f| %>
 <%= render :partial => 'shared/form_errors', :locals => {:item => @skill} %>
-  <fieldset>
+
     <legend><%= controller.action_name.capitalize %> /Skill</legend>
 
 
-    <div class="control-group">
-      <%= f.label :name, :class => 'control-label' %>
-      <div class="controls">
-        <%= f.text_field :name, :class => 'text_field' %>
-      </div>
+    <div class="form-group">
+      <%= f.label :name %>
+        <%= f.text_field :name, :class => 'form-control' %>
     </div>
 
-    <div class="control-group">
-      <%= f.label :summary, :class => 'control-label' %>
-      <div class="controls">
-        <%= f.text_field :summary, :class => 'text_field' %>
-      </div>
+    <div class="form-group">
+      <%= f.label :summary %>
+        <%= f.text_field :summary, :class => 'form-control' %>
     </div>
 
-    <div class="control-group">
-      <%= f.label :max_rank, :class => 'control-label' %>
-      <div class="controls">
-        <%= f.number_field :max_rank, :class => 'number_field' %>
-      </div>
+    <div class="form-group">
+      <%= f.label :max_rank %>
+        <%= f.number_field :max_rank, :class => 'form-control' %>
     </div>
 
-    <div class="control-group">
-      <%= f.label :description, :class => 'control-label' %>
-      <div class="controls">
-        <%= f.text_area :description, :class => 'text_area' , :rows => '20', :style => "width: 100%;" %>
-      </div>
+    <div class="form-group">
+      <%= f.label :description %>
+        <%= f.text_area :description, :class => 'form-control' , :rows => '10' %>
+
     </div>
     
-    <div class="control-group">
-      <%= f.label :rule, :class => 'control-label' %>
-      <div class="controls">
-        <%= f.text_area :rule, :class => 'text_area' , :rows => '20', :style => "width: 100%;"  %>
-      </div>
+    <div class="form-group">
+      <%= f.label :rule %>
+        <%= f.text_area :rule, :class => 'form-control' , :rows => '3' %>
     </div>
     
     
-    <div class="control-group">
-      <%= f.label :cost, :class => 'control-label' %>
-      <div class="controls">
-        <%= f.text_area :cost, :class => 'text_area' , :rows => '20', :style => "width: 100%;"  %>
-      </div>
+    <div class="form-group">
+      <%= f.label :cost %>
+        <%= f.text_area :cost, :class => 'form-control' , :rows => '3' %>
     </div>
     
     
-    <div class="form-actions">
+    <div class="form-group">
       <%= f.submit nil, :class => 'btn btn-default btn-primary' %>
       <%= link_to 'Cancel', game_skills_path(@game), :class => 'btn' %>
     </div>
-  </fieldset>
 <% end %>

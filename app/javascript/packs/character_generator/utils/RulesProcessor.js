@@ -26,7 +26,7 @@ class RulesProcessor{
     // Order of operations:
     // Run all spend analysis
     // Evaluate all rules
-    static evalRulesAndSpend(skrills, currencies_original){
+    static evalRulesAndSpend(skrills, currencies_original, idToAdd){
         // Build out placeholder for result
         result = {
             currencySpend:{},
@@ -34,7 +34,11 @@ class RulesProcessor{
         }
 
         // fuck you scope, ill figure it out later
-        skills = skrills
+        skills = LangUtils.deepCopy(skrills);
+
+        if(idToAdd != undefined){
+            skills[idToAdd].rank = 1
+        }
 
         
 
@@ -65,7 +69,6 @@ class RulesProcessor{
                 }
             }
         }
-        console.log(result)
         return result;
 
     }

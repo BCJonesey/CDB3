@@ -59,11 +59,18 @@ class CharacterEditor extends React.Component {
 
   render() {
     return (
-      <div className='container'>
+      <div className='container-fluid'>
+        <div className='row'>
         <CharacterDetails character={this.state.character} currencySpend={this.state.currencySpend} />
+        </div>
+        <div className='row'>
+        <div className='col'>
         <SearchAndFilter />
         <StatusMessages errorMessages={this.state.errorMessages} />
         <SkillList skills={this.state.skills} rankChangeHandler={this._rankChangeHandler.bind(this)} />
+        </div>
+        </div>
+        
       </div>
     )
   }

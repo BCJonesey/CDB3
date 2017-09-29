@@ -25,6 +25,10 @@ class CharacterEditor extends React.Component {
     this.dataApi.getCharacterData(this._characterUpdate.bind(this))
   }
 
+  _acknowledgeMessages(){
+    this.setState({errorMessages: []})
+  }
+
  
 
   _skillsUpdate(skills){
@@ -66,7 +70,7 @@ class CharacterEditor extends React.Component {
         <div className='row'>
         <div className='col'>
         <SearchAndFilter />
-        <StatusMessages errorMessages={this.state.errorMessages} />
+        <StatusMessages errorMessages={this.state.errorMessages}  acknowledgeMessages={this._acknowledgeMessages.bind(this)}/>
         <SkillList skills={this.state.skills} rankChangeHandler={this._rankChangeHandler.bind(this)} />
         </div>
         </div>

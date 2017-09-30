@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170918191708) do
+ActiveRecord::Schema.define(version: 20170930233235) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -74,11 +74,12 @@ ActiveRecord::Schema.define(version: 20170918191708) do
   end
 
   create_table "games", force: :cascade do |t|
-    t.string   "name",       limit: 255,                null: false
-    t.string   "slug",       limit: 255,                null: false
-    t.boolean  "public",                 default: true
+    t.string   "name",         limit: 255,                null: false
+    t.string   "slug",         limit: 255,                null: false
+    t.boolean  "public",                   default: true
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "side_effects"
   end
 
   add_index "games", ["slug"], name: "index_games_on_slug", unique: true, using: :btree
@@ -116,14 +117,15 @@ ActiveRecord::Schema.define(version: 20170918191708) do
 
   create_table "skills", force: :cascade do |t|
     t.integer  "game_id"
-    t.string   "name",        limit: 255
-    t.string   "summary",     limit: 255
+    t.string   "name",         limit: 255
+    t.string   "summary",      limit: 255
     t.text     "description"
-    t.integer  "max_rank",                default: 1
+    t.integer  "max_rank",                 default: 1
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "cost"
     t.text     "rule"
+    t.text     "side_effects"
   end
 
   create_table "tags", force: :cascade do |t|

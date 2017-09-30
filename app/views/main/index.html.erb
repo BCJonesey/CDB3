@@ -3,10 +3,11 @@
 <!-- Image Banner: Use the the data-bg-img functionality to create a simple image banner Use spacer classes to make the banner larger with padding, allows for easy responsive changes too see: elements-ctas.htm To make the banner full height/screen add the attributes: data-toggle="full-height" data-offset="#header" -->
 <div class="bg-white overlay overlay-op-8 text-center px-3 py-5 py-lg-10 flex-valign" data-bg-img="<%= asset_url('darren_ninja.png') %>"
 data-css='{"background-position": "right bottom"}'>
+
+<% if current_user.nil? %>
 <h2 class="display-4 text-white mt-7" data-animate="fadeIn" data-animate-delay="0.2">
     We're <span class="font-weight-bold">game</span> if you are!
 </h2>
-
 <h3 class="text-white font-weight-normal" data-animate="fadeIn" data-animate-delay="0.35">
     Come play with us
 </h3>
@@ -17,6 +18,11 @@ data-css='{"background-position": "right bottom"}'>
   Join LARP.ninja!
   <% end %>
 </div>
+<% else %>
+<h2 class="display-4 text-white mt-7" data-animate="fadeIn" data-animate-delay="0.2">
+    Hey <%= current_user.name %>!
+</h2>
+<% end %>
 </div>
 
 
@@ -31,7 +37,16 @@ data-css='{"background-position": "right bottom"}'>
 
 <div>
 <% @games.each do |game| %>
-  <p><%= link_to game.name, game_path(game) %></p>
+
+<div class="card text-white bg-white overlay overlay-op-8 text-center"  data-bg-img="<%= asset_url('after_dark.jpg') %>">
+    <a href="<%= game_path(game) %>"
+
+      <h2 class="card-title"><%= game.name %></h2>
+      <p class="card-text">A New England horror game or some shit.</p>
+
+
+    </a>
+  </div>
 <% end %>
 </div>
 

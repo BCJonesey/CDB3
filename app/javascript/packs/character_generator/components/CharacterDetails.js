@@ -18,6 +18,9 @@ class CharacterDetails extends React.Component {
               <div className='row'>
               <Currencies currencySpend={this.props.currencySpend} currency_totals={this.props.character.currency_totals} />
               </div>
+              <div className='row'>
+              <Currencies currencySpend={{}} currency_totals={this.props.sideEffects} />
+              </div>
       </div>
     )
   }

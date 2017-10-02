@@ -16,6 +16,7 @@ class CharacterEditor extends React.Component {
       skills: {},
       character: {},
       currencySpend: {},
+      sideEffects: {},
       errorMessages: []
     }
   }
@@ -65,7 +66,7 @@ class CharacterEditor extends React.Component {
     return (
       <div className='container-fluid'>
         <div className='row'>
-        <CharacterDetails character={this.state.character} currencySpend={this.state.currencySpend} />
+        <CharacterDetails character={this.state.character} currencySpend={this.state.currencySpend} sideEffects={this.state.sideEffects}  />
         </div>
         <div className='row'>
         <div className='col'>

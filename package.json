@@ -5,9 +5,10 @@
     "promise-polyfill": "^6.0.2",
     "prop-types": "^15.6.0",
     "react": "^16.0.0",
+    "react-bootstrap4-modal": "^1.1.1",
+    "react-debounce-input": "^3.1.0",
     "react-dom": "^16.0.0",
-    "whatwg-fetch": "^2.0.3",
-    "react-bootstrap4-modal": "^1.1.1"
+    "whatwg-fetch": "^2.0.3"
   },
   "devDependencies": {
     "webpack-dev-server": "^2.8.2"

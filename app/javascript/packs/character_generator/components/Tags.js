@@ -1,5 +1,5 @@
 var React = require('react');
-
+var Tag = require('./Tag');
 
 class Tags extends React.Component {
 
@@ -11,7 +11,7 @@ class Tags extends React.Component {
     }
     return (
         <div className="container">
-            {this.props.tags.map( (tag) => {return(<a key={tag.id} href="#" className="badge badge-primary">{tag.name}</a>)})}
+            {this.props.tags.map( (tag) => {return(<Tag key={tag.id} tag={tag} onTagSelected={this.props.onTagSelected.bind(this)} />)})}
         </div>
     )
   }

@@ -55,7 +55,7 @@ class RulesProcessor {
         // Loop thru each skill to apply it's spend and side effects to the current state copy
         for (skillId in skills) {
 
-            var skill = skills[skillId]
+            const skill = skills[skillId]
             if (skill.rank > 0) {
                 if (skill.cost.length > 0) {
                     var options = {
@@ -82,17 +82,17 @@ class RulesProcessor {
 
         // Loop thru each skill to evaluate it's rules
         for (skillId in skills) {
-            var skill = skills[skillId]
+            const skill = skills[skillId]
 
             if (skill.rank > 0) {
-                var options = {
-                    skillRank: skill.rank
-                };
                 if (skill.rank > skill.max_rank) {
                     result.errorMessages.push(`You do not meet the requirements for ${skill.name}`);
-                } else {
+                } else if(skill.cost.length > 0) {
                     try {
-                        if (eval(skill.cost) == false) {
+                        const options = {
+                            skillRank: skill.rank
+                        };
+                        if (eval(skill.rule) == false) {
                             result.errorMessages.push(`You do not meet the requirements for ${skill.name}`);
                         }
                     } catch (e) {

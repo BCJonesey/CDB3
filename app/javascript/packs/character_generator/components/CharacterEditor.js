@@ -16,8 +16,7 @@ class CharacterEditor extends React.Component {
       character: {},
       currencySpend: {},
       sideEffects: {},
-      errorMessages: [],
-      skillCache: {}
+      errorMessages: []
     }
   }
 
@@ -49,21 +48,36 @@ class CharacterEditor extends React.Component {
   }
 
   _rankChangeHandler(skillId, newRank){
-    var skillCopy = LangUtils.deepCopy(this.state.skills);
-    skillCopy[skillId].rank = newRank
-    var result = RulesProcessor.evalRulesAndSpend(skillCopy, this.state.character.currency_totals)
+
+    const options = {
+      skillToUpdate: this.state.skills[skillId],
+      newRank: newRank
+    }
+    var result = RulesProcessor.evalRulesAndSpend(this.state.skills, this.state.character.currency_totals, options)
     if(result.errorMessages.length == 0){
-      this.dataApi.updateSkillRank(skillId, newRank, this._skillsUpdate.bind(this));
-      result.skills = skillCopy
+      this.dataApi.updateSkillRank(skillId, newRank, this._apiError.bind(this));
+      this.setState(result)
+    }else{
+      this.setState({errorMessages: result.errorMessages})
     }
 
-    this.setState(result)
+
     
+    
+  }
+
+  _apiError(error){
+    console.log(error)
+    this.setState({errorMessages: ["Shit got fucked up, you shoudl just reload the page....."]})
   }
 
   _getValidSkillList(){
     return Object.values(this.state.skills).filter((skill) => {
-      if(skill.rank > 0 || RulesProcessor.evalRulesAndSpend(this.state.skills, {}, skill.id).errorMessages.length == 0){
+      const options = {
+        skillToUpdate: skill,
+        newRank: 1
+      }
+      if(skill.rank > 0 || RulesProcessor.evalRulesAndSpend(this.state.skills, {}, options).errorMessages.length == 0){
         return true;
       }
       return false;

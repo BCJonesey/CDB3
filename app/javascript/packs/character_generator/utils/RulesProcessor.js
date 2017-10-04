@@ -28,7 +28,8 @@ class RulesProcessor {
     // Order of operations:
     // Run all spend analysis
     // Evaluate all rules
-    static evalRulesAndSpend(skrills, currencies_original, idToAdd) {
+    static evalRulesAndSpend(skrills, currencies_original, options = {}) {
+        
         // Build out placeholder for result
         result = {
             currencySpend: {},
@@ -37,12 +38,15 @@ class RulesProcessor {
         }
 
         // fuck you scope, ill figure it out later
-        skills = LangUtils.deepCopy(skrills);
+        skills = Object.assign({}, skrills);
 
-        if (idToAdd != undefined) {
-            skills[idToAdd].rank = 1
+        if (options.skillToUpdate != undefined) {
+            skills[options.skillToUpdate.id].rank = options.newRank
         }
 
+     
+
+        
 
 
         // make a copy of currencies so we dont fuck with other people's shit
@@ -103,6 +107,7 @@ class RulesProcessor {
                 }
             }
         }
+        result.skills = skills;
         return result;
 
     }

@@ -18,14 +18,13 @@ class Currency extends React.Component {
 
   render() {
     return (
-      <div className='card'>
-          <div className='card-body'>
+      
+          <div className='row'>
+                  <div className="col">{this.props.shortName}</div>
+                  <div className="col">{this._amountRemaining()}</div>
                   
-                  <h4 className="card-title text-primary">{this._amountRemaining()}</h4>
-                  <h4 className="card-title">{this.props.shortName}</h4>
 
         </div>
-      </div>
     )
   }
 

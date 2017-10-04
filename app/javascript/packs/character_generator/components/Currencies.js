@@ -10,7 +10,7 @@ class Currencies extends React.Component {
         return(<div/>)
     }
     return (
-      <div className='card-deck'>
+      <div className='container'>
           {Object.keys(this.props.currency_totals).map( (currencyId) => {return(<Currency key={currencyId} shortName={currencyId} spent={this.props.currencySpend[currencyId]} earned={this.props.currency_totals[currencyId]} />)})}
       </div>
     )

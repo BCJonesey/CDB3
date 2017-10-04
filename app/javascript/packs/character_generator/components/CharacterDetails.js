@@ -13,14 +13,8 @@ class CharacterDetails extends React.Component {
     return (
       <div className='container'>
           <div className='row'>
-              <div className='col'>{this.props.character.name}</div>
-              </div>
-              <div className='row'>
-              <Currencies currencySpend={this.props.currencySpend} currency_totals={this.props.character.currency_totals} />
-              </div>
-              <div className='row'>
-              <Currencies currencySpend={{}} currency_totals={this.props.sideEffects} />
-              </div>
+              <h2 className="mx-auto">{this.props.character.name}</h2>
+          </div>
       </div>
     )
   }

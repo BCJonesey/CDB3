@@ -7,7 +7,7 @@ class DataApi{
         this.gameUrl = gameUrl;
         this.characterId = characterId;
     }
-    getSkills(successCallBack){
+    getSkillData(successCallBack){
 
         fetch(`${this.gameUrl}/characters/${this.characterId}/skills.json`,{
             credentials: 'same-origin'
@@ -35,7 +35,7 @@ class DataApi{
     }
 
  
-    updateSkillRank(skillId, newRank, successCallBack){
+    updateSkillRank(skillId, newRank, failureCallBack){
         fetch(`${this.gameUrl}/characters/${this.characterId}/skills/${skillId}.json`, {
             method: 'PUT',
             headers: {
@@ -48,11 +48,16 @@ class DataApi{
                 }
             })
         }).then(function(response) {
-          return response.json()
-        }).then(function(json) {
-            successCallBack(json);
+            if (response.status >= 200 && response.status < 300) {
+                return response
+            } else {
+                var error = new Error(response.statusText)
+                error.response = response
+                throw error
+            }
         }).catch(function(ex) {
-          console.log('parsing failed', ex)
+            debugger;
+            failureCallBack(ex);
         })
     }
 

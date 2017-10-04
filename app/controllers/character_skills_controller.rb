@@ -48,10 +48,14 @@ class CharacterSkillsController < ApplicationController
     @character.get_or_create_version.character_skills.each do |x|
       rank_hash[x.skill_id] = x.rank
     end
-    skills_hash.each do |x|
-      x["rank"] = rank_hash[x["id"]]
-    end
-    Hash[skills_hash.collect { |skill| [skill["id"], skill] }]
+
+    
+    {
+      skills: Hash[skills_hash.collect { |skill| [skill["id"], skill] }],
+      skillRanks: rank_hash
+    }
+
+    
   end
 
 end

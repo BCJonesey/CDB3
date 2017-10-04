@@ -9,13 +9,21 @@ class Skill extends React.Component {
     return this.props.skill.skill_tags.map(function(skill_tag){return skill_tag.tag})
   }
 
+  _getRank(){
+    if(this.props.rank > 0){
+      return this.props.rank
+    }else{
+      return 0
+    }
+  }
+
   render() {
     return (
       <div className="row skill">
         <div className="col">
         <div className="container">
           <div className="row">
-          <SkillUpAndDown value={this.props.skill.rank} skill={this.props.skill} rankChangeHandler={this._rankChangeHandler.bind(this)}/>
+          <SkillUpAndDown rank={this._getRank()} skill={this.props.skill} rankChangeHandler={this._rankChangeHandler.bind(this)}/>
             </div>
             <div className="row">
             {RulesProcessor.getCostString(this.props.skill)}

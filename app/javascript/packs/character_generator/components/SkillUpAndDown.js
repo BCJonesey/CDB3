@@ -4,7 +4,7 @@ var React = require('react');
 class SkillUpAndDown extends React.Component {
 
   _plusButton(){
-    if(this.props.skill.max_rank > this.props.skill.rank){
+    if(this.props.skill.max_rank > this.props.rank){
       return(
         <span className="input-group-btn">
         <input type="button" value="+" className="btn btn-secondary quantity-up" onClick={this._handlePlusClick.bind(this)} />
@@ -14,7 +14,7 @@ class SkillUpAndDown extends React.Component {
   }
 
   _minusButton(){
-    if(this.props.skill.rank>0){
+    if(this.props.rank>0){
       return(
      
     <span className="input-group-btn">
@@ -27,7 +27,7 @@ class SkillUpAndDown extends React.Component {
     return (
         <div className="input-group input-group-quantity" data-toggle="quantity">
             {this._minusButton()}
-            <span type="text" className="quantity form-control" >{this.props.skill.rank} </span>
+            <span type="text" className="quantity form-control" >{this.props.rank} </span>
             {this._plusButton()}
             
             
@@ -36,10 +36,10 @@ class SkillUpAndDown extends React.Component {
   }
 
   _handlePlusClick(){
-        this.props.rankChangeHandler(this.props.value + 1);
+        this.props.rankChangeHandler(this.props.rank + 1);
     }
 _handleMinusClick(){
-    this.props.rankChangeHandler(this.props.value - 1);
+    this.props.rankChangeHandler(this.props.rank - 1);
     }
 
   

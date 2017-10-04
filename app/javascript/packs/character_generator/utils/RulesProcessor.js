@@ -28,7 +28,7 @@ class RulesProcessor {
     // Order of operations:
     // Run all spend analysis
     // Evaluate all rules
-    static evalRulesAndSpend(skrills, currencies_original, options = {}) {
+    static evalRulesAndSpend(skills, currencies_original, options = {}) {
         
         // Build out placeholder for result
         result = {
@@ -38,10 +38,14 @@ class RulesProcessor {
         }
 
         // fuck you scope, ill figure it out later
-        skills = Object.assign({}, skrills);
-
+        skillRanks = Object.assign({}, options.skillRanks);
+        
         if (options.skillToUpdate != undefined) {
-            skills[options.skillToUpdate.id].rank = options.newRank
+            if(options.newRank == 0){
+                delete skillRanks[options.skillToUpdate.id]
+            }else{
+                skillRanks[options.skillToUpdate.id] = options.newRank
+            }
         }
 
      
@@ -57,13 +61,15 @@ class RulesProcessor {
 
 
         // Loop thru each skill to apply it's spend and side effects to the current state copy
-        for (skillId in skills) {
+        for (skillId in skillRanks) {
 
             const skill = skills[skillId]
-            if (skill.rank > 0) {
+            const rank = skillRanks[skillId]
+
+            if (rank > 0) {
                 if (skill.cost.length > 0) {
                     var options = {
-                        skillRank: skill.rank
+                        skillRank: rank
                     };
                     try {
                         eval(skill.cost);
@@ -73,7 +79,7 @@ class RulesProcessor {
                 }
                 if (skill.side_effects != null && skill.side_effects.length > 0) {
                     var options = {
-                        skillRank: skill.rank
+                        skillRank: rank
                     };
                     try {
                         eval(skill.side_effects);
@@ -85,16 +91,18 @@ class RulesProcessor {
         }
 
         // Loop thru each skill to evaluate it's rules
-        for (skillId in skills) {
+        for (skillId in skillRanks) {
+            
             const skill = skills[skillId]
+            const rank = skillRanks[skillId]
 
-            if (skill.rank > 0) {
-                if (skill.rank > skill.max_rank) {
+            if (rank > 0) {
+                if (rank > skill.max_rank) {
                     result.errorMessages.push(`You do not meet the requirements for ${skill.name}`);
                 } else if(skill.cost.length > 0) {
                     try {
                         const options = {
-                            skillRank: skill.rank
+                            skillRank: rank
                         };
                         if (eval(skill.rule) == false) {
                             result.errorMessages.push(`You do not meet the requirements for ${skill.name}`);
@@ -107,7 +115,7 @@ class RulesProcessor {
                 }
             }
         }
-        result.skills = skills;
+        result.skillRanks = skillRanks;
         return result;
 
     }
@@ -136,10 +144,10 @@ class RulesHelpers {
 
     static _skillRank = function (options, skill_id) {
 
-        if (skills[skill_id] === undefined) {
+        if (skillRanks[skill_id] === undefined) {
             return 0;
         }
-        return skills[skill_id].rank;
+        return skillRanks[skill_id];
     }
 
     static _addSideEffectScalar(options, attributeName, amount) {

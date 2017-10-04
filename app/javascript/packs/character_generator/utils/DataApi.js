@@ -7,7 +7,7 @@ class DataApi{
         this.gameUrl = gameUrl;
         this.characterId = characterId;
     }
-    getSkills(successCallBack){
+    getSkillData(successCallBack){
 
         fetch(`${this.gameUrl}/characters/${this.characterId}/skills.json`,{
             credentials: 'same-origin'

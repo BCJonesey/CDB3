@@ -13,15 +13,16 @@ class CharacterEditor extends React.Component {
     this.dataApi = new DataApi(this.props.gameUrl, this.props.characterId);
     this.state = {
       skills: {},
+      skillRanks: {},
       character: {},
       currencySpend: {},
       sideEffects: {},
-      errorMessages: []
+      errorMessages: [],
     }
   }
 
   componentWillMount(){
-    this.dataApi.getSkills(this._skillsUpdate.bind(this))
+    this.dataApi.getSkillData(this._skillsUpdate.bind(this))
     this.dataApi.getCharacterData(this._characterUpdate.bind(this))
   }
 
@@ -31,8 +32,8 @@ class CharacterEditor extends React.Component {
 
  
 
-  _skillsUpdate(skills){
-    this.setState({skills: skills})
+  _skillsUpdate(skillData){
+    this.setState(skillData)
     this._evalCharacterState()
   }
 
@@ -43,13 +44,14 @@ class CharacterEditor extends React.Component {
 
   _evalCharacterState(){
     if(!(this.state.character.currency_totals === undefined) && Object.keys(this.state.skills).length > 0){
-      this.setState(RulesProcessor.evalRulesAndSpend(this.state.skills, this.state.character.currency_totals))
+      this.setState(RulesProcessor.evalRulesAndSpend(this.state.skills, this.state.character.currency_totals,{skillRanks: this.state.skillRanks}))
     }
   }
 
   _rankChangeHandler(skillId, newRank){
 
     const options = {
+      skillRanks: this.state.skillRanks,
       skillToUpdate: this.state.skills[skillId],
       newRank: newRank
     }
@@ -74,6 +76,7 @@ class CharacterEditor extends React.Component {
   _getValidSkillList(){
     return Object.values(this.state.skills).filter((skill) => {
       const options = {
+        skillRanks: this.state.skillRanks,
         skillToUpdate: skill,
         newRank: 1
       }
@@ -94,7 +97,7 @@ class CharacterEditor extends React.Component {
         <div className='row'>
         <div className='col'>
         <StatusMessages errorMessages={this.state.errorMessages}  acknowledgeMessages={this._acknowledgeMessages.bind(this)}/>
-        <SkillList skills={this._getValidSkillList()} rankChangeHandler={this._rankChangeHandler.bind(this)} />
+        <SkillList skills={this._getValidSkillList()} skillRanks={this.state.skillRanks} rankChangeHandler={this._rankChangeHandler.bind(this)} />
         </div>
         </div>
         

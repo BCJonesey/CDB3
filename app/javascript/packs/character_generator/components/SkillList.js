@@ -14,6 +14,9 @@ class SkillList extends React.Component {
 
     _getValidSkills() {
       const checkTags = this.state.selectedTags.length > 0
+      const selectedTags = this.state.selectedTags.map(function (tag) {
+        return tag.id
+      });
       const checkSearch = this.state.searchText.length > 0
       return this.props.skills.filter((skill) => {
 
@@ -23,8 +26,13 @@ class SkillList extends React.Component {
             return false;
           } else {
             const tags = skill.skill_tags.map(function (skill_tag) {
-              return skill_tag.tag
+              return skill_tag.tag.id
             });
+            for(i in selectedTags){
+              if(tags.indexOf(selectedTags[i]) == -1){
+                return false
+              }
+            }
           }
         }
         if (checkSearch) {

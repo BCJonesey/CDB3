@@ -1,6 +1,7 @@
 var React = require('react');
 var SkillList = require('./SkillList');
 var CharacterDetails = require('./CharacterDetails');
+var CharacterStats = require('./CharacterStats');
 var StatusMessages = require('./StatusMessages');
 var SearchAndFilter = require('./SearchAndFilter');
 
@@ -43,7 +44,10 @@ class CharacterEditor extends React.Component {
         <CharacterDetails character={this.props.character} currencySpend={this.props.currencySpend} sideEffects={this.props.sideEffects}  />
         </div>
         <div className='row'>
-        <div className='col'>
+        <div className='col-md-4'>
+          <CharacterStats character={this.props.character} currencySpend={this.props.currencySpend} sideEffects={this.props.sideEffects}  />
+        </div>
+        <div className='col-md-8'>
         <StatusMessages errorMessages={this.props.errorMessages}  acknowledgeMessages={this.props.acknowledgeMessages.bind(this)}/>
         <SearchAndFilter 
               selectedTags = {this.state.selectedTags}

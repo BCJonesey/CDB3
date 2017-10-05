@@ -3,6 +3,7 @@ var SkillList = require('./SkillList');
 var CharacterDetails = require('./CharacterDetails');
 var CharacterStats = require('./CharacterStats');
 var StatusMessages = require('./StatusMessages');
+var DetailMessage = require('./DetailMessage');
 var SearchAndFilter = require('./SearchAndFilter');
 var Tags = require('./Tags');
 
@@ -12,7 +13,8 @@ class CharacterEditor extends React.Component {
     super(props);
     this.state = {
       selectedTags: [],
-      searchText: ""
+      searchText: "",
+      detailSkill: null
     }
   }
 
@@ -37,6 +39,20 @@ class CharacterEditor extends React.Component {
     });
   }
 
+  _renderDetails(){
+    if(this.state.detailSkill == null){
+      return null
+    }else{
+      return(
+      <DetailMessage skill={this.state.detailSkill}  dismiss={()=>{this.setState({detailSkill: null})}} />
+      )
+    }
+  }
+
+  _showDetail(skill){
+    this.setState({detailSkill: skill})
+  }
+
 
   render() {
     return (
@@ -59,12 +75,13 @@ class CharacterEditor extends React.Component {
         </div>
         <div className='col-md-8'>
         <StatusMessages errorMessages={this.props.errorMessages}  acknowledgeMessages={this.props.acknowledgeMessages.bind(this)}/>
+        {this._renderDetails()}
         <SearchAndFilter 
               selectedTags = {this.state.selectedTags}
               onTagUnselected = {this._onTagUnselected.bind(this)}
               seachTextUpdated = {this._seachTextUpdated.bind(this)}
             /> 
-        <SkillList selectedTags={this.state.selectedTags} searchText={this.state.searchText} skills={this.props.skills} skillRanks={this.props.skillRanks} rankChangeHandler={this.props.rankChangeHandler.bind(this)} onTagSelected = {this._onTagSelected.bind(this)} />
+        <SkillList selectedTags={this.state.selectedTags} searchText={this.state.searchText} skills={this.props.skills} skillRanks={this.props.skillRanks} rankChangeHandler={this.props.rankChangeHandler.bind(this)} onTagSelected = {this._onTagSelected.bind(this)} showDetail={this._showDetail.bind(this)} />
         </div>
         </div>
         

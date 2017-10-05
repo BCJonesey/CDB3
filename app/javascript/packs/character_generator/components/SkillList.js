@@ -53,6 +53,7 @@ class SkillList extends React.Component {
                     key = {skill.id}
                     rank={this.props.skillRanks[skill.id]}
                     onTagSelected = {this.props.onTagSelected.bind(this)}
+                    showDetail={this.props.showDetail.bind(this)}
                     />)} )} 
               </div> 
     )

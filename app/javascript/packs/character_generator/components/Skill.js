@@ -33,7 +33,7 @@ class Skill extends React.Component {
         <div className="col">
         <div className="container">
           <div className="row">
-          <span className="font-weight-bold">{this.props.skill.name}</span> 
+          <span className="font-weight-bold">{this.props.skill.name}<i onClick={this._showDetail.bind(this)} className="fa fa-info-circle" aria-hidden="true"></i></span> 
             </div>
             <div className="row">
             <Tags tags={this._getTags()} onTagSelected={this.props.onTagSelected.bind(this)} />
@@ -46,6 +46,10 @@ class Skill extends React.Component {
         </div>
       </div>
     )
+  }
+
+  _showDetail(){
+    this.props.showDetail(this.props.skill)
   }
 
   _rankChangeHandler(newValue){

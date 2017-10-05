@@ -37,6 +37,8 @@ class RulesProcessor {
             sideEffects: {}
         }
 
+        var grantedTags = {}
+
         // fuck you scope, ill figure it out later
         skillRanks = Object.assign({}, options.skillRanks);
         
@@ -60,13 +62,14 @@ class RulesProcessor {
         const LN = RulesHelpers.jsTollkit();
 
 
-        // Loop thru each skill to apply it's spend and side effects to the current state copy
+        // Loop thru each skill to apply it's granted tags, spend, and side effects to the current state copy
         for (skillId in skillRanks) {
 
             const skill = skills[skillId]
             const rank = skillRanks[skillId]
 
             if (rank > 0) {
+                skill.skill_tags.filter((skill_tag) => {return skill_tag.gives}).forEach((skillTag)=>{grantedTags[skillTag.tag.id] = skillTag.tag})
                 if (skill.cost.length > 0) {
                     var options = {
                         skillRank: rank
@@ -115,6 +118,7 @@ class RulesProcessor {
                 }
             }
         }
+        result.grantedTags = Object.values(grantedTags)
         result.skillRanks = skillRanks;
         return result;
 

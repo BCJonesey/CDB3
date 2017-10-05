@@ -15,6 +15,7 @@ class CharacterApp extends React.Component {
       currencySpend: {},
       sideEffects: {},
       errorMessages: [],
+      grantedTags: []
     }
   }
 
@@ -87,7 +88,7 @@ class CharacterApp extends React.Component {
 
   render() {
     return (
-      <CharacterEditor character={this.state.character} skills={this._getValidSkillList()} skillRanks={this.state.skillRanks} currencySpend={this.state.currencySpend} sideEffects={this.state.sideEffects} rankChangeHandler={this._rankChangeHandler.bind(this)} acknowledgeMessages={this._acknowledgeMessages.bind(this)}  errorMessages={this.state.errorMessages}/>  
+      <CharacterEditor character={this.state.character} skills={this._getValidSkillList()} skillRanks={this.state.skillRanks} grantedTags={this.state.grantedTags} currencySpend={this.state.currencySpend} sideEffects={this.state.sideEffects} rankChangeHandler={this._rankChangeHandler.bind(this)} acknowledgeMessages={this._acknowledgeMessages.bind(this)}  errorMessages={this.state.errorMessages}/>  
     )
   }
 

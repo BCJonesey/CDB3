@@ -4,6 +4,7 @@ var CharacterDetails = require('./CharacterDetails');
 var CharacterStats = require('./CharacterStats');
 var StatusMessages = require('./StatusMessages');
 var SearchAndFilter = require('./SearchAndFilter');
+var Tags = require('./Tags');
 
 class CharacterEditor extends React.Component {
 
@@ -39,13 +40,22 @@ class CharacterEditor extends React.Component {
 
   render() {
     return (
-      <div className='container-fluid character-editor'>
+      <div className='container character-editor'>
         <div className='row'>
         <CharacterDetails character={this.props.character} currencySpend={this.props.currencySpend} sideEffects={this.props.sideEffects}  />
         </div>
         <div className='row'>
         <div className='col-md-4'>
-          <CharacterStats character={this.props.character} currencySpend={this.props.currencySpend} sideEffects={this.props.sideEffects}  />
+          <div className='container'>
+            <div className='row'>
+            <h3>Attributes</h3>
+              <CharacterStats character={this.props.character} currencySpend={this.props.currencySpend} sideEffects={this.props.sideEffects}  />
+            </div>
+            <div className='row'>
+              <h3>Quick Tags</h3>
+              <Tags tags={this.props.grantedTags} onTagSelected = {this._onTagSelected.bind(this)} />
+            </div>
+          </div>
         </div>
         <div className='col-md-8'>
         <StatusMessages errorMessages={this.props.errorMessages}  acknowledgeMessages={this.props.acknowledgeMessages.bind(this)}/>

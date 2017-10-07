@@ -27,9 +27,7 @@ class CharacterApp extends React.Component {
   _acknowledgeMessages(){
     this.setState({errorMessages: []})
   }
-
- 
-
+  
   _skillsUpdate(skillData){
     this.setState(skillData)
     this._evalCharacterState()
@@ -40,9 +38,18 @@ class CharacterApp extends React.Component {
     this._evalCharacterState()
   }
 
+  _isLoading(){
+    this.state.character == {} || this.state.skills == {}
+  }
+
   _evalCharacterState(){
     if(!(this.state.character.currency_totals === undefined) && Object.keys(this.state.skills).length > 0){
-      this.setState(RulesProcessor.evalRulesAndSpend(this.state.skills, this.state.character.currency_totals,{skillRanks: this.state.skillRanks}))
+      const options = {
+        skillRanks: this.state.skillRanks,
+        skillToUpdate: this.state.skills[skillId],
+        currencyTotals: this.state.character.currency_totals
+      }
+      this.setState(RulesProcessor.evalRulesAndSpend(this.state.skills, this.state.character.currency_totals,options))
     }
   }
 
@@ -51,7 +58,8 @@ class CharacterApp extends React.Component {
     const options = {
       skillRanks: this.state.skillRanks,
       skillToUpdate: this.state.skills[skillId],
-      newRank: newRank
+      newRank: newRank,
+      currencyTotals: this.state.character.currency_totals
     }
     var result = RulesProcessor.evalRulesAndSpend(this.state.skills, this.state.character.currency_totals, options)
     if(result.errorMessages.length == 0){
@@ -73,23 +81,30 @@ class CharacterApp extends React.Component {
 
   _getValidSkillList(){
     return Object.values(this.state.skills).filter((skill) => {
+      if(skill.rank > 0){
+        return true;
+      }
       const options = {
         skillRanks: this.state.skillRanks,
         skillToUpdate: skill,
         newRank: 1
       }
-      if(skill.rank > 0 || RulesProcessor.evalRulesAndSpend(this.state.skills, {}, options).errorMessages.length == 0){
-        return true;
-      }
-      return false;
+      return RulesProcessor.evalRulesAndSpend(this.state.skills, {}, options).errorMessages.length == 0;
     })
   }
 
 
   render() {
-    return (
-      <CharacterEditor character={this.state.character} skills={this._getValidSkillList()} skillRanks={this.state.skillRanks} grantedTags={this.state.grantedTags} currencySpend={this.state.currencySpend} sideEffects={this.state.sideEffects} rankChangeHandler={this._rankChangeHandler.bind(this)} acknowledgeMessages={this._acknowledgeMessages.bind(this)}  errorMessages={this.state.errorMessages}/>  
-    )
+    if(this._isLoading()){
+      return(
+        <div className="container">Loading</div>
+      )
+
+    }else{
+      return (
+        <CharacterEditor character={this.state.character} skills={this._getValidSkillList()} skillRanks={this.state.skillRanks} grantedTags={this.state.grantedTags} currencySpend={this.state.currencySpend} sideEffects={this.state.sideEffects} rankChangeHandler={this._rankChangeHandler.bind(this)} acknowledgeMessages={this._acknowledgeMessages.bind(this)}  errorMessages={this.state.errorMessages}/>  
+      )
+    }
   }
 
   

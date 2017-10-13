@@ -13,7 +13,7 @@ class SearchAndFilter extends React.Component {
           <DebounceInput onChange={event => this.props.seachTextUpdated(event.target.value)} element="input" type="search" className="form-control ds-input" id="search-input" placeholder="Search..." aria-label="Search for..." spellCheck="false" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-labelledby="search-input"/>
         </div>
         <div className="row">
-          <Tags tags={this.props.selectedTags} onTagSelected={this.props.onTagUnselected.bind(this)} />
+          <Tags tags={this.props.selectedTags} action="remove" onTagSelected={this.props.onTagUnselected.bind(this)} />
         </div>
       </div>
     )

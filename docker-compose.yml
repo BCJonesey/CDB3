@@ -11,7 +11,6 @@ services:
       - "32785:32785"
     depends_on:
       - db
-      - packer
   packer:
     build: .
     command: ./bin/webpack-dev-server --progress --inline --host 0.0.0.0
@@ -19,3 +18,5 @@ services:
       - .:/CDB3
     ports:
       - "3035:3035"
+    depends_on:
+      - web

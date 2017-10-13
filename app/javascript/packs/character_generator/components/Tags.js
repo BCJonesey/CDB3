@@ -11,7 +11,7 @@ class Tags extends React.Component {
     }
     return (
         <div className="container">
-            {this.props.tags.map( (tag) => {return(<Tag key={tag.id} tag={tag} onTagSelected={this.props.onTagSelected.bind(this)} />)})}
+            {this.props.tags.map( (tag) => {return(<Tag key={tag.id} tag={tag} action={this.props.action} onTagSelected={this.props.onTagSelected.bind(this)} />)})}
         </div>
     )
   }

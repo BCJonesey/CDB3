@@ -1,6 +1,23 @@
-div.character-editor{
-    .row.skill{    
+div.character-editor {
+    .skill {
         border-bottom: grey 1px solid;
         padding: 20px 5px;
+        .skill-name {
+            i {
+                padding-left: 5px;
+            }
+        }
+    }
+    .skill-tag {
+        margin: 0px 5px;
+        i {
+            margin-left: 5px
+        }
+    }
+    .skill-spinner{
+        .quantity{
+            width: 40px;
+            font-size: 20px;
+        }
     }
 }

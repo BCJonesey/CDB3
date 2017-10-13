@@ -25,15 +25,20 @@ data-css='{"background-position": "right bottom"}'>
 <%= f.hidden_field :user_id %>
 
     <%= f.submit "Become a member!", :class => 'btn btn-xlg btn-rounded btn-primary mt-4' %>
-  </div>
 </div>
 
 
-<% end %>
-
 
 <% end %>
 <% end %>
+</div>
+
+<% end %>
+
+
+
+
+
 
 
 
@@ -46,11 +51,19 @@ data-css='{"background-position": "right bottom"}'>
 
 <div class="col-md-6">
 
-<h2>Your Characters</h2>
 
+<h2><%= link_to "Your Characters", game_characters_path(@game) %></h2>
+
+
+<ul class="list-group">
 <% @current_member.characters.each do |character| %>
-<p><%= link_to character.name, game_character_path(@game,character) %></p>
+    <li class="list-group-item justify-content-between"> 
+        <%= link_to character.name, game_character_path(@game,character) %> 
+        <%= link_to "Edit", edit_game_character_path(@game,character), {class: "btn btn-primary float-right"} %>
+    </li>
 <% end %>
+</ul>
+
 
 <p><%= link_to "Create Character", new_game_character_path(@game) %></p>
 
@@ -72,34 +85,5 @@ data-css='{"background-position": "right bottom"}'>
 
 </div>
 
-<% if current_user.game_admin?(@game) %>
-
-<div class="row">
-
-<div class="col-md-6">
-
-<% unless @members.nil? %>
-
-<h2>Game Members</h2>
-
-<% @game.members.each do |member| %>
-  <li><%= member.name %>
-      <%= link_to "[View]", game_member_path(@game, member) %></li>
-<% end %>
-</ul>
-
-<% end %>
-
-</div>
-
-<div class="col-md-6">
-
-<h2>Game Settings</h2>
-
-</div>
-
-</div>
-
-<% end %>
 
 <% end %>

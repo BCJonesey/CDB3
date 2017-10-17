@@ -30,7 +30,6 @@
                                         <%= link_to "Events", game_events_path(@game), :class=>"dropdown-item" %>
                                             <%= link_to "Awards", game_awards_path(@game), :class=>"dropdown-item" %>
 
-                                                <a href="customers.html" class="dropdown-item">Customers</a>
                                                 <% if(@current_member.is_admin) %>
                                                     <div class="dropdown dropdown-submenu">
                                                         <a href="#" class="dropdown-item dropdown-toggle" id="about-drop" data-toggle="dropdown" data-hover="dropdown" data-close-others="false">Admin</a>

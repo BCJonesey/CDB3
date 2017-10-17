@@ -1,18 +1,24 @@
-<h1><%= @character.name %> - <%= @character.member.name %></h1>
+<h2 class="title-divider">
+    <span><%= @character.member.name %>:</span><span class="font-weight-normal"><%= @character.name %></span>
+  </h2>
 
 
-<div class="form-actions">
-  <%= link_to 'Back', game_characters_path(@game), :class => 'btn'  %>
-  <%= link_to 'Edit', edit_game_character_path(@game,@character), :class => 'btn' %>
+
+
+
+
+  <%= link_to 'Edit', edit_game_character_path(@game,@character), :class => 'mb-1 btn btn-lg btn-primary' %>
   <% if @current_member.is_admin  %>
-    <%= link_to 'Delete', game_character_path(@game,@character), :method => 'delete', :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-default btn-danger' %>
+    <%= link_to 'Delete', game_character_path(@game,@character), :method => 'delete', :data => { :confirm => 'Are you sure?' }, :class => 'mb-1 btn btn-lg btn-danger' %>
   <% end %>
-</div>
+
 
 
 <%= render "character_sheet" %>
 
-<table class="table table-striped awards-table">
+<h3>Awards</h3>
+
+<table class="table">
   <thead>
     <tr>
       <th><%= Award.human_attribute_name(:amount) %></th>

@@ -34,7 +34,7 @@ class CharacterApp extends React.Component {
   }
 
   _isLoading() {
-    this.state.character == {} || this.state.skills == {}
+    return Object.keys(this.state.character).length == 0 || Object.keys(this.state.skills).length == 0
   }
 
   _evalCharacterState() {
@@ -42,6 +42,7 @@ class CharacterApp extends React.Component {
       skillRanks: this.state.skillRanks,
       currencyTotals: this.state.character.currency_totals
     }
+
     return RulesProcessor.evalRulesAndSpend(this.state.skills, options);
   }
 
@@ -53,7 +54,6 @@ class CharacterApp extends React.Component {
       newRank: newRank,
       currencyTotals: this.state.character.currency_totals
     }
-    debugger;
     var result = RulesProcessor.evalRulesAndSpend(this.state.skills, options)
     if (result.errorMessages.length == 0) {
       this.dataApi.updateSkillRank(skillId, newRank, this._apiError.bind(this));

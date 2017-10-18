@@ -56,7 +56,6 @@ class DataApi{
                 throw error
             }
         }).catch(function(ex) {
-            debugger;
             failureCallBack(ex);
         })
     }

@@ -28,8 +28,8 @@ class RulesProcessor {
     // Order of operations:
     // Run all spend analysis
     // Evaluate all rules
-    static evalRulesAndSpend(skills, options = {}) {
-        
+    static evalRulesAndSpend(skills, evalOptions = {}) {
+
         // Build out placeholder for result
         result = {
             currencySpend: {},
@@ -40,13 +40,13 @@ class RulesProcessor {
         var grantedTags = {}
 
         // fuck you scope, ill figure it out later
-        skillRanks = Object.assign({}, options.skillRanks);
+        skillRanks = Object.assign({}, evalOptions.skillRanks);
         
-        if (options.skillToUpdate != undefined) {
-            if(options.newRank == 0){
-                delete skillRanks[options.skillToUpdate.id]
+        if (evalOptions.skillToUpdate != undefined) {
+            if(evalOptions.newRank == 0){
+                delete skillRanks[evalOptions.skillToUpdate.id]
             }else{
-                skillRanks[options.skillToUpdate.id] = options.newRank
+                skillRanks[evalOptions.skillToUpdate.id] = evalOptions.newRank
             }
         }
 
@@ -90,11 +90,14 @@ class RulesProcessor {
                 }
             }
         }
-        
-        if(options.currencyTotals != undefined){
+
+        if(evalOptions.currencyTotals != undefined){
             // make a copy of currencies so we dont fuck with other people's shit
-            currencies = Object.assign({}, options.currencyTotals);
-            debugger;
+            for(currency in result.currencySpend){
+                if(evalOptions.currencyTotals[currency] == undefined || (evalOptions.currencyTotals[currency]-result.currencySpend[currency] < 0)){
+                    result.errorMessages.push(`You don't have enough ${currency} to afford that.`)
+                }
+            }
         }
 
         // Loop thru each skill to evaluate it's rules

@@ -28,7 +28,7 @@ class RulesProcessor {
     // Order of operations:
     // Run all spend analysis
     // Evaluate all rules
-    static evalRulesAndSpend(skills, currencies_original, options = {}) {
+    static evalRulesAndSpend(skills, options = {}) {
         
         // Build out placeholder for result
         result = {
@@ -54,12 +54,10 @@ class RulesProcessor {
 
         
 
-
-        // make a copy of currencies so we dont fuck with other people's shit
-        currencies = LangUtils.deepCopy(currencies_original);
+        
         currencySpend = {};
 
-        const LN = RulesHelpers.jsTollkit();
+        const LN = RulesHelpers.jsToolkit();
 
 
         // Loop thru each skill to apply it's granted tags, spend, and side effects to the current state copy
@@ -91,6 +89,12 @@ class RulesProcessor {
                     }
                 }
             }
+        }
+        
+        if(options.currencyTotals != undefined){
+            // make a copy of currencies so we dont fuck with other people's shit
+            currencies = Object.assign({}, options.currencyTotals);
+            debugger;
         }
 
         // Loop thru each skill to evaluate it's rules
@@ -129,7 +133,7 @@ class RulesProcessor {
 module.exports = RulesProcessor;
 
 class RulesHelpers {
-    static jsTollkit() {
+    static jsToolkit() {
         return {
             spend: RulesHelpers._spend,
             skillRank: RulesHelpers._skillRank,

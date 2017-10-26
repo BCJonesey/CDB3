@@ -1,5 +1,6 @@
 var React = require('react');
 var Currencies = require('./Currencies');
+var Traits = require('./Traits');
 
 
 class CharacterStats extends React.Component {
@@ -16,7 +17,10 @@ class CharacterStats extends React.Component {
               <Currencies currencySpend={this.props.currencySpend} currency_totals={this.props.character.currency_totals} />
               </div>
               <div className='row'>
-              <Currencies currencySpend={{}} currency_totals={this.props.sideEffects} />
+              <Currencies currencySpend={{}} currency_totals={this.props.sideEffects.stats} />
+              </div>
+              <div className='row'>
+              <Traits traits={this.props.sideEffects.traits} />
               </div>
       </div>
     )

@@ -34,10 +34,14 @@ class RulesProcessor {
         result = {
             currencySpend: {},
             errorMessages: [],
-            sideEffects: {}
+            sideEffects: {
+                traits: {},
+                stats: {}
+            }
         }
 
         var grantedTags = {}
+        var grantedTraits = {}
 
         // fuck you scope, ill figure it out later
         skillRanks = Object.assign({}, evalOptions.skillRanks);
@@ -126,6 +130,7 @@ class RulesProcessor {
             }
         }
         result.grantedTags = Object.values(grantedTags)
+        result.grantedTraits = Object.values(grantedTraits)
         result.skillRanks = skillRanks;
         return result;
 
@@ -141,7 +146,8 @@ class RulesHelpers {
             spend: RulesHelpers._spend,
             skillRank: RulesHelpers._skillRank,
             sideEffects: {
-                add: RulesHelpers._addSideEffectScalar
+                addStat: RulesHelpers._addStat,
+                addTrait: RulesHelpers._addTrait
             }
         }
     }
@@ -161,11 +167,16 @@ class RulesHelpers {
         return skillRanks[skill_id];
     }
 
-    static _addSideEffectScalar(options, attributeName, amount) {
-        if (result.sideEffects[attributeName] === undefined) {
-            result.sideEffects[attributeName] = 0;
+    static _addStat(options, attributeName, amount) {
+        if (result.sideEffects.stats[attributeName] === undefined) {
+            result.sideEffects.stats[attributeName] = 0;
         }
-        result.sideEffects[attributeName] = result.sideEffects[attributeName] + amount;
+        result.sideEffects.stats[attributeName] = result.sideEffects.stats[attributeName] + amount;
+    }
+    static _addTrait(options, attributeName) {
+        if (result.sideEffects.traits[attributeName] === undefined) {
+            result.sideEffects.traits[attributeName] = 0;
+        }
     }
 
 

@@ -159,7 +159,7 @@ class RulesHelpers {
         if (result.currencySpend[currency] === undefined) {
             result.currencySpend[currency] = 0;
         }
-        result.currencySpend[currency] = result.currencySpend[currency] + (cost * options.skillRank);
+        result.currencySpend[currency] = result.currencySpend[currency] + cost;
     }
 
     static _skillRank = function (options, skill_id) {

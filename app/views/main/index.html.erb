@@ -35,13 +35,13 @@ data-css='{"background-position": "right bottom"}'>
 
 <h2>Pick a Game</h2>
 
-<div>
+<div class="games-list">
 <% @games.each do |game| %>
 
 <div class="card text-white bg-white overlay overlay-op-8 text-center"  data-bg-img="<%= asset_url('after_dark.jpg') %>">
-    <a href="<%= game_path(game) %>"
+    <a href="<%= game_path(game) %>">
 
-      <h2 class="card-title"><%= game.name %></h2>
+      <h3 class="card-title"><%= game.name %></h3>
       <p class="card-text">A New England horror game or some shit.</p>
 
 

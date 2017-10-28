@@ -9,6 +9,9 @@ class RulesProcessor {
         var options = {};
         const LN = {
             spend: function (options, cost, currency) {
+                if(options.displayCost != undefined){
+                    return options.displayCost;
+                }
                 return cost + currency;
             }
         }

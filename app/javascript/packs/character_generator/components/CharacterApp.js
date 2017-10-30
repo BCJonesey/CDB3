@@ -40,7 +40,8 @@ class CharacterApp extends React.Component {
   _evalCharacterState() {
     const options = {
       skillRanks: this.state.skillRanks,
-      currencyTotals: this.state.character.currency_totals
+      currencyTotals: this.state.character.currency_totals,
+      gameSideEffects: this.state.character.game_rules.side_effects
     }
 
     return RulesProcessor.evalRulesAndSpend(this.state.skills, options);
@@ -52,7 +53,8 @@ class CharacterApp extends React.Component {
       skillRanks: this.state.skillRanks,
       skillToUpdate: this.state.skills[skillId],
       newRank: newRank,
-      currencyTotals: this.state.character.currency_totals
+      currencyTotals: this.state.character.currency_totals,
+      gameSideEffects: this.state.character.game_rules.side_effects
     }
     var result = RulesProcessor.evalRulesAndSpend(this.state.skills, options)
     if (result.errorMessages.length == 0) {

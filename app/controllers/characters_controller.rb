@@ -34,7 +34,7 @@ class CharactersController < ApplicationController
     @character.get_or_create_version
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @character.to_json(:methods => :currency_totals)}
+      format.json { render json: @character.to_json(:methods => [:currency_totals, :game_rules])}
     end
   end
 

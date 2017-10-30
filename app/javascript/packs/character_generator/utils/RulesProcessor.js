@@ -69,6 +69,16 @@ class RulesProcessor {
         const LN = RulesHelpers.jsToolkit();
 
 
+        if (evalOptions.gameSideEffects != undefined) {
+            var options = {}
+            try {
+                eval(evalOptions.gameSideEffects);
+            } catch (e) {
+                result.errorMessages.push(`We had an error in the game side effects, please screenshot this and send it to your GM:  ${e.message}`)
+            }
+        }
+
+
         // Loop thru each skill to apply it's granted tags, spend, and side effects to the current state copy
         for (skillId in skillRanks) {
 

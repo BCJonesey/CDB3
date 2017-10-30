@@ -116,7 +116,7 @@ class RulesProcessor {
             if (rank > 0) {
                 if (rank > skill.max_rank) {
                     result.errorMessages.push(`You do not meet the requirements for ${skill.name}`);
-                } else if(skill.cost.length > 0) {
+                } else if(skill.rule.length > 0) {
                     try {
                         const options = {
                             skillRank: rank

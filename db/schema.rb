@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170930233235) do
+ActiveRecord::Schema.define(version: 20171030204707) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -126,6 +126,7 @@ ActiveRecord::Schema.define(version: 20170930233235) do
     t.text     "cost"
     t.text     "rule"
     t.text     "side_effects"
+    t.integer  "weight"
   end
 
   create_table "tags", force: :cascade do |t|

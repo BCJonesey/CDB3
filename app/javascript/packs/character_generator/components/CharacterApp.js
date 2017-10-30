@@ -81,7 +81,9 @@ class CharacterApp extends React.Component {
         newRank: 1
       }
       return RulesProcessor.evalRulesAndSpend(this.state.skills, options).errorMessages.length == 0;
-    })
+    }).sort(function (a, b) {
+      return a.weight - b.weight;
+    });
   }
 
 

@@ -63,4 +63,10 @@ class Character < ActiveRecord::Base
     end
   end
 
+  def game_rules
+    {
+      side_effects: self.game.side_effects
+    }
+  end
+
 end

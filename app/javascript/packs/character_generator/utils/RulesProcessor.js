@@ -5,8 +5,10 @@ class RulesProcessor {
 
 
 
-    static getCostString(skill) {
-        var options = {};
+    static getCostString(skill, rank) {
+        var options = {
+            skillRank: rank
+        };
         const LN = {
             spend: function (options, cost, currency) {
                 if(options.displayCost != undefined){

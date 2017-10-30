@@ -26,7 +26,7 @@ class Skill extends React.Component {
           <SkillUpAndDown rank={this._getRank()} skill={this.props.skill} rankChangeHandler={this._rankChangeHandler.bind(this)}/>
             </div>
             <div className="row">
-            {RulesProcessor.getCostString(this.props.skill)}
+            {RulesProcessor.getCostString(this.props.skill, this._getRank())}
             </div>
           </div>
         </div>

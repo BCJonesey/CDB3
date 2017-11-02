@@ -1,16 +1,4 @@
-<div class="character-sheet ">
-  <h3>Skills:</h3>
-  <div class="skill-list">
-  <% @character.get_or_create_version.character_skills.each do |char_skill| %>
-    <% if !char_skill.skill.nil? %>
-      <div class="skill-name"><%= char_skill.skill.name %></div>
-      <% if char_skill.skill.max_rank > 1 %>
-        <div class="skill-rank">X <%= char_skill.rank %></div>
-      <% end %>
-      <div class="skill-description"><%= char_skill.skill.summary %></div>
-    <% end %>
-  <% end %>
-  </div>
-</div>
+<div id='character-app' gameUrl="<%= game_path(@game) %>" characterId="<%= @character.id %>" isViewOnly="true"></div>
 
+<%= javascript_pack_tag 'character_generator/pack' %>
 

@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css?family=IM+Fell+English');
+
+
+div.ADCharacterSheet{
+    .game-name{
+        font-family: 'IM Fell English', serif;
+        text-align: center;
+        font-size: 3.75rem;
+    }
+    .character-name{
+        text-align: center;
+        font-size: 2.25rem;
+        text-decoration: underline;
+    }
+    .title-divider{
+        margin-top:0.5em;
+        text-align: center;
+        span{
+            padding:0 0.5em;
+        }
+    }
+    .skillgroup{
+        .title-divider{
+            text-align: left;
+        }
+    }
+}

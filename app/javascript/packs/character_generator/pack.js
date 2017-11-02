@@ -11,11 +11,12 @@ if (!window.Promise) {
   window.Promise = Promise;
 }
 
-var element = document.getElementById('character-generator')
-var gameUrl = element.attributes["gameUrl"].value
-var characterId = element.attributes["characterId"].value
+const element = document.getElementById('character-app')
+const gameUrl = element.attributes["gameUrl"].value
+const characterId = element.attributes["characterId"].value
+const isViewOnly = element.attributes["isViewOnly"].value == "true"
 
 ReactDOM.render(
-  <CharacterApp gameUrl={gameUrl} characterId={characterId} />,
+  <CharacterApp gameUrl={gameUrl} characterId={characterId} isViewOnly={isViewOnly} />,
   element
 );

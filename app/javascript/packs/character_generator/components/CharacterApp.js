@@ -1,6 +1,7 @@
 var React = require('react');
 var DataApi = require('../utils/DataApi');
 var CharacterEditor = require('./CharacterEditor');
+var CharacterSheet = require('./CharacterSheet')
 var RulesProcessor = require('../utils/RulesProcessor');
 
 class CharacterApp extends React.Component {
@@ -16,9 +17,15 @@ class CharacterApp extends React.Component {
     }
   }
 
+
   componentWillMount() {
     this.dataApi.getSkillData(this._skillsUpdate.bind(this))
     this.dataApi.getCharacterData(this._characterUpdate.bind(this))
+  }
+
+
+  _isViewOnly(){
+    return this.props.isViewOnly;
   }
 
   _acknowledgeMessages() {
@@ -70,10 +77,12 @@ class CharacterApp extends React.Component {
     this.setState({ errorMessages: ["Shit got fucked up, you shoudl just reload the page....."] })
   }
 
-  _getValidSkillList() {
+  _getValidSkillList(forCharacterSheet) {
     return Object.values(this.state.skills).filter((skill) => {
-      if (skill.rank > 0) {
+      if (this.state.skillRanks[skill.id] > 0) {
         return true;
+      } else if(this._isViewOnly()){
+        return false;
       }
       const options = {
         skillRanks: this.state.skillRanks,
@@ -96,20 +105,31 @@ class CharacterApp extends React.Component {
     }else{
       const validSkillList = this._getValidSkillList()
       const characterState = this._evalCharacterState()
-
-      return (
-        <CharacterEditor 
+      if(this._isViewOnly()){
+        return(
+        <CharacterSheet 
         character={this.state.character} 
         skills={this._getValidSkillList()} 
-        skillRanks={this.state.skillRanks} 
-        grantedTags={characterState.grantedTags} 
+        skillRanks={this.state.skillRanks}
         currencySpend={characterState.currencySpend} 
         sideEffects={characterState.sideEffects}
-        errorMessages={this.state.errorMessages}
-        rankChangeHandler={this._rankChangeHandler.bind(this)} 
-        acknowledgeMessages={this._acknowledgeMessages.bind(this)}  
-        />  
-      )
+        />
+        )
+      }else{
+        return (
+          <CharacterEditor 
+          character={this.state.character} 
+          skills={this._getValidSkillList()} 
+          skillRanks={this.state.skillRanks} 
+          grantedTags={characterState.grantedTags} 
+          currencySpend={characterState.currencySpend} 
+          sideEffects={characterState.sideEffects}
+          errorMessages={this.state.errorMessages}
+          rankChangeHandler={this._rankChangeHandler.bind(this)} 
+          acknowledgeMessages={this._acknowledgeMessages.bind(this)}  
+          />  
+        )
+      }
     }
   }
 

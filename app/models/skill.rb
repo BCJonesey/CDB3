@@ -3,7 +3,7 @@ class Skill < ActiveRecord::Base
   has_many :provided_skill_tags, -> { where(gives: true) }, :class_name => "SkillTag"
   has_many :tags, :through => :skill_tags
   has_many :tags_provided,:class_name => "Tag", :through => :provided_skill_tags, :source=>:tag
-  has_many :character_skills
+  has_many :character_skills, :dependent => :delete_all
   
   
   

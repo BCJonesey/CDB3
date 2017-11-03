@@ -9,14 +9,14 @@ class RulesProcessor {
         var options = {
             skillRank: rank
         };
-        const LN = {
-            spend: function (options, cost, currency) {
+        var LN = RulesHelpers.jsToolkit();
+        LN.spend = function (options, cost, currency) {
                 if(options.displayCost != undefined){
                     return options.displayCost;
                 }
                 return cost + currency;
             }
-        }
+        
         if (skill.cost == "") {
             return "free";
         }

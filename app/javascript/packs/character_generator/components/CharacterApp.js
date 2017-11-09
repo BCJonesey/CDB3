@@ -77,7 +77,12 @@ class CharacterApp extends React.Component {
     this.setState({ errorMessages: ["Shit got fucked up, you shoudl just reload the page....."] })
   }
 
-  _getValidSkillList(forCharacterSheet) {
+  _getValidSkillList(characterState) {
+    const costOptions = {
+      skillRanks: this.state.skillRanks,
+      characterState: characterState,
+      skills: this.state.skills
+    }
     return Object.values(this.state.skills).filter((skill) => {
       if (this.state.skillRanks[skill.id] > 0) {
         return true;
@@ -90,6 +95,9 @@ class CharacterApp extends React.Component {
         newRank: 1
       }
       return RulesProcessor.evalRulesAndSpend(this.state.skills, options).errorMessages.length == 0;
+    }).map((skill) => {
+      skill.displayCost = RulesProcessor.getCostString(skill.id, costOptions);
+      return skill;
     }).sort(function (a, b) {
       return a.weight - b.weight;
     });
@@ -103,13 +111,14 @@ class CharacterApp extends React.Component {
       )
 
     }else{
-      const validSkillList = this._getValidSkillList()
-      const characterState = this._evalCharacterState()
+      
+      const characterState = this._evalCharacterState();
+      const validSkillList = this._getValidSkillList(characterState)
       if(this._isViewOnly()){
         return(
         <CharacterSheet 
         character={this.state.character} 
-        skills={this._getValidSkillList()} 
+        skills={validSkillList} 
         skillRanks={this.state.skillRanks}
         currencySpend={characterState.currencySpend} 
         sideEffects={characterState.sideEffects}
@@ -118,8 +127,9 @@ class CharacterApp extends React.Component {
       }else{
         return (
           <CharacterEditor 
-          character={this.state.character} 
-          skills={this._getValidSkillList()} 
+          character={this.state.character}
+          workspace={characterState.workspace} 
+          skills={validSkillList} 
           skillRanks={this.state.skillRanks} 
           grantedTags={characterState.grantedTags} 
           currencySpend={characterState.currencySpend} 

@@ -5,17 +5,16 @@ class RulesProcessor {
 
 
 
-    static getCostString(skill, rank) {
+    static getCostString(skillId, costOptions) {
+        // fuck you scope, ill figure it out later
+        skillRanks = Object.assign({}, costOptions.skillRanks);
+        result = costOptions.characterState
         var options = {
-            skillRank: rank
+            skillRank: costOptions.skillRanks[skillId]|| 0,
+            forDisplay: true
         };
-        var LN = RulesHelpers.jsToolkit();
-        LN.spend = function (options, cost, currency) {
-                if(options.displayCost != undefined){
-                    return options.displayCost;
-                }
-                return cost + currency;
-            }
+        const skill = costOptions.skills[skillId];
+        LN = RulesHelpers.jsToolkit();
         
         if (skill.cost == "") {
             return "free";
@@ -42,7 +41,8 @@ class RulesProcessor {
             sideEffects: {
                 traits: {},
                 stats: {}
-            }
+            },
+            workspace: {}
         }
 
         var grantedTags = {}
@@ -66,7 +66,7 @@ class RulesProcessor {
         
         currencySpend = {};
 
-        const LN = RulesHelpers.jsToolkit();
+        LN = RulesHelpers.jsToolkit();
 
 
         if (evalOptions.gameSideEffects != undefined) {
@@ -163,15 +163,44 @@ class RulesHelpers {
             sideEffects: {
                 addStat: RulesHelpers._addStat,
                 addTrait: RulesHelpers._addTrait
+            },
+            workspace: {
+                helpers: {
+                    hobbySpend: (options, cost) => {
+                        if(result.workspace.hobbyCosts == undefined){
+                            result.workspace.hobbyCosts = []
+                        }
+                        
+                  
+                        const dynoCost = result.workspace.hobbyCosts.length == 0 ? 0 : Math.min.apply(null, result.workspace.hobbyCosts.concat(cost))
+                        if(!options.forDisplay){
+                            result.workspace.hobbyCosts.push(cost);
+                            if(result.workspace.hobbyCosts.length == 0){
+                                result.workspace.hobbyCosts.splice(result.workspace.hobbyCosts.indexOf(dynoCost), 1);
+                            }
+                        }
+                        
+                        return LN.spend(options, dynoCost, "CP");  
+                    }
+                }
             }
         }
     }
 
     static _spend(options, cost, currency) {
-        if (result.currencySpend[currency] === undefined) {
-            result.currencySpend[currency] = 0;
+        if(options.forDisplay === true){
+            if(options.displayCost != undefined){
+                return options.displayCost;
+            } else if(cost == 0){
+                return "free";
+            }
+            return cost + currency;
+        }else{
+            if (result.currencySpend[currency] === undefined) {
+                result.currencySpend[currency] = 0;
+            }
+            result.currencySpend[currency] = result.currencySpend[currency] + cost;
         }
-        result.currencySpend[currency] = result.currencySpend[currency] + cost;
     }
 
     static _skillRank = function (options, skill_id) {

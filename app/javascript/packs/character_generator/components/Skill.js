@@ -17,6 +17,10 @@ class Skill extends React.Component {
     }
   }
 
+  _getDisplayCost(){
+    return this.props.skill.displayCost;
+  }
+
   render() {
     return (
       <div className="row skill">
@@ -26,7 +30,7 @@ class Skill extends React.Component {
           <SkillUpAndDown rank={this._getRank()} skill={this.props.skill} rankChangeHandler={this._rankChangeHandler.bind(this)}/>
             </div>
             <div className="row">
-            {RulesProcessor.getCostString(this.props.skill, this._getRank())}
+            {this._getDisplayCost()}
             </div>
           </div>
         </div>

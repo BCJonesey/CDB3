@@ -42,11 +42,13 @@ class RulesProcessor {
                 traits: {},
                 stats: {}
             },
-            workspace: {}
+            workspace: {},
+            tagRanks: {}
         }
 
         var grantedTags = {}
         var grantedTraits = {}
+        
 
         // fuck you scope, ill figure it out later
         skillRanks = Object.assign({}, evalOptions.skillRanks);
@@ -86,7 +88,16 @@ class RulesProcessor {
             const rank = skillRanks[skillId]
 
             if (rank > 0) {
-                skill.skill_tags.filter((skill_tag) => {return skill_tag.gives}).forEach((skillTag)=>{grantedTags[skillTag.tag.id] = skillTag.tag})
+                skill.skill_tags.forEach((skillTag)=>{
+                    if(skillTag.gives){
+                        grantedTags[skillTag.tag.id] = skillTag.tag;
+                    }
+                    if(result.tagRanks[skillTag.tag.id] == undefined){
+                        result.tagRanks[skillTag.tag.id] = {} 
+                    }
+                    result.tagRanks[skillTag.tag.id][skill.id] = rank
+
+                })
                 if (skill.cost.length > 0) {
                     var options = {
                         skillRank: rank
@@ -160,27 +171,44 @@ class RulesHelpers {
         return {
             spend: RulesHelpers._spend,
             skillRank: RulesHelpers._skillRank,
+            skillCountInTag: RulesHelpers._skillCountInTag,
+            rankCountInTag: RulesHelpers.rankCountInTag,
             sideEffects: {
                 addStat: RulesHelpers._addStat,
-                addTrait: RulesHelpers._addTrait
+                addTrait: RulesHelpers._addTrait,
+                statValue: RulesHelpers._statValue
             },
             workspace: {
                 helpers: {
                     hobbySpend: (options, cost) => {
-                        if(result.workspace.hobbyCosts == undefined){
-                            result.workspace.hobbyCosts = []
+                        if(LN.skillRank(options, 296) == 0){
+                            return LN.spend(options, cost, "CP"); 
+                        }else{
+                            if(result.workspace.hobbyCosts == undefined){
+                                result.workspace.hobbyCosts = []
+                            }
+                            
+                    
+                            const dynoCost = result.workspace.hobbyCosts.length == 0 ? 0 : Math.min.apply(null, result.workspace.hobbyCosts.concat(cost))
+                            if(!options.forDisplay){
+                                result.workspace.hobbyCosts.push(cost);
+                                if(result.workspace.hobbyCosts.length == 0){
+                                    result.workspace.hobbyCosts.splice(result.workspace.hobbyCosts.indexOf(dynoCost), 1);
+                                }
+                            }
+                            
+                            return LN.spend(options, dynoCost, "CP");  
                         }
-                        
-                  
-                        const dynoCost = result.workspace.hobbyCosts.length == 0 ? 0 : Math.min.apply(null, result.workspace.hobbyCosts.concat(cost))
-                        if(!options.forDisplay){
-                            result.workspace.hobbyCosts.push(cost);
-                            if(result.workspace.hobbyCosts.length == 0){
-                                result.workspace.hobbyCosts.splice(result.workspace.hobbyCosts.indexOf(dynoCost), 1);
+                    },
+                    hobbyRule: (options) => {
+                        if((LN.skillRank(options, 140) + LN.skillRank(options, 152) + LN.skillRank(options, 164) + LN.skillRank(options, 177) + LN.skillRank(options, 190) + LN.skillRank(options, 128) + LN.skillRank(options, 190)) + LN.skillRank(options, 296) > 0){
+                            if(LN.skillRank(options, 296) > 0){
+                                return LN.skillCountInTag(options, "10") < 4;
+                            }else{
+                                return LN.skillCountInTag(options, "10") < 2;
                             }
                         }
-                        
-                        return LN.spend(options, dynoCost, "CP");  
+                        return false;
                     }
                 }
             }
@@ -217,12 +245,25 @@ class RulesHelpers {
         }
         result.sideEffects.stats[attributeName] = result.sideEffects.stats[attributeName] + amount;
     }
+
+    static _statValue(options, attributeName) {
+        if (result.sideEffects.stats[attributeName] === undefined) {
+            return 0;
+        }
+        return result.sideEffects.stats[attributeName];
+    }
+
     static _addTrait(options, attributeName) {
         if (result.sideEffects.traits[attributeName] === undefined) {
             result.sideEffects.traits[attributeName] = 0;
         }
     }
-
+    static _skillCountInTag(options, tagId){
+        return Object.keys(result.tagRanks[tagId]).length;
+    }
+    static _rankCountInTag(options, tagId){
+        return Object.values(result.tagRanks[tagId]).reduce((a, b) => a + b, 0);
+    }
 
 
 }

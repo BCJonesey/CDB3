@@ -21,7 +21,17 @@ class ADCharacterSheet extends React.Component {
     }
   }
 
-  _getSkillsForTags(selectTags, activeOnly = false){
+  _getRace(){
+    if(this._getSkillsForTags(["Deviant"], false).length > 0){
+      return "Deviant"
+    } else if(this.props.sheetProps.skillRanks[296] == 1){
+      return "Innate"
+    }
+
+    return "none selected"
+  }
+
+  _getSkillsForTags(selectTags, activeOnly = true){
     
     return this.props.sheetProps.skills.filter((skill) => {
       const tagList = skill.skill_tags.map((skill_tag) => {return skill_tag.tag.name;});
@@ -32,7 +42,7 @@ class ADCharacterSheet extends React.Component {
           }
         }
       }
-      console.log(selectTags)
+
       for(i in selectTags){
         if(tagList.indexOf(selectTags[i]) > -1){
           return true
@@ -69,11 +79,11 @@ class ADCharacterSheet extends React.Component {
         </div>
         <div className='row'>
           <Attribute label="Player" value="" />
-          <Attribute label="D/I" value="" />
+          <Attribute label="Race" value={this._getRace()} />
           <Attribute label="Humanity" value={this._getStat("Humanity")} />
         </div>
         <div className='row'>
-          <Attribute label="Darkness" value={this._getStat("Darkness")} />
+          <Attribute label="Darkness" value={this._getStat("Weakness")} />
           <Attribute label="Vitality" value={this._getStat("Vitality")} />
           <Attribute label="Armor" value={this._getStat("Armor")} />
         </div>

@@ -31,6 +31,26 @@ class ADCharacterSheet extends React.Component {
     return "none selected"
   }
 
+  _getWeaknesses(){
+
+    if(this.props.sheetProps.skillRanks[140] == 1){
+      return "Light, Crystal, Presence, Earth"
+    }if(this.props.sheetProps.skillRanks[152] == 1){
+      return "Shadow, Radiation, Gloom, Lightning"
+    }if(this.props.sheetProps.skillRanks[164] == 1){
+      return "Ageing, Despair, Earth, Wind"
+    }if(this.props.sheetProps.skillRanks[177] == 1){
+      return "Silver, Cold, Curse, Ageing"
+    }if(this.props.sheetProps.skillRanks[128] == 1){
+      return "Fire, Silver, Sleep, Despair"
+    }if(this.props.sheetProps.skillRanks[190] == 1){
+      return "Water, Air, Silver, Blessing"
+    }
+
+    return "none";
+    
+  }
+
   _getSkillsForTags(selectTags, activeOnly = true){
     
     return this.props.sheetProps.skills.filter((skill) => {
@@ -83,7 +103,7 @@ class ADCharacterSheet extends React.Component {
           <Attribute label="Humanity" value={this._getStat("Humanity")} />
         </div>
         <div className='row'>
-          <Attribute label="Darkness" value={this._getStat("Weakness")} />
+          <Attribute label="Weakness" value={this._getWeaknesses()} />
           <Attribute label="Vitality" value={this._getStat("Vitality")} />
           <Attribute label="Armor" value={this._getStat("Armor")} />
         </div>

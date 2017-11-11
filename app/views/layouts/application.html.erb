@@ -108,6 +108,16 @@
             <%= javascript_include_tag "application" %>
                 <%= javascript_include_tag "appStrap" %>
                     <%= yield :extra_js %>
+            <!-- Global site tag (gtag.js) - Google Analytics -->
+            <script async src="https://www.googletagmanager.com/gtag/js?id=UA-109506705-1"></script>
+            <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'UA-109506705-1');
+            </script>
+
 </body>
 
 </html>

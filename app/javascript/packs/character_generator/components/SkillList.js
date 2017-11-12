@@ -30,7 +30,9 @@ class SkillList extends React.Component {
           }
         }
         if (checkSearch) {
-          if (!(skill.name.toLowerCase().includes(searchText))) {
+
+          const skillString = skill.skill_tags.map(function (skill_tag) {return skill_tag.tag.name}).join("////") + "///" + skill.name;
+          if (!(skillString.toLowerCase().includes(searchText))) {
             return false
           }
         }

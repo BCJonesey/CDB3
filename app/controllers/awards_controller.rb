@@ -2,7 +2,7 @@ class AwardsController < ApplicationController
   before_filter :require_login
   before_filter :require_game
   before_filter :get_member
-  before_filter :get_resource_and_match_game, :except => [:index, :new, :create]
+  before_filter :get_resource_and_match_game, :except => [:index, :new, :create, :admin]
   before_filter :require_game_admin,:except => [:index,:create,:assign,:update]
 
   # GET /awards
@@ -82,6 +82,10 @@ class AwardsController < ApplicationController
       format.html { redirect_to(:back, :notice => 'Award was successfully deleted.')  }
       format.json { head :ok }
     end
+  end
+
+  def admin
+    @unprocessed_awards = @game.awards.where(approved_by: nil)
   end
 
   private

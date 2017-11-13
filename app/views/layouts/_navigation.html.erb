@@ -35,10 +35,11 @@
                                                         <a href="#" class="dropdown-item dropdown-toggle" id="about-drop" data-toggle="dropdown" data-hover="dropdown" data-close-others="false">Admin</a>
                                                         <!-- Dropdown Menu -->
                                                         <div class="dropdown-menu" role="menu" aria-labelledby="about-drop">
+                                                            <%= link_to "Awards Admin", admin_game_awards_path(@game), :class=>"dropdown-item" %>
                                                             <%= link_to "Currencies", game_currencies_path(@game), :class=>"dropdown-item"  %>
-                                                                <%= link_to "Members", game_members_path(@game), :class=>"dropdown-item" %>
-                                                                    <%= link_to "Skills", game_skills_path(@game), :class=>"dropdown-item" %>
-                                                                        <%= link_to "Tags", game_tags_path(@game), :class=>"dropdown-item" %>
+                                                            <%= link_to "Members", game_members_path(@game), :class=>"dropdown-item" %>
+                                                            <%= link_to "Skills", game_skills_path(@game), :class=>"dropdown-item" %>
+                                                            <%= link_to "Tags", game_tags_path(@game), :class=>"dropdown-item" %>
                                                         </div>
                                                     </div>
                                 </div>

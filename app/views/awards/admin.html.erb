@@ -1,0 +1,24 @@
+<%- model_class = Award.new.class -%>
+<h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
+
+
+<% @unprocessed_awards.each do |award| %>
+    <div class="row">
+        <div class="col"><%= award.amount %><%= award.currency.short_name %></div>
+        <div class="col"><%= link_to award.member.name, [@game,award.member]  %></div>
+        <div class="col"><%= award.comment %></div>
+        <% if(@current_member.is_admin) %>
+        <div class="col">
+            <%= form_for [@game,award] do |f| %>
+            <%= hidden_field_tag("award[approve]", "true") %>
+            <%= f.submit "Approve", :class => 'btn btn-default btn-primary' %>
+            <% end %>
+        
+            <%= link_to t('.edit', :default => t("helpers.links.edit")), edit_game_award_path(@game,award), :class => 'btn btn-default btn-xs' %>
+        
+            <%= link_to t('.destroy', :default => t("helpers.links.destroy")),game_award_path(@game,award),:method => :delete,:data => { :confirm => 'Are you sure?' },:class => 'btn btn-default btn-xs btn-danger' %>
+        </div>
+  
+        <% end %>
+    </div>
+<% end %>

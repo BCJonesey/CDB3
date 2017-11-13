@@ -79,7 +79,9 @@ resource :session, :only => [:create]
     resources :character_skills
     resources :currencies
     resources :registrations
-    resources :awards
+    resources :awards do
+      get 'admin',:on => :collection
+    end
     resources :tags
   end
 end

@@ -4,6 +4,7 @@
     <tr>
       <th>ID</th>
       <th>User</th>
+      <th>E-Mail</th>
       <th>Created at</th>
       <th>Actions</th>
     </tr>
@@ -13,6 +14,7 @@
       <tr>
         <td><%= member.id %></td>
         <td><%= link_to member.name, game_member_path(@game,member) %></td>
+        <td><%= member.user.email %></td>
         <td><%= member.created_at %></td>
         <td>
           <%= link_to 'Edit', edit_game_member_path(@game,member), :class => 'btn btn-default btn-xs' %>

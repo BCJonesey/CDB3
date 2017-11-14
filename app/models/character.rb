@@ -50,11 +50,16 @@ class Character < ActiveRecord::Base
   end
 
   def currency_totals
-    res = awards.joins(:currency).group("currencies.short_name").sum(:amount)
-    res.each do |key, val|
-      res[key] = val.to_i
+    data_hash = {}
+    res = awards.joins(:currency).group(:currency).sum(:amount)
+    res.each do |currency, val|
+      if currency.cap.nil?
+        data_hash[currency.short_name] = val.to_f
+      else
+        data_hash[currency.short_name] = [val.to_f, currency.cap].min
+      end
     end
-    res
+    data_hash
   end
 
   def award_starting_currencies

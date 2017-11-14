@@ -6,6 +6,7 @@ class Game < ActiveRecord::Base
   has_many :tags
   has_many :characters, :through => :members
   has_many :awards, :through => :members
+  has_many :character_skills, :through => :characters
   
   validates :name, :presence => true, :uniqueness => true
   validates :slug, :presence => true, :uniqueness => true

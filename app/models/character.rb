@@ -4,6 +4,7 @@ class Character < ActiveRecord::Base
   has_many :awards, dependent: :destroy
   belongs_to :member
   has_one :game, :through => :member
+  has_many :character_skills, :through => :character_version
   validates :name, :presence => true
   validates :member_id, :presence => true
   

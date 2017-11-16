@@ -1,8 +1,8 @@
 class MembersController < ApplicationController
   before_filter :require_login
   before_filter :require_game
-  before_filter :get_member
-  before_filter :require_game_admin, :except => [:index, :show, :new, :create]
+  before_filter :require_member, :except => [:new, :create]
+  before_filter :require_game_admin, :except => [:show, :new, :create]
   before_filter :get_resource_and_match_game, :except => [:index, :new, :create]
 
   # GET /members
@@ -19,9 +19,11 @@ class MembersController < ApplicationController
   # GET /members/1
   # GET /members/1.json
   def show
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @member }
+    if require_member_match_or_admin(@member)
+      respond_to do |format|
+        format.html # show.html.erb
+        format.json { render json: @member }
+      end
     end
   end
 

@@ -91,6 +91,7 @@ class ApplicationController < ActionController::Base
     get_member
     unless game_admin?(@game) || object_member == @current_member
       redirect_to @game, :alert => "Access denied: requires game admin"
+      return false
     end
   end
 

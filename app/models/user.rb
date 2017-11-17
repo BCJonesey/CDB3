@@ -1,4 +1,4 @@
-class User < ActiveRecord::Base
+class User < ApplicationRecord
   authenticates_with_sorcery!
   has_many :members
   has_many :games, :through => :members

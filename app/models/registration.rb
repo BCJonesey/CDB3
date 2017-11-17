@@ -1,7 +1,7 @@
-class Registration < ActiveRecord::Base
+class Registration < ApplicationRecord
   belongs_to :event
   belongs_to :member
-  belongs_to :character
+  belongs_to :character, optional: true
   validates :event_id, :presence => true
   validates_uniqueness_of :event_id,:scope => :member_id
   

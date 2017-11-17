@@ -1,4 +1,4 @@
-class Tag < ActiveRecord::Base
+class Tag < ApplicationRecord
   validates :name, :presence => true, :length => {:maximum => 30}
   validates_uniqueness_of :name, :scope => :game_id, :case_sensitive => false
   validates_presence_of :game_id

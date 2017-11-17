@@ -1,4 +1,4 @@
-class CharacterSkill < ActiveRecord::Base
+class CharacterSkill < ApplicationRecord
   belongs_to :skill
   belongs_to :character_version
   has_one :game, :through => :character_version

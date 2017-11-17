@@ -1,4 +1,4 @@
-class Member < ActiveRecord::Base
+class Member < ApplicationRecord
   belongs_to :game
   belongs_to :user
   has_many :characters

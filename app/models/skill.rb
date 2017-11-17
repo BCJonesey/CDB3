@@ -1,4 +1,4 @@
-class Skill < ActiveRecord::Base
+class Skill < ApplicationRecord
   has_many :skill_tags, :dependent => :delete_all
   has_many :provided_skill_tags, -> { where(gives: true) }, :class_name => "SkillTag"
   has_many :tags, :through => :skill_tags

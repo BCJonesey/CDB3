@@ -1,4 +1,4 @@
-class Currency < ActiveRecord::Base
+class Currency < ApplicationRecord
 
   validates :short_name, :presence => true, :length => {:maximum => 5}
   validates :name, :presence => true, :length => {:maximum => 30}

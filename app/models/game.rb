@@ -1,4 +1,4 @@
-class Game < ActiveRecord::Base
+class Game < ApplicationRecord
   has_many :members
   has_many :events
   has_many :currencies

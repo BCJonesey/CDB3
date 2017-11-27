@@ -27,11 +27,11 @@ class ApplicationController < ActionController::Base
 
   def get_current_game
     if(params[:controller].to_s.classify.downcase == 'game')
-      @game = Game.find(params[:id])
+      @game = Game.friendly.find(params[:id])
     elsif params[:game_id].nil?
       @game = nil
     else
-      @game = Game.find(params[:game_id])
+      @game = Game.friendly.find(params[:game_id])
     end
   end
 

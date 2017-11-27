@@ -1,36 +1,15 @@
-require File.expand_path('../boot', __FILE__)
+require_relative 'boot'
 
 require 'rails/all'
 
-if defined?(Bundler)
-  # If you precompile assets before deploying to production, use this line
-  Bundler.require(*Rails.groups(:assets => %w(development test)))
-  # If you want your assets lazily compiled in production, use this line
-  # Bundler.require(:default, :assets, Rails.env)
-end
+# Require the gems listed in Gemfile, including any gems
+# you've limited to :test, :development, or :production.
+Bundler.require(*Rails.groups)
 
 module CDB3
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
-
-    # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
-    # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
-    # config.time_zone = 'Central Time (US & Canada)'
-
-    # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
-    # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
-    # config.i18n.default_locale = :de
-    config.action_controller.permit_all_parameters = true
-    config.assets.paths << Rails.root.join('vendor', 'assets', 'fonts')
-    config.assets.precompile += %w( .svg .eot .woff .ttf appStrap.js appStrap/plugins/jPanelMenu/jquery.jpanelmenu.min.js appStrap/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js character_sheets/*)
-    config.sass.load_paths << File.expand_path('../../lib/assets/stylesheets/')
-    config.sass.load_paths << File.expand_path('../../vendor/assets/stylesheets/')
-    config.assets.paths << Rails.root.join("vendor", "assets", "images")
-    console do
-        require "pry"
-        config.console = Pry
-    end
   end
 end

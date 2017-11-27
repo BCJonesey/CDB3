@@ -1,5 +1,5 @@
-class Character < ActiveRecord::Base
-  belongs_to :character_version
+class Character < ApplicationRecord
+  belongs_to :character_version, optional: true
   has_many :character_versions, dependent: :destroy
   has_many :awards, dependent: :destroy
   belongs_to :member

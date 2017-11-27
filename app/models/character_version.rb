@@ -1,6 +1,6 @@
-class CharacterVersion < ActiveRecord::Base
+class CharacterVersion < ApplicationRecord
   has_many :character_skills, :dependent => :destroy
-  belongs_to :previous_version, :class_name => 'CharacterVersion', :inverse_of => :next_version
+  belongs_to :previous_version, :class_name => 'CharacterVersion', :inverse_of => :next_version, optional: true
   has_one :next_version, :class_name => 'CharacterVersion', :foreign_key => 'previous_version_id', :inverse_of => :previous_version
   belongs_to :character
   has_one :game, :through => :character

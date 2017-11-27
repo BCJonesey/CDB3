@@ -31,17 +31,17 @@ class GamesController < ApplicationController
   end
 
   def edit
-    @game = Game.find(params[:id])
+    @game = Game.friendly.find(params[:id])
   end
 
   def update
-    @game = Game.find(params[:id])
+    @game = Game.friendly.find(params[:id])
     @game.update_attributes(params[:game])
     redirect_to game_path(@game), :notice => "Game updated: #{@game.name}"    
   end
 
   def destroy
-    @game = Game.find(params[:id])
+    @game = Game.friendly.find(params[:id])
     if (params[:confirm] == "Yes")
       @game.destroy
       redirect_to games_path, :notice => "Game deleted: #{@game.name}"

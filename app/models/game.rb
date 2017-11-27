@@ -1,4 +1,4 @@
-class Game < ActiveRecord::Base
+class Game < ApplicationRecord
   has_many :members
   has_many :events
   has_many :currencies
@@ -12,7 +12,7 @@ class Game < ActiveRecord::Base
   validates :slug, :presence => true, :uniqueness => true
   
   extend FriendlyId
-  friendly_id :slug, use: [:finders]
+  friendly_id :slug, :use => :slugged
 
   def logo_image
     logo = self.name + '_logo.png'

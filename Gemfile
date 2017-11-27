@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.10'
+gem 'rails', '5.0.6'
 
 # Use sqlite3 as the database for Active Record
 gem 'pg'
@@ -66,7 +66,7 @@ group :test do
   gem 'rake'
 end
 gem "sorcery"
-gem 'friendly_id', '~> 5.0.0'
+gem 'friendly_id'
 gem 'pry'
 gem 'thin'
 gem 'newrelic_rpm'

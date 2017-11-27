@@ -66,7 +66,7 @@ group :test do
   gem 'rake'
 end
 gem "sorcery"
-gem 'friendly_id', '~> 5.0.0'
+gem 'friendly_id'
 gem 'pry'
 gem 'thin'
 gem 'newrelic_rpm'

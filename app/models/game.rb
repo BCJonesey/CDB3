@@ -12,7 +12,7 @@ class Game < ApplicationRecord
   validates :slug, :presence => true, :uniqueness => true
   
   extend FriendlyId
-  friendly_id :slug, use: [:finders]
+  friendly_id :slug, :use => :slugged
 
   def logo_image
     logo = self.name + '_logo.png'

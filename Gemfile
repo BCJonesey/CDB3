@@ -58,12 +58,11 @@ end
 # gem 'debugger', group: [:development, :test]
 
 group :test do
-  # Pretty printed test output
-  gem 'turn', '0.8.2'
   gem 'database_cleaner'
   gem 'capybara'
   gem 'factory_girl_rails'
   gem 'rake'
+  gem 'minitest'
 end
 gem "sorcery"
 gem 'friendly_id'

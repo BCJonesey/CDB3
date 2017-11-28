@@ -49,7 +49,7 @@ class AwardsController < ApplicationController
     set_vars
     respond_to do |format|
       if @award.save
-        format.html { redirect_to :back, notice: 'Award was successfully created.' }
+        format.html { redirect_back fallback_location: game_path(@award.game), notice: 'Award was successfully created.' }
         format.json { render json: @award, status: :created, location: @award }
       else
         format.html { render action: "new" }
@@ -64,7 +64,7 @@ class AwardsController < ApplicationController
     set_vars
     respond_to do |format|
       if @award.save
-        format.html { redirect_to :back, notice: 'Award was successfully updated.' }
+        format.html { redirect_back fallback_location: game_path(@award.game), notice: 'Award was successfully updated.' }
         format.json { head :ok }
       else
         format.html { render action: "edit" }
@@ -79,7 +79,7 @@ class AwardsController < ApplicationController
     @award.destroy
 
     respond_to do |format|
-      format.html { redirect_to(:back, :notice => 'Award was successfully deleted.')  }
+      format.html { redirect_back fallback_location: game_path(@award.game), :notice => 'Award was successfully deleted.'  }
       format.json { head :ok }
     end
   end

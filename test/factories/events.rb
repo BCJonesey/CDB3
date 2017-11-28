@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :event do
     site "your mom"
     start_date DateTime.now + 1.days

@@ -2,7 +2,7 @@ require 'test_helper'
 
 class AddUserTest < ActionDispatch::IntegrationTest 
   test "add a user" do
-    admin_user = FactoryGirl.create(:user, :global_admin => true)
+    admin_user = FactoryBot.create(:user, :global_admin => true)
     visit root_url
     
     click_link 'Log In'

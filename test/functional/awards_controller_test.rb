@@ -2,13 +2,13 @@ require 'test_helper'
 
 class AwardsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @game   = FactoryGirl.create(:game)
-    @user = FactoryGirl.create(:user, password: "123456")
-    @member = FactoryGirl.create(:member,game: @game,game_admin: true, user: @user)
+    @game   = FactoryBot.create(:game)
+    @user = FactoryBot.create(:user, password: "123456")
+    @member = FactoryBot.create(:member,game: @game,game_admin: true, user: @user)
     
-    @character = FactoryGirl.create(:character, member: @member)
-    @currency = FactoryGirl.create(:currency,game: @game)
-    @award = FactoryGirl.create(:award, member: @member, currency: @currency, created_by: @member)
+    @character = FactoryBot.create(:character, member: @member)
+    @currency = FactoryBot.create(:currency,game: @game)
+    @award = FactoryBot.create(:award, member: @member, currency: @currency, created_by: @member)
     @user_session = create_authenticated_session(@user, "123456")
   end
 

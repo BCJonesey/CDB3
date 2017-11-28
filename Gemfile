@@ -60,7 +60,7 @@ end
 group :test do
   gem 'database_cleaner'
   gem 'capybara'
-  gem 'factory_girl_rails'
+  gem 'factory_bot_rails'
   gem 'rake'
   gem 'minitest'
 end

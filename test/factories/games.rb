@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :game do
       sequence(:name){|i| "Game #{i}"}
       sequence(:slug){|i| "Game#{i}"}

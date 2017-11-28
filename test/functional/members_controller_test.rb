@@ -2,8 +2,8 @@ require 'test_helper'
 
 class MembersControllerTest < ActionController::TestCase
   setup do
-     @game   = FactoryGirl.create(:game_the_calling)
-    @member = FactoryGirl.create(:member,game:@game,game_admin: true)
+     @game   = FactoryBot.create(:game_the_calling)
+    @member = FactoryBot.create(:member,game:@game,game_admin: true)
     @user = @member.user
    
   end
@@ -24,7 +24,7 @@ class MembersControllerTest < ActionController::TestCase
 
     assert_difference('@game.members.count') do
       post :create, {:game_id => @game.id,
-          member: {:game_id => @game.id, :user_id => FactoryGirl.create(:user).id}}, 
+          member: {:game_id => @game.id, :user_id => FactoryBot.create(:user).id}}, 
         {:user_id => @user}
     end
 
@@ -39,7 +39,7 @@ class MembersControllerTest < ActionController::TestCase
 
   test "should get edit" do
     get :edit, {:game_id => @game.id, id: @member.id}, 
-      {:user_id => FactoryGirl.create(:member,user: FactoryGirl.create(:user), game_admin: true,game:@game).user.id}
+      {:user_id => FactoryBot.create(:member,user: FactoryBot.create(:user), game_admin: true,game:@game).user.id}
     assert_response :success
   end
 

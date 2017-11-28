@@ -4,11 +4,11 @@ class TagsControllerTest < ActionController::TestCase
   setup do
     
 
-    @game = FactoryGirl.create(:game_mirror_mirror)
+    @game = FactoryBot.create(:game_mirror_mirror)
     
-    @tag = FactoryGirl.create(:tag,game: @game)
+    @tag = FactoryBot.create(:tag,game: @game)
 
-    @member= FactoryGirl.create(:member, game:@game,game_admin: true)
+    @member= FactoryBot.create(:member, game:@game,game_admin: true)
     @user=@member.user
   end
 

@@ -2,9 +2,9 @@ require 'test_helper'
 
 class RegistrationsControllerTest < ActionController::TestCase
   setup do
-    @game = FactoryGirl.create(:game_the_calling)
-    @event = FactoryGirl.create(:event, game: @game)
-    @registration = FactoryGirl.create(:registration,event:@event,member: FactoryGirl.create(:member, game:@game))
+    @game = FactoryBot.create(:game_the_calling)
+    @event = FactoryBot.create(:event, game: @game)
+    @registration = FactoryBot.create(:registration,event:@event,member: FactoryBot.create(:member, game:@game))
     @user = @registration.member.user
     
   end

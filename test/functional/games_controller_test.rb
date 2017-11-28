@@ -3,9 +3,9 @@ require 'test_helper'
 class GamesControllerTest < ActionController::TestCase
     setup do
     
-    @admin = FactoryGirl.create(:user, global_admin: true)
-    @user = FactoryGirl.create(:user)
-   @mirror_mirror = FactoryGirl.create(:game_mirror_mirror)
+    @admin = FactoryBot.create(:user, global_admin: true)
+    @user = FactoryBot.create(:user)
+   @mirror_mirror = FactoryBot.create(:game_mirror_mirror)
   end
 
 

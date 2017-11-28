@@ -2,10 +2,10 @@ require 'test_helper'
 
 class CurrenciesControllerTest < ActionController::TestCase
   setup do
-    @game   = FactoryGirl.create(:game)
-    @member = FactoryGirl.create(:member,game: @game,game_admin: true)
+    @game   = FactoryBot.create(:game)
+    @member = FactoryBot.create(:member,game: @game,game_admin: true)
     @user = @member.user
-    @currency = FactoryGirl.create(:currency,game: @game)
+    @currency = FactoryBot.create(:currency,game: @game)
   end
 
   test "should get index" do

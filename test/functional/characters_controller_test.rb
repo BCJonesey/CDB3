@@ -3,8 +3,8 @@ require 'test_helper'
 class CharactersControllerTest < ActionController::TestCase
   setup do
     
-    @game      = FactoryGirl.create(:game_the_calling)
-    @character = FactoryGirl.create(:character, member: FactoryGirl.create(:member, game: @game))
+    @game      = FactoryBot.create(:game_the_calling)
+    @character = FactoryBot.create(:character, member: FactoryBot.create(:member, game: @game))
     @user = @character.member.user
   end
 

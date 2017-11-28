@@ -1,10 +1,10 @@
 class CharacterSkillsController < ApplicationController
-  #before_filter :require_login
-  before_filter :require_game
-  #before_filter :get_member
-  before_filter :get_character
-  #before_filter :require_game_admin, :except => [:index,:show]
-  #before_filter :get_resource_and_match_game, :except => [:index, :new, :create]
+  #before_action :require_login
+  before_action :require_game
+  #before_action :get_member
+  before_action :get_character
+  #before_action :require_game_admin, :except => [:index,:show]
+  #before_action :get_resource_and_match_game, :except => [:index, :new, :create]
 
 
   # GET /tags

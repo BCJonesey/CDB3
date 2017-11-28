@@ -1,9 +1,9 @@
 class AwardsController < ApplicationController
-  before_filter :require_login
-  before_filter :require_game
-  before_filter :get_member
-  before_filter :get_resource_and_match_game, :except => [:index, :new, :create, :admin]
-  before_filter :require_game_admin,:except => [:index,:create,:assign,:update]
+  before_action :require_login
+  before_action :require_game
+  before_action :get_member
+  before_action :get_resource_and_match_game, :except => [:index, :new, :create, :admin]
+  before_action :require_game_admin,:except => [:index,:create,:assign,:update]
 
   # GET /awards
   # GET /awards.json

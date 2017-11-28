@@ -1,6 +1,6 @@
 class RegistrationsController < ApplicationController
-  before_filter :require_login
-  before_filter :require_game
+  before_action :require_login
+  before_action :require_game
 
   # GET /registrations
   # GET /registrations.json

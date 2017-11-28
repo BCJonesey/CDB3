@@ -1,11 +1,11 @@
 
 class CharactersController < ApplicationController
-  before_filter :require_login
-  before_filter :require_game
-  before_filter :get_member
-  before_filter :require_game_admin, :only => [:destroy]
-  before_filter :get_resource_and_match_game, :except => [:index, :new, :create]
-  before_filter :check_character_access, :only => [:show, :edit, :update]
+  before_action :require_login
+  before_action :require_game
+  before_action :get_member
+  before_action :require_game_admin, :only => [:destroy]
+  before_action :get_resource_and_match_game, :except => [:index, :new, :create]
+  before_action :check_character_access, :only => [:show, :edit, :update]
 
   # GET /characters
   # GET /characters.json

@@ -1,9 +1,9 @@
 class EventsController < ApplicationController
-  before_filter :require_login
-  before_filter :require_game
-  before_filter :get_member
-  before_filter :require_game_admin, :except => [:index,:show,:registration_buttons]
-  before_filter :get_resource_and_match_game, :except => [:index, :new, :create]
+  before_action :require_login
+  before_action :require_game
+  before_action :get_member
+  before_action :require_game_admin, :except => [:index,:show,:registration_buttons]
+  before_action :get_resource_and_match_game, :except => [:index, :new, :create]
 
   # GET /events
   # GET /events.json

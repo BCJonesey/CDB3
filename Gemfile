@@ -59,7 +59,7 @@ end
 
 group :test do
   gem 'database_cleaner'
-  gem 'capybara'
+  gem 'minitest-rails-capybara'
   gem 'factory_bot_rails'
   gem 'rake'
   gem 'minitest'

@@ -45,7 +45,7 @@ class CurrenciesController < ApplicationController
   # POST /currencies
   # POST /currencies.json
   def create
-    @currency = Currency.new(params[:currency])
+    @currency = @game.currencies.build(params[:currency])
 
     
     respond_to do |format|

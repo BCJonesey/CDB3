@@ -43,7 +43,7 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    @user = User.new(params[:user])
+    @user = User.new(params.require(:user).permit(:name, :password, :email))
     if(User.count < 1)
       @user.global_admin = true
     end
@@ -70,7 +70,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
 
     respond_to do |format|
-      if @user.update_attributes(params[:user])
+      if @user.update_attributes(params.require(:user).permit(:name, :password, :email))
         format.html { redirect_to root_path, notice: 'User was successfully updated.' } if @user.id == current_user.id
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
         format.json { head :ok }

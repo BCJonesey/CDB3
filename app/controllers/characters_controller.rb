@@ -63,7 +63,7 @@ class CharactersController < ApplicationController
   # POST /characters
   # POST /characters.json
   def create
-    @character = Character.new(params.require(:user).permit(:name))
+    @character = Character.new(params.require(:character).permit(:name))
 
     if params[:user_id]
       @user = User.find(params[:user_id])
@@ -92,7 +92,7 @@ class CharactersController < ApplicationController
   def update
 
     respond_to do |format|
-      if @character.update_attributes(params.require(:user).permit(:name))
+      if @character.update_attributes(params.require(:character).permit(:name))
         format.html { redirect_to [@game, @character], notice: 'Character was successfully updated.' }
         format.json { head :ok }
       else

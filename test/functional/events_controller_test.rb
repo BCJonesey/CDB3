@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class EventsControllerTest < ActionDispatch::IntegrationTest
-  describe "CurrenciesController" do
+  describe "EventsController" do
     let(:game){FactoryBot.create(:game)}
     let(:user_password) {"123456"}
     let(:is_game_admin){false}

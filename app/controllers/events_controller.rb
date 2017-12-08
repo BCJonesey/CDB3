@@ -43,11 +43,11 @@ class EventsController < ApplicationController
   def edit
 
   end
-
+  
   # POST /events
   # POST /events.json
   def create
-    @event = Event.new(params[:event])
+    @event = Event.new(params.require(:event).permit(:start_date, :end_date, :site, :notes, :player_cap))
     @event.game = @game
     respond_to do |format|
       if @event.save
@@ -65,7 +65,7 @@ class EventsController < ApplicationController
   def update
 
     respond_to do |format|
-      if @event.update_attributes(params[:event])
+      if @event.update_attributes(params.require(:event).permit(:start_date, :end_date, :site, :notes, :player_cap))
         format.html { redirect_to [@game, @event], notice: 'Event was successfully updated.' }
         format.json { head :ok }
       else

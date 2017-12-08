@@ -1,55 +1,115 @@
 require 'test_helper'
 
-class EventsControllerTest < ActionController::TestCase
-  setup do
-    @game  = FactoryBot.create(:game_mirror_mirror)
-    @event = FactoryBot.create(:event,game: @game)
-    @member = FactoryBot.create(:member,game: @game)
-    @ben = FactoryBot.create(:member,game: @game,game_admin: true)
-    
-  end
+class EventsControllerTest < ActionDispatch::IntegrationTest
+  describe "CurrenciesController" do
+    let(:game){FactoryBot.create(:game)}
+    let(:user_password) {"123456"}
+    let(:is_game_admin){false}
+    let(:is_global_admin){false}
+    let(:user){FactoryBot.create(:user, password: user_password)}
+    let(:member) {FactoryBot.create(:member, game: game, user: user, game_admin: is_game_admin)}
+    let(:user_session) { create_authenticated_session(user, user_password) }
+    let(:event){FactoryBot.create(:event, game: game)}
+  
+    describe "game admin" do
+      let(:is_game_admin){true}
+      setup do
+        user_session.get game_member_path(game, member)
+      end
 
-  test "should get index" do
-    get :index, {:game_id => @game.id}, {:user_id => @ben.user.id}
-    assert_response :success
-    assert_not_nil assigns(:events)
-  end
+      test "should get index" do
+        user_session.get game_events_path(game)
+        user_session.assert_response :success
+      end
 
-  test "should get new" do
-    get :new, {:game_id => @game.id}, {:user_id => @ben.user.id}
-    assert_response :success
-  end
+      test "should get new" do
+        user_session.get new_game_event_path(game)
+        user_session.assert_response :success
+      end
 
-  test "should create event" do
-    assert_difference('Event.count') do
-      post :create, {:game_id => @game.id, event: 
-        {:game_id => @game.id, :start_date => DateTime.now, :end_date=>DateTime.now + 1.day,:site => "Bacon" }}, {:user_id => @ben.user.id}
+      test "should create event" do
+        assert_difference('Event.count', 1) do
+          user_session.post game_events_path(game), params: {event: 
+          {:start_date => DateTime.now, :end_date=>DateTime.now + 1.day, :site => "Bacon", :player_cap => 22 }}
+        end
+        user_session.assert_redirected_to game_event_path(game, Event.last)
+      end
+
+      test "should show event" do
+        user_session.get game_event_path(game, event)
+        user_session.assert_response :success
+      end
+
+      test "should get edit" do
+        user_session.get edit_game_event_path(game, event)
+        user_session.assert_response :success
+      end
+
+      test "should update event" do
+        user_session.put game_event_path(game, event), params: {event: {player_cap: 55}}
+        user_session.assert_redirected_to game_event_path(game, event)
+        event.reload
+        assert event.player_cap == 55
+      end
+
+      test "should destroy event" do
+        user_session.get game_event_path(game, event)
+        assert_difference('Event.count', -1) do
+          user_session.delete game_event_path(game, event)
+        end
+
+        user_session.assert_redirected_to game_events_path(game)
+      end
     end
+    describe "game admin" do
+      let(:is_game_admin){false}
+      setup do
+        user_session.get game_member_path(game, member)
+      end
 
-    assert_redirected_to game_event_path(@game, assigns(:event))
-  end
+      test "should get index" do
+        user_session.get game_events_path(game)
+        user_session.assert_response :success
+      end
 
-  test "should show event" do
-    get :show, {:game_id => @game.id, id: @event.to_param}, {:user_id => @ben.user.id}
-    assert_response :success
-  end
+      test "should get new" do
+        user_session.get new_game_event_path(game)
+        user_session.assert_redirected_to game_path(game)
+      end
 
-  test "should get edit" do
-    get :edit, {:game_id => @game.id, id: @event.to_param}, {:user_id => @ben.user.id}
-    assert_response :success
-  end
+      test "should create event" do
+        assert_difference('Event.count', 0) do
+          user_session.post game_events_path(game), params: {event: 
+          {:start_date => DateTime.now, :end_date=>DateTime.now + 1.day, :site => "Bacon", :player_cap => 22 }}
+        end
+        user_session.assert_redirected_to game_path(game)
+      end
 
-  test "should update event" do
-    put :update, {:game_id => @game.id, id: @event.to_param, event: @event.attributes}, 
-      {:user_id => @ben.user.id}
-    assert_redirected_to game_event_path(@game, assigns(:event))
-  end
+      test "should show event" do
+        user_session.get game_event_path(game, event)
+        user_session.assert_response :success
+      end
 
-  test "should destroy event" do
-    assert_difference('Event.count', -1) do
-      delete :destroy, {:game_id => @game.id, id: @event.to_param}, {:user_id => @ben.user.id}
+      test "should get edit" do
+        user_session.get edit_game_event_path(game, event)
+        user_session.assert_redirected_to game_path(game)
+      end
+
+      test "should update event" do
+        user_session.put game_event_path(game, event), params: {event: {player_cap: 55}}
+        user_session.assert_redirected_to game_path(game)
+        event.reload
+        assert event.player_cap == 33
+      end
+
+      test "should destroy event" do
+        user_session.get game_event_path(game, event)
+        assert_difference('Event.count', 0) do
+          user_session.delete game_event_path(game, event)
+        end
+
+        user_session.assert_redirected_to game_path(game)
+      end
     end
-
-    assert_redirected_to game_events_path(@game)
   end
 end

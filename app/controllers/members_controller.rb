@@ -55,12 +55,10 @@ class MembersController < ApplicationController
   # POST /members
   # POST /members.json
   def create
-    @member = Member.new(params[:member])
+    @member = Member.new()
     @member.game = @game
-    
-    unless current_user.game_admin?(@game)
-      @member.user = current_user
-    end
+    @member.user = current_user
+
     
     respond_to do |format|
       if @member.save

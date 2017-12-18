@@ -18,6 +18,10 @@ end
 
 class ActionDispatch::IntegrationTest
 
+  def setup
+    Webpacker.compile
+  end
+
   def teardown
       Capybara.reset_sessions!
       Capybara.use_default_driver

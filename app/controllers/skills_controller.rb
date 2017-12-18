@@ -44,7 +44,7 @@ class SkillsController < ApplicationController
   # POST /skills
   # POST /skills.json
   def create
-    @skill = Skill.new(params[:skill])
+    @skill = @game.skills.build(params.require(:skill).permit(:name,:summary,:max_rank,:weight,:description,:rule,:cost,:side_effects))
     @skill.game = @game
     respond_to do |format|
       if @skill.save

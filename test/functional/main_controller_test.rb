@@ -1,34 +1,23 @@
 require 'test_helper'
 
-class MainControllerTest < ActionController::TestCase
+class MainControllerTest < ActionDispatch::IntegrationTest
+
+  describe "MainController" do
+    let(:user_password) {"123456"}
+    let(:is_game_admin){false}
+    let(:is_global_admin){false}
+    let(:user){FactoryBot.create(:user, password: user_password, global_admin: is_global_admin)}
+    let(:user_session) { create_authenticated_session(user, user_password) }
 
 
-  test "should get index" do
-    FactoryBot.create(:user,global_admin: true)
-    get :index
-    
-    assert_response :success
-  end
+    setup do 
+      FactoryBot.create(:user,global_admin: true)
+    end
 
-  test "should error on bad account" do
-    FactoryBot.create(:user,global_admin: true)
-    post :login, :email => 'bad_address@nowhere.gov'
-    assert_response :success
-    assert_nil session[:user_id]
-    assert_equal "No such user",flash[:alert]
-  end
-
-  test "should login" do
-    @member = FactoryBot.create(:member)
-    post :login, {:email => @member.user.email, :game => @member.game}, 
-    {:request_path => game_path(@member.game)}
-    assert session[:user_id] == @member.user.id, "User id mismatch"
-    assert_response :redirect
-    assert_nil flash[:alert]
-  end
-
-  test "should logout" do
-    get :logout, {}, { :user_id => FactoryBot.create(:user).id }
-    assert_redirected_to '/'
+    test "should get index" do
+      get root_path
+      
+      assert_response :success
+    end
   end
 end

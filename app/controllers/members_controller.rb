@@ -32,7 +32,7 @@ class MembersController < ApplicationController
   def new
     @member = Member.find_by_game_id_and_user_id(@game.id, current_user.id)
 
-    if @member and !@member.game_admin?
+    if @member
       redirect_to game_path(@game), :notice => "You are already a member."
       return
     end

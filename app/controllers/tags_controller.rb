@@ -47,8 +47,7 @@ class TagsController < ApplicationController
   # POST /tags
   # POST /tags.json
   def create
-    @tag = Tag.new(params[:tag])
-    @tag.game =@game
+    @tag = @game.tags.create(params.require(:tag).permit(:name))
     respond_to do |format|
       if @tag.save
         format.html { redirect_to [@game,@tag], notice: 'Tag was successfully created.' }

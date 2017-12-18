@@ -1,8 +1,9 @@
 ENV["RAILS_ENV"] = "test"
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
-require 'capybara/rails'
-require 'factory_girl'
+require "minitest/rails/capybara"
+require 'factory_bot'
+require "minitest/autorun"
 
 class ActiveSupport::TestCase
   # Setup all fixtures in test/fixtures/*.(yml|csv) for all tests in alphabetical order.
@@ -16,10 +17,21 @@ end
 
 
 class ActionDispatch::IntegrationTest
-  include Capybara::DSL
+
+  def setup
+    Webpacker.compile
+  end
 
   def teardown
       Capybara.reset_sessions!
       Capybara.use_default_driver
   end
+
+  def create_authenticated_session(user, password)
+    open_session do |sess|
+      sess.post session_url, params: {:email => user.email, :password => password}
+    end
+  end
+
+
 end

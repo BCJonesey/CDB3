@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_filter :require_global_admin, :except => [:new,:create,:edit,:update]
-  before_filter :require_global_admin_unless_owned, :only => [:edit,:update]
+  before_action :require_global_admin, :except => [:new,:create,:edit,:update]
+  before_action :require_global_admin_unless_owned, :only => [:edit,:update]
 
   # GET /users
   # GET /users.json

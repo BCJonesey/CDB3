@@ -4,11 +4,18 @@ class ApplicationController < ActionController::Base
 
   def get_logged_in_user
     if session[:user_id].nil?
-      current_user = nil
+      return nil
     else
-      current_user = User.find(session[:user_id])
+      return User.find(session[:user_id])
     end
+    return nil
   end
+
+  def current_user
+    @current_logged_in_user ||= get_logged_in_user
+  end
+
+
 
   def not_authenticated
     redirect_to login_path, :alert => "You must log in to access that page."

@@ -120,7 +120,7 @@
           <tr>
            <td colspan="8"><h4><%= char.name %></h4></td>
            <tr>
-             <% char.awards(true).each do |award| %>
+             <% char.awards.each do |award| %>
              <tr>
                <td><%= award.amount %></td>
                <td><%= award.currency.name %></td>

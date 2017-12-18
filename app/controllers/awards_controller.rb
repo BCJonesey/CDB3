@@ -1,9 +1,9 @@
 class AwardsController < ApplicationController
-  before_filter :require_login
-  before_filter :require_game
-  before_filter :get_member
-  before_filter :get_resource_and_match_game, :except => [:index, :new, :create, :admin]
-  before_filter :require_game_admin,:except => [:index,:create,:assign,:update]
+  before_action :require_login
+  before_action :require_game
+  before_action :get_member
+  before_action :get_resource_and_match_game, :except => [:index, :new, :create, :admin]
+  before_action :require_game_admin,:except => [:index,:create,:assign,:update]
 
   # GET /awards
   # GET /awards.json
@@ -49,7 +49,7 @@ class AwardsController < ApplicationController
     set_vars
     respond_to do |format|
       if @award.save
-        format.html { redirect_to :back, notice: 'Award was successfully created.' }
+        format.html { redirect_back fallback_location: game_path(@award.game), notice: 'Award was successfully created.' }
         format.json { render json: @award, status: :created, location: @award }
       else
         format.html { render action: "new" }
@@ -64,7 +64,7 @@ class AwardsController < ApplicationController
     set_vars
     respond_to do |format|
       if @award.save
-        format.html { redirect_to :back, notice: 'Award was successfully updated.' }
+        format.html { redirect_back fallback_location: game_path(@award.game), notice: 'Award was successfully updated.' }
         format.json { head :ok }
       else
         format.html { render action: "edit" }
@@ -79,7 +79,7 @@ class AwardsController < ApplicationController
     @award.destroy
 
     respond_to do |format|
-      format.html { redirect_to(:back, :notice => 'Award was successfully deleted.')  }
+      format.html { redirect_back fallback_location: game_path(@award.game), :notice => 'Award was successfully deleted.'  }
       format.json { head :ok }
     end
   end

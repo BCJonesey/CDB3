@@ -1,66 +1,60 @@
 require 'test_helper'
 
-class GamesControllerTest < ActionController::TestCase
-    setup do
-    
-    @admin = FactoryGirl.create(:user, global_admin: true)
-    @user = FactoryGirl.create(:user)
-   @mirror_mirror = FactoryGirl.create(:game_mirror_mirror)
-  end
+class GamesControllerTest < ActionDispatch::IntegrationTest
+  describe "CurrenciesController" do
+    let(:game){FactoryBot.create(:game)}
+    let(:user_password) {"123456"}
+    let(:is_game_admin){false}
+    let(:is_global_admin){false}
+    let(:user){FactoryBot.create(:user, password: user_password, global_admin: is_global_admin)}
+    let(:member) {FactoryBot.create(:member, game: game, user: user, game_admin: is_game_admin)}
+    let(:user_session) { create_authenticated_session(user, user_password) }
 
 
-  test "should require logged in user" do
-    get :index
-    assert_response :redirect
-    assert_not_nil flash[:alert]
-  end
+    describe "global admin" do
 
-  test "should succeed with global admin" do
-    get :new, {}, {:user_id => @admin.id}
-    assert_response :success
-  end
+      let(:is_global_admin){true}
 
-  test "should fail without global admin" do
-    get :new, {}, {:user_id => @user.id}
-    assert_redirected_to '/'
-    assert_equal flash[:alert], "Access denied: requires global admin"   
-  end
+      test "should show new game page" do
+        user_session.get new_game_path
+        user_session.assert_response :success
+      end
 
-  test "should display edit form" do
-    get :edit, {:id => @mirror_mirror.id}, {:user_id => @admin.id}
-    assert_response :success
-    assert(@response.body.include?("<form"), "No form")
-  end
+      test "should show games" do
+        user_session.get games_path
+        user_session.assert_response :success
+      end
 
-  test "should display mirror mirror" do
-    get :show, {:id => @mirror_mirror.id}, {:user_id => @admin.id}
-    assert_response :success
-  end
+      test "should display edit form" do
+        user_session.get edit_game_path(game)
+        user_session.assert_response :success
+      end
 
-  test "should create new game" do
-    post :create, {:game => {:name => "Created Game",:slug => 'created'}}, {:user_id => @admin.id}
-    assert_response :redirect
-    assert_not_nil Game.find_by_name("Created Game")
-  end
+      test "should create new game" do
+        user_session.post games_path, params: {:game => {:name => "Created Game",:slug => 'created'}}
+        assert_not_nil Game.find_by_name("Created Game")
+        user_session.assert_redirected_to game_path(Game.find_by_name("Created Game"))
+      end
 
-  test "should update game" do
-    post :update, {:id => @mirror_mirror.id, 
-        :game => {:id => @mirror_mirror.id, :name => "Teh Colling"}},
-      {:user_id => @admin.id}
-    game = Game.find_by_name("Teh Colling")
-    assert_equal game.id, @mirror_mirror.id
-  end
+      test "should update game" do
+        user_session.put game_path(game), params: {game:{name: "Teh Colling"}}
+        assert_equal game.id,Game.find_by_name("Teh Colling").id
+        user_session.assert_redirected_to game_path(game)
+      end
 
-  test "should not destroy game without confirm" do 
-    post :destroy, {:id => @mirror_mirror.id}, {:user_id => @admin.id}
-    assert_response :redirect
-    assert_equal flash[:alert], "Must confirm game deletion"
-    assert_not_nil Game.find(@mirror_mirror.id)    
-  end
+      test "should not destroy game without confirm" do 
+        user_session.delete game_path(game)
+        user_session.assert_redirected_to game_path(game)
+        assert_not_nil Game.find(game.id)    
+      end
 
-  test "should destroy game" do
-    post :destroy, {:id => @mirror_mirror.id, :confirm => "Yes"}, {:user_id => @admin.id}
-    assert_response :redirect
-    assert_nil Game.find_by_name(@mirror_mirror.name)    
+      test "should destroy game" do
+        user_session.delete game_path(game), params: {:confirm => "Yes"}
+        user_session.assert_redirected_to games_path
+        assert_raises(ActiveRecord::RecordNotFound) do
+          Game.find(game.id)
+        end
+      end
+    end
   end
 end

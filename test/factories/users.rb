@@ -1,5 +1,5 @@
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :user do
     name "Goonbag McDouchepants"
     sequence(:email) { |i| "goonbag#{i}@example.com"}

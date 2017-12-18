@@ -1,9 +1,9 @@
 class SkillsController < ApplicationController
-  before_filter :require_login
-  before_filter :require_game
-  before_filter :get_member
-  before_filter :require_game_admin, :except => [:index,:show]
-  before_filter :get_resource_and_match_game, :except => [:index, :new, :create]
+  before_action :require_login
+  before_action :require_game
+  before_action :get_member
+  before_action :require_game_admin, :except => [:index,:show]
+  before_action :get_resource_and_match_game, :except => [:index, :new, :create]
   
   # GET /skills
   # GET /skills.json
@@ -44,7 +44,7 @@ class SkillsController < ApplicationController
   # POST /skills
   # POST /skills.json
   def create
-    @skill = Skill.new(params[:skill])
+    @skill = @game.skills.build(params.require(:skill).permit(:name,:summary,:max_rank,:weight,:description,:rule,:cost,:side_effects))
     @skill.game = @game
     respond_to do |format|
       if @skill.save

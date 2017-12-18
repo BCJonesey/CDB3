@@ -1,9 +1,9 @@
 class MembersController < ApplicationController
-  before_filter :require_login
-  before_filter :require_game
-  before_filter :require_member, :except => [:new, :create]
-  before_filter :require_game_admin, :except => [:show, :new, :create]
-  before_filter :get_resource_and_match_game, :except => [:index, :new, :create]
+  before_action :require_login
+  before_action :require_game
+  before_action :require_member, :except => [:new, :create]
+  before_action :require_game_admin, :except => [:show, :new, :create]
+  before_action :get_resource_and_match_game, :except => [:index, :new, :create]
 
   # GET /members
   # GET /members.json
@@ -32,7 +32,7 @@ class MembersController < ApplicationController
   def new
     @member = Member.find_by_game_id_and_user_id(@game.id, current_user.id)
 
-    if @member and !@member.game_admin?
+    if @member
       redirect_to game_path(@game), :notice => "You are already a member."
       return
     end

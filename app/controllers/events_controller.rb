@@ -1,9 +1,9 @@
 class EventsController < ApplicationController
-  before_filter :require_login
-  before_filter :require_game
-  before_filter :get_member
-  before_filter :require_game_admin, :except => [:index,:show,:registration_buttons]
-  before_filter :get_resource_and_match_game, :except => [:index, :new, :create]
+  before_action :require_login
+  before_action :require_game
+  before_action :get_member
+  before_action :require_game_admin, :except => [:index,:show,:registration_buttons]
+  before_action :get_resource_and_match_game, :except => [:index, :new, :create]
 
   # GET /events
   # GET /events.json
@@ -43,11 +43,11 @@ class EventsController < ApplicationController
   def edit
 
   end
-
+  
   # POST /events
   # POST /events.json
   def create
-    @event = Event.new(params[:event])
+    @event = Event.new(params.require(:event).permit(:start_date, :end_date, :site, :notes, :player_cap))
     @event.game = @game
     respond_to do |format|
       if @event.save
@@ -65,7 +65,7 @@ class EventsController < ApplicationController
   def update
 
     respond_to do |format|
-      if @event.update_attributes(params[:event])
+      if @event.update_attributes(params.require(:event).permit(:start_date, :end_date, :site, :notes, :player_cap))
         format.html { redirect_to [@game, @event], notice: 'Event was successfully updated.' }
         format.json { head :ok }
       else

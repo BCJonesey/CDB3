@@ -37,6 +37,7 @@ class TagsControllerTest < ActionDispatch::IntegrationTest
         end
 
         user_session.assert_redirected_to game_tag_path(game,Tag.last)
+        assert_equal "weak shit", Tag.last.name
       end
 
       test "should show tag" do

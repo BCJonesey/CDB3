@@ -13,6 +13,6 @@ cache:
 
 install:
   - bundle install
-  - yarn
+  - yarn --ignore-engines
 script:
   - bundle exec rails test

@@ -21,7 +21,7 @@ class GamesController < ApplicationController
   end
 
   def create
-    @game = Game.new(params[:game])
+    @game = Game.new(params.require(:game).permit(:name,:slug,:side_effects,:public))
     
     if @game.save
       redirect_to game_path(@game), :notice => "Game created: #{@game.name}"
@@ -36,7 +36,7 @@ class GamesController < ApplicationController
 
   def update
     @game = Game.friendly.find(params[:id])
-    @game.update_attributes(params[:game])
+    @game.update_attributes(params.require(:game).permit(:name,:slug,:side_effects,:public))
     redirect_to game_path(@game), :notice => "Game updated: #{@game.name}"    
   end
 

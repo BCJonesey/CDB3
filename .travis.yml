@@ -13,12 +13,6 @@ cache:
 
 install:
   - bundle install
-  - nvm install node
-  - node -v
-  - npm i -g yarn
   - yarn
 script:
-  - yarn lint
-  - yarn test
-  - bundle exec rubocop
-  - bundle exec rake test
+  - bundle exec rails test

@@ -16,15 +16,13 @@
     <%= f.label :email %><br />
     <%= @user.email %>
   </div>
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password %>
+  <div class="form-group">
+    <%= f.label :password %>
+      <%= f.password_field :password,{class: "form-control"} %>
   </div>
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation %>
+  <div class="form-group">
+    <%= f.label :password_confirmation %>
+      <%= f.password_field  :password_confirmation ,{class: "form-control"} %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <%= f.submit  "Update my password!", {class: "btn btn-primary"}  %>
 <% end %>

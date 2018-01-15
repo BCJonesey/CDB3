@@ -62,10 +62,10 @@ class TagsController < ApplicationController
   # PUT /tags/1
   # PUT /tags/1.json
   def update
-    @tag = Tag.find(params.require(:tag).permit(:name))
+    @tag = Tag.find(params[:id])
 
     respond_to do |format|
-      if @tag.update_attributes(params[:tag])
+      if @tag.update_attributes(params.require(:tag).permit(:name))
         format.html { redirect_to [@game,@tag], notice: 'Tag was successfully updated.' }
         format.json { head :ok }
       else

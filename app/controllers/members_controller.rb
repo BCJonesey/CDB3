@@ -78,7 +78,7 @@ class MembersController < ApplicationController
   def update
 
     respond_to do |format|
-      if @member.update_attributes(params[:member])
+      if @member.update_attributes(params.require(:member).permit(:game_admin))
         format.html { redirect_to [@game, @member], notice: 'Member was successfully updated.' }
         format.json { head :ok }
       else

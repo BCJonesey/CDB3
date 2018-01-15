@@ -62,7 +62,7 @@ class TagsController < ApplicationController
   # PUT /tags/1
   # PUT /tags/1.json
   def update
-    @tag = Tag.find(params[:id])
+    @tag = Tag.find(params.require(:tag).permit(:name))
 
     respond_to do |format|
       if @tag.update_attributes(params[:tag])

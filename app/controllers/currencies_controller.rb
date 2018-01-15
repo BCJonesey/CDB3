@@ -45,7 +45,7 @@ class CurrenciesController < ApplicationController
   # POST /currencies
   # POST /currencies.json
   def create
-    @currency = @game.currencies.build(params[:currency])
+    @currency = @game.currencies.build( params[:currency])
 
     
     respond_to do |format|
@@ -64,7 +64,7 @@ class CurrenciesController < ApplicationController
   def update
 
     respond_to do |format|
-      if @currency.update_attributes(params[:currency])
+      if @currency.update_attributes( params.require(:currency).permit(:starting_amount, :cap))
         format.html { redirect_to [@game, @currency], notice: 'Currency was successfully updated.' }
         format.json { head :ok }
       else

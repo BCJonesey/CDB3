@@ -63,7 +63,7 @@ class SkillsController < ApplicationController
 
 
     respond_to do |format|
-      if @skill.update_attributes(params[:skill])
+      if @skill.update_attributes(params.require(:skill).permit(:name, :summary, :max_rank, :weight, :description, :rule, :cost, :side_effects))
         format.html { redirect_to [@game,@skill], notice: 'Skill was successfully updated.' }
         format.json { head :ok }
       else

@@ -65,7 +65,7 @@ class TagsController < ApplicationController
     @tag = Tag.find(params[:id])
 
     respond_to do |format|
-      if @tag.update_attributes(params[:tag])
+      if @tag.update_attributes(params.require(:tag).permit(:name))
         format.html { redirect_to [@game,@tag], notice: 'Tag was successfully updated.' }
         format.json { head :ok }
       else

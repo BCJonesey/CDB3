@@ -1,4 +1,4 @@
-Rails.application.routes.default_url_options[:host] = 'larp.ninja'
+Rails.application.routes.default_url_options[:host] = 'www.larp.ninja'
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
